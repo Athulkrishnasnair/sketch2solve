@@ -1,0 +1,7711 @@
+{
+  "image_width": 2046,
+  "image_height": 1319,
+  "coordinate_space": "image_pixels",
+  "lines": [
+    {
+      "id": "L001",
+      "start": [
+        30,
+        136
+      ],
+      "end": [
+        67,
+        136
+      ],
+      "length_px": 37.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L002",
+      "start": [
+        31,
+        156
+      ],
+      "end": [
+        84,
+        156
+      ],
+      "length_px": 53.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L003",
+      "start": [
+        36,
+        24
+      ],
+      "end": [
+        69,
+        26
+      ],
+      "length_px": 33.06055050963308,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L004",
+      "start": [
+        63,
+        26
+      ],
+      "end": [
+        63,
+        64
+      ],
+      "length_px": 38.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L005",
+      "start": [
+        63,
+        35
+      ],
+      "end": [
+        85,
+        36
+      ],
+      "length_px": 22.02271554554524,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L006",
+      "start": [
+        63,
+        42
+      ],
+      "end": [
+        88,
+        42
+      ],
+      "length_px": 25.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L007",
+      "start": [
+        77,
+        155
+      ],
+      "end": [
+        100,
+        155
+      ],
+      "length_px": 23.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L008",
+      "start": [
+        78,
+        138
+      ],
+      "end": [
+        102,
+        138
+      ],
+      "length_px": 24.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L009",
+      "start": [
+        80,
+        143
+      ],
+      "end": [
+        100,
+        142
+      ],
+      "length_px": 20.024984394500787,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L010",
+      "start": [
+        80,
+        148
+      ],
+      "end": [
+        100,
+        148
+      ],
+      "length_px": 20.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L011",
+      "start": [
+        82,
+        43
+      ],
+      "end": [
+        104,
+        43
+      ],
+      "length_px": 22.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L012",
+      "start": [
+        83,
+        47
+      ],
+      "end": [
+        124,
+        48
+      ],
+      "length_px": 41.012193308819754,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L013",
+      "start": [
+        83,
+        54
+      ],
+      "end": [
+        103,
+        54
+      ],
+      "length_px": 20.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L014",
+      "start": [
+        83,
+        59
+      ],
+      "end": [
+        104,
+        59
+      ],
+      "length_px": 21.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L015",
+      "start": [
+        89,
+        44
+      ],
+      "end": [
+        118,
+        67
+      ],
+      "length_px": 37.013511046643494,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L016",
+      "start": [
+        95,
+        131
+      ],
+      "end": [
+        134,
+        131
+      ],
+      "length_px": 39.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L017",
+      "start": [
+        98,
+        41
+      ],
+      "end": [
+        122,
+        41
+      ],
+      "length_px": 24.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L018",
+      "start": [
+        133,
+        142
+      ],
+      "end": [
+        154,
+        141
+      ],
+      "length_px": 21.02379604162864,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L019",
+      "start": [
+        133,
+        146
+      ],
+      "end": [
+        154,
+        146
+      ],
+      "length_px": 21.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L020",
+      "start": [
+        133,
+        151
+      ],
+      "end": [
+        154,
+        151
+      ],
+      "length_px": 21.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L021",
+      "start": [
+        148,
+        161
+      ],
+      "end": [
+        169,
+        161
+      ],
+      "length_px": 21.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L022",
+      "start": [
+        149,
+        130
+      ],
+      "end": [
+        169,
+        130
+      ],
+      "length_px": 20.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L023",
+      "start": [
+        151,
+        36
+      ],
+      "end": [
+        173,
+        36
+      ],
+      "length_px": 22.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L024",
+      "start": [
+        163,
+        60
+      ],
+      "end": [
+        229,
+        63
+      ],
+      "length_px": 66.06814663663572,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L025",
+      "start": [
+        163,
+        65
+      ],
+      "end": [
+        187,
+        65
+      ],
+      "length_px": 24.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L026",
+      "start": [
+        164,
+        42
+      ],
+      "end": [
+        188,
+        43
+      ],
+      "length_px": 24.020824298928627,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L027",
+      "start": [
+        165,
+        58
+      ],
+      "end": [
+        202,
+        57
+      ],
+      "length_px": 37.013511046643494,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L028",
+      "start": [
+        166,
+        26
+      ],
+      "end": [
+        188,
+        27
+      ],
+      "length_px": 22.02271554554524,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L029",
+      "start": [
+        166,
+        47
+      ],
+      "end": [
+        188,
+        47
+      ],
+      "length_px": 22.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L030",
+      "start": [
+        166,
+        52
+      ],
+      "end": [
+        188,
+        52
+      ],
+      "length_px": 22.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L031",
+      "start": [
+        168,
+        153
+      ],
+      "end": [
+        189,
+        153
+      ],
+      "length_px": 21.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L032",
+      "start": [
+        169,
+        139
+      ],
+      "end": [
+        194,
+        137
+      ],
+      "length_px": 25.079872407968907,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L033",
+      "start": [
+        169,
+        140
+      ],
+      "end": [
+        191,
+        140
+      ],
+      "length_px": 22.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L034",
+      "start": [
+        173,
+        39
+      ],
+      "end": [
+        219,
+        40
+      ],
+      "length_px": 46.010868281309364,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L035",
+      "start": [
+        192,
+        1053
+      ],
+      "end": [
+        349,
+        1053
+      ],
+      "length_px": 157.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L036",
+      "start": [
+        194,
+        1048
+      ],
+      "end": [
+        347,
+        1048
+      ],
+      "length_px": 153.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L037",
+      "start": [
+        198,
+        675
+      ],
+      "end": [
+        258,
+        674
+      ],
+      "length_px": 60.00833275470999,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L038",
+      "start": [
+        199,
+        679
+      ],
+      "end": [
+        346,
+        679
+      ],
+      "length_px": 147.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L039",
+      "start": [
+        202,
+        67
+      ],
+      "end": [
+        234,
+        67
+      ],
+      "length_px": 32.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L040",
+      "start": [
+        206,
+        48
+      ],
+      "end": [
+        235,
+        48
+      ],
+      "length_px": 29.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L041",
+      "start": [
+        206,
+        147
+      ],
+      "end": [
+        232,
+        147
+      ],
+      "length_px": 26.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L042",
+      "start": [
+        206,
+        864
+      ],
+      "end": [
+        229,
+        887
+      ],
+      "length_px": 32.526911934581186,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L043",
+      "start": [
+        208,
+        135
+      ],
+      "end": [
+        240,
+        135
+      ],
+      "length_px": 32.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L044",
+      "start": [
+        208,
+        157
+      ],
+      "end": [
+        242,
+        156
+      ],
+      "length_px": 34.0147027033899,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L045",
+      "start": [
+        213,
+        42
+      ],
+      "end": [
+        235,
+        43
+      ],
+      "length_px": 22.02271554554524,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L046",
+      "start": [
+        214,
+        58
+      ],
+      "end": [
+        250,
+        61
+      ],
+      "length_px": 36.124783736376884,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L047",
+      "start": [
+        214,
+        65
+      ],
+      "end": [
+        254,
+        65
+      ],
+      "length_px": 40.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L048",
+      "start": [
+        215,
+        56
+      ],
+      "end": [
+        247,
+        55
+      ],
+      "length_px": 32.01562118716424,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L049",
+      "start": [
+        216,
+        143
+      ],
+      "end": [
+        246,
+        140
+      ],
+      "length_px": 30.14962686336267,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L050",
+      "start": [
+        220,
+        50
+      ],
+      "end": [
+        251,
+        49
+      ],
+      "length_px": 31.016124838541646,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L051",
+      "start": [
+        227,
+        74
+      ],
+      "end": [
+        254,
+        73
+      ],
+      "length_px": 27.018512172212592,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L052",
+      "start": [
+        229,
+        41
+      ],
+      "end": [
+        252,
+        41
+      ],
+      "length_px": 23.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L053",
+      "start": [
+        230,
+        134
+      ],
+      "end": [
+        281,
+        135
+      ],
+      "length_px": 51.0098029794274,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L054",
+      "start": [
+        233,
+        144
+      ],
+      "end": [
+        253,
+        144
+      ],
+      "length_px": 20.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L055",
+      "start": [
+        245,
+        48
+      ],
+      "end": [
+        266,
+        48
+      ],
+      "length_px": 21.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L056",
+      "start": [
+        247,
+        702
+      ],
+      "end": [
+        247,
+        821
+      ],
+      "length_px": 119.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L057",
+      "start": [
+        247,
+        923
+      ],
+      "end": [
+        247,
+        959
+      ],
+      "length_px": 36.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L058",
+      "start": [
+        247,
+        960
+      ],
+      "end": [
+        247,
+        1016
+      ],
+      "length_px": 56.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L059",
+      "start": [
+        248,
+        157
+      ],
+      "end": [
+        269,
+        156
+      ],
+      "length_px": 21.02379604162864,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L060",
+      "start": [
+        251,
+        895
+      ],
+      "end": [
+        253,
+        858
+      ],
+      "length_px": 37.05401462729781,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L061",
+      "start": [
+        251,
+        1047
+      ],
+      "end": [
+        252,
+        1018
+      ],
+      "length_px": 29.017236257093817,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L062",
+      "start": [
+        252,
+        693
+      ],
+      "end": [
+        252,
+        818
+      ],
+      "length_px": 125.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L063",
+      "start": [
+        252,
+        926
+      ],
+      "end": [
+        252,
+        977
+      ],
+      "length_px": 51.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L064",
+      "start": [
+        253,
+        39
+      ],
+      "end": [
+        288,
+        40
+      ],
+      "length_px": 35.014282800023196,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L065",
+      "start": [
+        262,
+        61
+      ],
+      "end": [
+        288,
+        61
+      ],
+      "length_px": 26.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L066",
+      "start": [
+        266,
+        157
+      ],
+      "end": [
+        287,
+        155
+      ],
+      "length_px": 21.095023109728988,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L067",
+      "start": [
+        271,
+        863
+      ],
+      "end": [
+        271,
+        890
+      ],
+      "length_px": 27.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L068",
+      "start": [
+        275,
+        148
+      ],
+      "end": [
+        314,
+        148
+      ],
+      "length_px": 39.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L069",
+      "start": [
+        278,
+        861
+      ],
+      "end": [
+        278,
+        890
+      ],
+      "length_px": 29.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L070",
+      "start": [
+        280,
+        152
+      ],
+      "end": [
+        314,
+        151
+      ],
+      "length_px": 34.0147027033899,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L071",
+      "start": [
+        281,
+        60
+      ],
+      "end": [
+        303,
+        60
+      ],
+      "length_px": 22.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L072",
+      "start": [
+        282,
+        43
+      ],
+      "end": [
+        306,
+        43
+      ],
+      "length_px": 24.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L073",
+      "start": [
+        284,
+        46
+      ],
+      "end": [
+        304,
+        47
+      ],
+      "length_px": 20.024984394500787,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L074",
+      "start": [
+        294,
+        136
+      ],
+      "end": [
+        317,
+        137
+      ],
+      "length_px": 23.021728866442675,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L075",
+      "start": [
+        294,
+        142
+      ],
+      "end": [
+        314,
+        140
+      ],
+      "length_px": 20.09975124224178,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L076",
+      "start": [
+        294,
+        143
+      ],
+      "end": [
+        314,
+        143
+      ],
+      "length_px": 20.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L077",
+      "start": [
+        294,
+        155
+      ],
+      "end": [
+        317,
+        155
+      ],
+      "length_px": 23.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L078",
+      "start": [
+        298,
+        36
+      ],
+      "end": [
+        319,
+        36
+      ],
+      "length_px": 21.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L079",
+      "start": [
+        298,
+        41
+      ],
+      "end": [
+        323,
+        43
+      ],
+      "length_px": 25.079872407968907,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L080",
+      "start": [
+        301,
+        1103
+      ],
+      "end": [
+        328,
+        1102
+      ],
+      "length_px": 27.018512172212592,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L081",
+      "start": [
+        302,
+        1107
+      ],
+      "end": [
+        494,
+        1107
+      ],
+      "length_px": 192.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L082",
+      "start": [
+        310,
+        135
+      ],
+      "end": [
+        335,
+        135
+      ],
+      "length_px": 25.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L083",
+      "start": [
+        310,
+        157
+      ],
+      "end": [
+        334,
+        157
+      ],
+      "length_px": 24.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L084",
+      "start": [
+        310,
+        674
+      ],
+      "end": [
+        344,
+        674
+      ],
+      "length_px": 34.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L085",
+      "start": [
+        313,
+        1033
+      ],
+      "end": [
+        342,
+        994
+      ],
+      "length_px": 48.60041152089147,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L086",
+      "start": [
+        318,
+        53
+      ],
+      "end": [
+        356,
+        55
+      ],
+      "length_px": 38.05259518088089,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L087",
+      "start": [
+        318,
+        59
+      ],
+      "end": [
+        338,
+        59
+      ],
+      "length_px": 20.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L088",
+      "start": [
+        321,
+        1023
+      ],
+      "end": [
+        349,
+        1023
+      ],
+      "length_px": 28.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L089",
+      "start": [
+        324,
+        1018
+      ],
+      "end": [
+        348,
+        1018
+      ],
+      "length_px": 24.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L090",
+      "start": [
+        330,
+        139
+      ],
+      "end": [
+        353,
+        139
+      ],
+      "length_px": 23.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L091",
+      "start": [
+        331,
+        144
+      ],
+      "end": [
+        351,
+        144
+      ],
+      "length_px": 20.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L092",
+      "start": [
+        331,
+        149
+      ],
+      "end": [
+        351,
+        148
+      ],
+      "length_px": 20.024984394500787,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L093",
+      "start": [
+        333,
+        39
+      ],
+      "end": [
+        355,
+        39
+      ],
+      "length_px": 22.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L094",
+      "start": [
+        340,
+        996
+      ],
+      "end": [
+        342,
+        1035
+      ],
+      "length_px": 39.05124837953327,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L095",
+      "start": [
+        345,
+        995
+      ],
+      "end": [
+        351,
+        1035
+      ],
+      "length_px": 40.44749683231337,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L096",
+      "start": [
+        346,
+        137
+      ],
+      "end": [
+        371,
+        137
+      ],
+      "length_px": 25.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L097",
+      "start": [
+        366,
+        21
+      ],
+      "end": [
+        366,
+        65
+      ],
+      "length_px": 44.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L098",
+      "start": [
+        367,
+        485
+      ],
+      "end": [
+        379,
+        448
+      ],
+      "length_px": 38.897300677553446,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L099",
+      "start": [
+        370,
+        491
+      ],
+      "end": [
+        383,
+        454
+      ],
+      "length_px": 39.21734310225516,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L100",
+      "start": [
+        370,
+        1085
+      ],
+      "end": [
+        374,
+        1063
+      ],
+      "length_px": 22.360679774997898,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L101",
+      "start": [
+        372,
+        27
+      ],
+      "end": [
+        372,
+        62
+      ],
+      "length_px": 35.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L102",
+      "start": [
+        372,
+        139
+      ],
+      "end": [
+        372,
+        159
+      ],
+      "length_px": 20.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L103",
+      "start": [
+        375,
+        663
+      ],
+      "end": [
+        375,
+        769
+      ],
+      "length_px": 106.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L104",
+      "start": [
+        375,
+        958
+      ],
+      "end": [
+        375,
+        987
+      ],
+      "length_px": 29.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L105",
+      "start": [
+        375,
+        1025
+      ],
+      "end": [
+        375,
+        1062
+      ],
+      "length_px": 37.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L106",
+      "start": [
+        376,
+        770
+      ],
+      "end": [
+        376,
+        957
+      ],
+      "length_px": 187.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L107",
+      "start": [
+        376,
+        1051
+      ],
+      "end": [
+        407,
+        1051
+      ],
+      "length_px": 31.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L108",
+      "start": [
+        377,
+        612
+      ],
+      "end": [
+        392,
+        654
+      ],
+      "length_px": 44.598206241955516,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L109",
+      "start": [
+        385,
+        718
+      ],
+      "end": [
+        386,
+        744
+      ],
+      "length_px": 26.019223662515376,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L110",
+      "start": [
+        390,
+        514
+      ],
+      "end": [
+        390,
+        612
+      ],
+      "length_px": 98.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L111",
+      "start": [
+        390,
+        658
+      ],
+      "end": [
+        411,
+        658
+      ],
+      "length_px": 21.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L112",
+      "start": [
+        392,
+        1141
+      ],
+      "end": [
+        392,
+        1216
+      ],
+      "length_px": 75.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L113",
+      "start": [
+        392,
+        1235
+      ],
+      "end": [
+        392,
+        1256
+      ],
+      "length_px": 21.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L114",
+      "start": [
+        393,
+        751
+      ],
+      "end": [
+        395,
+        725
+      ],
+      "length_px": 26.076809620810597,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L115",
+      "start": [
+        394,
+        135
+      ],
+      "end": [
+        442,
+        136
+      ],
+      "length_px": 48.010415536631214,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L116",
+      "start": [
+        396,
+        60
+      ],
+      "end": [
+        431,
+        62
+      ],
+      "length_px": 35.05709628591621,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L117",
+      "start": [
+        397,
+        40
+      ],
+      "end": [
+        425,
+        40
+      ],
+      "length_px": 28.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L118",
+      "start": [
+        397,
+        1137
+      ],
+      "end": [
+        397,
+        1182
+      ],
+      "length_px": 45.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L119",
+      "start": [
+        397,
+        1186
+      ],
+      "end": [
+        398,
+        1226
+      ],
+      "length_px": 40.01249804748511,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L120",
+      "start": [
+        397,
+        1227
+      ],
+      "end": [
+        397,
+        1258
+      ],
+      "length_px": 31.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L121",
+      "start": [
+        398,
+        653
+      ],
+      "end": [
+        406,
+        629
+      ],
+      "length_px": 25.298221281347036,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L122",
+      "start": [
+        400,
+        514
+      ],
+      "end": [
+        400,
+        613
+      ],
+      "length_px": 99.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L123",
+      "start": [
+        403,
+        127
+      ],
+      "end": [
+        403,
+        157
+      ],
+      "length_px": 30.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L124",
+      "start": [
+        406,
+        449
+      ],
+      "end": [
+        406,
+        491
+      ],
+      "length_px": 42.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L125",
+      "start": [
+        407,
+        491
+      ],
+      "end": [
+        430,
+        491
+      ],
+      "length_px": 23.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L126",
+      "start": [
+        411,
+        774
+      ],
+      "end": [
+        411,
+        953
+      ],
+      "length_px": 179.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L127",
+      "start": [
+        412,
+        659
+      ],
+      "end": [
+        412,
+        690
+      ],
+      "length_px": 31.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L128",
+      "start": [
+        412,
+        957
+      ],
+      "end": [
+        452,
+        969
+      ],
+      "length_px": 41.7612260356422,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L129",
+      "start": [
+        413,
+        659
+      ],
+      "end": [
+        436,
+        659
+      ],
+      "length_px": 23.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L130",
+      "start": [
+        416,
+        37
+      ],
+      "end": [
+        442,
+        37
+      ],
+      "length_px": 26.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L131",
+      "start": [
+        416,
+        1225
+      ],
+      "end": [
+        482,
+        1224
+      ],
+      "length_px": 66.007575322837,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L132",
+      "start": [
+        417,
+        157
+      ],
+      "end": [
+        441,
+        157
+      ],
+      "length_px": 24.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L133",
+      "start": [
+        419,
+        665
+      ],
+      "end": [
+        473,
+        665
+      ],
+      "length_px": 54.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L134",
+      "start": [
+        424,
+        1219
+      ],
+      "end": [
+        542,
+        1219
+      ],
+      "length_px": 118.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L135",
+      "start": [
+        425,
+        1069
+      ],
+      "end": [
+        483,
+        1069
+      ],
+      "length_px": 58.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L136",
+      "start": [
+        427,
+        716
+      ],
+      "end": [
+        463,
+        744
+      ],
+      "length_px": 45.60701700396552,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L137",
+      "start": [
+        435,
+        647
+      ],
+      "end": [
+        446,
+        606
+      ],
+      "length_px": 42.44997055358225,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L138",
+      "start": [
+        436,
+        138
+      ],
+      "end": [
+        461,
+        138
+      ],
+      "length_px": 25.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L139",
+      "start": [
+        436,
+        153
+      ],
+      "end": [
+        458,
+        153
+      ],
+      "length_px": 22.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L140",
+      "start": [
+        437,
+        143
+      ],
+      "end": [
+        458,
+        142
+      ],
+      "length_px": 21.02379604162864,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L141",
+      "start": [
+        437,
+        148
+      ],
+      "end": [
+        458,
+        148
+      ],
+      "length_px": 21.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L142",
+      "start": [
+        437,
+        659
+      ],
+      "end": [
+        482,
+        659
+      ],
+      "length_px": 45.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L143",
+      "start": [
+        438,
+        677
+      ],
+      "end": [
+        465,
+        677
+      ],
+      "length_px": 27.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L144",
+      "start": [
+        438,
+        764
+      ],
+      "end": [
+        458,
+        759
+      ],
+      "length_px": 20.615528128088304,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L145",
+      "start": [
+        440,
+        629
+      ],
+      "end": [
+        472,
+        629
+      ],
+      "length_px": 32.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L146",
+      "start": [
+        442,
+        624
+      ],
+      "end": [
+        466,
+        624
+      ],
+      "length_px": 24.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L147",
+      "start": [
+        442,
+        696
+      ],
+      "end": [
+        478,
+        696
+      ],
+      "length_px": 36.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L148",
+      "start": [
+        444,
+        641
+      ],
+      "end": [
+        453,
+        606
+      ],
+      "length_px": 36.138621999185304,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L149",
+      "start": [
+        448,
+        61
+      ],
+      "end": [
+        486,
+        61
+      ],
+      "length_px": 38.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L150",
+      "start": [
+        449,
+        41
+      ],
+      "end": [
+        490,
+        41
+      ],
+      "length_px": 41.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L151",
+      "start": [
+        451,
+        754
+      ],
+      "end": [
+        518,
+        807
+      ],
+      "length_px": 85.42833253669417,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L152",
+      "start": [
+        453,
+        132
+      ],
+      "end": [
+        481,
+        132
+      ],
+      "length_px": 28.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L153",
+      "start": [
+        458,
+        970
+      ],
+      "end": [
+        589,
+        864
+      ],
+      "length_px": 168.51409436602032,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L154",
+      "start": [
+        465,
+        135
+      ],
+      "end": [
+        513,
+        135
+      ],
+      "length_px": 48.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L155",
+      "start": [
+        465,
+        633
+      ],
+      "end": [
+        471,
+        605
+      ],
+      "length_px": 28.635642126552707,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L156",
+      "start": [
+        468,
+        648
+      ],
+      "end": [
+        479,
+        605
+      ],
+      "length_px": 44.384682042344295,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L157",
+      "start": [
+        468,
+        1102
+      ],
+      "end": [
+        495,
+        1102
+      ],
+      "length_px": 27.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L158",
+      "start": [
+        470,
+        46
+      ],
+      "end": [
+        491,
+        46
+      ],
+      "length_px": 21.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L159",
+      "start": [
+        476,
+        156
+      ],
+      "end": [
+        513,
+        156
+      ],
+      "length_px": 37.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L160",
+      "start": [
+        478,
+        697
+      ],
+      "end": [
+        505,
+        695
+      ],
+      "length_px": 27.073972741361768,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L161",
+      "start": [
+        478,
+        728
+      ],
+      "end": [
+        484,
+        701
+      ],
+      "length_px": 27.65863337187866,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L162",
+      "start": [
+        478,
+        729
+      ],
+      "end": [
+        617,
+        842
+      ],
+      "length_px": 179.13681921927719,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L163",
+      "start": [
+        478,
+        999
+      ],
+      "end": [
+        615,
+        888
+      ],
+      "length_px": 176.32356620712955,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L164",
+      "start": [
+        478,
+        1004
+      ],
+      "end": [
+        485,
+        1031
+      ],
+      "length_px": 27.892651361962706,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L165",
+      "start": [
+        483,
+        63
+      ],
+      "end": [
+        529,
+        62
+      ],
+      "length_px": 46.010868281309364,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L166",
+      "start": [
+        484,
+        39
+      ],
+      "end": [
+        528,
+        39
+      ],
+      "length_px": 44.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L167",
+      "start": [
+        484,
+        1068
+      ],
+      "end": [
+        537,
+        1068
+      ],
+      "length_px": 53.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L168",
+      "start": [
+        485,
+        1224
+      ],
+      "end": [
+        540,
+        1224
+      ],
+      "length_px": 55.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L169",
+      "start": [
+        486,
+        1032
+      ],
+      "end": [
+        528,
+        1032
+      ],
+      "length_px": 42.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L170",
+      "start": [
+        495,
+        666
+      ],
+      "end": [
+        523,
+        666
+      ],
+      "length_px": 28.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L171",
+      "start": [
+        502,
+        143
+      ],
+      "end": [
+        548,
+        143
+      ],
+      "length_px": 46.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L172",
+      "start": [
+        502,
+        146
+      ],
+      "end": [
+        528,
+        147
+      ],
+      "length_px": 26.019223662515376,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L173",
+      "start": [
+        505,
+        797
+      ],
+      "end": [
+        566,
+        846
+      ],
+      "length_px": 78.24321056807422,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L174",
+      "start": [
+        510,
+        661
+      ],
+      "end": [
+        538,
+        661
+      ],
+      "length_px": 28.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L175",
+      "start": [
+        521,
+        695
+      ],
+      "end": [
+        561,
+        695
+      ],
+      "length_px": 40.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L176",
+      "start": [
+        522,
+        137
+      ],
+      "end": [
+        542,
+        137
+      ],
+      "length_px": 20.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L177",
+      "start": [
+        539,
+        661
+      ],
+      "end": [
+        582,
+        661
+      ],
+      "length_px": 43.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L178",
+      "start": [
+        540,
+        1067
+      ],
+      "end": [
+        597,
+        1068
+      ],
+      "length_px": 57.0087712549569,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L179",
+      "start": [
+        549,
+        156
+      ],
+      "end": [
+        572,
+        156
+      ],
+      "length_px": 23.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L180",
+      "start": [
+        553,
+        35
+      ],
+      "end": [
+        573,
+        35
+      ],
+      "length_px": 20.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L181",
+      "start": [
+        553,
+        60
+      ],
+      "end": [
+        578,
+        60
+      ],
+      "length_px": 25.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L182",
+      "start": [
+        557,
+        666
+      ],
+      "end": [
+        613,
+        666
+      ],
+      "length_px": 56.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L183",
+      "start": [
+        557,
+        1032
+      ],
+      "end": [
+        585,
+        1032
+      ],
+      "length_px": 28.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L184",
+      "start": [
+        564,
+        40
+      ],
+      "end": [
+        597,
+        43
+      ],
+      "length_px": 33.13608305156178,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L185",
+      "start": [
+        566,
+        845
+      ],
+      "end": [
+        587,
+        862
+      ],
+      "length_px": 27.018512172212592,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L186",
+      "start": [
+        566,
+        1067
+      ],
+      "end": [
+        627,
+        1067
+      ],
+      "length_px": 61.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L187",
+      "start": [
+        573,
+        44
+      ],
+      "end": [
+        596,
+        44
+      ],
+      "length_px": 23.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L188",
+      "start": [
+        573,
+        58
+      ],
+      "end": [
+        594,
+        58
+      ],
+      "length_px": 21.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L189",
+      "start": [
+        573,
+        1206
+      ],
+      "end": [
+        579,
+        1237
+      ],
+      "length_px": 31.575306807693888,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L190",
+      "start": [
+        573,
+        1226
+      ],
+      "end": [
+        597,
+        1226
+      ],
+      "length_px": 24.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L191",
+      "start": [
+        574,
+        48
+      ],
+      "end": [
+        594,
+        49
+      ],
+      "length_px": 20.024984394500787,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L192",
+      "start": [
+        574,
+        1206
+      ],
+      "end": [
+        595,
+        1224
+      ],
+      "length_px": 27.65863337187866,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L193",
+      "start": [
+        575,
+        1216
+      ],
+      "end": [
+        598,
+        1236
+      ],
+      "length_px": 30.479501308256342,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L194",
+      "start": [
+        583,
+        661
+      ],
+      "end": [
+        604,
+        661
+      ],
+      "length_px": 21.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L195",
+      "start": [
+        586,
+        695
+      ],
+      "end": [
+        614,
+        695
+      ],
+      "length_px": 28.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L196",
+      "start": [
+        588,
+        36
+      ],
+      "end": [
+        616,
+        36
+      ],
+      "length_px": 28.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L197",
+      "start": [
+        592,
+        868
+      ],
+      "end": [
+        618,
+        847
+      ],
+      "length_px": 33.421549934136806,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L198",
+      "start": [
+        601,
+        40
+      ],
+      "end": [
+        633,
+        39
+      ],
+      "length_px": 32.01562118716424,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L199",
+      "start": [
+        604,
+        1032
+      ],
+      "end": [
+        632,
+        1032
+      ],
+      "length_px": 28.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L200",
+      "start": [
+        605,
+        1068
+      ],
+      "end": [
+        688,
+        1067
+      ],
+      "length_px": 83.00602387778854,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L201",
+      "start": [
+        609,
+        157
+      ],
+      "end": [
+        668,
+        156
+      ],
+      "length_px": 59.00847396772772,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L202",
+      "start": [
+        611,
+        53
+      ],
+      "end": [
+        648,
+        53
+      ],
+      "length_px": 37.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L203",
+      "start": [
+        611,
+        61
+      ],
+      "end": [
+        634,
+        61
+      ],
+      "length_px": 23.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L204",
+      "start": [
+        611,
+        125
+      ],
+      "end": [
+        632,
+        124
+      ],
+      "length_px": 21.02379604162864,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L205",
+      "start": [
+        612,
+        40
+      ],
+      "end": [
+        634,
+        41
+      ],
+      "length_px": 22.02271554554524,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L206",
+      "start": [
+        619,
+        887
+      ],
+      "end": [
+        763,
+        1004
+      ],
+      "length_px": 185.53975315279473,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L207",
+      "start": [
+        620,
+        695
+      ],
+      "end": [
+        676,
+        695
+      ],
+      "length_px": 56.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L208",
+      "start": [
+        620,
+        842
+      ],
+      "end": [
+        764,
+        725
+      ],
+      "length_px": 185.53975315279473,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L209",
+      "start": [
+        621,
+        143
+      ],
+      "end": [
+        647,
+        143
+      ],
+      "length_px": 26.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L210",
+      "start": [
+        621,
+        1209
+      ],
+      "end": [
+        621,
+        1242
+      ],
+      "length_px": 33.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L211",
+      "start": [
+        622,
+        48
+      ],
+      "end": [
+        643,
+        49
+      ],
+      "length_px": 21.02379604162864,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L212",
+      "start": [
+        626,
+        666
+      ],
+      "end": [
+        654,
+        666
+      ],
+      "length_px": 28.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L213",
+      "start": [
+        628,
+        59
+      ],
+      "end": [
+        651,
+        59
+      ],
+      "length_px": 23.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L214",
+      "start": [
+        628,
+        1199
+      ],
+      "end": [
+        628,
+        1243
+      ],
+      "length_px": 44.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L215",
+      "start": [
+        634,
+        1032
+      ],
+      "end": [
+        674,
+        1032
+      ],
+      "length_px": 40.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L216",
+      "start": [
+        643,
+        136
+      ],
+      "end": [
+        698,
+        135
+      ],
+      "length_px": 55.00909015790027,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L217",
+      "start": [
+        644,
+        61
+      ],
+      "end": [
+        673,
+        61
+      ],
+      "length_px": 29.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L218",
+      "start": [
+        645,
+        40
+      ],
+      "end": [
+        679,
+        40
+      ],
+      "length_px": 34.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L219",
+      "start": [
+        646,
+        661
+      ],
+      "end": [
+        674,
+        661
+      ],
+      "length_px": 28.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L220",
+      "start": [
+        647,
+        863
+      ],
+      "end": [
+        786,
+        755
+      ],
+      "length_px": 176.02556632489498,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L221",
+      "start": [
+        648,
+        866
+      ],
+      "end": [
+        784,
+        976
+      ],
+      "length_px": 174.91712323268982,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L222",
+      "start": [
+        648,
+        1207
+      ],
+      "end": [
+        648,
+        1236
+      ],
+      "length_px": 29.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L223",
+      "start": [
+        655,
+        666
+      ],
+      "end": [
+        687,
+        666
+      ],
+      "length_px": 32.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L224",
+      "start": [
+        661,
+        155
+      ],
+      "end": [
+        684,
+        155
+      ],
+      "length_px": 23.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L225",
+      "start": [
+        663,
+        139
+      ],
+      "end": [
+        699,
+        137
+      ],
+      "length_px": 36.05551275463989,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L226",
+      "start": [
+        664,
+        142
+      ],
+      "end": [
+        684,
+        142
+      ],
+      "length_px": 20.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L227",
+      "start": [
+        664,
+        147
+      ],
+      "end": [
+        684,
+        147
+      ],
+      "length_px": 20.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L228",
+      "start": [
+        675,
+        1032
+      ],
+      "end": [
+        731,
+        1032
+      ],
+      "length_px": 56.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L229",
+      "start": [
+        681,
+        1224
+      ],
+      "end": [
+        722,
+        1224
+      ],
+      "length_px": 41.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L230",
+      "start": [
+        688,
+        666
+      ],
+      "end": [
+        714,
+        666
+      ],
+      "length_px": 26.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L231",
+      "start": [
+        689,
+        36
+      ],
+      "end": [
+        710,
+        36
+      ],
+      "length_px": 21.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L232",
+      "start": [
+        689,
+        40
+      ],
+      "end": [
+        728,
+        44
+      ],
+      "length_px": 39.20459156782532,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L233",
+      "start": [
+        691,
+        1068
+      ],
+      "end": [
+        747,
+        1068
+      ],
+      "length_px": 56.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L234",
+      "start": [
+        692,
+        1219
+      ],
+      "end": [
+        748,
+        1219
+      ],
+      "length_px": 56.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L235",
+      "start": [
+        694,
+        142
+      ],
+      "end": [
+        730,
+        142
+      ],
+      "length_px": 36.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L236",
+      "start": [
+        696,
+        695
+      ],
+      "end": [
+        796,
+        696
+      ],
+      "length_px": 100.00499987500625,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L237",
+      "start": [
+        698,
+        661
+      ],
+      "end": [
+        726,
+        661
+      ],
+      "length_px": 28.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L238",
+      "start": [
+        703,
+        949
+      ],
+      "end": [
+        810,
+        1036
+      ],
+      "length_px": 137.90576492663388,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L239",
+      "start": [
+        708,
+        46
+      ],
+      "end": [
+        728,
+        46
+      ],
+      "length_px": 20.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L240",
+      "start": [
+        708,
+        51
+      ],
+      "end": [
+        745,
+        51
+      ],
+      "length_px": 37.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L241",
+      "start": [
+        708,
+        56
+      ],
+      "end": [
+        737,
+        56
+      ],
+      "length_px": 29.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L242",
+      "start": [
+        708,
+        61
+      ],
+      "end": [
+        740,
+        60
+      ],
+      "length_px": 32.01562118716424,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L243",
+      "start": [
+        708,
+        65
+      ],
+      "end": [
+        748,
+        65
+      ],
+      "length_px": 40.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L244",
+      "start": [
+        711,
+        137
+      ],
+      "end": [
+        731,
+        137
+      ],
+      "length_px": 20.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L245",
+      "start": [
+        720,
+        666
+      ],
+      "end": [
+        748,
+        666
+      ],
+      "length_px": 28.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L246",
+      "start": [
+        721,
+        73
+      ],
+      "end": [
+        746,
+        75
+      ],
+      "length_px": 25.079872407968907,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L247",
+      "start": [
+        723,
+        41
+      ],
+      "end": [
+        746,
+        41
+      ],
+      "length_px": 23.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L248",
+      "start": [
+        723,
+        147
+      ],
+      "end": [
+        749,
+        147
+      ],
+      "length_px": 26.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L249",
+      "start": [
+        725,
+        136
+      ],
+      "end": [
+        749,
+        136
+      ],
+      "length_px": 24.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L250",
+      "start": [
+        725,
+        157
+      ],
+      "end": [
+        749,
+        157
+      ],
+      "length_px": 24.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L251",
+      "start": [
+        725,
+        1224
+      ],
+      "end": [
+        781,
+        1224
+      ],
+      "length_px": 56.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L252",
+      "start": [
+        740,
+        753
+      ],
+      "end": [
+        805,
+        699
+      ],
+      "length_px": 84.50443775329198,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L253",
+      "start": [
+        757,
+        665
+      ],
+      "end": [
+        806,
+        665
+      ],
+      "length_px": 49.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L254",
+      "start": [
+        757,
+        1030
+      ],
+      "end": [
+        765,
+        1000
+      ],
+      "length_px": 31.04834939252005,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L255",
+      "start": [
+        758,
+        698
+      ],
+      "end": [
+        764,
+        721
+      ],
+      "length_px": 23.769728648009426,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L256",
+      "start": [
+        771,
+        36
+      ],
+      "end": [
+        811,
+        36
+      ],
+      "length_px": 40.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L257",
+      "start": [
+        771,
+        38
+      ],
+      "end": [
+        771,
+        58
+      ],
+      "length_px": 20.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L258",
+      "start": [
+        778,
+        992
+      ],
+      "end": [
+        809,
+        1016
+      ],
+      "length_px": 39.20459156782532,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L259",
+      "start": [
+        779,
+        1069
+      ],
+      "end": [
+        817,
+        1069
+      ],
+      "length_px": 38.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L260",
+      "start": [
+        782,
+        135
+      ],
+      "end": [
+        820,
+        135
+      ],
+      "length_px": 38.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L261",
+      "start": [
+        782,
+        1224
+      ],
+      "end": [
+        824,
+        1224
+      ],
+      "length_px": 42.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L262",
+      "start": [
+        785,
+        755
+      ],
+      "end": [
+        828,
+        768
+      ],
+      "length_px": 44.9221548904324,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L263",
+      "start": [
+        785,
+        976
+      ],
+      "end": [
+        828,
+        958
+      ],
+      "length_px": 46.61544808322666,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L264",
+      "start": [
+        790,
+        1219
+      ],
+      "end": [
+        818,
+        1219
+      ],
+      "length_px": 28.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L265",
+      "start": [
+        794,
+        156
+      ],
+      "end": [
+        820,
+        156
+      ],
+      "length_px": 26.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L266",
+      "start": [
+        803,
+        463
+      ],
+      "end": [
+        803,
+        491
+      ],
+      "length_px": 28.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L267",
+      "start": [
+        809,
+        44
+      ],
+      "end": [
+        830,
+        44
+      ],
+      "length_px": 21.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L268",
+      "start": [
+        809,
+        450
+      ],
+      "end": [
+        809,
+        485
+      ],
+      "length_px": 35.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L269",
+      "start": [
+        809,
+        659
+      ],
+      "end": [
+        865,
+        658
+      ],
+      "length_px": 56.00892785976178,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L270",
+      "start": [
+        810,
+        48
+      ],
+      "end": [
+        864,
+        47
+      ],
+      "length_px": 54.00925846556311,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L271",
+      "start": [
+        810,
+        54
+      ],
+      "end": [
+        834,
+        53
+      ],
+      "length_px": 24.020824298928627,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L272",
+      "start": [
+        810,
+        58
+      ],
+      "end": [
+        830,
+        58
+      ],
+      "length_px": 20.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L273",
+      "start": [
+        813,
+        137
+      ],
+      "end": [
+        839,
+        137
+      ],
+      "length_px": 26.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L274",
+      "start": [
+        813,
+        154
+      ],
+      "end": [
+        835,
+        154
+      ],
+      "length_px": 22.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L275",
+      "start": [
+        818,
+        1068
+      ],
+      "end": [
+        849,
+        1068
+      ],
+      "length_px": 31.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L276",
+      "start": [
+        823,
+        477
+      ],
+      "end": [
+        849,
+        477
+      ],
+      "length_px": 26.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L277",
+      "start": [
+        824,
+        41
+      ],
+      "end": [
+        858,
+        41
+      ],
+      "length_px": 34.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L278",
+      "start": [
+        825,
+        62
+      ],
+      "end": [
+        864,
+        62
+      ],
+      "length_px": 39.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L279",
+      "start": [
+        828,
+        611
+      ],
+      "end": [
+        843,
+        656
+      ],
+      "length_px": 47.43416490252569,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L280",
+      "start": [
+        829,
+        769
+      ],
+      "end": [
+        829,
+        958
+      ],
+      "length_px": 189.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L281",
+      "start": [
+        832,
+        1219
+      ],
+      "end": [
+        854,
+        1220
+      ],
+      "length_px": 22.02271554554524,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L282",
+      "start": [
+        836,
+        1225
+      ],
+      "end": [
+        866,
+        1227
+      ],
+      "length_px": 30.066592756745816,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L283",
+      "start": [
+        841,
+        514
+      ],
+      "end": [
+        841,
+        612
+      ],
+      "length_px": 98.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L284",
+      "start": [
+        843,
+        1085
+      ],
+      "end": [
+        843,
+        1257
+      ],
+      "length_px": 172.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L285",
+      "start": [
+        846,
+        451
+      ],
+      "end": [
+        846,
+        490
+      ],
+      "length_px": 39.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L286",
+      "start": [
+        848,
+        1084
+      ],
+      "end": [
+        848,
+        1258
+      ],
+      "length_px": 174.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L287",
+      "start": [
+        850,
+        649
+      ],
+      "end": [
+        864,
+        611
+      ],
+      "length_px": 40.496913462633174,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L288",
+      "start": [
+        854,
+        514
+      ],
+      "end": [
+        854,
+        611
+      ],
+      "length_px": 97.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L289",
+      "start": [
+        859,
+        36
+      ],
+      "end": [
+        898,
+        36
+      ],
+      "length_px": 39.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L290",
+      "start": [
+        864,
+        768
+      ],
+      "end": [
+        864,
+        959
+      ],
+      "length_px": 191.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L291",
+      "start": [
+        865,
+        767
+      ],
+      "end": [
+        904,
+        754
+      ],
+      "length_px": 41.10960958218893,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L292",
+      "start": [
+        865,
+        960
+      ],
+      "end": [
+        903,
+        976
+      ],
+      "length_px": 41.23105625617661,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L293",
+      "start": [
+        866,
+        1225
+      ],
+      "end": [
+        931,
+        1224
+      ],
+      "length_px": 65.00769185258002,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L294",
+      "start": [
+        867,
+        135
+      ],
+      "end": [
+        891,
+        135
+      ],
+      "length_px": 24.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L295",
+      "start": [
+        867,
+        659
+      ],
+      "end": [
+        929,
+        659
+      ],
+      "length_px": 62.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L296",
+      "start": [
+        868,
+        1126
+      ],
+      "end": [
+        877,
+        1089
+      ],
+      "length_px": 38.07886552931954,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L297",
+      "start": [
+        871,
+        157
+      ],
+      "end": [
+        897,
+        157
+      ],
+      "length_px": 26.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L298",
+      "start": [
+        872,
+        452
+      ],
+      "end": [
+        873,
+        491
+      ],
+      "length_px": 39.01281840626232,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L299",
+      "start": [
+        875,
+        1219
+      ],
+      "end": [
+        924,
+        1219
+      ],
+      "length_px": 49.0,
+      "evidence": "probabilistic_hough"
+    },
+    {
+      "id": "L300",
+      "start": [
+        879,
+        130
+      ],
+      "end": [
+        911,
+        130
+      ],
+      "length_px": 32.0,
+      "evidence": "probabilistic_hough"
+    }
+  ],
+  "joints": [
+    {
+      "id": "J001",
+      "point": [
+        369.0,
+        24.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L097",
+        "L101"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J002",
+      "point": [
+        36.0,
+        24.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L003"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J003",
+      "point": [
+        64.5,
+        32.25
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L003",
+        "L004",
+        "L005",
+        "L006"
+      ],
+      "endpoint_count": 4
+    },
+    {
+      "id": "J004",
+      "point": [
+        166.0,
+        26.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L028"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J005",
+      "point": [
+        188.0,
+        27.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L028"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J006",
+      "point": [
+        553.0,
+        35.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L180"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J007",
+      "point": [
+        572.5,
+        47.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L180",
+        "L181",
+        "L184",
+        "L187",
+        "L188",
+        "L191"
+      ],
+      "endpoint_count": 6
+    },
+    {
+      "id": "J008",
+      "point": [
+        91.0909090909091,
+        47.45454545454545
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L005",
+        "L006",
+        "L011",
+        "L012",
+        "L013",
+        "L014",
+        "L015",
+        "L017"
+      ],
+      "endpoint_count": 11
+    },
+    {
+      "id": "J009",
+      "point": [
+        151.0,
+        36.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L023"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J010",
+      "point": [
+        166.625,
+        49.875
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L023",
+        "L024",
+        "L025",
+        "L026",
+        "L027",
+        "L029",
+        "L030",
+        "L034"
+      ],
+      "endpoint_count": 8
+    },
+    {
+      "id": "J011",
+      "point": [
+        294.2857142857143,
+        42.285714285714285
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L064",
+        "L072",
+        "L073",
+        "L078",
+        "L079"
+      ],
+      "endpoint_count": 7
+    },
+    {
+      "id": "J012",
+      "point": [
+        322.2,
+        46.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L078",
+        "L079",
+        "L086",
+        "L087",
+        "L093"
+      ],
+      "endpoint_count": 5
+    },
+    {
+      "id": "J013",
+      "point": [
+        599.75,
+        43.25
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L184",
+        "L187",
+        "L188",
+        "L191",
+        "L196",
+        "L198",
+        "L205"
+      ],
+      "endpoint_count": 8
+    },
+    {
+      "id": "J014",
+      "point": [
+        685.6666666666666,
+        38.666666666666664
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L218",
+        "L231",
+        "L232"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J015",
+      "point": [
+        708.3333333333334,
+        52.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L231",
+        "L239",
+        "L240",
+        "L241",
+        "L242",
+        "L243"
+      ],
+      "endpoint_count": 6
+    },
+    {
+      "id": "J016",
+      "point": [
+        771.0,
+        37.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L256",
+        "L257"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J017",
+      "point": [
+        810.0,
+        48.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L256",
+        "L267",
+        "L270",
+        "L271",
+        "L272"
+      ],
+      "endpoint_count": 5
+    },
+    {
+      "id": "J018",
+      "point": [
+        860.3333333333334,
+        41.333333333333336
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L270",
+        "L277",
+        "L289"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J019",
+      "point": [
+        898.0,
+        36.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L289"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J020",
+      "point": [
+        420.5,
+        38.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L117",
+        "L130"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J021",
+      "point": [
+        445.5,
+        39.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L130",
+        "L150"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J022",
+      "point": [
+        232.0,
+        52.714285714285715
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L027",
+        "L034",
+        "L039",
+        "L040",
+        "L045",
+        "L046",
+        "L047",
+        "L048",
+        "L050",
+        "L051",
+        "L052",
+        "L055",
+        "L064",
+        "L065"
+      ],
+      "endpoint_count": 21
+    },
+    {
+      "id": "J023",
+      "point": [
+        355.0,
+        39.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L093"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J024",
+      "point": [
+        488.3333333333333,
+        42.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L150",
+        "L158",
+        "L166"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J025",
+      "point": [
+        528.0,
+        39.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L166"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J026",
+      "point": [
+        640.0,
+        51.333333333333336
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L198",
+        "L202",
+        "L203",
+        "L205",
+        "L211",
+        "L213",
+        "L217",
+        "L218"
+      ],
+      "endpoint_count": 9
+    },
+    {
+      "id": "J027",
+      "point": [
+        397.0,
+        40.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L117"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J028",
+      "point": [
+        123.0,
+        44.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L012",
+        "L017"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J029",
+      "point": [
+        726.3333333333334,
+        43.666666666666664
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L232",
+        "L239",
+        "L247"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J030",
+      "point": [
+        743.6666666666666,
+        58.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L240",
+        "L241",
+        "L242",
+        "L243",
+        "L246",
+        "L247"
+      ],
+      "endpoint_count": 6
+    },
+    {
+      "id": "J031",
+      "point": [
+        828.6,
+        51.6
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L267",
+        "L271",
+        "L272",
+        "L277",
+        "L278"
+      ],
+      "endpoint_count": 5
+    },
+    {
+      "id": "J032",
+      "point": [
+        188.0,
+        47.333333333333336
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L026",
+        "L029",
+        "L030"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J033",
+      "point": [
+        470.0,
+        46.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L158"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J034",
+      "point": [
+        266.0,
+        48.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L055"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J035",
+      "point": [
+        622.0,
+        48.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L211"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J036",
+      "point": [
+        611.0,
+        57.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L202",
+        "L203"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J037",
+      "point": [
+        356.0,
+        55.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L086"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J038",
+      "point": [
+        771.0,
+        58.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L257"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J039",
+      "point": [
+        338.0,
+        59.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L087"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J040",
+      "point": [
+        284.5,
+        60.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L065",
+        "L071"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J041",
+      "point": [
+        303.0,
+        60.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L071"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J042",
+      "point": [
+        396.0,
+        60.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L116"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J043",
+      "point": [
+        553.0,
+        60.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L181"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J044",
+      "point": [
+        448.0,
+        61.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L149"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J045",
+      "point": [
+        484.5,
+        62.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L149",
+        "L165"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J046",
+      "point": [
+        673.0,
+        61.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L217"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J047",
+      "point": [
+        369.0,
+        63.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L097",
+        "L101"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J048",
+      "point": [
+        431.0,
+        62.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L116"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J049",
+      "point": [
+        529.0,
+        62.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L165"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J050",
+      "point": [
+        864.0,
+        62.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L278"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J051",
+      "point": [
+        230.0,
+        68.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L024",
+        "L039",
+        "L051"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J052",
+      "point": [
+        63.0,
+        64.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L004"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J053",
+      "point": [
+        187.0,
+        65.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L025"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J054",
+      "point": [
+        118.0,
+        67.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L015"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J055",
+      "point": [
+        721.0,
+        73.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L246"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J056",
+      "point": [
+        632.0,
+        124.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L204"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J057",
+      "point": [
+        611.0,
+        125.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L204"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J058",
+      "point": [
+        403.0,
+        127.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L123"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J059",
+      "point": [
+        149.0,
+        130.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L022"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J060",
+      "point": [
+        169.0,
+        136.33333333333334
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L022",
+        "L032",
+        "L033"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J061",
+      "point": [
+        879.0,
+        130.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L300"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J062",
+      "point": [
+        911.0,
+        130.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L300"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J063",
+      "point": [
+        99.4,
+        142.8
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L007",
+        "L008",
+        "L009",
+        "L010",
+        "L016"
+      ],
+      "endpoint_count": 5
+    },
+    {
+      "id": "J064",
+      "point": [
+        133.25,
+        142.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L016",
+        "L018",
+        "L019",
+        "L020"
+      ],
+      "endpoint_count": 4
+    },
+    {
+      "id": "J065",
+      "point": [
+        448.5,
+        143.58333333333334
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L115",
+        "L132",
+        "L138",
+        "L139",
+        "L140",
+        "L141",
+        "L152",
+        "L154"
+      ],
+      "endpoint_count": 12
+    },
+    {
+      "id": "J066",
+      "point": [
+        481.0,
+        132.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L152"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J067",
+      "point": [
+        239.0,
+        140.66666666666666
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L041",
+        "L043",
+        "L049",
+        "L053",
+        "L054"
+      ],
+      "endpoint_count": 6
+    },
+    {
+      "id": "J068",
+      "point": [
+        209.5,
+        145.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L041",
+        "L043",
+        "L044",
+        "L049"
+      ],
+      "endpoint_count": 4
+    },
+    {
+      "id": "J069",
+      "point": [
+        281.0,
+        135.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L053"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J070",
+      "point": [
+        313.75,
+        145.75
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L068",
+        "L070",
+        "L074",
+        "L075",
+        "L076",
+        "L077",
+        "L082",
+        "L083"
+      ],
+      "endpoint_count": 8
+    },
+    {
+      "id": "J071",
+      "point": [
+        340.22222222222223,
+        143.55555555555554
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L082",
+        "L083",
+        "L090",
+        "L091",
+        "L092",
+        "L096"
+      ],
+      "endpoint_count": 9
+    },
+    {
+      "id": "J072",
+      "point": [
+        394.0,
+        135.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L115"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J073",
+      "point": [
+        521.0,
+        139.66666666666666
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L154",
+        "L172",
+        "L176"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J074",
+      "point": [
+        693.4285714285714,
+        142.14285714285714
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L216",
+        "L224",
+        "L225",
+        "L226",
+        "L227",
+        "L235",
+        "L244"
+      ],
+      "endpoint_count": 7
+    },
+    {
+      "id": "J075",
+      "point": [
+        782.0,
+        135.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L260"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J076",
+      "point": [
+        816.5,
+        136.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L260",
+        "L273"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J077",
+      "point": [
+        867.0,
+        135.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L294"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J078",
+      "point": [
+        891.0,
+        135.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L294"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J079",
+      "point": [
+        30.0,
+        136.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L001"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J080",
+      "point": [
+        77.66666666666667,
+        146.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L001",
+        "L002",
+        "L007",
+        "L008",
+        "L009",
+        "L010"
+      ],
+      "endpoint_count": 6
+    },
+    {
+      "id": "J081",
+      "point": [
+        283.6666666666667,
+        149.33333333333334
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L059",
+        "L066",
+        "L068",
+        "L070",
+        "L074",
+        "L075",
+        "L076",
+        "L077"
+      ],
+      "endpoint_count": 9
+    },
+    {
+      "id": "J082",
+      "point": [
+        645.0,
+        139.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L209",
+        "L216"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J083",
+      "point": [
+        726.8,
+        143.8
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L235",
+        "L244",
+        "L248",
+        "L249",
+        "L250"
+      ],
+      "endpoint_count": 5
+    },
+    {
+      "id": "J084",
+      "point": [
+        749.0,
+        146.66666666666666
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L248",
+        "L249",
+        "L250"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J085",
+      "point": [
+        192.5,
+        138.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L032",
+        "L033"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J086",
+      "point": [
+        371.5,
+        138.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L096",
+        "L102"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J087",
+      "point": [
+        545.0,
+        140.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L171",
+        "L176"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J088",
+      "point": [
+        839.0,
+        137.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L273"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J089",
+      "point": [
+        664.0,
+        147.8
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L201",
+        "L224",
+        "L225",
+        "L226",
+        "L227"
+      ],
+      "endpoint_count": 5
+    },
+    {
+      "id": "J090",
+      "point": [
+        152.5,
+        149.75
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L018",
+        "L019",
+        "L020",
+        "L021"
+      ],
+      "endpoint_count": 4
+    },
+    {
+      "id": "J091",
+      "point": [
+        502.0,
+        144.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L171",
+        "L172"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J092",
+      "point": [
+        621.0,
+        143.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L209"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J093",
+      "point": [
+        168.5,
+        157.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L021",
+        "L031"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J094",
+      "point": [
+        189.0,
+        153.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L031"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J095",
+      "point": [
+        816.5,
+        155.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L265",
+        "L274"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J096",
+      "point": [
+        835.0,
+        154.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L274"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J097",
+      "point": [
+        31.0,
+        156.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L002"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J098",
+      "point": [
+        245.0,
+        156.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L044",
+        "L059"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J099",
+      "point": [
+        476.0,
+        156.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L159"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J100",
+      "point": [
+        513.0,
+        156.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L159"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J101",
+      "point": [
+        549.0,
+        156.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L179"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J102",
+      "point": [
+        572.0,
+        156.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L179"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J103",
+      "point": [
+        794.0,
+        156.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L265"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J104",
+      "point": [
+        403.0,
+        157.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L123"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J105",
+      "point": [
+        417.0,
+        157.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L132"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J106",
+      "point": [
+        609.0,
+        157.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L201"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J107",
+      "point": [
+        871.0,
+        157.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L297"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J108",
+      "point": [
+        897.0,
+        157.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L297"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J109",
+      "point": [
+        372.0,
+        159.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L102"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J110",
+      "point": [
+        381.0,
+        451.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L098",
+        "L099"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J111",
+      "point": [
+        406.0,
+        449.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L124"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J112",
+      "point": [
+        809.0,
+        450.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L268"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J113",
+      "point": [
+        846.0,
+        451.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L285"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J114",
+      "point": [
+        872.0,
+        452.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L298"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J115",
+      "point": [
+        803.0,
+        463.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L266"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J116",
+      "point": [
+        823.0,
+        477.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L276"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J117",
+      "point": [
+        849.0,
+        477.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L276"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J118",
+      "point": [
+        368.5,
+        488.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L098",
+        "L099"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J119",
+      "point": [
+        806.0,
+        488.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L266",
+        "L268"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J120",
+      "point": [
+        846.0,
+        490.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L285"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J121",
+      "point": [
+        406.5,
+        491.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L124",
+        "L125"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J122",
+      "point": [
+        430.0,
+        491.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L125"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J123",
+      "point": [
+        873.0,
+        491.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L298"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J124",
+      "point": [
+        395.0,
+        514.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L110",
+        "L122"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J125",
+      "point": [
+        841.0,
+        514.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L283"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J126",
+      "point": [
+        854.0,
+        514.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L288"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J127",
+      "point": [
+        475.0,
+        605.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L155",
+        "L156"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J128",
+      "point": [
+        449.5,
+        606.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L137",
+        "L148"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J129",
+      "point": [
+        828.0,
+        611.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L279"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J130",
+      "point": [
+        859.0,
+        611.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L287",
+        "L288"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J131",
+      "point": [
+        377.0,
+        612.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L108"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J132",
+      "point": [
+        395.0,
+        612.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L110",
+        "L122"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J133",
+      "point": [
+        841.0,
+        612.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L283"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J134",
+      "point": [
+        441.0,
+        626.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L145",
+        "L146"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J135",
+      "point": [
+        467.6666666666667,
+        628.6666666666666
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L145",
+        "L146",
+        "L155"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J136",
+      "point": [
+        406.0,
+        629.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L121"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J137",
+      "point": [
+        439.5,
+        644.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L137",
+        "L148"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J138",
+      "point": [
+        468.0,
+        648.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L156"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J139",
+      "point": [
+        846.5,
+        652.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L279",
+        "L287"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J140",
+      "point": [
+        393.3333333333333,
+        655.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L108",
+        "L111",
+        "L121"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J141",
+      "point": [
+        413.75,
+        660.25
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L111",
+        "L127",
+        "L129",
+        "L133"
+      ],
+      "endpoint_count": 4
+    },
+    {
+      "id": "J142",
+      "point": [
+        866.0,
+        658.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L269",
+        "L295"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J143",
+      "point": [
+        436.5,
+        659.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L129",
+        "L142"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J144",
+      "point": [
+        477.5,
+        662.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L133",
+        "L142"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J145",
+      "point": [
+        807.5,
+        662.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L253",
+        "L269"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J146",
+      "point": [
+        929.0,
+        659.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L295"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J147",
+      "point": [
+        510.0,
+        661.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L174"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J148",
+      "point": [
+        538.5,
+        661.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L174",
+        "L177"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J149",
+      "point": [
+        582.5,
+        661.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L177",
+        "L194"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J150",
+      "point": [
+        608.5,
+        663.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L182",
+        "L194"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J151",
+      "point": [
+        651.6666666666666,
+        664.3333333333334
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L212",
+        "L219",
+        "L223"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J152",
+      "point": [
+        674.0,
+        661.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L219"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J153",
+      "point": [
+        691.0,
+        664.3333333333334
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L223",
+        "L230",
+        "L237"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J154",
+      "point": [
+        720.0,
+        664.3333333333334
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L230",
+        "L237",
+        "L245"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J155",
+      "point": [
+        375.0,
+        663.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L103"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J156",
+      "point": [
+        752.5,
+        665.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L245",
+        "L253"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J157",
+      "point": [
+        495.0,
+        666.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L170"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J158",
+      "point": [
+        523.0,
+        666.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L170"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J159",
+      "point": [
+        557.0,
+        666.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L182"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J160",
+      "point": [
+        626.0,
+        666.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L212"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J161",
+      "point": [
+        258.0,
+        674.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L037"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J162",
+      "point": [
+        310.0,
+        674.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L084"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J163",
+      "point": [
+        345.0,
+        676.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L038",
+        "L084"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J164",
+      "point": [
+        198.5,
+        677.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L037",
+        "L038"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J165",
+      "point": [
+        438.0,
+        677.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L143"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J166",
+      "point": [
+        465.0,
+        677.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L143"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J167",
+      "point": [
+        412.0,
+        690.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L127"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J168",
+      "point": [
+        249.5,
+        697.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L056",
+        "L062"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J169",
+      "point": [
+        505.0,
+        695.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L160"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J170",
+      "point": [
+        521.0,
+        695.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L175"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J171",
+      "point": [
+        561.0,
+        695.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L175"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J172",
+      "point": [
+        586.0,
+        695.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L195"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J173",
+      "point": [
+        617.0,
+        695.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L195",
+        "L207"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J174",
+      "point": [
+        676.0,
+        695.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L207"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J175",
+      "point": [
+        696.0,
+        695.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L236"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J176",
+      "point": [
+        442.0,
+        696.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L147"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J177",
+      "point": [
+        480.0,
+        698.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L147",
+        "L160",
+        "L161"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J178",
+      "point": [
+        800.5,
+        697.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L236",
+        "L252"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J179",
+      "point": [
+        758.0,
+        698.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L255"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J180",
+      "point": [
+        427.0,
+        716.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L136"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J181",
+      "point": [
+        385.0,
+        718.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L109"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J182",
+      "point": [
+        764.0,
+        723.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L208",
+        "L255"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J183",
+      "point": [
+        395.0,
+        725.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L114"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J184",
+      "point": [
+        478.0,
+        728.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L161",
+        "L162"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J185",
+      "point": [
+        389.5,
+        747.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L109",
+        "L114"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J186",
+      "point": [
+        463.0,
+        744.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L136"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J187",
+      "point": [
+        740.0,
+        753.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L252"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J188",
+      "point": [
+        454.5,
+        756.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L144",
+        "L151"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J189",
+      "point": [
+        904.0,
+        754.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L291"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J190",
+      "point": [
+        785.5,
+        755.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L220",
+        "L262"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J191",
+      "point": [
+        438.0,
+        764.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L144"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J192",
+      "point": [
+        864.5,
+        767.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L290",
+        "L291"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J193",
+      "point": [
+        828.5,
+        768.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L262",
+        "L280"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J194",
+      "point": [
+        375.5,
+        769.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L103",
+        "L106"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J195",
+      "point": [
+        411.0,
+        774.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L126"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J196",
+      "point": [
+        505.0,
+        797.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L173"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J197",
+      "point": [
+        518.0,
+        807.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L151"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J198",
+      "point": [
+        249.5,
+        819.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L056",
+        "L062"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J199",
+      "point": [
+        618.3333333333334,
+        843.6666666666666
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L162",
+        "L197",
+        "L208"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J200",
+      "point": [
+        566.0,
+        845.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L173",
+        "L185"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J201",
+      "point": [
+        253.0,
+        858.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L060"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J202",
+      "point": [
+        274.5,
+        862.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L067",
+        "L069"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J203",
+      "point": [
+        589.3333333333334,
+        864.6666666666666
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L153",
+        "L185",
+        "L197"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J204",
+      "point": [
+        647.5,
+        864.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L220",
+        "L221"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J205",
+      "point": [
+        206.0,
+        864.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L042"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J206",
+      "point": [
+        229.0,
+        887.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L042"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J207",
+      "point": [
+        617.0,
+        887.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L163",
+        "L206"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J208",
+      "point": [
+        274.5,
+        890.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L067",
+        "L069"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J209",
+      "point": [
+        251.0,
+        895.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L060"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J210",
+      "point": [
+        249.5,
+        924.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L057",
+        "L063"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J211",
+      "point": [
+        703.0,
+        949.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L238"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J212",
+      "point": [
+        411.5,
+        955.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L126",
+        "L128"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J213",
+      "point": [
+        375.5,
+        957.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L104",
+        "L106"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J214",
+      "point": [
+        828.5,
+        958.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L263",
+        "L280"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J215",
+      "point": [
+        247.0,
+        959.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L057",
+        "L058"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J216",
+      "point": [
+        864.5,
+        959.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L290",
+        "L292"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J217",
+      "point": [
+        455.0,
+        969.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L128",
+        "L153"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J218",
+      "point": [
+        784.5,
+        976.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L221",
+        "L263"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J219",
+      "point": [
+        903.0,
+        976.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L292"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J220",
+      "point": [
+        252.0,
+        977.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L063"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J221",
+      "point": [
+        375.0,
+        987.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L104"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J222",
+      "point": [
+        778.0,
+        992.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L258"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J223",
+      "point": [
+        342.3333333333333,
+        995.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L085",
+        "L094",
+        "L095"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J224",
+      "point": [
+        478.0,
+        1001.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L163",
+        "L164"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J225",
+      "point": [
+        764.0,
+        1002.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L206",
+        "L254"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J226",
+      "point": [
+        249.5,
+        1017.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L058",
+        "L061"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J227",
+      "point": [
+        809.0,
+        1016.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L258"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J228",
+      "point": [
+        322.5,
+        1020.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L088",
+        "L089"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J229",
+      "point": [
+        348.5,
+        1020.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L088",
+        "L089"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J230",
+      "point": [
+        375.0,
+        1025.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L105"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J231",
+      "point": [
+        757.0,
+        1030.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L254"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J232",
+      "point": [
+        485.5,
+        1031.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L164",
+        "L169"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J233",
+      "point": [
+        528.0,
+        1032.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L169"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J234",
+      "point": [
+        557.0,
+        1032.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L183"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J235",
+      "point": [
+        585.0,
+        1032.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L183"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J236",
+      "point": [
+        604.0,
+        1032.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L199"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J237",
+      "point": [
+        633.0,
+        1032.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L199",
+        "L215"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J238",
+      "point": [
+        674.5,
+        1032.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L215",
+        "L228"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J239",
+      "point": [
+        731.0,
+        1032.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L228"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J240",
+      "point": [
+        313.0,
+        1033.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L085"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J241",
+      "point": [
+        346.5,
+        1035.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L094",
+        "L095"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J242",
+      "point": [
+        810.0,
+        1036.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L238"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J243",
+      "point": [
+        251.0,
+        1047.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L061"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J244",
+      "point": [
+        193.0,
+        1050.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L035",
+        "L036"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J245",
+      "point": [
+        348.0,
+        1050.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L035",
+        "L036"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J246",
+      "point": [
+        375.0,
+        1058.6666666666667
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L100",
+        "L105",
+        "L107"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J247",
+      "point": [
+        407.0,
+        1051.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L107"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J248",
+      "point": [
+        538.5,
+        1067.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L167",
+        "L178"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J249",
+      "point": [
+        566.0,
+        1067.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L186"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J250",
+      "point": [
+        627.0,
+        1067.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L186"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J251",
+      "point": [
+        689.5,
+        1067.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L200",
+        "L233"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J252",
+      "point": [
+        483.5,
+        1068.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L135",
+        "L167"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J253",
+      "point": [
+        601.0,
+        1068.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L178",
+        "L200"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J254",
+      "point": [
+        747.0,
+        1068.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L233"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J255",
+      "point": [
+        817.5,
+        1068.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L259",
+        "L275"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J256",
+      "point": [
+        849.0,
+        1068.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L275"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J257",
+      "point": [
+        425.0,
+        1069.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L135"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J258",
+      "point": [
+        779.0,
+        1069.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L259"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J259",
+      "point": [
+        845.5,
+        1084.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L284",
+        "L286"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J260",
+      "point": [
+        370.0,
+        1085.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L100"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J261",
+      "point": [
+        877.0,
+        1089.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L296"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J262",
+      "point": [
+        328.0,
+        1102.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L080"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J263",
+      "point": [
+        468.0,
+        1102.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L157"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J264",
+      "point": [
+        494.5,
+        1104.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L081",
+        "L157"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J265",
+      "point": [
+        301.5,
+        1105.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L080",
+        "L081"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J266",
+      "point": [
+        868.0,
+        1126.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L296"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J267",
+      "point": [
+        394.5,
+        1139.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L112",
+        "L118"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J268",
+      "point": [
+        397.0,
+        1184.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L118",
+        "L119"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J269",
+      "point": [
+        628.0,
+        1199.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L214"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J270",
+      "point": [
+        573.75,
+        1213.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L189",
+        "L190",
+        "L192",
+        "L193"
+      ],
+      "endpoint_count": 4
+    },
+    {
+      "id": "J271",
+      "point": [
+        648.0,
+        1207.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L222"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J272",
+      "point": [
+        621.0,
+        1209.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L210"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J273",
+      "point": [
+        394.75,
+        1226.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L112",
+        "L113",
+        "L119",
+        "L120"
+      ],
+      "endpoint_count": 4
+    },
+    {
+      "id": "J274",
+      "point": [
+        420.0,
+        1222.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L131",
+        "L134"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J275",
+      "point": [
+        541.0,
+        1221.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L134",
+        "L168"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J276",
+      "point": [
+        692.0,
+        1219.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L234"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J277",
+      "point": [
+        748.0,
+        1219.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L234"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J278",
+      "point": [
+        784.3333333333334,
+        1222.3333333333333
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L251",
+        "L261",
+        "L264"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J279",
+      "point": [
+        827.5,
+        1221.75
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L261",
+        "L264",
+        "L281",
+        "L282"
+      ],
+      "endpoint_count": 4
+    },
+    {
+      "id": "J280",
+      "point": [
+        869.0,
+        1223.6666666666667
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L282",
+        "L293",
+        "L299"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J281",
+      "point": [
+        927.5,
+        1221.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L293",
+        "L299"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J282",
+      "point": [
+        854.0,
+        1220.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L281"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J283",
+      "point": [
+        483.5,
+        1224.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L131",
+        "L168"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J284",
+      "point": [
+        596.6666666666666,
+        1228.6666666666667
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L190",
+        "L192",
+        "L193"
+      ],
+      "endpoint_count": 3
+    },
+    {
+      "id": "J285",
+      "point": [
+        681.0,
+        1224.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L229"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J286",
+      "point": [
+        723.5,
+        1224.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L229",
+        "L251"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J287",
+      "point": [
+        648.0,
+        1236.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L222"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J288",
+      "point": [
+        579.0,
+        1237.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L189"
+      ],
+      "endpoint_count": 1
+    },
+    {
+      "id": "J289",
+      "point": [
+        624.5,
+        1242.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L210",
+        "L214"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J290",
+      "point": [
+        394.5,
+        1257.0
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L113",
+        "L120"
+      ],
+      "endpoint_count": 2
+    },
+    {
+      "id": "J291",
+      "point": [
+        845.5,
+        1257.5
+      ],
+      "evidence": "endpoint_cluster",
+      "line_ids": [
+        "L284",
+        "L286"
+      ],
+      "endpoint_count": 2
+    }
+  ],
+  "settings": {
+    "canny_sigma": 0.33,
+    "canny_min_threshold": 30,
+    "canny_max_threshold": 220,
+    "hough_rho": 1.0,
+    "hough_theta_degrees": 1.0,
+    "hough_threshold": 25,
+    "min_line_length": 20.0,
+    "max_line_gap": 8.0,
+    "endpoint_tolerance": 12.0,
+    "duplicate_angle_degrees": 4.0,
+    "duplicate_distance": 4.0,
+    "duplicate_overlap_ratio": 0.65,
+    "canny_lower_used": 170,
+    "canny_upper_used": 220
+  },
+  "warnings": [
+    "Candidate line output was capped to keep processing bounded."
+  ],
+  "diagnostics": {
+    "edge_pixel_count": 50140,
+    "raw_hough_segment_count": 1136,
+    "candidate_line_count": 300
+  }
+}
