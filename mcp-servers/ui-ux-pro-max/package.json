@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@modelcontextprotocol/server-everything": "^2.0.1"
+  }
+}

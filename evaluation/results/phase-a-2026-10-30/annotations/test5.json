@@ -1,0 +1,228 @@
+{
+  "annotation_schema_version": "1.0",
+  "image": {
+    "filename": "test5.png",
+    "sha256": "5fa616402e536ecb0907d699f6e0252f4fadc556df11a3cbb475e4f184b1ca36",
+    "width": 2046,
+    "height": 1319
+  },
+  "coordinate_system": {
+    "space": "original_image_pixels",
+    "origin": "top_left",
+    "x_axis": "right",
+    "y_axis": "down"
+  },
+  "scope": "Main eight-joint truss centerline graph in the selected textbook figure only; prose, dimensions, loads, supports, labels, and connection semantics at diagonal crossings are not scored.",
+  "assessment": {
+    "status": "confirmed",
+    "notes": "The labeled main diagram clearly depicts four top and four bottom joints, chords, verticals, and X-brace members. Pixel blur affects exact centerline placement. Each X-brace crossing is marked separately as ambiguous regarding whether the braces connect there; no crossing joint is asserted."
+  },
+  "evaluation_roi": [
+    365,
+    630,
+    1745,
+    1050
+  ],
+  "joints": [
+    {
+      "id": "A",
+      "x": 389,
+      "y": 1023,
+      "status": "confirmed",
+      "reason": "Center of the visibly drawn structural joint/connection."
+    },
+    {
+      "id": "B",
+      "x": 813,
+      "y": 1023,
+      "status": "confirmed",
+      "reason": "Center of the visibly drawn structural joint/connection."
+    },
+    {
+      "id": "C",
+      "x": 1252,
+      "y": 1023,
+      "status": "confirmed",
+      "reason": "Center of the visibly drawn structural joint/connection."
+    },
+    {
+      "id": "D",
+      "x": 1693,
+      "y": 1023,
+      "status": "confirmed",
+      "reason": "Center of the visibly drawn structural joint/connection."
+    },
+    {
+      "id": "H",
+      "x": 389,
+      "y": 663,
+      "status": "confirmed",
+      "reason": "Center of the visibly drawn structural joint/connection."
+    },
+    {
+      "id": "G",
+      "x": 813,
+      "y": 663,
+      "status": "confirmed",
+      "reason": "Center of the visibly drawn structural joint/connection."
+    },
+    {
+      "id": "F",
+      "x": 1252,
+      "y": 663,
+      "status": "confirmed",
+      "reason": "Center of the visibly drawn structural joint/connection."
+    },
+    {
+      "id": "E",
+      "x": 1693,
+      "y": 663,
+      "status": "confirmed",
+      "reason": "Center of the visibly drawn structural joint/connection."
+    }
+  ],
+  "members": [
+    {
+      "id": "M01",
+      "node_i": "H",
+      "node_j": "G",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M02",
+      "node_i": "G",
+      "node_j": "F",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M03",
+      "node_i": "F",
+      "node_j": "E",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M04",
+      "node_i": "A",
+      "node_j": "B",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M05",
+      "node_i": "B",
+      "node_j": "C",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M06",
+      "node_i": "C",
+      "node_j": "D",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M07",
+      "node_i": "H",
+      "node_j": "A",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M08",
+      "node_i": "G",
+      "node_j": "B",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M09",
+      "node_i": "F",
+      "node_j": "C",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M10",
+      "node_i": "E",
+      "node_j": "D",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M11",
+      "node_i": "H",
+      "node_j": "B",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M12",
+      "node_i": "A",
+      "node_j": "G",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M13",
+      "node_i": "G",
+      "node_j": "C",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M14",
+      "node_i": "B",
+      "node_j": "F",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M15",
+      "node_i": "F",
+      "node_j": "D",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M16",
+      "node_i": "C",
+      "node_j": "E",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    }
+  ],
+  "ambiguous_regions": [
+    {
+      "status": "ambiguous",
+      "point": [
+        601,
+        843
+      ],
+      "reason": "Two diagonal braces overlap in the raster; no connector is drawn at the crossing, so connection/joint status is not asserted."
+    },
+    {
+      "status": "ambiguous",
+      "point": [
+        1032,
+        843
+      ],
+      "reason": "Two diagonal braces overlap in the raster; no connector is drawn at the crossing, so connection/joint status is not asserted."
+    },
+    {
+      "status": "ambiguous",
+      "point": [
+        1472,
+        843
+      ],
+      "reason": "Two diagonal braces overlap in the raster; no connector is drawn at the crossing, so connection/joint status is not asserted."
+    }
+  ],
+  "unobservable_regions": [],
+  "scope_exclusions": [
+    "The statement and load/dimension labels are not structural member labels except insofar as the visible bar geometry itself is clear. Supports, loads, length units, and force units are not part of these annotations."
+  ]
+}

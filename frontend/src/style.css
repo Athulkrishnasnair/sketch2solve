@@ -1,4 +1,6 @@
+@import './styles/design-tokens.css';
 @import './styles/shell.css';
 @import './styles/workspace.css';
 @import './styles/analysis-review.css';
+@import './styles/truss-editor.css';
 @import './styles/responsive.css';

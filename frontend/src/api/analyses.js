@@ -69,6 +69,17 @@ export function solveReviewedAnalysis(analysisId) {
   return request(`/api/analyses/${encodeURIComponent(analysisId)}/solve`, { method: 'POST' })
 }
 
+export function previewAnalysisGeometry(geometry, analysisId = '') {
+  const path = analysisId
+    ? `/api/analyses/${encodeURIComponent(analysisId)}/preview`
+    : '/api/analyses/preview'
+  return request(path, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ geometry }),
+  })
+}
+
 export function createAnalysis(file, provider) {
   const body = new FormData()
   body.append('image', file)

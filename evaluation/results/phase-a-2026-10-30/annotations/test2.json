@@ -1,0 +1,69 @@
+{
+  "annotation_schema_version": "1.0",
+  "image": {
+    "filename": "test2.jpg",
+    "sha256": "46e6a9089c12e5f27a70bb183b8b30b755cc3da4058259c843ac82b6444704d6",
+    "width": 576,
+    "height": 749
+  },
+  "coordinate_system": {
+    "space": "original_image_pixels",
+    "origin": "top_left",
+    "x_axis": "right",
+    "y_axis": "down"
+  },
+  "scope": "A single structural joint/member graph cannot be selected reliably from this page without an external target selection.",
+  "assessment": {
+    "status": "ambiguous",
+    "notes": "Four separate rough bridge/truss sketches share ruled paper. Strokes, overdrawn abutments, page rules, shadows, and crossings make clean centerlines and connectivity uncertain, and the image does not designate one evaluation target."
+  },
+  "evaluation_roi": null,
+  "joints": [],
+  "members": [],
+  "ambiguous_regions": [
+    {
+      "status": "ambiguous",
+      "bbox": [
+        70,
+        85,
+        455,
+        205
+      ],
+      "reason": "Top rough sketch has overdrawn abutments, ruled-paper lines, and nonuniform intersections."
+    },
+    {
+      "status": "ambiguous",
+      "bbox": [
+        70,
+        210,
+        455,
+        385
+      ],
+      "reason": "Second sketch has multiple overlapping diagonals and rough intersections."
+    },
+    {
+      "status": "ambiguous",
+      "bbox": [
+        70,
+        420,
+        455,
+        550
+      ],
+      "reason": "Third sketch is shadowed and dense; line edges and intended member centerlines are difficult to separate."
+    },
+    {
+      "status": "ambiguous",
+      "bbox": [
+        70,
+        575,
+        500,
+        745
+      ],
+      "reason": "Bottom sketch is more regular but still rough, with many crossings and obscured supports/ends."
+    }
+  ],
+  "unobservable_regions": [],
+  "scope_exclusions": [
+    "No loads, supports, dimensions, or physical units are labeled as structural reference data."
+  ]
+}

@@ -4,18 +4,31 @@ import AnalysisDetailPage from './pages/AnalysisDetailPage.vue'
 import AnalysisHistoryPage from './pages/AnalysisHistoryPage.vue'
 import DashboardPage from './pages/DashboardPage.vue'
 import NewAnalysisPage from './pages/NewAnalysisPage.vue'
+import TrussEditorPage from './pages/TrussEditorPage.vue'
 
 const view = ref('dashboard')
 const analysisId = ref('')
 const historyCount = ref(0)
-const pageTitle = computed(() => ({ dashboard: 'Dashboard', new: 'New analysis', history: 'Analysis history', detail: 'Analysis review' })[view.value])
+const pageTitle = computed(() => ({
+  dashboard: 'Dashboard',
+  new: 'New analysis',
+  history: 'Analysis history',
+  detail: 'Analysis review',
+  editor: 'Truss Editor',
+})[view.value])
 
 function updateAddress(nextView, id = '') {
   const url = new URL(window.location.href)
   url.searchParams.delete('analysis')
   url.searchParams.delete('view')
-  if (id) url.searchParams.set('analysis', id)
-  else if (nextView !== 'dashboard') url.searchParams.set('view', nextView)
+  if (nextView === 'editor' && id) {
+    url.searchParams.set('analysis', id)
+    url.searchParams.set('view', 'editor')
+  } else if (id) {
+    url.searchParams.set('analysis', id)
+  } else if (nextView !== 'dashboard') {
+    url.searchParams.set('view', nextView)
+  }
   window.history.pushState({}, '', `${url.pathname}${url.search}${url.hash}`)
 }
 
@@ -31,15 +44,26 @@ function openAnalysis(id) {
   updateAddress('detail', id)
 }
 
+function openEditor(id) {
+  analysisId.value = id
+  view.value = 'editor'
+  updateAddress('editor', id)
+}
+
 function handleCreated(id) {
   historyCount.value += 1
   openAnalysis(id)
 }
 
 function handlePopState() {
+  const pathMatch = window.location.pathname.match(/\/analyses\/([^/]+)\/editor/)
   const params = new URLSearchParams(window.location.search)
-  const id = params.get('analysis')
-  if (id) {
+  const id = pathMatch ? pathMatch[1] : params.get('analysis')
+  const isEditor = Boolean(pathMatch) || params.get('view') === 'editor'
+  if (id && isEditor) {
+    analysisId.value = id
+    view.value = 'editor'
+  } else if (id) {
     analysisId.value = id
     view.value = 'detail'
   } else {
@@ -76,13 +100,14 @@ onBeforeUnmount(() => window.removeEventListener('popstate', handlePopState))
       <div class="sidebar-footer"><span class="backend-indicator"></span> Backend API · localhost:5000</div>
     </aside>
 
-    <main class="main-area">
-      <header class="topbar"><div class="breadcrumb"><span>Workspace</span><span class="crumb-separator">/</span><strong>{{ pageTitle }}</strong></div><div class="topbar-right"><span class="local-pill"><span></span> LOCAL ONLY</span><span class="avatar" aria-hidden="true">S</span></div></header>
+    <main class="main-area" :class="{ 'in-editor': view === 'editor' }">
+      <header v-if="view !== 'editor'" class="topbar"><div class="breadcrumb"><span>Workspace</span><span class="crumb-separator">/</span><strong>{{ pageTitle }}</strong></div><div class="topbar-right"><span class="local-pill"><span></span> LOCAL ONLY</span><span class="avatar" aria-hidden="true">S</span></div></header>
       <DashboardPage v-if="view === 'dashboard'" @open="openAnalysis" @new="navigate('new')" @history="navigate('history')" @count="historyCount = $event" />
       <NewAnalysisPage v-else-if="view === 'new'" @created="handleCreated" />
       <AnalysisHistoryPage v-else-if="view === 'history'" @open="openAnalysis" @new="navigate('new')" @count="historyCount = $event" />
-      <AnalysisDetailPage v-else :analysis-id="analysisId" @history="navigate('history')" @created="handleCreated" />
-      <footer class="main-footer"><span>Sketch2Solve · Local review workspace</span><span>Interpretation is a starting point, not a structural check.</span></footer>
+      <TrussEditorPage v-else-if="view === 'editor'" :analysis-id="analysisId" @back="openAnalysis(analysisId)" @history="navigate('history')" />
+      <AnalysisDetailPage v-else :analysis-id="analysisId" @history="navigate('history')" @created="handleCreated" @editor="openEditor" />
+      <footer v-if="view !== 'editor'" class="main-footer"><span>Sketch2Solve · Local review workspace</span><span>Interpretation is a starting point, not a structural check.</span></footer>
     </main>
   </div>
 </template>

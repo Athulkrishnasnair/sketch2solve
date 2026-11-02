@@ -4,7 +4,7 @@ import { apiUrl, createAnalysis, getAnalysis, getAnalysisImage } from '../api/an
 import GeometryReview from '../components/GeometryReview.vue'
 
 const props = defineProps({ analysisId: { type: String, required: true } })
-const emit = defineEmits(['history', 'created'])
+const emit = defineEmits(['history', 'created', 'editor'])
 const analysis = ref(null)
 const loading = ref(true)
 const error = ref('')
@@ -135,7 +135,24 @@ function selectElement(id) { selectedElementId.value = id || '' }
     <div v-else-if="!analysis" class="empty-panel detail-not-found"><div class="eyebrow">ANALYSIS UNAVAILABLE</div><strong>{{ error || 'This saved analysis could not be found.' }}</strong><button class="button button-secondary" type="button" @click="emit('history')">Back to history</button></div>
     <template v-else>
       <div class="detail-back-row"><button class="back-button" type="button" @click="emit('history')"><span>←</span> Analysis history</button><span class="detail-id">ANALYSIS #{{ shortId(analysis.analysis_id) }}</span></div>
-      <div class="detail-heading"><div><div class="eyebrow">ANALYSIS REVIEW</div><h1>{{ analysis.sketch?.original_filename || analysis.original_filename || 'Solver analysis' }}</h1><div class="detail-meta"><span>{{ formatDate(analysis.created_at) }}</span><i></i><span>{{ imageWidth && imageHeight ? `${imageWidth} × ${imageHeight} px` : 'No source image' }}</span><i></i><span>{{ analysis.provider ? `${analysis.provider} · ${analysis.model_id || ''}` : 'Deterministic solver' }}</span></div></div><span class="status-badge large-status" :class="statusClass(analysis.status)"><i></i>{{ displayStatus(analysis.status) }}</span></div>
+      <div class="detail-heading">
+        <div>
+          <div class="eyebrow">ANALYSIS REVIEW</div>
+          <h1>{{ analysis.sketch?.original_filename || analysis.original_filename || 'Solver analysis' }}</h1>
+          <div class="detail-meta">
+            <span>{{ formatDate(analysis.created_at) }}</span><i></i>
+            <span>{{ imageWidth && imageHeight ? `${imageWidth} × ${imageHeight} px` : 'No source image' }}</span><i></i>
+            <span>{{ analysis.provider ? `${analysis.provider} · ${analysis.model_id || ''}` : 'Deterministic solver' }}</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="button button-primary" type="button" @click="emit('editor', analysis.analysis_id)">
+            <svg viewBox="0 0 20 20" fill="none" width="16" height="16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            Edit geometry
+          </button>
+          <span class="status-badge large-status" :class="statusClass(analysis.status)"><i></i>{{ displayStatus(analysis.status) }}</span>
+        </div>
+      </div>
 
       <div v-if="analysis.status === 'failed'" class="alert alert-error analysis-alert" role="alert"><span class="alert-icon">!</span><div><strong>{{ humanizeError(analysis.error_code, analysis.error_message) }}</strong><p>{{ analysis.error_code }} · This attempt was saved to history. <template v-if="!analysis.human_review?.geometry">Retry only when you choose to submit another provider request.</template></p></div><button v-if="analysis.sketch?.image_url && !analysis.human_review?.geometry" class="button button-secondary" type="button" :disabled="uploading" @click="retryAnalysis">{{ uploading ? 'Retrying…' : 'Retry analysis' }}</button></div>
       <div v-if="error" class="alert alert-error analysis-alert" role="alert"><span class="alert-icon">!</span><div><strong>Could not refresh this analysis</strong><p>{{ error }}</p></div><button class="button button-secondary" type="button" @click="loadAnalysis">Retry</button></div>
@@ -163,7 +180,7 @@ function selectElement(id) { selectedElementId.value = id || '' }
         <section class="result-card card-surface"><div class="result-heading"><div><div class="eyebrow">CHECKS & DIAGNOSTICS</div><h2>Validation state</h2></div><span class="not-run-badge">{{ analysis.validation?.status === 'not_performed' ? 'NOT RUN' : analysis.validation?.status || '—' }}</span></div><p v-if="analysis.validation?.status === 'not_performed'" class="validation-intro">Candidate geometry has not been converted into a solver model. Nothing is approved or solved from this proposal.</p><ul v-if="validationIssues.length" class="issue-list"><li v-for="(issue, index) in validationIssues" :key="`${issue.code}-${index}`"><span class="issue-mark">!</span><span><strong>{{ issue.path || issue.code }}</strong><small>{{ issueMessage(issue) }}</small></span></li></ul><ul v-if="validationWarnings.length" class="issue-list warning-issue-list"><li v-for="(warning, index) in validationWarnings" :key="`warning-${index}`"><span class="issue-mark">i</span><span><strong>{{ warning.path || warning.code || 'Review note' }}</strong><small>{{ typeof warning === 'string' ? warning : issueMessage(warning) }}</small></span></li></ul><div v-if="!validationIssues.length && !validationWarnings.length && analysis.validation?.status !== 'not_performed' && analysis.validation" class="quiet-note">{{ analysis.validation.message || 'No validation issues were saved.' }}</div><div v-if="analysis.diagnostics" class="diagnostics"><span>Solver diagnostics</span><b>{{ analysis.diagnostics.category || 'Available' }}</b><small>{{ analysis.diagnostics.equation_count ?? '—' }} equations · {{ analysis.diagnostics.unknown_count ?? '—' }} unknowns</small></div><div v-if="analysis.solver_results" class="solver-result-note"><strong>Deterministic solver results</strong><p>These values belong to the model submitted to the solver; they do not approve any separate AI proposal.</p><div v-if="solverMemberForces.length" class="solver-values"><h3>Member forces <span>{{ analysis.solver_results.force_unit || 'declared force units' }}</span></h3><div v-for="[id, value] in solverMemberForces" :key="`force-${id}`"><strong>{{ id }}</strong><span>{{ Number(value).toPrecision(5) }}</span></div></div><div v-if="solverReactions.length" class="solver-values"><h3>Support reactions <span>{{ analysis.solver_results.force_unit || 'declared force units' }}</span></h3><div v-for="[id, axis, value] in solverReactions" :key="`reaction-${id}-${axis}`"><strong>{{ id }} · {{ axis }}</strong><span>{{ Number(value).toPrecision(5) }}</span></div></div><small v-if="analysis.solver_results.max_equilibrium_residual != null" class="solver-residual">Maximum equilibrium residual {{ Number(analysis.solver_results.max_equilibrium_residual).toPrecision(4) }} · tolerance {{ Number(analysis.solver_results.residual_tolerance).toPrecision(4) }}</small></div></section>
       </div>
 
-      <GeometryReview v-if="analysis.analysis_type === 'sketch' && proposal" :analysis="analysis" :selected-element-id="selectedElementId" @select-element="selectElement" @updated="loadAnalysis" />
+      <GeometryReview v-if="analysis.analysis_type === 'sketch' && proposal" :analysis="analysis" :selected-element-id="selectedElementId" @select-element="selectElement" @updated="loadAnalysis" @editor="emit('editor', $event)" />
       <div class="review-disclaimer"><span class="disclaimer-icon">i</span><div><strong>Engineering review boundary</strong><p>Model validation checks the request schema and references; solver diagnostics are numerical checks. Neither establishes physical stability, code compliance, or engineering suitability. Review all dimensions and loads.</p></div><span class="review-status-label"><i></i>{{ displayStatus(analysis.review_status) }}</span></div>
     </template>
   </section>

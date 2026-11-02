@@ -1,0 +1,161 @@
+{
+  "annotation_schema_version": "1.0",
+  "image": {
+    "filename": "test3.png",
+    "sha256": "df07cb29feec023260392b62f3a7d796eba51e03b24264c4b6fd7ca86379b0b5",
+    "width": 1024,
+    "height": 515
+  },
+  "coordinate_system": {
+    "space": "original_image_pixels",
+    "origin": "top_left",
+    "x_axis": "right",
+    "y_axis": "down"
+  },
+  "scope": "Main seven-joint truss centerline graph only.",
+  "assessment": {
+    "status": "confirmed",
+    "notes": "High-contrast vector-like drawing with explicit node circles and visibly continuous member centerlines. Labels and load/support graphics are excluded from the member graph."
+  },
+  "evaluation_roi": [
+    0,
+    45,
+    980,
+    390
+  ],
+  "joints": [
+    {
+      "id": "A",
+      "x": 43,
+      "y": 349,
+      "status": "confirmed",
+      "reason": "Center of the visibly drawn structural joint/connection."
+    },
+    {
+      "id": "B",
+      "x": 181,
+      "y": 73,
+      "status": "confirmed",
+      "reason": "Center of the visibly drawn structural joint/connection."
+    },
+    {
+      "id": "C",
+      "x": 487,
+      "y": 73,
+      "status": "confirmed",
+      "reason": "Center of the visibly drawn structural joint/connection."
+    },
+    {
+      "id": "D",
+      "x": 786,
+      "y": 73,
+      "status": "confirmed",
+      "reason": "Center of the visibly drawn structural joint/connection."
+    },
+    {
+      "id": "E",
+      "x": 947,
+      "y": 349,
+      "status": "confirmed",
+      "reason": "Center of the visibly drawn structural joint/connection."
+    },
+    {
+      "id": "F",
+      "x": 628,
+      "y": 349,
+      "status": "confirmed",
+      "reason": "Center of the visibly drawn structural joint/connection."
+    },
+    {
+      "id": "G",
+      "x": 349,
+      "y": 349,
+      "status": "confirmed",
+      "reason": "Center of the visibly drawn structural joint/connection."
+    }
+  ],
+  "members": [
+    {
+      "id": "M01",
+      "node_i": "A",
+      "node_j": "G",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M02",
+      "node_i": "G",
+      "node_j": "F",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M03",
+      "node_i": "F",
+      "node_j": "E",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M04",
+      "node_i": "B",
+      "node_j": "C",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M05",
+      "node_i": "C",
+      "node_j": "D",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M06",
+      "node_i": "A",
+      "node_j": "B",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M07",
+      "node_i": "B",
+      "node_j": "G",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M08",
+      "node_i": "G",
+      "node_j": "C",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M09",
+      "node_i": "C",
+      "node_j": "F",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M10",
+      "node_i": "F",
+      "node_j": "D",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    },
+    {
+      "id": "M11",
+      "node_i": "D",
+      "node_j": "E",
+      "status": "confirmed",
+      "reason": "A continuous visible member centerline connects these drawn joint locations."
+    }
+  ],
+  "ambiguous_regions": [],
+  "unobservable_regions": [],
+  "scope_exclusions": [
+    "Supports, applied loads, labels, and force magnitudes are not scored as truss members."
+  ]
+}

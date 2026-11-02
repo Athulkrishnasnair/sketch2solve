@@ -1,0 +1,3688 @@
+{
+  "experiment": "test5-target-member-failure-diagnostic",
+  "source": {
+    "path": "backend/evaluation/sketches/test5.png",
+    "sha256": "5fa616402e536ecb0907d699f6e0252f4fadc556df11a3cbb475e4f184b1ca36",
+    "width": 2046,
+    "height": 1319
+  },
+  "coordinates": "original raster pixels; x right, y down; raw segments mapped back to source coordinates",
+  "reference_annotation": "evaluation/results/phase-a-2026-10-30/annotations/test5.json (unchanged)",
+  "ambiguous_crossings_excluded_from_joint_scoring": [
+    [
+      601,
+      843
+    ],
+    [
+      1032,
+      843
+    ],
+    [
+      1472,
+      843
+    ]
+  ],
+  "method": {
+    "corridor_px": 18.25734321444388,
+    "angle_tolerance_deg": 8.0,
+    "coverage_threshold": 0.8,
+    "single_segment_overlap": "candidate projection clipped to annotated finite member centerline",
+    "fragment_union": "union only of segments satisfying existing angle and corridor gates; uncovered gaps reported; no gaps bridged",
+    "nearby_responses": "positive longitudinal overlap, offset within corridor, including candidates that fail the 8 degree gate; not considered member coverage",
+    "endpoint_errors": "nearest detector endpoint to each annotated joint, independent of line coverage"
+  },
+  "conditions": {
+    "original": {
+      "raw_lines": 300,
+      "cap_reached": true,
+      "endpoint_clusters": 221
+    },
+    "full_roi": {
+      "raw_lines": 300,
+      "cap_reached": true,
+      "endpoint_clusters": 211
+    },
+    "three_wide": {
+      "raw_lines": 577,
+      "cap_reached": false,
+      "endpoint_clusters_before_deduplication": 203,
+      "endpoint_clusters_after_primary_deduplication": 210,
+      "deduplicated_lines_primary_4px": 477,
+      "tile_counts": [
+        {
+          "tile_id": "three_wide-T01",
+          "candidate_lines": 180,
+          "endpoint_clusters": 115,
+          "cap_reached": false
+        },
+        {
+          "tile_id": "three_wide-T02",
+          "candidate_lines": 219,
+          "endpoint_clusters": 117,
+          "cap_reached": false
+        },
+        {
+          "tile_id": "three_wide-T03",
+          "candidate_lines": 178,
+          "endpoint_clusters": 115,
+          "cap_reached": false
+        }
+      ]
+    },
+    "four_narrow": {
+      "raw_lines": 489,
+      "cap_reached": false,
+      "endpoint_clusters_before_deduplication": 246,
+      "endpoint_clusters_after_primary_deduplication": 223,
+      "deduplicated_lines_primary_4px": 389,
+      "tile_counts": [
+        {
+          "tile_id": "four_narrow-T01",
+          "candidate_lines": 124,
+          "endpoint_clusters": 78,
+          "cap_reached": false
+        },
+        {
+          "tile_id": "four_narrow-T02",
+          "candidate_lines": 124,
+          "endpoint_clusters": 94,
+          "cap_reached": false
+        },
+        {
+          "tile_id": "four_narrow-T03",
+          "candidate_lines": 124,
+          "endpoint_clusters": 90,
+          "cap_reached": false
+        },
+        {
+          "tile_id": "four_narrow-T04",
+          "candidate_lines": 117,
+          "endpoint_clusters": 79,
+          "cap_reached": false
+        }
+      ]
+    },
+    "targeted_tile": {
+      "raw_lines": 156,
+      "cap_reached": false,
+      "endpoint_clusters": 90,
+      "deduplicated_lines_primary_4px": 156,
+      "tile": {
+        "tile_id": "rightmost-target-T01",
+        "x": 1200,
+        "y": 630,
+        "width": 545,
+        "height": 420,
+        "right_exclusive": 1745,
+        "bottom_exclusive": 1050,
+        "horizontal_overlap_with_roi_edge": 0,
+        "vertical_overlap_with_roi_edge": 0,
+        "encoding": "PNG from decoded source pixels",
+        "resize": false,
+        "local_to_original": {
+          "original_x": "tile_x + local_x",
+          "original_y": "tile_y + local_y"
+        }
+      }
+    }
+  },
+  "member_diagnostics": {
+    "M09": {
+      "original": {
+        "reference_start": [
+          1252,
+          663
+        ],
+        "reference_end": [
+          1252,
+          1023
+        ],
+        "reference_length_px": 360.0,
+        "best_single_coverage_segment": null,
+        "best_longitudinal_overlap_candidate": {
+          "angle_mismatch_deg": 0.0,
+          "centerline_offset_px": 848.0,
+          "endpoint_offsets_px": [
+            848.0,
+            848.0
+          ],
+          "overlap_px": 216.0,
+          "coverage_fraction": 0.6,
+          "projection_interval_px": [
+            85.0,
+            301.0
+          ],
+          "endpoint_errors_px": [
+            852.249376649816,
+            850.0499985294982
+          ],
+          "segment_id": "L155",
+          "start": [
+            404,
+            748
+          ],
+          "end": [
+            404,
+            964
+          ],
+          "provenance": [],
+          "coverage_eligible": false
+        },
+        "best_single_eligible_segment": null,
+        "eligible_fragment_count": 0,
+        "fragment_union_intervals_px": [],
+        "fragment_union_coverage_px": 0.0,
+        "fragment_union_coverage_fraction": 0.0,
+        "uncovered_gaps_px": [
+          [
+            0.0,
+            360.0
+          ]
+        ],
+        "meets_80_percent_threshold": false,
+        "nearby_candidates_within_corridor_and_longitudinal_extent": [],
+        "nearby_candidate_count": 0,
+        "eligible_candidate_count": 0
+      },
+      "full_roi": {
+        "reference_start": [
+          1252,
+          663
+        ],
+        "reference_end": [
+          1252,
+          1023
+        ],
+        "reference_length_px": 360.0,
+        "best_single_coverage_segment": null,
+        "best_longitudinal_overlap_candidate": {
+          "angle_mismatch_deg": 0.0,
+          "centerline_offset_px": 388.0,
+          "endpoint_offsets_px": [
+            388.0,
+            388.0
+          ],
+          "overlap_px": 286.0,
+          "coverage_fraction": 0.7944444444444444,
+          "projection_interval_px": [
+            59.0,
+            345.0
+          ],
+          "endpoint_errors_px": [
+            392.4601890638081,
+            388.28984019672725
+          ],
+          "segment_id": "L180",
+          "start": [
+            864,
+            722
+          ],
+          "end": [
+            864,
+            1008
+          ],
+          "provenance": [],
+          "coverage_eligible": false
+        },
+        "best_single_eligible_segment": null,
+        "eligible_fragment_count": 0,
+        "fragment_union_intervals_px": [],
+        "fragment_union_coverage_px": 0.0,
+        "fragment_union_coverage_fraction": 0.0,
+        "uncovered_gaps_px": [
+          [
+            0.0,
+            360.0
+          ]
+        ],
+        "meets_80_percent_threshold": false,
+        "nearby_candidates_within_corridor_and_longitudinal_extent": [
+          {
+            "angle_mismatch_deg": 87.7974018382342,
+            "centerline_offset_px": 17.0,
+            "endpoint_offsets_px": [
+              17.0,
+              9.0
+            ],
+            "overlap_px": 1.0,
+            "coverage_fraction": 0.002777777777777778,
+            "projection_interval_px": [
+              352.0,
+              353.0
+            ],
+            "endpoint_errors_px": [
+              352.115038020247,
+              12.041594578792296
+            ],
+            "segment_id": "L283",
+            "start": [
+              1235,
+              1016
+            ],
+            "end": [
+              1261,
+              1015
+            ],
+            "provenance": [],
+            "coverage_eligible": false
+          }
+        ],
+        "nearby_candidate_count": 1,
+        "eligible_candidate_count": 0
+      },
+      "three_wide": {
+        "reference_start": [
+          1252,
+          663
+        ],
+        "reference_end": [
+          1252,
+          1023
+        ],
+        "reference_length_px": 360.0,
+        "best_single_coverage_segment": {
+          "angle_mismatch_deg": 5.710593137499633,
+          "centerline_offset_px": 2.0,
+          "endpoint_offsets_px": [
+            2.0,
+            0.0
+          ],
+          "overlap_px": 20.0,
+          "coverage_fraction": 0.05555555555555555,
+          "projection_interval_px": [
+            306.0,
+            326.0
+          ],
+          "endpoint_errors_px": [
+            306.0,
+            34.058772731852805
+          ],
+          "segment_id": "three_wide-T02:L165",
+          "start": [
+            1250,
+            989
+          ],
+          "end": [
+            1252,
+            969
+          ],
+          "provenance": [
+            {
+              "tile_id": "three_wide-T02",
+              "line_id": "L165",
+              "tile_origin": [
+                755,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": true
+        },
+        "best_longitudinal_overlap_candidate": {
+          "angle_mismatch_deg": 0.0,
+          "centerline_offset_px": 58.0,
+          "endpoint_offsets_px": [
+            58.0,
+            58.0
+          ],
+          "overlap_px": 287.0,
+          "coverage_fraction": 0.7972222222222223,
+          "projection_interval_px": [
+            59.0,
+            346.0
+          ],
+          "endpoint_errors_px": [
+            82.73451516749222,
+            59.665735560705194
+          ],
+          "segment_id": "three_wide-T02:L194",
+          "start": [
+            1310,
+            722
+          ],
+          "end": [
+            1310,
+            1009
+          ],
+          "provenance": [
+            {
+              "tile_id": "three_wide-T02",
+              "line_id": "L194",
+              "tile_origin": [
+                755,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": false
+        },
+        "best_single_eligible_segment": {
+          "angle_mismatch_deg": 5.710593137499633,
+          "centerline_offset_px": 2.0,
+          "endpoint_offsets_px": [
+            2.0,
+            0.0
+          ],
+          "overlap_px": 20.0,
+          "coverage_fraction": 0.05555555555555555,
+          "projection_interval_px": [
+            306.0,
+            326.0
+          ],
+          "endpoint_errors_px": [
+            306.0,
+            34.058772731852805
+          ],
+          "segment_id": "three_wide-T02:L165",
+          "start": [
+            1250,
+            989
+          ],
+          "end": [
+            1252,
+            969
+          ],
+          "provenance": [
+            {
+              "tile_id": "three_wide-T02",
+              "line_id": "L165",
+              "tile_origin": [
+                755,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": true
+        },
+        "eligible_fragment_count": 1,
+        "fragment_union_intervals_px": [
+          [
+            306.0,
+            326.0
+          ]
+        ],
+        "fragment_union_coverage_px": 20.0,
+        "fragment_union_coverage_fraction": 0.05555555555555555,
+        "uncovered_gaps_px": [
+          [
+            0.0,
+            306.0
+          ],
+          [
+            326.0,
+            360.0
+          ]
+        ],
+        "meets_80_percent_threshold": false,
+        "nearby_candidates_within_corridor_and_longitudinal_extent": [
+          {
+            "angle_mismatch_deg": 35.13419305691563,
+            "centerline_offset_px": 13.0,
+            "endpoint_offsets_px": [
+              13.0,
+              6.0
+            ],
+            "overlap_px": 27.0,
+            "coverage_fraction": 0.075,
+            "projection_interval_px": [
+              35.0,
+              62.0
+            ],
+            "endpoint_errors_px": [
+              35.510561809129406,
+              298.28342226815084
+            ],
+            "segment_id": "three_wide-T03:L032",
+            "start": [
+              1239,
+              725
+            ],
+            "end": [
+              1258,
+              698
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T03",
+                "line_id": "L032",
+                "tile_origin": [
+                  1145,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 5.710593137499633,
+            "centerline_offset_px": 2.0,
+            "endpoint_offsets_px": [
+              2.0,
+              0.0
+            ],
+            "overlap_px": 20.0,
+            "coverage_fraction": 0.05555555555555555,
+            "projection_interval_px": [
+              306.0,
+              326.0
+            ],
+            "endpoint_errors_px": [
+              306.0,
+              34.058772731852805
+            ],
+            "segment_id": "three_wide-T02:L165",
+            "start": [
+              1250,
+              989
+            ],
+            "end": [
+              1252,
+              969
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T02",
+                "line_id": "L165",
+                "tile_origin": [
+                  755,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": true
+          },
+          {
+            "angle_mismatch_deg": 57.52880770915152,
+            "centerline_offset_px": 11.0,
+            "endpoint_offsets_px": [
+              11.0,
+              11.0
+            ],
+            "overlap_px": 14.0,
+            "coverage_fraction": 0.03888888888888889,
+            "projection_interval_px": [
+              330.0,
+              344.0
+            ],
+            "endpoint_errors_px": [
+              330.18328243568,
+              19.4164878389476
+            ],
+            "segment_id": "three_wide-T03:L034",
+            "start": [
+              1241,
+              1007
+            ],
+            "end": [
+              1263,
+              993
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T03",
+                "line_id": "L034",
+                "tile_origin": [
+                  1145,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 64.35899417569472,
+            "centerline_offset_px": 15.0,
+            "endpoint_offsets_px": [
+              15.0,
+              10.0
+            ],
+            "overlap_px": 12.0,
+            "coverage_fraction": 0.03333333333333333,
+            "projection_interval_px": [
+              307.0,
+              319.0
+            ],
+            "endpoint_errors_px": [
+              307.1628232713067,
+              43.657759905886145
+            ],
+            "segment_id": "three_wide-T03:L030",
+            "start": [
+              1237,
+              982
+            ],
+            "end": [
+              1262,
+              970
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T03",
+                "line_id": "L030",
+                "tile_origin": [
+                  1145,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 79.2157021324374,
+            "centerline_offset_px": 13.0,
+            "endpoint_offsets_px": [
+              8.0,
+              13.0
+            ],
+            "overlap_px": 4.0,
+            "coverage_fraction": 0.011111111111111112,
+            "projection_interval_px": [
+              98.0,
+              102.0
+            ],
+            "endpoint_errors_px": [
+              98.32598842625484,
+              258.3273117577776
+            ],
+            "segment_id": "three_wide-T02:L162",
+            "start": [
+              1244,
+              761
+            ],
+            "end": [
+              1265,
+              765
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T02",
+                "line_id": "L162",
+                "tile_origin": [
+                  755,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 79.69515353123397,
+            "centerline_offset_px": 13.0,
+            "endpoint_offsets_px": [
+              13.0,
+              9.0
+            ],
+            "overlap_px": 4.0,
+            "coverage_fraction": 0.011111111111111112,
+            "projection_interval_px": [
+              91.0,
+              95.0
+            ],
+            "endpoint_errors_px": [
+              91.92388155425118,
+              265.1527861441399
+            ],
+            "segment_id": "three_wide-T02:L159",
+            "start": [
+              1239,
+              754
+            ],
+            "end": [
+              1261,
+              758
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T02",
+                "line_id": "L159",
+                "tile_origin": [
+                  755,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 82.8749836510982,
+            "centerline_offset_px": 13.0,
+            "endpoint_offsets_px": [
+              11.0,
+              13.0
+            ],
+            "overlap_px": 3.0,
+            "coverage_fraction": 0.008333333333333333,
+            "projection_interval_px": [
+              40.0,
+              43.0
+            ],
+            "endpoint_errors_px": [
+              41.48493702538308,
+              317.26644953414154
+            ],
+            "segment_id": "three_wide-T03:L033",
+            "start": [
+              1241,
+              703
+            ],
+            "end": [
+              1265,
+              706
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T03",
+                "line_id": "L033",
+                "tile_origin": [
+                  1145,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 87.61405596961119,
+            "centerline_offset_px": 14.0,
+            "endpoint_offsets_px": [
+              10.0,
+              14.0
+            ],
+            "overlap_px": 1.0,
+            "coverage_fraction": 0.002777777777777778,
+            "projection_interval_px": [
+              16.0,
+              17.0
+            ],
+            "endpoint_errors_px": [
+              18.867962264113206,
+              343.2855953866984
+            ],
+            "segment_id": "three_wide-T02:L161",
+            "start": [
+              1242,
+              679
+            ],
+            "end": [
+              1266,
+              680
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T02",
+                "line_id": "L161",
+                "tile_origin": [
+                  755,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          }
+        ],
+        "nearby_candidate_count": 8,
+        "eligible_candidate_count": 1
+      },
+      "four_narrow": {
+        "reference_start": [
+          1252,
+          663
+        ],
+        "reference_end": [
+          1252,
+          1023
+        ],
+        "reference_length_px": 360.0,
+        "best_single_coverage_segment": {
+          "angle_mismatch_deg": 4.76364169072622,
+          "centerline_offset_px": 9.0,
+          "endpoint_offsets_px": [
+            5.0,
+            9.0
+          ],
+          "overlap_px": 35.0,
+          "coverage_fraction": 0.09722222222222222,
+          "projection_interval_px": [
+            325.0,
+            360.0
+          ],
+          "endpoint_errors_px": [
+            325.0384592629002,
+            15.811388300841896
+          ],
+          "segment_id": "four_narrow-T03:L055",
+          "start": [
+            1257,
+            988
+          ],
+          "end": [
+            1261,
+            1036
+          ],
+          "provenance": [
+            {
+              "tile_id": "four_narrow-T03",
+              "line_id": "L055",
+              "tile_origin": [
+                965,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": true
+        },
+        "best_longitudinal_overlap_candidate": {
+          "angle_mismatch_deg": 0.0,
+          "centerline_offset_px": 58.0,
+          "endpoint_offsets_px": [
+            58.0,
+            58.0
+          ],
+          "overlap_px": 287.0,
+          "coverage_fraction": 0.7972222222222223,
+          "projection_interval_px": [
+            59.0,
+            346.0
+          ],
+          "endpoint_errors_px": [
+            82.73451516749222,
+            59.665735560705194
+          ],
+          "segment_id": "four_narrow-T03:L085",
+          "start": [
+            1310,
+            722
+          ],
+          "end": [
+            1310,
+            1009
+          ],
+          "provenance": [
+            {
+              "tile_id": "four_narrow-T03",
+              "line_id": "L085",
+              "tile_origin": [
+                965,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": false
+        },
+        "best_single_eligible_segment": {
+          "angle_mismatch_deg": 4.76364169072622,
+          "centerline_offset_px": 9.0,
+          "endpoint_offsets_px": [
+            5.0,
+            9.0
+          ],
+          "overlap_px": 35.0,
+          "coverage_fraction": 0.09722222222222222,
+          "projection_interval_px": [
+            325.0,
+            360.0
+          ],
+          "endpoint_errors_px": [
+            325.0384592629002,
+            15.811388300841896
+          ],
+          "segment_id": "four_narrow-T03:L055",
+          "start": [
+            1257,
+            988
+          ],
+          "end": [
+            1261,
+            1036
+          ],
+          "provenance": [
+            {
+              "tile_id": "four_narrow-T03",
+              "line_id": "L055",
+              "tile_origin": [
+                965,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": true
+        },
+        "eligible_fragment_count": 1,
+        "fragment_union_intervals_px": [
+          [
+            325.0,
+            360.0
+          ]
+        ],
+        "fragment_union_coverage_px": 35.0,
+        "fragment_union_coverage_fraction": 0.09722222222222222,
+        "uncovered_gaps_px": [
+          [
+            0.0,
+            325.0
+          ]
+        ],
+        "meets_80_percent_threshold": false,
+        "nearby_candidates_within_corridor_and_longitudinal_extent": [
+          {
+            "angle_mismatch_deg": 4.76364169072622,
+            "centerline_offset_px": 9.0,
+            "endpoint_offsets_px": [
+              5.0,
+              9.0
+            ],
+            "overlap_px": 35.0,
+            "coverage_fraction": 0.09722222222222222,
+            "projection_interval_px": [
+              325.0,
+              360.0
+            ],
+            "endpoint_errors_px": [
+              325.0384592629002,
+              15.811388300841896
+            ],
+            "segment_id": "four_narrow-T03:L055",
+            "start": [
+              1257,
+              988
+            ],
+            "end": [
+              1261,
+              1036
+            ],
+            "provenance": [
+              {
+                "tile_id": "four_narrow-T03",
+                "line_id": "L055",
+                "tile_origin": [
+                  965,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": true
+          }
+        ],
+        "nearby_candidate_count": 1,
+        "eligible_candidate_count": 1
+      },
+      "targeted_tile": {
+        "reference_start": [
+          1252,
+          663
+        ],
+        "reference_end": [
+          1252,
+          1023
+        ],
+        "reference_length_px": 360.0,
+        "best_single_coverage_segment": {
+          "angle_mismatch_deg": 7.815293546766919,
+          "centerline_offset_px": 10.0,
+          "endpoint_offsets_px": [
+            10.0,
+            3.0
+          ],
+          "overlap_px": 51.0,
+          "coverage_fraction": 0.14166666666666666,
+          "projection_interval_px": [
+            46.0,
+            97.0
+          ],
+          "endpoint_errors_px": [
+            46.09772228646444,
+            263.1900454044567
+          ],
+          "segment_id": "rightmost-target-T01:L029",
+          "start": [
+            1242,
+            760
+          ],
+          "end": [
+            1249,
+            709
+          ],
+          "provenance": [
+            {
+              "tile_id": "rightmost-target-T01",
+              "line_id": "L029",
+              "tile_origin": [
+                1200,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": true
+        },
+        "best_longitudinal_overlap_candidate": {
+          "angle_mismatch_deg": 0.0,
+          "centerline_offset_px": 58.0,
+          "endpoint_offsets_px": [
+            58.0,
+            58.0
+          ],
+          "overlap_px": 287.0,
+          "coverage_fraction": 0.7972222222222223,
+          "projection_interval_px": [
+            59.0,
+            346.0
+          ],
+          "endpoint_errors_px": [
+            82.73451516749222,
+            59.665735560705194
+          ],
+          "segment_id": "rightmost-target-T01:L057",
+          "start": [
+            1310,
+            722
+          ],
+          "end": [
+            1310,
+            1009
+          ],
+          "provenance": [
+            {
+              "tile_id": "rightmost-target-T01",
+              "line_id": "L057",
+              "tile_origin": [
+                1200,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": false
+        },
+        "best_single_eligible_segment": {
+          "angle_mismatch_deg": 7.815293546766919,
+          "centerline_offset_px": 10.0,
+          "endpoint_offsets_px": [
+            10.0,
+            3.0
+          ],
+          "overlap_px": 51.0,
+          "coverage_fraction": 0.14166666666666666,
+          "projection_interval_px": [
+            46.0,
+            97.0
+          ],
+          "endpoint_errors_px": [
+            46.09772228646444,
+            263.1900454044567
+          ],
+          "segment_id": "rightmost-target-T01:L029",
+          "start": [
+            1242,
+            760
+          ],
+          "end": [
+            1249,
+            709
+          ],
+          "provenance": [
+            {
+              "tile_id": "rightmost-target-T01",
+              "line_id": "L029",
+              "tile_origin": [
+                1200,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": true
+        },
+        "eligible_fragment_count": 1,
+        "fragment_union_intervals_px": [
+          [
+            46.0,
+            97.0
+          ]
+        ],
+        "fragment_union_coverage_px": 51.0,
+        "fragment_union_coverage_fraction": 0.14166666666666666,
+        "uncovered_gaps_px": [
+          [
+            0.0,
+            46.0
+          ],
+          [
+            97.0,
+            360.0
+          ]
+        ],
+        "meets_80_percent_threshold": false,
+        "nearby_candidates_within_corridor_and_longitudinal_extent": [
+          {
+            "angle_mismatch_deg": 7.815293546766919,
+            "centerline_offset_px": 10.0,
+            "endpoint_offsets_px": [
+              10.0,
+              3.0
+            ],
+            "overlap_px": 51.0,
+            "coverage_fraction": 0.14166666666666666,
+            "projection_interval_px": [
+              46.0,
+              97.0
+            ],
+            "endpoint_errors_px": [
+              46.09772228646444,
+              263.1900454044567
+            ],
+            "segment_id": "rightmost-target-T01:L029",
+            "start": [
+              1242,
+              760
+            ],
+            "end": [
+              1249,
+              709
+            ],
+            "provenance": [
+              {
+                "tile_id": "rightmost-target-T01",
+                "line_id": "L029",
+                "tile_origin": [
+                  1200,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": true
+          },
+          {
+            "angle_mismatch_deg": 85.42607874009914,
+            "centerline_offset_px": 17.0,
+            "endpoint_offsets_px": [
+              8.0,
+              17.0
+            ],
+            "overlap_px": 2.0,
+            "coverage_fraction": 0.005555555555555556,
+            "projection_interval_px": [
+              345.0,
+              347.0
+            ],
+            "endpoint_errors_px": [
+              345.09274115808347,
+              17.0
+            ],
+            "segment_id": "rightmost-target-T01:L032",
+            "start": [
+              1244,
+              1008
+            ],
+            "end": [
+              1269,
+              1010
+            ],
+            "provenance": [
+              {
+                "tile_id": "rightmost-target-T01",
+                "line_id": "L032",
+                "tile_origin": [
+                  1200,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 87.13759477388825,
+            "centerline_offset_px": 16.0,
+            "endpoint_offsets_px": [
+              16.0,
+              4.0
+            ],
+            "overlap_px": 1.0,
+            "coverage_fraction": 0.002777777777777778,
+            "projection_interval_px": [
+              43.0,
+              44.0
+            ],
+            "endpoint_errors_px": [
+              44.181444068749045,
+              316.0253154416589
+            ],
+            "segment_id": "rightmost-target-T01:L026",
+            "start": [
+              1236,
+              706
+            ],
+            "end": [
+              1256,
+              707
+            ],
+            "provenance": [
+              {
+                "tile_id": "rightmost-target-T01",
+                "line_id": "L026",
+                "tile_origin": [
+                  1200,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          }
+        ],
+        "nearby_candidate_count": 3,
+        "eligible_candidate_count": 1
+      }
+    },
+    "M10": {
+      "original": {
+        "reference_start": [
+          1693,
+          663
+        ],
+        "reference_end": [
+          1693,
+          1023
+        ],
+        "reference_length_px": 360.0,
+        "best_single_coverage_segment": null,
+        "best_longitudinal_overlap_candidate": {
+          "angle_mismatch_deg": 0.0,
+          "centerline_offset_px": 1289.0,
+          "endpoint_offsets_px": [
+            1289.0,
+            1289.0
+          ],
+          "overlap_px": 216.0,
+          "coverage_fraction": 0.6,
+          "projection_interval_px": [
+            85.0,
+            301.0
+          ],
+          "endpoint_errors_px": [
+            1291.799520049454,
+            1290.3495650404195
+          ],
+          "segment_id": "L155",
+          "start": [
+            404,
+            748
+          ],
+          "end": [
+            404,
+            964
+          ],
+          "provenance": [],
+          "coverage_eligible": false
+        },
+        "best_single_eligible_segment": null,
+        "eligible_fragment_count": 0,
+        "fragment_union_intervals_px": [],
+        "fragment_union_coverage_px": 0.0,
+        "fragment_union_coverage_fraction": 0.0,
+        "uncovered_gaps_px": [
+          [
+            0.0,
+            360.0
+          ]
+        ],
+        "meets_80_percent_threshold": false,
+        "nearby_candidates_within_corridor_and_longitudinal_extent": [],
+        "nearby_candidate_count": 0,
+        "eligible_candidate_count": 0
+      },
+      "full_roi": {
+        "reference_start": [
+          1693,
+          663
+        ],
+        "reference_end": [
+          1693,
+          1023
+        ],
+        "reference_length_px": 360.0,
+        "best_single_coverage_segment": null,
+        "best_longitudinal_overlap_candidate": {
+          "angle_mismatch_deg": 0.0,
+          "centerline_offset_px": 829.0,
+          "endpoint_offsets_px": [
+            829.0,
+            829.0
+          ],
+          "overlap_px": 286.0,
+          "coverage_fraction": 0.7944444444444444,
+          "projection_interval_px": [
+            59.0,
+            345.0
+          ],
+          "endpoint_errors_px": [
+            831.096865593897,
+            829.1356945639236
+          ],
+          "segment_id": "L180",
+          "start": [
+            864,
+            722
+          ],
+          "end": [
+            864,
+            1008
+          ],
+          "provenance": [],
+          "coverage_eligible": false
+        },
+        "best_single_eligible_segment": null,
+        "eligible_fragment_count": 0,
+        "fragment_union_intervals_px": [],
+        "fragment_union_coverage_px": 0.0,
+        "fragment_union_coverage_fraction": 0.0,
+        "uncovered_gaps_px": [
+          [
+            0.0,
+            360.0
+          ]
+        ],
+        "meets_80_percent_threshold": false,
+        "nearby_candidates_within_corridor_and_longitudinal_extent": [],
+        "nearby_candidate_count": 0,
+        "eligible_candidate_count": 0
+      },
+      "three_wide": {
+        "reference_start": [
+          1693,
+          663
+        ],
+        "reference_end": [
+          1693,
+          1023
+        ],
+        "reference_length_px": 360.0,
+        "best_single_coverage_segment": {
+          "angle_mismatch_deg": 1.5074357587748821,
+          "centerline_offset_px": 9.0,
+          "endpoint_offsets_px": [
+            8.0,
+            9.0
+          ],
+          "overlap_px": 37.0,
+          "coverage_fraction": 0.10277777777777777,
+          "projection_interval_px": [
+            323.0,
+            360.0
+          ],
+          "endpoint_errors_px": [
+            323.0990560184291,
+            9.055385138137417
+          ],
+          "segment_id": "three_wide-T03:L163",
+          "start": [
+            1701,
+            986
+          ],
+          "end": [
+            1702,
+            1024
+          ],
+          "provenance": [
+            {
+              "tile_id": "three_wide-T03",
+              "line_id": "L163",
+              "tile_origin": [
+                1145,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": true
+        },
+        "best_longitudinal_overlap_candidate": {
+          "angle_mismatch_deg": 0.0,
+          "centerline_offset_px": 383.0,
+          "endpoint_offsets_px": [
+            383.0,
+            383.0
+          ],
+          "overlap_px": 287.0,
+          "coverage_fraction": 0.7972222222222223,
+          "projection_interval_px": [
+            59.0,
+            346.0
+          ],
+          "endpoint_errors_px": [
+            387.5177415293395,
+            383.2557892582968
+          ],
+          "segment_id": "three_wide-T02:L194",
+          "start": [
+            1310,
+            722
+          ],
+          "end": [
+            1310,
+            1009
+          ],
+          "provenance": [
+            {
+              "tile_id": "three_wide-T02",
+              "line_id": "L194",
+              "tile_origin": [
+                755,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": false
+        },
+        "best_single_eligible_segment": {
+          "angle_mismatch_deg": 1.5074357587748821,
+          "centerline_offset_px": 9.0,
+          "endpoint_offsets_px": [
+            8.0,
+            9.0
+          ],
+          "overlap_px": 37.0,
+          "coverage_fraction": 0.10277777777777777,
+          "projection_interval_px": [
+            323.0,
+            360.0
+          ],
+          "endpoint_errors_px": [
+            323.0990560184291,
+            9.055385138137417
+          ],
+          "segment_id": "three_wide-T03:L163",
+          "start": [
+            1701,
+            986
+          ],
+          "end": [
+            1702,
+            1024
+          ],
+          "provenance": [
+            {
+              "tile_id": "three_wide-T03",
+              "line_id": "L163",
+              "tile_origin": [
+                1145,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": true
+        },
+        "eligible_fragment_count": 1,
+        "fragment_union_intervals_px": [
+          [
+            323.0,
+            360.0
+          ]
+        ],
+        "fragment_union_coverage_px": 37.0,
+        "fragment_union_coverage_fraction": 0.10277777777777777,
+        "uncovered_gaps_px": [
+          [
+            0.0,
+            323.0
+          ]
+        ],
+        "meets_80_percent_threshold": false,
+        "nearby_candidates_within_corridor_and_longitudinal_extent": [
+          {
+            "angle_mismatch_deg": 1.5074357587748821,
+            "centerline_offset_px": 9.0,
+            "endpoint_offsets_px": [
+              8.0,
+              9.0
+            ],
+            "overlap_px": 37.0,
+            "coverage_fraction": 0.10277777777777777,
+            "projection_interval_px": [
+              323.0,
+              360.0
+            ],
+            "endpoint_errors_px": [
+              323.0990560184291,
+              9.055385138137417
+            ],
+            "segment_id": "three_wide-T03:L163",
+            "start": [
+              1701,
+              986
+            ],
+            "end": [
+              1702,
+              1024
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T03",
+                "line_id": "L163",
+                "tile_origin": [
+                  1145,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": true
+          },
+          {
+            "angle_mismatch_deg": 52.81529354676688,
+            "centerline_offset_px": 17.0,
+            "endpoint_offsets_px": [
+              12.0,
+              17.0
+            ],
+            "overlap_px": 22.0,
+            "coverage_fraction": 0.06111111111111111,
+            "projection_interval_px": [
+              322.0,
+              344.0
+            ],
+            "endpoint_errors_px": [
+              322.2235249015813,
+              23.345235059857504
+            ],
+            "segment_id": "three_wide-T03:L157",
+            "start": [
+              1681,
+              985
+            ],
+            "end": [
+              1710,
+              1007
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T03",
+                "line_id": "L157",
+                "tile_origin": [
+                  1145,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 45.00000000000001,
+            "centerline_offset_px": 12.0,
+            "endpoint_offsets_px": [
+              8.0,
+              12.0
+            ],
+            "overlap_px": 20.0,
+            "coverage_fraction": 0.05555555555555555,
+            "projection_interval_px": [
+              41.0,
+              61.0
+            ],
+            "endpoint_errors_px": [
+              42.720018726587654,
+              299.1070042643602
+            ],
+            "segment_id": "three_wide-T03:L158",
+            "start": [
+              1685,
+              724
+            ],
+            "end": [
+              1705,
+              704
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T03",
+                "line_id": "L158",
+                "tile_origin": [
+                  1145,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 50.1944289077348,
+            "centerline_offset_px": 16.0,
+            "endpoint_offsets_px": [
+              16.0,
+              8.0
+            ],
+            "overlap_px": 20.0,
+            "coverage_fraction": 0.05555555555555555,
+            "projection_interval_px": [
+              332.0,
+              352.0
+            ],
+            "endpoint_errors_px": [
+              332.38531856867564,
+              11.313708498984761
+            ],
+            "segment_id": "three_wide-T03:L152",
+            "start": [
+              1677,
+              995
+            ],
+            "end": [
+              1701,
+              1015
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T03",
+                "line_id": "L152",
+                "tile_origin": [
+                  1145,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          }
+        ],
+        "nearby_candidate_count": 4,
+        "eligible_candidate_count": 1
+      },
+      "four_narrow": {
+        "reference_start": [
+          1693,
+          663
+        ],
+        "reference_end": [
+          1693,
+          1023
+        ],
+        "reference_length_px": 360.0,
+        "best_single_coverage_segment": {
+          "angle_mismatch_deg": 1.2730300200569502,
+          "centerline_offset_px": 2.0,
+          "endpoint_offsets_px": [
+            2.0,
+            1.0
+          ],
+          "overlap_px": 45.0,
+          "coverage_fraction": 0.125,
+          "projection_interval_px": [
+            55.0,
+            100.0
+          ],
+          "endpoint_errors_px": [
+            55.036351623268054,
+            260.00192306981114
+          ],
+          "segment_id": "four_narrow-T04:L100",
+          "start": [
+            1691,
+            718
+          ],
+          "end": [
+            1692,
+            763
+          ],
+          "provenance": [
+            {
+              "tile_id": "four_narrow-T04",
+              "line_id": "L100",
+              "tile_origin": [
+                1265,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": true
+        },
+        "best_longitudinal_overlap_candidate": {
+          "angle_mismatch_deg": 0.0,
+          "centerline_offset_px": 383.0,
+          "endpoint_offsets_px": [
+            383.0,
+            383.0
+          ],
+          "overlap_px": 287.0,
+          "coverage_fraction": 0.7972222222222223,
+          "projection_interval_px": [
+            59.0,
+            346.0
+          ],
+          "endpoint_errors_px": [
+            387.5177415293395,
+            383.2557892582968
+          ],
+          "segment_id": "four_narrow-T03:L085",
+          "start": [
+            1310,
+            722
+          ],
+          "end": [
+            1310,
+            1009
+          ],
+          "provenance": [
+            {
+              "tile_id": "four_narrow-T03",
+              "line_id": "L085",
+              "tile_origin": [
+                965,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": false
+        },
+        "best_single_eligible_segment": {
+          "angle_mismatch_deg": 1.2730300200569502,
+          "centerline_offset_px": 2.0,
+          "endpoint_offsets_px": [
+            2.0,
+            1.0
+          ],
+          "overlap_px": 45.0,
+          "coverage_fraction": 0.125,
+          "projection_interval_px": [
+            55.0,
+            100.0
+          ],
+          "endpoint_errors_px": [
+            55.036351623268054,
+            260.00192306981114
+          ],
+          "segment_id": "four_narrow-T04:L100",
+          "start": [
+            1691,
+            718
+          ],
+          "end": [
+            1692,
+            763
+          ],
+          "provenance": [
+            {
+              "tile_id": "four_narrow-T04",
+              "line_id": "L100",
+              "tile_origin": [
+                1265,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": true
+        },
+        "eligible_fragment_count": 1,
+        "fragment_union_intervals_px": [
+          [
+            55.0,
+            100.0
+          ]
+        ],
+        "fragment_union_coverage_px": 45.0,
+        "fragment_union_coverage_fraction": 0.125,
+        "uncovered_gaps_px": [
+          [
+            0.0,
+            55.0
+          ],
+          [
+            100.0,
+            360.0
+          ]
+        ],
+        "meets_80_percent_threshold": false,
+        "nearby_candidates_within_corridor_and_longitudinal_extent": [
+          {
+            "angle_mismatch_deg": 1.2730300200569502,
+            "centerline_offset_px": 2.0,
+            "endpoint_offsets_px": [
+              2.0,
+              1.0
+            ],
+            "overlap_px": 45.0,
+            "coverage_fraction": 0.125,
+            "projection_interval_px": [
+              55.0,
+              100.0
+            ],
+            "endpoint_errors_px": [
+              55.036351623268054,
+              260.00192306981114
+            ],
+            "segment_id": "four_narrow-T04:L100",
+            "start": [
+              1691,
+              718
+            ],
+            "end": [
+              1692,
+              763
+            ],
+            "provenance": [
+              {
+                "tile_id": "four_narrow-T04",
+                "line_id": "L100",
+                "tile_origin": [
+                  1265,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": true
+          },
+          {
+            "angle_mismatch_deg": 51.34019174590991,
+            "centerline_offset_px": 15.0,
+            "endpoint_offsets_px": [
+              15.0,
+              5.0
+            ],
+            "overlap_px": 16.0,
+            "coverage_fraction": 0.044444444444444446,
+            "projection_interval_px": [
+              334.0,
+              350.0
+            ],
+            "endpoint_errors_px": [
+              334.33665668005955,
+              11.180339887498949
+            ],
+            "segment_id": "four_narrow-T04:L093",
+            "start": [
+              1678,
+              997
+            ],
+            "end": [
+              1698,
+              1013
+            ],
+            "provenance": [
+              {
+                "tile_id": "four_narrow-T04",
+                "line_id": "L093",
+                "tile_origin": [
+                  1265,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          }
+        ],
+        "nearby_candidate_count": 2,
+        "eligible_candidate_count": 1
+      },
+      "targeted_tile": {
+        "reference_start": [
+          1693,
+          663
+        ],
+        "reference_end": [
+          1693,
+          1023
+        ],
+        "reference_length_px": 360.0,
+        "best_single_coverage_segment": null,
+        "best_longitudinal_overlap_candidate": {
+          "angle_mismatch_deg": 0.0,
+          "centerline_offset_px": 383.0,
+          "endpoint_offsets_px": [
+            383.0,
+            383.0
+          ],
+          "overlap_px": 287.0,
+          "coverage_fraction": 0.7972222222222223,
+          "projection_interval_px": [
+            59.0,
+            346.0
+          ],
+          "endpoint_errors_px": [
+            387.5177415293395,
+            383.2557892582968
+          ],
+          "segment_id": "rightmost-target-T01:L057",
+          "start": [
+            1310,
+            722
+          ],
+          "end": [
+            1310,
+            1009
+          ],
+          "provenance": [
+            {
+              "tile_id": "rightmost-target-T01",
+              "line_id": "L057",
+              "tile_origin": [
+                1200,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": false
+        },
+        "best_single_eligible_segment": null,
+        "eligible_fragment_count": 0,
+        "fragment_union_intervals_px": [],
+        "fragment_union_coverage_px": 0.0,
+        "fragment_union_coverage_fraction": 0.0,
+        "uncovered_gaps_px": [
+          [
+            0.0,
+            360.0
+          ]
+        ],
+        "meets_80_percent_threshold": false,
+        "nearby_candidates_within_corridor_and_longitudinal_extent": [
+          {
+            "angle_mismatch_deg": 52.305759533310834,
+            "centerline_offset_px": 18.0,
+            "endpoint_offsets_px": [
+              18.0,
+              4.0
+            ],
+            "overlap_px": 17.0,
+            "coverage_fraction": 0.04722222222222222,
+            "projection_interval_px": [
+              65.0,
+              82.0
+            ],
+            "endpoint_errors_px": [
+              65.12296062065974,
+              278.5821243367923
+            ],
+            "segment_id": "rightmost-target-T01:L122",
+            "start": [
+              1675,
+              745
+            ],
+            "end": [
+              1697,
+              728
+            ],
+            "provenance": [
+              {
+                "tile_id": "rightmost-target-T01",
+                "line_id": "L122",
+                "tile_origin": [
+                  1200,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 54.46232220802562,
+            "centerline_offset_px": 16.0,
+            "endpoint_offsets_px": [
+              16.0,
+              5.0
+            ],
+            "overlap_px": 15.0,
+            "coverage_fraction": 0.041666666666666664,
+            "projection_interval_px": [
+              330.0,
+              345.0
+            ],
+            "endpoint_errors_px": [
+              330.38765110094533,
+              15.811388300841896
+            ],
+            "segment_id": "rightmost-target-T01:L123",
+            "start": [
+              1677,
+              993
+            ],
+            "end": [
+              1698,
+              1008
+            ],
+            "provenance": [
+              {
+                "tile_id": "rightmost-target-T01",
+                "line_id": "L123",
+                "tile_origin": [
+                  1200,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 84.8055710922652,
+            "centerline_offset_px": 18.0,
+            "endpoint_offsets_px": [
+              15.0,
+              18.0
+            ],
+            "overlap_px": 3.0,
+            "coverage_fraction": 0.008333333333333333,
+            "projection_interval_px": [
+              330.0,
+              333.0
+            ],
+            "endpoint_errors_px": [
+              330.4905444940899,
+              30.886890422961002
+            ],
+            "segment_id": "rightmost-target-T01:L124",
+            "start": [
+              1678,
+              996
+            ],
+            "end": [
+              1711,
+              993
+            ],
+            "provenance": [
+              {
+                "tile_id": "rightmost-target-T01",
+                "line_id": "L124",
+                "tile_origin": [
+                  1200,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          }
+        ],
+        "nearby_candidate_count": 3,
+        "eligible_candidate_count": 0
+      }
+    },
+    "M16": {
+      "original": {
+        "reference_start": [
+          1252,
+          1023
+        ],
+        "reference_end": [
+          1693,
+          663
+        ],
+        "reference_length_px": 569.2811256312649,
+        "best_single_coverage_segment": null,
+        "best_longitudinal_overlap_candidate": {
+          "angle_mismatch_deg": 38.22058809208254,
+          "centerline_offset_px": 1236.9284142683819,
+          "endpoint_offsets_px": [
+            1236.9284142683819,
+            1201.6576155435255
+          ],
+          "overlap_px": 44.78806489803594,
+          "coverage_fraction": 0.07867477575050695,
+          "projection_interval_px": [
+            2.845694204605138,
+            47.63375910264108
+          ],
+          "endpoint_errors_px": [
+            1202.6013470805694,
+            1309.9988549613317
+          ],
+          "segment_id": "L241",
+          "start": [
+            472,
+            63
+          ],
+          "end": [
+            529,
+            62
+          ],
+          "provenance": [],
+          "coverage_eligible": false
+        },
+        "best_single_eligible_segment": null,
+        "eligible_fragment_count": 0,
+        "fragment_union_intervals_px": [],
+        "fragment_union_coverage_px": 0.0,
+        "fragment_union_coverage_fraction": 0.0,
+        "uncovered_gaps_px": [
+          [
+            0.0,
+            569.2811256312649
+          ]
+        ],
+        "meets_80_percent_threshold": false,
+        "nearby_candidates_within_corridor_and_longitudinal_extent": [],
+        "nearby_candidate_count": 0,
+        "eligible_candidate_count": 0
+      },
+      "full_roi": {
+        "reference_start": [
+          1252,
+          1023
+        ],
+        "reference_end": [
+          1693,
+          663
+        ],
+        "reference_length_px": 569.2811256312649,
+        "best_single_coverage_segment": null,
+        "best_longitudinal_overlap_candidate": {
+          "angle_mismatch_deg": 39.225674097336736,
+          "centerline_offset_px": 499.5299987939425,
+          "endpoint_offsets_px": [
+            499.5299987939425,
+            241.52039090974017
+          ],
+          "overlap_px": 230.72256234448832,
+          "coverage_fraction": 0.40528756699713964,
+          "projection_interval_px": [
+            0.0,
+            230.72256234448832
+          ],
+          "endpoint_errors_px": [
+            334.0134727821619,
+            415.87738577614437
+          ],
+          "segment_id": "L188",
+          "start": [
+            870,
+            690
+          ],
+          "end": [
+            1278,
+            690
+          ],
+          "provenance": [],
+          "coverage_eligible": false
+        },
+        "best_single_eligible_segment": null,
+        "eligible_fragment_count": 0,
+        "fragment_union_intervals_px": [],
+        "fragment_union_coverage_px": 0.0,
+        "fragment_union_coverage_fraction": 0.0,
+        "uncovered_gaps_px": [
+          [
+            0.0,
+            569.2811256312649
+          ]
+        ],
+        "meets_80_percent_threshold": false,
+        "nearby_candidates_within_corridor_and_longitudinal_extent": [
+          {
+            "angle_mismatch_deg": 35.41159926304637,
+            "centerline_offset_px": 15.082179284407417,
+            "endpoint_offsets_px": [
+              15.082179284407417,
+              2.3397930126753645
+            ],
+            "overlap_px": 24.5045889841001,
+            "coverage_fraction": 0.04304479435696631,
+            "projection_interval_px": [
+              22.639078338858933,
+              47.14366732295903
+            ],
+            "endpoint_errors_px": [
+              27.202941017470888,
+              522.1427008012273
+            ],
+            "segment_id": "L291",
+            "start": [
+              1260,
+              997
+            ],
+            "end": [
+              1290,
+              995
+            ],
+            "provenance": [],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 39.22567409733672,
+            "centerline_offset_px": 16.678929921435877,
+            "endpoint_offsets_px": [
+              16.678929921435877,
+              2.292364775931945
+            ],
+            "overlap_px": 23.23983600427558,
+            "coverage_fraction": 0.04082312755144547,
+            "projection_interval_px": [
+              3.2883577475437553,
+              26.528193751819337
+            ],
+            "endpoint_errors_px": [
+              17.0,
+              542.7577728600485
+            ],
+            "segment_id": "L286",
+            "start": [
+              1244,
+              1008
+            ],
+            "end": [
+              1274,
+              1008
+            ],
+            "provenance": [],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 39.22567409733672,
+            "centerline_offset_px": 13.343143937148701,
+            "endpoint_offsets_px": [
+              13.343143937148701,
+              3.731021290482338
+            ],
+            "overlap_px": 20.915852403848028,
+            "coverage_fraction": 0.03674081479630093,
+            "projection_interval_px": [
+              40.58276124011933,
+              61.49861364396736
+            ],
+            "endpoint_errors_px": [
+              42.720018726587654,
+              507.79621896977534
+            ],
+            "segment_id": "L296",
+            "start": [
+              1275,
+              987
+            ],
+            "end": [
+              1302,
+              987
+            ],
+            "provenance": [],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 37.02307593557093,
+            "centerline_offset_px": 16.17302872950607,
+            "endpoint_offsets_px": [
+              16.17302872950607,
+              0.5059011919298085
+            ],
+            "overlap_px": 12.03096272058076,
+            "coverage_fraction": 0.02113360548751701,
+            "projection_interval_px": [
+              0.0,
+              12.03096272058076
+            ],
+            "endpoint_errors_px": [
+              12.041594578792296,
+              557.2503925525759
+            ],
+            "segment_id": "L283",
+            "start": [
+              1235,
+              1016
+            ],
+            "end": [
+              1261,
+              1015
+            ],
+            "provenance": [],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 39.22567409733672,
+            "centerline_offset_px": 9.627932058914169,
+            "endpoint_offsets_px": [
+              3.6519742292433057,
+              9.627932058914169
+            ],
+            "overlap_px": 10.21288031208301,
+            "coverage_fraction": 0.0179399594545808,
+            "projection_interval_px": [
+              0.0,
+              10.21288031208301
+            ],
+            "endpoint_errors_px": [
+              7.0710678118654755,
+              559.1511423577707
+            ],
+            "segment_id": "L287",
+            "start": [
+              1245,
+              1024
+            ],
+            "end": [
+              1266,
+              1024
+            ],
+            "provenance": [],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 41.516284139975255,
+            "centerline_offset_px": 15.825221660054323,
+            "endpoint_offsets_px": [
+              0.7588517878947129,
+              15.825221660054323
+            ],
+            "overlap_px": 5.153868392784925,
+            "coverage_fraction": 0.00905329223249743,
+            "projection_interval_px": [
+              0.0,
+              5.153868392784925
+            ],
+            "endpoint_errors_px": [
+              13.601470508735444,
+              564.3491826874564
+            ],
+            "segment_id": "L285",
+            "start": [
+              1241,
+              1031
+            ],
+            "end": [
+              1266,
+              1032
+            ],
+            "provenance": [],
+            "coverage_eligible": false
+          }
+        ],
+        "nearby_candidate_count": 6,
+        "eligible_candidate_count": 0
+      },
+      "three_wide": {
+        "reference_start": [
+          1252,
+          1023
+        ],
+        "reference_end": [
+          1693,
+          663
+        ],
+        "reference_length_px": 569.2811256312649,
+        "best_single_coverage_segment": {
+          "angle_mismatch_deg": 7.220290889253204,
+          "centerline_offset_px": 12.39457920228031,
+          "endpoint_offsets_px": [
+            12.39457920228031,
+            5.280343690767377
+          ],
+          "overlap_px": 56.155032304208746,
+          "coverage_fraction": 0.09864200616512538,
+          "projection_interval_px": [
+            10.118023838596171,
+            66.27305614280492
+          ],
+          "endpoint_errors_px": [
+            16.0,
+            503.03578401541176
+          ],
+          "segment_id": "three_wide-T03:L041",
+          "start": [
+            1252,
+            1007
+          ],
+          "end": [
+            1300,
+            977
+          ],
+          "provenance": [
+            {
+              "tile_id": "three_wide-T03",
+              "line_id": "L041",
+              "tile_origin": [
+                1145,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": true
+        },
+        "best_longitudinal_overlap_candidate": {
+          "angle_mismatch_deg": 0.28746288606459974,
+          "centerline_offset_px": 58.2102558964236,
+          "endpoint_offsets_px": [
+            56.597695847147335,
+            58.2102558964236
+          ],
+          "overlap_px": 321.4053509979065,
+          "coverage_fraction": 0.564581076952984,
+          "projection_interval_px": [
+            37.70544821101854,
+            359.1107992089251
+          ],
+          "endpoint_errors_px": [
+            68.00735254367721,
+            218.08255317654368
+          ],
+          "segment_id": "three_wide-T03:L078",
+          "start": [
+            1317,
+            1043
+          ],
+          "end": [
+            1567,
+            841
+          ],
+          "provenance": [
+            {
+              "tile_id": "three_wide-T03",
+              "line_id": "L078",
+              "tile_origin": [
+                1145,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": false
+        },
+        "best_single_eligible_segment": {
+          "angle_mismatch_deg": 7.220290889253204,
+          "centerline_offset_px": 12.39457920228031,
+          "endpoint_offsets_px": [
+            12.39457920228031,
+            5.280343690767377
+          ],
+          "overlap_px": 56.155032304208746,
+          "coverage_fraction": 0.09864200616512538,
+          "projection_interval_px": [
+            10.118023838596171,
+            66.27305614280492
+          ],
+          "endpoint_errors_px": [
+            16.0,
+            503.03578401541176
+          ],
+          "segment_id": "three_wide-T03:L041",
+          "start": [
+            1252,
+            1007
+          ],
+          "end": [
+            1300,
+            977
+          ],
+          "provenance": [
+            {
+              "tile_id": "three_wide-T03",
+              "line_id": "L041",
+              "tile_origin": [
+                1145,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": true
+        },
+        "eligible_fragment_count": 4,
+        "fragment_union_intervals_px": [
+          [
+            0.0,
+            66.27305614280492
+          ]
+        ],
+        "fragment_union_coverage_px": 66.27305614280492,
+        "fragment_union_coverage_fraction": 0.11641534060929211,
+        "uncovered_gaps_px": [
+          [
+            66.27305614280492,
+            569.2811256312649
+          ]
+        ],
+        "meets_80_percent_threshold": false,
+        "nearby_candidates_within_corridor_and_longitudinal_extent": [
+          {
+            "angle_mismatch_deg": 7.220290889253204,
+            "centerline_offset_px": 12.39457920228031,
+            "endpoint_offsets_px": [
+              12.39457920228031,
+              5.280343690767377
+            ],
+            "overlap_px": 56.155032304208746,
+            "coverage_fraction": 0.09864200616512538,
+            "projection_interval_px": [
+              10.118023838596171,
+              66.27305614280492
+            ],
+            "endpoint_errors_px": [
+              16.0,
+              503.03578401541176
+            ],
+            "segment_id": "three_wide-T03:L041",
+            "start": [
+              1252,
+              1007
+            ],
+            "end": [
+              1300,
+              977
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T03",
+                "line_id": "L041",
+                "tile_origin": [
+                  1145,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": true
+          },
+          {
+            "angle_mismatch_deg": 0.1436431450307881,
+            "centerline_offset_px": 9.422409699692684,
+            "endpoint_offsets_px": [
+              9.422409699692684,
+              9.295934401710232
+            ],
+            "overlap_px": 50.447834482750594,
+            "coverage_fraction": 0.08861673470521257,
+            "projection_interval_px": [
+              5.217106041776152,
+              55.66494052452674
+            ],
+            "endpoint_errors_px": [
+              10.770329614269007,
+              513.7003017324402
+            ],
+            "segment_id": "three_wide-T03:L043",
+            "start": [
+              1262,
+              1027
+            ],
+            "end": [
+              1301,
+              995
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T03",
+                "line_id": "L043",
+                "tile_origin": [
+                  1145,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": true
+          },
+          {
+            "angle_mismatch_deg": 4.895456901833383,
+            "centerline_offset_px": 3.731021290482338,
+            "endpoint_offsets_px": [
+              0.5059011919298085,
+              3.731021290482338
+            ],
+            "overlap_px": 49.4676509233866,
+            "coverage_fraction": 0.08689494293093394,
+            "projection_interval_px": [
+              12.03096272058076,
+              61.49861364396736
+            ],
+            "endpoint_errors_px": [
+              12.041594578792296,
+              507.79621896977534
+            ],
+            "segment_id": "three_wide-T03:L042",
+            "start": [
+              1261,
+              1015
+            ],
+            "end": [
+              1302,
+              987
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T03",
+                "line_id": "L042",
+                "tile_origin": [
+                  1145,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": true
+          },
+          {
+            "angle_mismatch_deg": 42.80200847233409,
+            "centerline_offset_px": 16.331122851984134,
+            "endpoint_offsets_px": [
+              5.454247225493249,
+              16.331122851984134
+            ],
+            "overlap_px": 23.524405424736074,
+            "coverage_fraction": 0.04132300258268762,
+            "projection_interval_px": [
+              538.879625878733,
+              562.4040313034691
+            ],
+            "endpoint_errors_px": [
+              538.9072276375591,
+              17.72004514666935
+            ],
+            "segment_id": "three_wide-T03:L143",
+            "start": [
+              1666,
+              678
+            ],
+            "end": [
+              1698,
+              680
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T03",
+                "line_id": "L143",
+                "tile_origin": [
+                  1145,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 39.22567409733672,
+            "centerline_offset_px": 12.220675667554438,
+            "endpoint_offsets_px": [
+              4.22111307016434,
+              12.220675667554438
+            ],
+            "overlap_px": 19.71433707301473,
+            "coverage_fraction": 0.034630231331056124,
+            "projection_interval_px": [
+              0.0,
+              19.71433707301473
+            ],
+            "endpoint_errors_px": [
+              4.242640687119285,
+              549.7026468919356
+            ],
+            "segment_id": "three_wide-T02:L164",
+            "start": [
+              1249,
+              1020
+            ],
+            "end": [
+              1275,
+              1020
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T02",
+                "line_id": "L164",
+                "tile_origin": [
+                  755,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 39.22567409733672,
+            "centerline_offset_px": 7.952134360646678,
+            "endpoint_offsets_px": [
+              7.857277887159839,
+              7.952134360646678
+            ],
+            "overlap_px": 19.366530003562957,
+            "coverage_fraction": 0.03401927295953785,
+            "projection_interval_px": [
+              548.5866049988862,
+              567.9531350024491
+            ],
+            "endpoint_errors_px": [
+              548.6428710919336,
+              8.06225774829855
+            ],
+            "segment_id": "three_wide-T03:L149",
+            "start": [
+              1672,
+              670
+            ],
+            "end": [
+              1697,
+              670
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T03",
+                "line_id": "L149",
+                "tile_origin": [
+                  1145,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 52.68347833565965,
+            "centerline_offset_px": 15.350939292620128,
+            "endpoint_offsets_px": [
+              15.350939292620128,
+              8.521273201567713
+            ],
+            "overlap_px": 18.196633497225307,
+            "coverage_fraction": 0.031964231164431124,
+            "projection_interval_px": [
+              56.297317014439,
+              74.49395051166431
+            ],
+            "endpoint_errors_px": [
+              56.938563381947034,
+              495.025251881154
+            ],
+            "segment_id": "three_wide-T03:L061",
+            "start": [
+              1300,
+              964
+            ],
+            "end": [
+              1301,
+              994
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T03",
+                "line_id": "L061",
+                "tile_origin": [
+                  1145,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 39.225674097336736,
+            "centerline_offset_px": 9.928310891622493,
+            "endpoint_offsets_px": [
+              9.928310891622493,
+              4.616348376359503
+            ],
+            "overlap_px": 17.817207603277947,
+            "coverage_fraction": 0.03129773112277486,
+            "projection_interval_px": [
+              6.813856678804608,
+              24.631064282082555
+            ],
+            "endpoint_errors_px": [
+              12.041594578792296,
+              544.6696246349708
+            ],
+            "segment_id": "three_wide-T02:L166",
+            "start": [
+              1251,
+              1011
+            ],
+            "end": [
+              1274,
+              1011
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T02",
+                "line_id": "L166",
+                "tile_origin": [
+                  755,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 36.62311189483691,
+            "centerline_offset_px": 10.655543855021593,
+            "endpoint_offsets_px": [
+              10.655543855021593,
+              2.4820777229056232
+            ],
+            "overlap_px": 17.674922893047686,
+            "coverage_fraction": 0.031047793607153765,
+            "projection_interval_px": [
+              28.061706739856568,
+              45.736629632904254
+            ],
+            "endpoint_errors_px": [
+              30.01666203960727,
+              523.550379619765
+            ],
+            "segment_id": "three_wide-T02:L169",
+            "start": [
+              1267,
+              997
+            ],
+            "end": [
+              1289,
+              996
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T02",
+                "line_id": "L169",
+                "tile_origin": [
+                  755,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 39.22567409733672,
+            "centerline_offset_px": 12.536863912510569,
+            "endpoint_offsets_px": [
+              12.536863912510569,
+              0.11066588573464563
+            ],
+            "overlap_px": 15.49322400285039,
+            "coverage_fraction": 0.02721541836763032,
+            "projection_interval_px": [
+              11.525061528650951,
+              27.01828553150134
+            ],
+            "endpoint_errors_px": [
+              17.029386365926403,
+              542.2628513922008
+            ],
+            "segment_id": "three_wide-T02:L168",
+            "start": [
+              1253,
+              1006
+            ],
+            "end": [
+              1273,
+              1006
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T02",
+                "line_id": "L168",
+                "tile_origin": [
+                  755,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 53.636731128775025,
+            "centerline_offset_px": 13.769998067839477,
+            "endpoint_offsets_px": [
+              2.355602424923171,
+              13.769998067839477
+            ],
+            "overlap_px": 11.872868598102695,
+            "coverage_fraction": 0.020855897136826906,
+            "projection_interval_px": [
+              18.449584093190207,
+              30.322452691292902
+            ],
+            "endpoint_errors_px": [
+              23.021728866442675,
+              538.9638206781602
+            ],
+            "segment_id": "three_wide-T03:L046",
+            "start": [
+              1274,
+              1002
+            ],
+            "end": [
+              1275,
+              1022
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T03",
+                "line_id": "L046",
+                "tile_origin": [
+                  1145,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 3.3159510181591956,
+            "centerline_offset_px": 10.054786189604945,
+            "endpoint_offsets_px": [
+              7.983753185142291,
+              10.054786189604945
+            ],
+            "overlap_px": 5.991767241918669,
+            "coverage_fraction": 0.010525146491154987,
+            "projection_interval_px": [
+              0.0,
+              5.991767241918669
+            ],
+            "endpoint_errors_px": [
+              11.704699910719626,
+              563.3790908438118
+            ],
+            "segment_id": "three_wide-T03:L029",
+            "start": [
+              1234,
+              1048
+            ],
+            "end": [
+              1263,
+              1027
+            ],
+            "provenance": [
+              {
+                "tile_id": "three_wide-T03",
+                "line_id": "L029",
+                "tile_origin": [
+                  1145,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": true
+          }
+        ],
+        "nearby_candidate_count": 12,
+        "eligible_candidate_count": 4
+      },
+      "four_narrow": {
+        "reference_start": [
+          1252,
+          1023
+        ],
+        "reference_end": [
+          1693,
+          663
+        ],
+        "reference_length_px": 569.2811256312649,
+        "best_single_coverage_segment": {
+          "angle_mismatch_deg": 5.7743259026633105,
+          "centerline_offset_px": 11.335348581677273,
+          "endpoint_offsets_px": [
+            11.335348581677273,
+            7.6359461156905475
+          ],
+          "overlap_px": 29.91140797284993,
+          "coverage_fraction": 0.05254241995056791,
+          "projection_interval_px": [
+            0.0,
+            29.91140797284993
+          ],
+          "endpoint_errors_px": [
+            13.152946437965905,
+            539.4237666250904
+          ],
+          "segment_id": "four_narrow-T03:L054",
+          "start": [
+            1254,
+            1036
+          ],
+          "end": [
+            1280,
+            1010
+          ],
+          "provenance": [
+            {
+              "tile_id": "four_narrow-T03",
+              "line_id": "L054",
+              "tile_origin": [
+                965,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": true
+        },
+        "best_longitudinal_overlap_candidate": {
+          "angle_mismatch_deg": 0.28746288606459974,
+          "centerline_offset_px": 58.2102558964236,
+          "endpoint_offsets_px": [
+            56.597695847147335,
+            58.2102558964236
+          ],
+          "overlap_px": 321.4053509979065,
+          "coverage_fraction": 0.564581076952984,
+          "projection_interval_px": [
+            37.70544821101854,
+            359.1107992089251
+          ],
+          "endpoint_errors_px": [
+            68.00735254367721,
+            218.08255317654368
+          ],
+          "segment_id": "four_narrow-T04:L036",
+          "start": [
+            1317,
+            1043
+          ],
+          "end": [
+            1567,
+            841
+          ],
+          "provenance": [
+            {
+              "tile_id": "four_narrow-T04",
+              "line_id": "L036",
+              "tile_origin": [
+                1265,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": false
+        },
+        "best_single_eligible_segment": {
+          "angle_mismatch_deg": 5.7743259026633105,
+          "centerline_offset_px": 11.335348581677273,
+          "endpoint_offsets_px": [
+            11.335348581677273,
+            7.6359461156905475
+          ],
+          "overlap_px": 29.91140797284993,
+          "coverage_fraction": 0.05254241995056791,
+          "projection_interval_px": [
+            0.0,
+            29.91140797284993
+          ],
+          "endpoint_errors_px": [
+            13.152946437965905,
+            539.4237666250904
+          ],
+          "segment_id": "four_narrow-T03:L054",
+          "start": [
+            1254,
+            1036
+          ],
+          "end": [
+            1280,
+            1010
+          ],
+          "provenance": [
+            {
+              "tile_id": "four_narrow-T03",
+              "line_id": "L054",
+              "tile_origin": [
+                965,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": true
+        },
+        "eligible_fragment_count": 1,
+        "fragment_union_intervals_px": [
+          [
+            0.0,
+            29.91140797284993
+          ]
+        ],
+        "fragment_union_coverage_px": 29.91140797284993,
+        "fragment_union_coverage_fraction": 0.05254241995056791,
+        "uncovered_gaps_px": [
+          [
+            29.91140797284993,
+            569.2811256312649
+          ]
+        ],
+        "meets_80_percent_threshold": false,
+        "nearby_candidates_within_corridor_and_longitudinal_extent": [
+          {
+            "angle_mismatch_deg": 5.7743259026633105,
+            "centerline_offset_px": 11.335348581677273,
+            "endpoint_offsets_px": [
+              11.335348581677273,
+              7.6359461156905475
+            ],
+            "overlap_px": 29.91140797284993,
+            "coverage_fraction": 0.05254241995056791,
+            "projection_interval_px": [
+              0.0,
+              29.91140797284993
+            ],
+            "endpoint_errors_px": [
+              13.152946437965905,
+              539.4237666250904
+            ],
+            "segment_id": "four_narrow-T03:L054",
+            "start": [
+              1254,
+              1036
+            ],
+            "end": [
+              1280,
+              1010
+            ],
+            "provenance": [
+              {
+                "tile_id": "four_narrow-T03",
+                "line_id": "L054",
+                "tile_origin": [
+                  965,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": true
+          },
+          {
+            "angle_mismatch_deg": 39.22567409733672,
+            "centerline_offset_px": 7.952134360646678,
+            "endpoint_offsets_px": [
+              7.857277887159839,
+              7.952134360646678
+            ],
+            "overlap_px": 19.366530003562957,
+            "coverage_fraction": 0.03401927295953785,
+            "projection_interval_px": [
+              548.5866049988862,
+              567.9531350024491
+            ],
+            "endpoint_errors_px": [
+              548.6428710919336,
+              8.06225774829855
+            ],
+            "segment_id": "four_narrow-T04:L088",
+            "start": [
+              1672,
+              670
+            ],
+            "end": [
+              1697,
+              670
+            ],
+            "provenance": [
+              {
+                "tile_id": "four_narrow-T04",
+                "line_id": "L088",
+                "tile_origin": [
+                  1265,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 39.225674097336736,
+            "centerline_offset_px": 9.722788532401008,
+            "endpoint_offsets_px": [
+              5.454247225493249,
+              9.722788532401008
+            ],
+            "overlap_px": 18.591868803420425,
+            "coverage_fraction": 0.032658502041156307,
+            "projection_interval_px": [
+              538.879625878733,
+              557.4714946821534
+            ],
+            "endpoint_errors_px": [
+              538.9072276375591,
+              15.297058540778355
+            ],
+            "segment_id": "four_narrow-T04:L087",
+            "start": [
+              1666,
+              678
+            ],
+            "end": [
+              1690,
+              678
+            ],
+            "provenance": [
+              {
+                "tile_id": "four_narrow-T04",
+                "line_id": "L087",
+                "tile_origin": [
+                  1265,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 50.77432590266327,
+            "centerline_offset_px": 10.038976777357139,
+            "endpoint_offsets_px": [
+              9.327553226205845,
+              10.038976777357139
+            ],
+            "overlap_px": 15.809412247806513,
+            "coverage_fraction": 0.027770835069010517,
+            "projection_interval_px": [
+              20.20442885269673,
+              36.01384110050324
+            ],
+            "endpoint_errors_px": [
+              22.561028345356956,
+              533.348853940833
+            ],
+            "segment_id": "four_narrow-T04:L002",
+            "start": [
+              1274,
+              993
+            ],
+            "end": [
+              1274,
+              1018
+            ],
+            "provenance": [
+              {
+                "tile_id": "four_narrow-T04",
+                "line_id": "L002",
+                "tile_origin": [
+                  1265,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          }
+        ],
+        "nearby_candidate_count": 4,
+        "eligible_candidate_count": 1
+      },
+      "targeted_tile": {
+        "reference_start": [
+          1252,
+          1023
+        ],
+        "reference_end": [
+          1693,
+          663
+        ],
+        "reference_length_px": 569.2811256312649,
+        "best_single_coverage_segment": null,
+        "best_longitudinal_overlap_candidate": {
+          "angle_mismatch_deg": 0.14907557495168755,
+          "centerline_offset_px": 63.69612194641246,
+          "endpoint_offsets_px": [
+            62.85822309727871,
+            63.69612194641246
+          ],
+          "overlap_px": 322.03772748781876,
+          "coverage_fraction": 0.5656919103557444,
+          "projection_interval_px": [
+            39.049248252082094,
+            361.0869757399009
+          ],
+          "endpoint_errors_px": [
+            74.0,
+            217.7200036744442
+          ],
+          "segment_id": "rightmost-target-T01:L070",
+          "start": [
+            1322,
+            1047
+          ],
+          "end": [
+            1572,
+            844
+          ],
+          "provenance": [
+            {
+              "tile_id": "rightmost-target-T01",
+              "line_id": "L070",
+              "tile_origin": [
+                1200,
+                630
+              ]
+            }
+          ],
+          "coverage_eligible": false
+        },
+        "best_single_eligible_segment": null,
+        "eligible_fragment_count": 0,
+        "fragment_union_intervals_px": [],
+        "fragment_union_coverage_px": 0.0,
+        "fragment_union_coverage_fraction": 0.0,
+        "uncovered_gaps_px": [
+          [
+            0.0,
+            569.2811256312649
+          ]
+        ],
+        "meets_80_percent_threshold": false,
+        "nearby_candidates_within_corridor_and_longitudinal_extent": [
+          {
+            "angle_mismatch_deg": 39.225674097336736,
+            "centerline_offset_px": 13.232478051414056,
+            "endpoint_offsets_px": [
+              6.371193135866027,
+              13.232478051414056
+            ],
+            "overlap_px": 24.01449720441815,
+            "coverage_fraction": 0.04218389846982707,
+            "projection_interval_px": [
+              540.9190400586999,
+              564.9335372631181
+            ],
+            "endpoint_errors_px": [
+              540.9565601783567,
+              13.92838827718412
+            ],
+            "segment_id": "rightmost-target-T01:L118",
+            "start": [
+              1667,
+              676
+            ],
+            "end": [
+              1698,
+              676
+            ],
+            "provenance": [
+              {
+                "tile_id": "rightmost-target-T01",
+                "line_id": "L118",
+                "tile_origin": [
+                  1200,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 39.22567409733672,
+            "centerline_offset_px": 7.952134360646678,
+            "endpoint_offsets_px": [
+              7.857277887159839,
+              7.952134360646678
+            ],
+            "overlap_px": 19.366530003562957,
+            "coverage_fraction": 0.03401927295953785,
+            "projection_interval_px": [
+              548.5866049988862,
+              567.9531350024491
+            ],
+            "endpoint_errors_px": [
+              548.6428710919336,
+              8.06225774829855
+            ],
+            "segment_id": "rightmost-target-T01:L120",
+            "start": [
+              1672,
+              670
+            ],
+            "end": [
+              1697,
+              670
+            ],
+            "provenance": [
+              {
+                "tile_id": "rightmost-target-T01",
+                "line_id": "L120",
+                "tile_origin": [
+                  1200,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          },
+          {
+            "angle_mismatch_deg": 43.79959535723759,
+            "centerline_offset_px": 16.678929921435877,
+            "endpoint_offsets_px": [
+              16.678929921435877,
+              0.6798047266556803
+            ],
+            "overlap_px": 18.101777023738464,
+            "coverage_fraction": 0.031797606154017055,
+            "projection_interval_px": [
+              3.2883577475437553,
+              21.39013477128222
+            ],
+            "endpoint_errors_px": [
+              17.0,
+              547.8914125992485
+            ],
+            "segment_id": "rightmost-target-T01:L032",
+            "start": [
+              1244,
+              1008
+            ],
+            "end": [
+              1269,
+              1010
+            ],
+            "provenance": [
+              {
+                "tile_id": "rightmost-target-T01",
+                "line_id": "L032",
+                "tile_origin": [
+                  1200,
+                  630
+                ]
+              }
+            ],
+            "coverage_eligible": false
+          }
+        ],
+        "nearby_candidate_count": 3,
+        "eligible_candidate_count": 0
+      }
+    }
+  },
+  "nearest_raw_endpoint_by_annotated_joint": {
+    "M09": {
+      "F": {
+        "original": {
+          "distance_px": 496.0090724976711,
+          "segment_id": "L250",
+          "candidate_endpoint": [
+            756,
+            666
+          ]
+        },
+        "full_roi": {
+          "distance_px": 7.211102550927978,
+          "segment_id": "L288",
+          "candidate_endpoint": [
+            1246,
+            659
+          ]
+        },
+        "three_wide": {
+          "distance_px": 14.035668847618199,
+          "segment_id": "three_wide-T02:L167",
+          "candidate_endpoint": [
+            1253,
+            677
+          ]
+        },
+        "four_narrow": {
+          "distance_px": 13.601470508735444,
+          "segment_id": "four_narrow-T03:L050",
+          "candidate_endpoint": [
+            1239,
+            659
+          ]
+        },
+        "targeted_tile": {
+          "distance_px": 12.649110640673518,
+          "segment_id": "rightmost-target-T01:L028",
+          "candidate_endpoint": [
+            1240,
+            659
+          ]
+        }
+      },
+      "C": {
+        "original": {
+          "distance_px": 431.9085551363853,
+          "segment_id": "L296",
+          "candidate_endpoint": [
+            821,
+            1051
+          ]
+        },
+        "full_roi": {
+          "distance_px": 7.0710678118654755,
+          "segment_id": "L287",
+          "candidate_endpoint": [
+            1245,
+            1024
+          ]
+        },
+        "three_wide": {
+          "distance_px": 4.242640687119285,
+          "segment_id": "three_wide-T02:L164",
+          "candidate_endpoint": [
+            1249,
+            1020
+          ]
+        },
+        "four_narrow": {
+          "distance_px": 8.54400374531753,
+          "segment_id": "four_narrow-T03:L040",
+          "candidate_endpoint": [
+            1249,
+            1031
+          ]
+        },
+        "targeted_tile": {
+          "distance_px": 11.313708498984761,
+          "segment_id": "rightmost-target-T01:L010",
+          "candidate_endpoint": [
+            1260,
+            1031
+          ]
+        }
+      }
+    },
+    "M10": {
+      "E": {
+        "original": {
+          "distance_px": 937.0048025490585,
+          "segment_id": "L250",
+          "candidate_endpoint": [
+            756,
+            666
+          ]
+        },
+        "full_roi": {
+          "distance_px": 310.01451578918045,
+          "segment_id": "L298",
+          "candidate_endpoint": [
+            1383,
+            660
+          ]
+        },
+        "three_wide": {
+          "distance_px": 4.123105625617661,
+          "segment_id": "three_wide-T03:L142",
+          "candidate_endpoint": [
+            1694,
+            659
+          ]
+        },
+        "four_narrow": {
+          "distance_px": 5.656854249492381,
+          "segment_id": "four_narrow-T04:L103",
+          "candidate_endpoint": [
+            1697,
+            659
+          ]
+        },
+        "targeted_tile": {
+          "distance_px": 8.06225774829855,
+          "segment_id": "rightmost-target-T01:L120",
+          "candidate_endpoint": [
+            1697,
+            670
+          ]
+        }
+      },
+      "D": {
+        "original": {
+          "distance_px": 872.4494254683191,
+          "segment_id": "L296",
+          "candidate_endpoint": [
+            821,
+            1051
+          ]
+        },
+        "full_roi": {
+          "distance_px": 388.1855226563711,
+          "segment_id": "L290",
+          "candidate_endpoint": [
+            1305,
+            1011
+          ]
+        },
+        "three_wide": {
+          "distance_px": 3.0,
+          "segment_id": "three_wide-T03:L117",
+          "candidate_endpoint": [
+            1693,
+            1026
+          ]
+        },
+        "four_narrow": {
+          "distance_px": 4.0,
+          "segment_id": "four_narrow-T04:L084",
+          "candidate_endpoint": [
+            1689,
+            1023
+          ]
+        },
+        "targeted_tile": {
+          "distance_px": 3.0,
+          "segment_id": "rightmost-target-T01:L107",
+          "candidate_endpoint": [
+            1693,
+            1026
+          ]
+        }
+      }
+    },
+    "M16": {
+      "C": {
+        "original": {
+          "distance_px": 431.9085551363853,
+          "segment_id": "L296",
+          "candidate_endpoint": [
+            821,
+            1051
+          ]
+        },
+        "full_roi": {
+          "distance_px": 7.0710678118654755,
+          "segment_id": "L287",
+          "candidate_endpoint": [
+            1245,
+            1024
+          ]
+        },
+        "three_wide": {
+          "distance_px": 4.242640687119285,
+          "segment_id": "three_wide-T02:L164",
+          "candidate_endpoint": [
+            1249,
+            1020
+          ]
+        },
+        "four_narrow": {
+          "distance_px": 8.54400374531753,
+          "segment_id": "four_narrow-T03:L040",
+          "candidate_endpoint": [
+            1249,
+            1031
+          ]
+        },
+        "targeted_tile": {
+          "distance_px": 11.313708498984761,
+          "segment_id": "rightmost-target-T01:L010",
+          "candidate_endpoint": [
+            1260,
+            1031
+          ]
+        }
+      },
+      "E": {
+        "original": {
+          "distance_px": 937.0048025490585,
+          "segment_id": "L250",
+          "candidate_endpoint": [
+            756,
+            666
+          ]
+        },
+        "full_roi": {
+          "distance_px": 310.01451578918045,
+          "segment_id": "L298",
+          "candidate_endpoint": [
+            1383,
+            660
+          ]
+        },
+        "three_wide": {
+          "distance_px": 4.123105625617661,
+          "segment_id": "three_wide-T03:L142",
+          "candidate_endpoint": [
+            1694,
+            659
+          ]
+        },
+        "four_narrow": {
+          "distance_px": 5.656854249492381,
+          "segment_id": "four_narrow-T04:L103",
+          "candidate_endpoint": [
+            1697,
+            659
+          ]
+        },
+        "targeted_tile": {
+          "distance_px": 8.06225774829855,
+          "segment_id": "rightmost-target-T01:L120",
+          "candidate_endpoint": [
+            1697,
+            670
+          ]
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Candidate response alignment is not proof of semantic member detection.",
+    "Endpoint cluster counts are unavailable for the two saved single-image candidate sets in this diagnostic record; line segment endpoint proximity is reported independently.",
+    "No detector was rerun; all comparisons use saved raw outputs."
+  ],
+  "overlay_candidate_ids": {
+    "original": {
+      "M09": [],
+      "M10": [],
+      "M16": []
+    },
+    "full_roi": {
+      "M09": [
+        "L283"
+      ],
+      "M10": [],
+      "M16": [
+        "L291",
+        "L286",
+        "L296"
+      ]
+    },
+    "three_wide": {
+      "M09": [
+        "three_wide-T03:L032",
+        "three_wide-T02:L165",
+        "three_wide-T03:L034"
+      ],
+      "M10": [
+        "three_wide-T03:L163",
+        "three_wide-T03:L157",
+        "three_wide-T03:L158"
+      ],
+      "M16": [
+        "three_wide-T03:L041",
+        "three_wide-T03:L043",
+        "three_wide-T03:L042"
+      ]
+    },
+    "four_narrow": {
+      "M09": [
+        "four_narrow-T03:L055"
+      ],
+      "M10": [
+        "four_narrow-T04:L100",
+        "four_narrow-T04:L093"
+      ],
+      "M16": [
+        "four_narrow-T03:L054",
+        "four_narrow-T04:L088",
+        "four_narrow-T04:L087"
+      ]
+    },
+    "targeted_tile": {
+      "M09": [
+        "rightmost-target-T01:L029",
+        "rightmost-target-T01:L032",
+        "rightmost-target-T01:L026"
+      ],
+      "M10": [
+        "rightmost-target-T01:L122",
+        "rightmost-target-T01:L123",
+        "rightmost-target-T01:L124"
+      ],
+      "M16": [
+        "rightmost-target-T01:L118",
+        "rightmost-target-T01:L120",
+        "rightmost-target-T01:L032"
+      ]
+    }
+  }
+}

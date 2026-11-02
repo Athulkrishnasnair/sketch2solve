@@ -1,0 +1,121 @@
+{
+  "date": "2026-10-29",
+  "environment": "Integrated VS Code Chromium browser; isolated Flask test server on port 5101; Vite test frontend on port 5174; temporary SQLite and uploads",
+  "provider": "Gemini provider selection with deterministic mocked responses; no live provider calls",
+  "evaluation_images": [
+    {
+      "filename": "test1.jpg",
+      "size_bytes": 109870,
+      "detected_format": "image/webp",
+      "upload_success": true,
+      "http_status": 201,
+      "analysis_record_saved": true,
+      "original_image_http_status": 200,
+      "opencv_candidate_lines": 153,
+      "provider_result": "Synthetic mock proposal returned; not an interpretation of this image",
+      "review_status": "pending_review"
+    },
+    {
+      "filename": "test2.jpg",
+      "size_bytes": 86957,
+      "detected_format": "image/jpeg",
+      "upload_success": true,
+      "http_status": 201,
+      "analysis_record_saved": true,
+      "original_image_http_status": 200,
+      "opencv_candidate_lines": 300,
+      "provider_result": "Synthetic mock proposal returned; not an interpretation of this image",
+      "review_status": "pending_review"
+    },
+    {
+      "filename": "test3.png",
+      "size_bytes": 75621,
+      "detected_format": "image/png",
+      "upload_success": true,
+      "http_status": 201,
+      "analysis_record_saved": true,
+      "original_image_http_status": 200,
+      "opencv_candidate_lines": 76,
+      "provider_result": "Synthetic mock proposal returned; not an interpretation of this image",
+      "review_status": "pending_review"
+    },
+    {
+      "filename": "test4.jpg",
+      "size_bytes": 18606,
+      "detected_format": "image/jpeg",
+      "upload_success": true,
+      "http_status": 201,
+      "analysis_record_saved": true,
+      "original_image_http_status": 200,
+      "opencv_candidate_lines": 49,
+      "provider_result": "Synthetic mock proposal returned; not an interpretation of this image",
+      "review_status": "pending_review"
+    },
+    {
+      "filename": "test5.png",
+      "size_bytes": 732759,
+      "detected_format": "image/png",
+      "upload_success": true,
+      "http_status": 201,
+      "analysis_record_saved": true,
+      "original_image_http_status": 200,
+      "opencv_candidate_lines": 300,
+      "provider_result": "Synthetic mock proposal returned; not an interpretation of this image",
+      "review_status": "pending_review"
+    }
+  ],
+  "edge_uploads": [
+    {
+      "filename": "browser-generated.webp",
+      "file_size_bytes": null,
+      "detected_format": "image/webp",
+      "http_status": 201,
+      "analysis_record_saved": true
+    },
+    {
+      "filename": "corrupted.png",
+      "detected_format": null,
+      "http_status": 422,
+      "error_code": "INVALID_IMAGE",
+      "analysis_record_saved": true
+    },
+    {
+      "filename": "unsupported.txt",
+      "detected_format": null,
+      "http_status": 415,
+      "error_code": "UNSUPPORTED_IMAGE_TYPE",
+      "analysis_record_saved": true
+    },
+    {
+      "filename": "over-limit.jpg",
+      "size_bytes": 10485761,
+      "frontend": "Blocked before upload with the 10 MiB limit message",
+      "backend_http_status": 413,
+      "backend_error_code": "IMAGE_TOO_LARGE",
+      "analysis_record_saved": true
+    },
+    {
+      "filename": "misleading.jpg",
+      "contents": "PNG bytes from test3.png",
+      "detected_format": "image/png",
+      "http_status": 201,
+      "analysis_record_saved": true
+    }
+  ],
+  "mock_provider_scenarios": [
+    { "scenario": "MISSING_GEMINI_API_KEY", "http_status": 503, "persisted_as_failed": true },
+    { "scenario": "GEMINI_AUTHENTICATION_FAILED", "http_status": 502, "persisted_as_failed": true },
+    { "scenario": "GEMINI_RATE_LIMITED", "http_status": 429, "persisted_as_failed": true },
+    { "scenario": "GEMINI_TIMEOUT", "http_status": 504, "persisted_as_failed": true },
+    { "scenario": "GEMINI_NETWORK_ERROR", "http_status": 503, "persisted_as_failed": true },
+    { "scenario": "INVALID_GEMINI_RESPONSE", "http_status": 502, "persisted_as_failed": true },
+    {
+      "scenario": "EMPTY_PROPOSAL",
+      "http_status": 201,
+      "persisted_as_failed": false,
+      "review_status": "pending_review",
+      "joints": 0,
+      "members": 0
+    }
+  ]
+}

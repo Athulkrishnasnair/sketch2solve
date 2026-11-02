@@ -1,0 +1,62 @@
+{
+  "experiment": "test5-overlapping-tiles-2026-10-30",
+  "source": {
+    "path": "backend/evaluation/sketches/test5.png",
+    "width": 2046,
+    "height": 1319,
+    "sha256": "5fa616402e536ecb0907d699f6e0252f4fadc556df11a3cbb475e4f184b1ca36"
+  },
+  "roi": {
+    "x": 365,
+    "y": 630,
+    "width": 1380,
+    "height": 420,
+    "coordinate_space": "original_image_pixels",
+    "origin": "top_left",
+    "x_axis": "right",
+    "y_axis": "down",
+    "right_bottom_exclusive": true
+  },
+  "tile_selection_basis": "Both layouts were chosen from the fixed ROI and annotated bay spacing before running the detector. Three 600px tiles retain more neighboring-bay context (each tile is wider than one approximately 440px bay). Four 480px tiles reduce per-call scene width to roughly one bay while retaining 180px overlap for boundary context. This small comparison tests context versus saturation without using detector results to select a layout.",
+  "encoding": "PNG from decoded source pixels; no resize",
+  "partial_edge_policy": "Tiles are fully contained in the ROI. Origins are explicitly listed. The last tile is edge-aligned so the union covers the ROI exactly; if a future ROI is not exactly covered, use a full-size right-aligned edge tile and record its resulting overlap. Do not pad or resize.",
+  "coordinate_mapping": {
+    "tile_origin_is_original_pixel": true,
+    "original_x": "tile_origin_x + tile_local_x",
+    "original_y": "tile_origin_y + tile_local_y"
+  },
+  "configurations": {
+    "three_wide": {
+      "tile_width": 600,
+      "tile_height": 420,
+      "horizontal_overlap": 210,
+      "vertical_overlap": 0,
+      "origins_original_pixels": [[365, 630], [755, 630], [1145, 630]],
+      "rationale": "Three wide contexts, each slightly wider than one annotated bay; 35% overlap shares boundaries while keeping tile count low."
+    },
+    "four_narrow": {
+      "tile_width": 480,
+      "tile_height": 420,
+      "horizontal_overlap": 180,
+      "vertical_overlap": 0,
+      "origins_original_pixels": [[365, 630], [665, 630], [965, 630], [1265, 630]],
+      "rationale": "Four narrower contexts, approximately one bay wide; 37.5% overlap retains boundary context and tests whether reducing horizontal clutter avoids the cap."
+    }
+  },
+  "deduplication": {
+    "primary_perpendicular_tolerance_px": 4,
+    "sensitivity_perpendicular_tolerances_px": [2, 4, 8],
+    "orientation_tolerance_degrees": 4,
+    "minimum_projected_overlap_ratio_of_shorter_segment": 0.35,
+    "endpoint_proximity": "At least one endpoint must be within the perpendicular tolerance of the other finite segment; this permits partial overlapping detections while rejecting nearby non-overlapping collinear segments.",
+    "grouping": "Deterministic complete-link grouping: a candidate must match every existing group member and a group may contain at most one detection from each tile. Reversed endpoint ordering is canonicalized.",
+    "merged_geometry": "For a duplicate group, take the union of projected intervals along a length-weighted mean orientation and use the median normal offset. This retains the observed union while not bridging gaps between non-overlapping fragments.",
+    "provenance": "Each deduplicated segment retains all original tile IDs, line IDs, origins, and mapped endpoints."
+  },
+  "test5_ambiguous_crossings_original_pixels": [
+    {"x": 601, "y": 843, "status": "ambiguous"},
+    {"x": 1032, "y": 843, "status": "ambiguous"},
+    {"x": 1472, "y": 843, "status": "ambiguous"}
+  ],
+  "rightmost_bay_reference_member_ids": ["M03", "M06", "M09", "M10", "M15", "M16"]
+}

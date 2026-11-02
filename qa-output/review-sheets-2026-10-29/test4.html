@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QA review sheet — test4.jpg</title>
+  <style>
+    body { margin: 0; padding: 2rem; color: #252821; background: #f5f4ef; font: 15px/1.5 system-ui, sans-serif; }
+    main { max-width: 1200px; margin: auto; }
+    h1 { margin-bottom: .25rem; }
+    .status, .warning { padding: 1rem; border-radius: .6rem; }
+    .status { background: #fff1d6; }
+    .warning { margin: 1rem 0; color: #6b3a17; background: #ffeadb; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem; }
+    figure { margin: 0; padding: .8rem; background: white; border: 1px solid #deded7; border-radius: .6rem; }
+    figure img { display: block; width: 100%; height: auto; }
+    .proposal { position: relative; }
+    .proposal svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .proposal line { stroke: #d97627; stroke-width: 7; stroke-linecap: round; }
+    .proposal circle { fill: #fff; stroke: #b94a20; stroke-width: 5; }
+    pre { overflow: auto; padding: 1rem; background: #f5f4ef; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Review sheet: test4.jpg</h1>
+  <p>image/jpeg · 1300 × 403 px · 18,606 bytes · OpenCV candidates: 49</p>
+  <p class="status"><strong>Human-review status: REQUIRED — NOT REVIEWED.</strong> No ground-truth geometry is present for this dataset item.</p>
+  <p class="warning"><strong>Mock proposal only:</strong> The orange triangle is deterministic test-fixture data returned to test the interface. It is not inferred from, or a proposed interpretation of, this image. Do not compare it with the sketch or treat it as a label.</p>
+  <div class="grid">
+    <figure><figcaption>Original evaluation sketch</figcaption><img src="../../backend/evaluation/sketches/test4.jpg" alt="Original sketch test4.jpg"></figure>
+    <figure><figcaption>Saved OpenCV candidate overlay · 49 candidate segments</figcaption><img src="../../evaluation/results/test4_final_default_opencv_4_14_0.png" alt="OpenCV overlay for test4.jpg"></figure>
+    <figure>
+      <figcaption>Synthetic mocked proposal — not image-derived</figcaption>
+      <div class="proposal"><img src="../../backend/evaluation/sketches/test4.jpg" alt="Source image under a test-only proposal overlay"><svg viewBox="0 0 1300 403" preserveAspectRatio="none" role="img" aria-label="Synthetic test triangle, not an interpretation"><line x1="130.0" y1="342.55" x2="1170.0" y2="342.55" /><line x1="130.0" y1="342.55" x2="650.0" y2="80.60000000000001" /><line x1="1170.0" y1="342.55" x2="650.0" y2="80.60000000000001" /><circle cx="130.0" cy="342.55" r="10.4" /><circle cx="1170.0" cy="342.55" r="10.4" /><circle cx="650.0" cy="80.60000000000001" r="10.4" /></svg></div>
+    </figure>
+    <figure><figcaption>Mock response metadata</figcaption><pre>{
+  &quot;proposal_only&quot;: true,
+  &quot;test_fixture&quot;: &quot;Synthetic triangle; not derived from this sketch&quot;,
+  &quot;image_width&quot;: 1300,
+  &quot;image_height&quot;: 403,
+  &quot;joint_count&quot;: 3,
+  &quot;member_count&quot;: 3,
+  &quot;review_status&quot;: &quot;pending_review&quot;
+}</pre></figure>
+  </div>
+</main>
+</body>
+</html>

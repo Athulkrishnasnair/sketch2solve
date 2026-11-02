@@ -2,7 +2,12 @@
 __pycache__/
 *.py[cod]
 .venv/
+*.venv*/
+.python*/
 .env
+
+# Third-party evaluation dependencies
+/evaluation/DeepLSD/
 
 # Frontend
 node_modules/
@@ -12,6 +17,7 @@ dist/
 *.db
 *.sqlite
 *.sqlite3
+/backend/instance/
 
 # Editor and OS
 .vscode/

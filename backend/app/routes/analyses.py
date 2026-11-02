@@ -21,6 +21,7 @@ from app.services.analysis_persistence import (
 )
 from app.services.perception import MAX_IMAGE_BYTES, PerceptionInputError, detect_candidate_geometry
 from app.services.solver import SolverAssemblyError, assemble_equilibrium_system, diagnose_equilibrium_system, solve_equilibrium_system
+from app.services.truss_preview import evaluate_truss_preview
 from app.services.validation import validate_truss_request
 
 
@@ -158,6 +159,26 @@ def get_analysis_draft(analysis_id: str):
         "review_status": record.review_status,
         "validation": record.validation_json,
     })
+
+
+@analyses_api.post("/api/analyses/preview")
+def preview_truss_geometry():
+    """Non-persistent preview validation and equilibrium calculations."""
+    body, error = _json_body()
+    if error:
+        return error
+    result = evaluate_truss_preview(body)
+    return jsonify(result), 200
+
+
+@analyses_api.post("/api/analyses/<analysis_id>/preview")
+def preview_analysis_geometry(analysis_id: str):
+    """Non-persistent preview calculation for a specific analysis context."""
+    body, error = _json_body()
+    if error:
+        return error
+    result = evaluate_truss_preview(body)
+    return jsonify(result), 200
 
 
 @analyses_api.put("/api/analyses/<analysis_id>/draft")

@@ -1,0 +1,128 @@
+{
+  "method": "phase-a-v1",
+  "aggregate": {
+    "metrics_status": "exploratory_micro_average",
+    "included_images": [
+      "test1.jpg",
+      "test3.png",
+      "test4.jpg",
+      "test5.png"
+    ],
+    "excluded_images": [
+      "test2.jpg"
+    ],
+    "joint_precision": 0.08239700374531835,
+    "joint_recall": 0.7096774193548387,
+    "matched_joint_endpoint_error_px_mean": 9.377452774815561,
+    "member_coverage_recall": 0.5094339622641509,
+    "member_precision": null,
+    "member_precision_unavailable_reason": "The detector does not produce grouped or semantic member predictions.",
+    "note": "Micro-average over confirmed reference graphs only; five-image exploratory sample, not a general performance estimate."
+  },
+  "images": [
+    {
+      "filename": "test1.jpg",
+      "annotation_assessment": "confirmed",
+      "metrics_status": "available",
+      "confirmed_reference_joint_count": 7,
+      "detected_candidate_joints_in_roi": 99,
+      "matched_joints": 4,
+      "joint_precision": 0.04040404040404041,
+      "joint_recall": 0.5714285714285714,
+      "matched_joint_endpoint_error_px_mean": 10.046338604256054,
+      "matched_joint_endpoint_error_px_median": 8.164058145137329,
+      "confirmed_reference_member_count": 11,
+      "members_with_at_least_80_percent_candidate_line_coverage": 0,
+      "member_coverage_recall": 0.0,
+      "member_precision": null,
+      "member_precision_unavailable_reason": "The detector emits raw line segments, not grouped or semantically classified member predictions.",
+      "thresholds": {
+        "joint_match_tolerance_px": 22.5,
+        "member_centerline_corridor_px": 22.5,
+        "member_angle_tolerance_degrees": 8.0,
+        "member_coverage_recall_threshold": 0.8
+      }
+    },
+    {
+      "filename": "test2.jpg",
+      "annotation_assessment": "ambiguous",
+      "metrics_status": "unavailable",
+      "metrics_unavailable_reason": "No complete, selected, confirmed joint/member reference graph is available for this image.",
+      "joint_precision": null,
+      "joint_recall": null,
+      "member_coverage_recall": null,
+      "member_precision": null,
+      "matched_joint_endpoint_error_px_mean": null,
+      "matched_joint_endpoint_error_px_median": null
+    },
+    {
+      "filename": "test3.png",
+      "annotation_assessment": "confirmed",
+      "metrics_status": "available",
+      "confirmed_reference_joint_count": 7,
+      "detected_candidate_joints_in_roi": 51,
+      "matched_joints": 7,
+      "joint_precision": 0.13725490196078433,
+      "joint_recall": 1.0,
+      "matched_joint_endpoint_error_px_mean": 8.102670374683255,
+      "matched_joint_endpoint_error_px_median": 8.06225774829855,
+      "confirmed_reference_member_count": 11,
+      "members_with_at_least_80_percent_candidate_line_coverage": 9,
+      "member_coverage_recall": 0.8181818181818182,
+      "member_precision": null,
+      "member_precision_unavailable_reason": "The detector emits raw line segments, not grouped or semantically classified member predictions.",
+      "thresholds": {
+        "joint_match_tolerance_px": 12.0,
+        "member_centerline_corridor_px": 12.0,
+        "member_angle_tolerance_degrees": 8.0,
+        "member_coverage_recall_threshold": 0.8
+      }
+    },
+    {
+      "filename": "test4.jpg",
+      "annotation_assessment": "confirmed",
+      "metrics_status": "available",
+      "confirmed_reference_joint_count": 9,
+      "detected_candidate_joints_in_roi": 50,
+      "matched_joints": 9,
+      "joint_precision": 0.18,
+      "joint_recall": 1.0,
+      "matched_joint_endpoint_error_px_mean": 8.634361774925981,
+      "matched_joint_endpoint_error_px_median": 8.845903006477066,
+      "confirmed_reference_member_count": 15,
+      "members_with_at_least_80_percent_candidate_line_coverage": 15,
+      "member_coverage_recall": 1.0,
+      "member_precision": null,
+      "member_precision_unavailable_reason": "The detector emits raw line segments, not grouped or semantically classified member predictions.",
+      "thresholds": {
+        "joint_match_tolerance_px": 12.0,
+        "member_centerline_corridor_px": 12.0,
+        "member_angle_tolerance_degrees": 8.0,
+        "member_coverage_recall_threshold": 0.8
+      }
+    },
+    {
+      "filename": "test5.png",
+      "annotation_assessment": "confirmed",
+      "metrics_status": "available",
+      "confirmed_reference_joint_count": 8,
+      "detected_candidate_joints_in_roi": 67,
+      "matched_joints": 2,
+      "joint_precision": 0.029850746268656716,
+      "joint_recall": 0.25,
+      "matched_joint_endpoint_error_px_mean": 15.845329015900752,
+      "matched_joint_endpoint_error_px_median": 15.845329015900752,
+      "confirmed_reference_member_count": 16,
+      "members_with_at_least_80_percent_candidate_line_coverage": 3,
+      "member_coverage_recall": 0.1875,
+      "member_precision": null,
+      "member_precision_unavailable_reason": "The detector emits raw line segments, not grouped or semantically classified member predictions.",
+      "thresholds": {
+        "joint_match_tolerance_px": 18.25734321444388,
+        "member_centerline_corridor_px": 18.25734321444388,
+        "member_angle_tolerance_degrees": 8.0,
+        "member_coverage_recall_threshold": 0.8
+      }
+    }
+  ]
+}

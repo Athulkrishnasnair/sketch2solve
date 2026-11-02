@@ -1,0 +1,34 @@
+{
+  "experiment": "roi-crop-2026-10-30",
+  "selection_basis": "Rectangles chosen by visual inspection of the original source images and the independently prepared Phase A reference; detector output was not consulted.",
+  "coordinate_system": {
+    "space": "original_image_pixels",
+    "origin": "top_left",
+    "x_axis": "right",
+    "y_axis": "down",
+    "rectangle": "x, y, width, height; right/bottom are exclusive"
+  },
+  "resize": false,
+  "crop_encoding": "PNG encoded from the decoded source pixels; lossless relative to the decoded raster",
+  "images": {
+    "test2.jpg": {
+      "source": "backend/evaluation/sketches/test2.jpg",
+      "width": 576,
+      "height": 749,
+      "roi": {"x": 60, "y": 565, "width": 455, "height": 184},
+      "selection_note": "Bottom/fourth rough sketch plus margin, selected from the source image because it is the most isolated page region. The reference annotation remains ambiguous; no accuracy metrics are authorized."
+    },
+    "test5.png": {
+      "source": "backend/evaluation/sketches/test5.png",
+      "width": 2046,
+      "height": 1319,
+      "roi": {"x": 365, "y": 630, "width": 1380, "height": 420},
+      "selection_note": "Exactly the independently annotated Phase A main-truss evaluation ROI, which encloses the full eight-joint, sixteen-member graph."
+    }
+  },
+  "test5_ambiguous_crossings_original_pixels": [
+    {"x": 601, "y": 843, "status": "ambiguous"},
+    {"x": 1032, "y": 843, "status": "ambiguous"},
+    {"x": 1472, "y": 843, "status": "ambiguous"}
+  ]
+}

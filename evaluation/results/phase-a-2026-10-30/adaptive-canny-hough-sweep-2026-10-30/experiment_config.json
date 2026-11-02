@@ -1,0 +1,322 @@
+{
+  "experiment": "phase-a-adaptive-canny-hough-parameter-sweep-2026-10-30",
+  "fixed_preprocessing": {
+    "grayscale": "OpenCV BGR2GRAY",
+    "gaussian_blur": [
+      5,
+      5
+    ],
+    "sigma": 0,
+    "image_resize": false
+  },
+  "repeat_count": 5,
+  "current_production_config": {
+    "canny_sigma": 0.8,
+    "canny_min_threshold": 40,
+    "canny_max_threshold": 160,
+    "hough_rho": 1.0,
+    "hough_theta_degrees": 1.0,
+    "hough_threshold": 25,
+    "min_line_length": 20.0,
+    "max_line_gap": 8.0,
+    "endpoint_tolerance": 12.0,
+    "duplicate_angle_degrees": 4.0,
+    "duplicate_distance": 4.0,
+    "duplicate_overlap_ratio": 0.65
+  },
+  "stage1_canny_variants": {
+    "control": {
+      "canny_sigma": 0.8,
+      "canny_min_threshold": 40,
+      "canny_max_threshold": 160,
+      "hough_rho": 1.0,
+      "hough_theta_degrees": 1.0,
+      "hough_threshold": 25,
+      "min_line_length": 20.0,
+      "max_line_gap": 8.0,
+      "endpoint_tolerance": 12.0,
+      "duplicate_angle_degrees": 4.0,
+      "duplicate_distance": 4.0,
+      "duplicate_overlap_ratio": 0.65
+    },
+    "canny_low": {
+      "canny_sigma": 0.8,
+      "canny_min_threshold": 20,
+      "canny_max_threshold": 120,
+      "hough_rho": 1.0,
+      "hough_theta_degrees": 1.0,
+      "hough_threshold": 25,
+      "min_line_length": 20.0,
+      "max_line_gap": 8.0,
+      "endpoint_tolerance": 12.0,
+      "duplicate_angle_degrees": 4.0,
+      "duplicate_distance": 4.0,
+      "duplicate_overlap_ratio": 0.65
+    },
+    "canny_high": {
+      "canny_sigma": 0.8,
+      "canny_min_threshold": 60,
+      "canny_max_threshold": 220,
+      "hough_rho": 1.0,
+      "hough_theta_degrees": 1.0,
+      "hough_threshold": 25,
+      "min_line_length": 20.0,
+      "max_line_gap": 8.0,
+      "endpoint_tolerance": 12.0,
+      "duplicate_angle_degrees": 4.0,
+      "duplicate_distance": 4.0,
+      "duplicate_overlap_ratio": 0.65
+    }
+  },
+  "stage2_hough_one_factor_variants": {
+    "control": {},
+    "hough_vote_low": {
+      "hough_threshold": 20
+    },
+    "hough_short_lines": {
+      "min_line_length": 12.0
+    },
+    "hough_long_gap": {
+      "max_line_gap": 12.0
+    }
+  },
+  "tested_configurations": {
+    "control": {
+      "parameters": {
+        "canny_sigma": 0.8,
+        "canny_min_threshold": 40,
+        "canny_max_threshold": 160,
+        "hough_rho": 1.0,
+        "hough_theta_degrees": 1.0,
+        "hough_threshold": 25,
+        "min_line_length": 20.0,
+        "max_line_gap": 8.0,
+        "endpoint_tolerance": 12.0,
+        "duplicate_angle_degrees": 4.0,
+        "duplicate_distance": 4.0,
+        "duplicate_overlap_ratio": 0.65
+      },
+      "stage": "canny_sweep",
+      "parent": "control",
+      "changed_parameters": []
+    },
+    "canny_low": {
+      "parameters": {
+        "canny_sigma": 0.8,
+        "canny_min_threshold": 20,
+        "canny_max_threshold": 120,
+        "hough_rho": 1.0,
+        "hough_theta_degrees": 1.0,
+        "hough_threshold": 25,
+        "min_line_length": 20.0,
+        "max_line_gap": 8.0,
+        "endpoint_tolerance": 12.0,
+        "duplicate_angle_degrees": 4.0,
+        "duplicate_distance": 4.0,
+        "duplicate_overlap_ratio": 0.65
+      },
+      "stage": "canny_sweep",
+      "parent": "control",
+      "changed_parameters": [
+        "canny_max_threshold",
+        "canny_min_threshold"
+      ]
+    },
+    "canny_high": {
+      "parameters": {
+        "canny_sigma": 0.8,
+        "canny_min_threshold": 60,
+        "canny_max_threshold": 220,
+        "hough_rho": 1.0,
+        "hough_theta_degrees": 1.0,
+        "hough_threshold": 25,
+        "min_line_length": 20.0,
+        "max_line_gap": 8.0,
+        "endpoint_tolerance": 12.0,
+        "duplicate_angle_degrees": 4.0,
+        "duplicate_distance": 4.0,
+        "duplicate_overlap_ratio": 0.65
+      },
+      "stage": "canny_sweep",
+      "parent": "control",
+      "changed_parameters": [
+        "canny_max_threshold",
+        "canny_min_threshold"
+      ]
+    },
+    "control__hough_vote_low": {
+      "parameters": {
+        "canny_sigma": 0.8,
+        "canny_min_threshold": 40,
+        "canny_max_threshold": 160,
+        "hough_rho": 1.0,
+        "hough_theta_degrees": 1.0,
+        "hough_threshold": 20,
+        "min_line_length": 20.0,
+        "max_line_gap": 8.0,
+        "endpoint_tolerance": 12.0,
+        "duplicate_angle_degrees": 4.0,
+        "duplicate_distance": 4.0,
+        "duplicate_overlap_ratio": 0.65
+      },
+      "stage": "hough_one_factor",
+      "parent": "control",
+      "changed_parameters": [
+        "hough_threshold"
+      ]
+    },
+    "control__hough_short_lines": {
+      "parameters": {
+        "canny_sigma": 0.8,
+        "canny_min_threshold": 40,
+        "canny_max_threshold": 160,
+        "hough_rho": 1.0,
+        "hough_theta_degrees": 1.0,
+        "hough_threshold": 25,
+        "min_line_length": 12.0,
+        "max_line_gap": 8.0,
+        "endpoint_tolerance": 12.0,
+        "duplicate_angle_degrees": 4.0,
+        "duplicate_distance": 4.0,
+        "duplicate_overlap_ratio": 0.65
+      },
+      "stage": "hough_one_factor",
+      "parent": "control",
+      "changed_parameters": [
+        "min_line_length"
+      ]
+    },
+    "control__hough_long_gap": {
+      "parameters": {
+        "canny_sigma": 0.8,
+        "canny_min_threshold": 40,
+        "canny_max_threshold": 160,
+        "hough_rho": 1.0,
+        "hough_theta_degrees": 1.0,
+        "hough_threshold": 25,
+        "min_line_length": 20.0,
+        "max_line_gap": 12.0,
+        "endpoint_tolerance": 12.0,
+        "duplicate_angle_degrees": 4.0,
+        "duplicate_distance": 4.0,
+        "duplicate_overlap_ratio": 0.65
+      },
+      "stage": "hough_one_factor",
+      "parent": "control",
+      "changed_parameters": [
+        "max_line_gap"
+      ]
+    },
+    "canny_low__hough_vote_low": {
+      "parameters": {
+        "canny_sigma": 0.8,
+        "canny_min_threshold": 20,
+        "canny_max_threshold": 120,
+        "hough_rho": 1.0,
+        "hough_theta_degrees": 1.0,
+        "hough_threshold": 20,
+        "min_line_length": 20.0,
+        "max_line_gap": 8.0,
+        "endpoint_tolerance": 12.0,
+        "duplicate_angle_degrees": 4.0,
+        "duplicate_distance": 4.0,
+        "duplicate_overlap_ratio": 0.65
+      },
+      "stage": "hough_one_factor",
+      "parent": "canny_low",
+      "changed_parameters": [
+        "hough_threshold"
+      ]
+    },
+    "canny_low__hough_short_lines": {
+      "parameters": {
+        "canny_sigma": 0.8,
+        "canny_min_threshold": 20,
+        "canny_max_threshold": 120,
+        "hough_rho": 1.0,
+        "hough_theta_degrees": 1.0,
+        "hough_threshold": 25,
+        "min_line_length": 12.0,
+        "max_line_gap": 8.0,
+        "endpoint_tolerance": 12.0,
+        "duplicate_angle_degrees": 4.0,
+        "duplicate_distance": 4.0,
+        "duplicate_overlap_ratio": 0.65
+      },
+      "stage": "hough_one_factor",
+      "parent": "canny_low",
+      "changed_parameters": [
+        "min_line_length"
+      ]
+    },
+    "canny_low__hough_long_gap": {
+      "parameters": {
+        "canny_sigma": 0.8,
+        "canny_min_threshold": 20,
+        "canny_max_threshold": 120,
+        "hough_rho": 1.0,
+        "hough_theta_degrees": 1.0,
+        "hough_threshold": 25,
+        "min_line_length": 20.0,
+        "max_line_gap": 12.0,
+        "endpoint_tolerance": 12.0,
+        "duplicate_angle_degrees": 4.0,
+        "duplicate_distance": 4.0,
+        "duplicate_overlap_ratio": 0.65
+      },
+      "stage": "hough_one_factor",
+      "parent": "canny_low",
+      "changed_parameters": [
+        "max_line_gap"
+      ]
+    }
+  },
+  "selection": {
+    "qualification": "member micro-recall strictly above control; joint precision and recall no lower; no increase in capped image count; per annotated image no more than one recovered-member loss",
+    "selected_configuration": "control__hough_long_gap",
+    "strongest_coverage_configuration_even_if_not_qualified": "canny_low",
+    "comparison_configuration_for_roi_and_tiles": "control__hough_long_gap",
+    "qualifying_configurations": [
+      "control__hough_long_gap"
+    ]
+  },
+  "source_images": {
+    "test1.jpg": {
+      "path": "backend/evaluation/sketches/test1.jpg",
+      "sha256": "1de3f27bacc8db91a371b3dcfec4be29c075e2364766e3123dbccd3a4a263bb3",
+      "width": 1800,
+      "height": 2400
+    },
+    "test2.jpg": {
+      "path": "backend/evaluation/sketches/test2.jpg",
+      "sha256": "46e6a9089c12e5f27a70bb183b8b30b755cc3da4058259c843ac82b6444704d6",
+      "width": 576,
+      "height": 749
+    },
+    "test3.png": {
+      "path": "backend/evaluation/sketches/test3.png",
+      "sha256": "df07cb29feec023260392b62f3a7d796eba51e03b24264c4b6fd7ca86379b0b5",
+      "width": 1024,
+      "height": 515
+    },
+    "test4.jpg": {
+      "path": "backend/evaluation/sketches/test4.jpg",
+      "sha256": "5497ddfe36c6fc263f40fa8a6c3de0f29c2abeab285c892062369924f29fa307",
+      "width": 1300,
+      "height": 403
+    },
+    "test5.png": {
+      "path": "backend/evaluation/sketches/test5.png",
+      "sha256": "5fa616402e536ecb0907d699f6e0252f4fadc556df11a3cbb475e4f184b1ca36",
+      "width": 2046,
+      "height": 1319
+    }
+  },
+  "evaluation": {
+    "annotations_directory": "evaluation/results/phase-a-2026-10-30/annotations",
+    "joint_tolerance": "max(12 px, 0.75% image diagonal)",
+    "member_corridor": "max(12 px, 0.75% image diagonal)",
+    "angle_tolerance_degrees": 8,
+    "member_coverage_threshold": 0.8
+  }
+}

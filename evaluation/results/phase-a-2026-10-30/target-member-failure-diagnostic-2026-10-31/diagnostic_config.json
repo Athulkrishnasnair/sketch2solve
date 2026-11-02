@@ -1,0 +1,39 @@
+{
+  "experiment": "test5-target-member-failure-diagnostic",
+  "source_sha256": "5fa616402e536ecb0907d699f6e0252f4fadc556df11a3cbb475e4f184b1ca36",
+  "input_artifacts": [
+    "detector-baseline/baseline.json",
+    "roi-crop-experiment/results.json",
+    "overlapping-tile-experiment-2026-10-30/results.json",
+    "rightmost-bay-targeted-tile-2026-10-30/results.json"
+  ],
+  "candidate_filter": "all raw lines for each layout, no posthoc score filtering",
+  "target_members": [
+    "M09",
+    "M10",
+    "M16"
+  ],
+  "corridor_px": 18.25734321444388,
+  "angle_tolerance_deg": 8.0,
+  "coverage_threshold": 0.8,
+  "overlay_region_original_pixels": [
+    1190,
+    630,
+    1745,
+    1050
+  ],
+  "ambiguous_points_original_pixels": [
+    [
+      601,
+      843
+    ],
+    [
+      1032,
+      843
+    ],
+    [
+      1472,
+      843
+    ]
+  ]
+}

@@ -3,7 +3,7 @@ import { computed, ref, watch } from 'vue'
 import { getAnalysisDraft, markAnalysisReviewed, saveAnalysisDraft, solveReviewedAnalysis } from '../api/analyses'
 
 const props = defineProps({ analysis: { type: Object, required: true }, selectedElementId: { type: String, default: '' } })
-const emit = defineEmits(['updated', 'select-element'])
+const emit = defineEmits(['updated', 'select-element', 'editor'])
 const editing = ref(false)
 const geometry = ref(null)
 const loadedGeometry = ref(null)
@@ -15,15 +15,27 @@ const requestError = ref(null)
 const proposal = computed(() => props.analysis.interpretation_proposal || null)
 const savedGeometry = computed(() => props.analysis.human_review?.geometry || null)
 const validationIssues = computed(() => requestError.value?.validation_issues || props.analysis.validation?.issues || [])
-const nodes = computed(() => geometry.value?.model?.nodes || [])
+const activeNodes = computed(() => savedGeometry.value?.model?.nodes || geometry.value?.model?.nodes || [])
 const bounds = computed(() => {
-  const points = nodes.value.filter((node) => Number.isFinite(Number(node.x)) && Number.isFinite(Number(node.y)))
+  const points = activeNodes.value.filter((node) => Number.isFinite(Number(node.x)) && Number.isFinite(Number(node.y)))
   if (!points.length) return '0 0 1 1'
   const xs = points.map((point) => Number(point.x))
   const ys = points.map((point) => Number(point.y))
-  const span = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys), 1)
+  const minX = Math.min(...xs)
+  const maxX = Math.max(...xs)
+  const minY = Math.min(...ys)
+  const maxY = Math.max(...ys)
+  const span = Math.max(maxX - minX, maxY - minY, 1)
   const pad = span * 0.12
-  return `${Math.min(...xs) - pad} ${Math.min(...ys) - pad} ${Math.max(...xs) - Math.min(...xs) + pad * 2} ${Math.max(...ys) - Math.min(...ys) + pad * 2}`
+  return `${minX - pad} ${minY - pad} ${(maxX - minX) + pad * 2} ${(maxY - minY) + pad * 2}`
+})
+const nodeRadius = computed(() => {
+  const points = activeNodes.value.filter((node) => Number.isFinite(Number(node.x)) && Number.isFinite(Number(node.y)))
+  if (!points.length) return 0.02
+  const xs = points.map((point) => Number(point.x))
+  const ys = points.map((point) => Number(point.y))
+  const span = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys), 1)
+  return Math.max(span * 0.018, 0.001)
 })
 const reviewed = computed(() => props.analysis.review_status === 'reviewed')
 const submitted = computed(() => props.analysis.review_status === 'submitted')
@@ -162,7 +174,12 @@ watch(() => props.analysis.analysis_id, () => cancelEditing())
   <section class="geometry-review card-surface">
     <div class="review-editor-heading">
       <div><div class="eyebrow">HUMAN-CORRECTED MODEL</div><h2>Geometry draft</h2></div>
-      <span class="draft-state" :class="{ reviewed, submitted }">{{ submitted ? 'SUBMITTED' : reviewed ? 'REVIEWED' : savedGeometry ? 'DRAFT SAVED' : 'NOT SAVED' }}</span>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <button class="button button-primary" type="button" @click="emit('editor', props.analysis.analysis_id)">
+          Open Interactive Editor ↗
+        </button>
+        <span class="draft-state" :class="{ reviewed, submitted }">{{ submitted ? 'SUBMITTED' : reviewed ? 'REVIEWED' : savedGeometry ? 'DRAFT SAVED' : 'NOT SAVED' }}</span>
+      </div>
     </div>
     <p class="editor-intro">AI output remains preserved above. Draft coordinates use physical length units and are separate from the AI's image-pixel coordinates. No unit or load value is inferred.</p>
 
@@ -177,7 +194,7 @@ watch(() => props.analysis.analysis_id, () => cancelEditing())
       <div v-if="savedGeometry.model?.nodes?.length" class="draft-preview" aria-label="Human geometry preview in its own model coordinate system">
         <svg :viewBox="bounds" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Human-corrected draft geometry, drawn independently of the sketch image">
           <line v-for="member in savedGeometry.model.members || []" :key="`draft-member-${member.id}`" :x1="savedGeometry.model.nodes.find((node) => node.id === member.node_i)?.x" :y1="savedGeometry.model.nodes.find((node) => node.id === member.node_i)?.y" :x2="savedGeometry.model.nodes.find((node) => node.id === member.node_j)?.x" :y2="savedGeometry.model.nodes.find((node) => node.id === member.node_j)?.y" :class="['draft-preview-member', { selected: selectedElementId === member.id }]" @click="emit('select-element', member.id)" />
-          <circle v-for="node in savedGeometry.model.nodes || []" :key="`draft-node-${node.id}`" :cx="node.x" :cy="node.y" r="0.018" :class="['draft-preview-node', { selected: selectedElementId === node.id }]" @click="emit('select-element', node.id)" />
+          <circle v-for="node in savedGeometry.model.nodes || []" :key="`draft-node-${node.id}`" :cx="node.x" :cy="node.y" :r="nodeRadius" :class="['draft-preview-node', { selected: selectedElementId === node.id }]" @click="emit('select-element', node.id)" />
         </svg>
         <small>Reviewer geometry preview · model units · not overlaid on image pixels</small>
       </div>
