@@ -740,8 +740,12 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 12px;
+  padding: 6px 14px;
+  background: var(--color-surface, #fffef8);
+  border-bottom: 1px solid var(--color-border, #e9e5d7);
   gap: 8px;
+  min-height: 44px;
+  box-sizing: border-box;
   flex-wrap: nowrap;
 }
 
@@ -755,19 +759,28 @@ onUnmounted(() => {
 }
 
 .panel-title {
+  margin: 0;
   font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-primary, #252b2c);
+  letter-spacing: -0.2px;
+  white-space: nowrap;
 }
 
 .status-badge {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 3px 8px;
+  padding: 0 7px;
+  height: 22px;
   border-radius: 9999px;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  white-space: nowrap;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .badge-solved {
@@ -784,37 +797,71 @@ onUnmounted(() => {
 
 .units-chip {
   font-size: 11px;
+  font-weight: 500;
   color: #64748b;
   background: #f1f5f9;
-  padding: 2px 6px;
+  padding: 0 6px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
   border-radius: 4px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 /* Tabs */
 .header-center {
-  flex: 1;
+  flex: 1 1 auto;
   display: flex;
   justify-content: center;
+  min-width: 0;
 }
 
 .panel-tabs {
   display: inline-flex;
+  align-items: center;
   background: #f1f5f9;
-  padding: 3px;
+  padding: 2px;
   border-radius: 6px;
   gap: 2px;
+  height: 32px;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  flex-shrink: 1;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+/* Hide scrollbar while keeping horizontal tab scrolling */
+.panel-tabs {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.panel-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .tab-btn {
   background: transparent;
   border: none;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   color: #64748b;
-  padding: 4px 10px;
+  padding: 0 7px;
+  height: 28px;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.15s ease;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex: 0 0 auto;
 }
 
 .tab-btn:hover {
@@ -833,32 +880,51 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .header-action-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
   background: #f8fafc;
   border: 1px solid #e2e8f0;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 11px;
+  height: 30px;
+  min-height: 30px;
+  padding: 0 7px;
+  border-radius: 6px;
+  font-size: 10.5px;
   font-weight: 500;
   color: #475569;
   cursor: pointer;
   transition: all 0.15s ease;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .header-action-btn:hover {
   background: #f1f5f9;
   color: #1e293b;
+  border-color: #cbd5e1;
 }
 
 .header-action-btn.active {
   background: #e0f2fe;
   color: #0369a1;
   border-color: #bae6fd;
+}
+
+/* Compact square controls for minimize, expand, close */
+.header-action-btn.btn-minimize,
+.header-action-btn.btn-expand,
+.header-action-btn.btn-close {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  padding: 0;
+  justify-content: center;
 }
 
 .header-action-btn.btn-close:hover {
@@ -875,9 +941,9 @@ onUnmounted(() => {
 
 .export-menu {
   position: absolute;
-  bottom: calc(100% + 8px);
+  bottom: calc(100% + 6px);
   right: 0;
-  width: 260px;
+  width: 250px;
   background: #ffffff;
   border: 1px solid var(--color-border, #e9e5d7);
   border-radius: 8px;
@@ -1312,6 +1378,32 @@ onUnmounted(() => {
   to   { transform: rotate(360deg); }
 }
 
+@media (max-width: 1180px) and (min-width: 769px) {
+  .panel-header {
+    padding: 6px 10px;
+    gap: 6px;
+  }
+
+  .header-left {
+    gap: 6px;
+  }
+
+  .units-chip {
+    display: none;
+  }
+
+  .tab-btn {
+    padding: 0 7px;
+    font-size: 11px;
+  }
+
+  .header-action-btn.btn-export,
+  .header-action-btn.btn-force-labels {
+    padding: 0 7px;
+    font-size: 11px;
+  }
+}
+
 @media (max-width: 768px) {
   .analysis-results-panel {
     height: 320px;
@@ -1328,6 +1420,7 @@ onUnmounted(() => {
   }
 
   .panel-header {
+    position: relative;
     flex-wrap: wrap;
     padding: 6px 10px;
     gap: 6px;
@@ -1346,7 +1439,7 @@ onUnmounted(() => {
   .header-center {
     order: 3;
     width: 100%;
-    padding: 2px 0;
+    padding: 2px 0 0 0;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     justify-content: flex-start;
@@ -1357,12 +1450,15 @@ onUnmounted(() => {
     display: flex;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    height: 32px;
+    padding: 2px;
   }
 
   .tab-btn {
     white-space: nowrap;
     font-size: 11px;
-    padding: 4px 8px;
+    padding: 0 8px;
+    height: 28px;
     flex: 1 0 auto;
     text-align: center;
   }
@@ -1377,7 +1473,30 @@ onUnmounted(() => {
   }
 
   .header-action-btn {
-    padding: 5px 6px;
+    height: 32px;
+    min-height: 32px;
+    min-width: 32px;
+    padding: 0 6px;
+  }
+
+  .header-action-btn.btn-minimize,
+  .header-action-btn.btn-expand,
+  .header-action-btn.btn-close {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+  }
+
+  .export-dropdown-container {
+    position: static;
+    flex: 0 0 auto;
+  }
+
+  .export-menu {
+    left: auto;
+    right: 10px;
+    width: min(260px, calc(100vw - 20px));
+    bottom: calc(100% + 6px);
   }
 
   .panel-body {
@@ -1389,37 +1508,6 @@ onUnmounted(() => {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-
-  /* Keep results actions accessible on mobile */
-.header-left {
-  flex: 1 1 100%;
-  width: 100%;
-}
-
-.header-right {
-  order: 2;
-  width: 100%;
-  max-width: 100%;
-  margin-left: 0;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.header-action-btn {
-  flex: 0 0 auto;
-  min-height: 34px;
-}
-
-.export-dropdown-container {
-  flex: 0 0 auto;
-}
-
-.export-menu {
-  left: 0;
-  right: auto;
-  width: min(260px, calc(100vw - 24px));
-}
 }
 </style>
 
