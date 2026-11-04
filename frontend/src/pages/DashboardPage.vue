@@ -1,10 +1,10 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
-import { Sparkles, X, Loader2, Send, ArrowRight } from 'lucide-vue-next'
+import { Sparkles, X, Loader2, Send, ArrowRight, BookOpen } from 'lucide-vue-next'
 import { apiUrl, listAnalyses, designTruss, applyDesignProposal } from '../api/analyses'
 import DesignProposalCard from '../components/DesignProposalCard.vue'
 
-const emit = defineEmits(['open', 'new', 'history', 'count', 'design', 'editor'])
+const emit = defineEmits(['open', 'new', 'history', 'count', 'design', 'editor', 'guide'])
 const analyses = ref([])
 const total = ref(0)
 const loading = ref(true)
@@ -139,6 +139,9 @@ onMounted(loadDashboard)
             @click="toggleCreateAi"
           >
             <Sparkles :size="14" /> Create with AI
+          </button>
+          <button class="dashboard-guide-btn" type="button" @click="emit('guide')">
+            <BookOpen :size="14" /> Guide
           </button>
           <button class="dashboard-link" type="button" @click="emit('history')">Browse all history <span>↗</span></button>
         </div>
@@ -281,6 +284,8 @@ onMounted(loadDashboard)
 .dashboard-ai-btn { min-height: 38px; display: inline-flex; align-items: center; gap: 7px; border: 1px solid #0284c7; border-radius: 999px; padding: 0 16px; color: #0284c7; background: #f0f9ff; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.15s ease; }
 .dashboard-ai-btn:hover { background: #e0f2fe; color: #0369a1; }
 .dashboard-ai-btn.active { background: #0284c7; color: #fff; }
+.dashboard-guide-btn { min-height: 38px; display: inline-flex; align-items: center; gap: 7px; border: 1px solid #cbd5e1; border-radius: 999px; padding: 0 16px; color: #334155; background: #fff; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.15s ease; }
+.dashboard-guide-btn:hover { background: #f1f5f9; color: #0f172a; border-color: #94a3b8; }
 .dashboard-link { border: 0; padding: 7px 0; color: #575b52; background: none; font-size: 10px; font-weight: 700; cursor: pointer; }
 
 /* In-place AI Workbench */

@@ -663,11 +663,16 @@ const canvasSvg = computed(() => {
 
 <style scoped>
 .design-studio-page {
-  padding: 24px clamp(20px, 3vw, 40px);
+  padding: 20px clamp(16px, 2.5vw, 36px);
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  min-height: calc(100vh - 80px);
+  gap: 16px;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  min-height: 0;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 /* Header */
@@ -780,14 +785,18 @@ const canvasSvg = computed(() => {
 /* Workspace Layout */
 .studio-workspace {
   display: grid;
-  grid-template-columns: minmax(360px, 440px) 1fr;
-  gap: 24px;
-  align-items: start;
+  grid-template-columns: minmax(340px, 420px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: stretch;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1080px) {
   .studio-workspace {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 
@@ -796,6 +805,8 @@ const canvasSvg = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-width: 0;
+  min-height: 0;
 }
 
 .engineering-guidance-card {
@@ -824,15 +835,18 @@ const canvasSvg = computed(() => {
   line-height: 1.45;
 }
 
-/* Right Pane */
+/* Right Pane: Structural Geometry Preview */
 .studio-right-pane {
   background: #fff;
   border: 1px solid #e5e0d2;
-  border-radius: 14px;
+  border-radius: 12px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 3px 12px rgba(41, 42, 40, 0.04);
+  box-shadow: 0 2px 8px rgba(41, 42, 40, 0.04);
+  min-width: 0;
+  min-height: 0;
+  flex: 1 1 auto;
 }
 
 .canvas-header {
@@ -842,6 +856,7 @@ const canvasSvg = computed(() => {
   padding: 10px 16px;
   background: #faf8f3;
   border-bottom: 1px solid #eae5d7;
+  flex-shrink: 0;
 }
 
 .canvas-title {
@@ -874,7 +889,11 @@ const canvasSvg = computed(() => {
 }
 
 .canvas-viewport {
-  height: 520px;
+  flex: 1 1 auto;
+  min-height: 480px;
+  height: clamp(480px, 62vh, 720px);
+  width: 100%;
+  min-width: 0;
   background: #fffefb;
   position: relative;
   display: flex;
@@ -886,6 +905,59 @@ const canvasSvg = computed(() => {
 .cad-svg {
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+@media (max-width: 1080px) {
+  .canvas-viewport {
+    height: clamp(380px, 50vh, 520px);
+    min-height: 380px;
+  }
+}
+
+@media (max-width: 640px) {
+  .design-studio-page {
+    padding: 14px 12px;
+    gap: 12px;
+  }
+
+  .studio-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .header-controls {
+    width: 100%;
+  }
+
+  .analysis-select-group {
+    width: 100%;
+  }
+
+  .btn-open-editor {
+    align-self: stretch;
+    justify-content: center;
+  }
+
+  .canvas-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .canvas-meta {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+
+  .canvas-viewport {
+    height: 320px;
+    min-height: 280px;
+  }
 }
 
 .cad-member {
