@@ -242,6 +242,15 @@ npm run dev
 
 Open your browser and navigate to `http://localhost:5173`.
 
+### 4. Production Deployment to Render
+
+Sketch2Solve is configured for 1-click deployment on [Render](https://render.com/) using the included [`render.yaml`](render.yaml) blueprint specification:
+
+- **Backend Web Service**: Flask application served via Gunicorn WSGI (`0.0.0.0:$PORT`) with OpenCV and Meta Model API (`muse-spark-1.3`) integration.
+- **Frontend Static Site**: High-performance Vue 3 application built with Vite and distributed globally via Render CDN with automated client-side rewrites.
+
+For complete step-by-step instructions, database persistence strategies, and dashboard settings, see the [Render Deployment Guide](docs/RENDER_DEPLOYMENT.md).
+
 ---
 
 ## Step-by-Step User Guide

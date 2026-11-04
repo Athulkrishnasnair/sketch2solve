@@ -21,6 +21,16 @@ const pageTitle = computed(() => ({
   design: 'Natural Language Design',
 })[view.value])
 
+const backendDisplay = computed(() => {
+  const url = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:5000'
+  try {
+    const parsed = new URL(url)
+    return parsed.host || 'localhost:5000'
+  } catch (_) {
+    return url.replace(/^https?:\/\//, '').replace(/\/.*$/, '') || 'localhost:5000'
+  }
+})
+
 // User Profile & Onboarding State
 const userName = ref(localStorage.getItem('sketch2solve_username') || '')
 const showOnboarding = ref(!localStorage.getItem('sketch2solve_username'))
@@ -184,7 +194,7 @@ onBeforeUnmount(() => {
         </div>
       </div>
 
-      <div class="sidebar-footer"><span class="backend-indicator"></span> Backend API · localhost:5000</div>
+      <div class="sidebar-footer"><span class="backend-indicator"></span> Backend API · {{ backendDisplay }}</div>
     </aside>
 
     <!-- Mobile Drawer & Backdrop -->
@@ -241,7 +251,7 @@ onBeforeUnmount(() => {
         </div>
       </div>
 
-      <div class="sidebar-footer"><span class="backend-indicator"></span> Backend API · localhost:5000</div>
+      <div class="sidebar-footer"><span class="backend-indicator"></span> Backend API · {{ backendDisplay }}</div>
     </aside>
 
     <main class="main-area" :class="{ 'in-editor': view === 'editor' }">

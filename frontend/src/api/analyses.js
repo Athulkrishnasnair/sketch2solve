@@ -1,4 +1,4 @@
-const API_BASE = (import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:5000').replace(/\/+$/, '')
+export const API_BASE = (import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:5000').replace(/\/+$/, '')
 
 export function apiUrl(path) {
   if (!path) return ''
@@ -10,7 +10,12 @@ async function request(path, options = {}) {
   try {
     response = await fetch(apiUrl(path), options)
   } catch {
-    throw new Error('Could not reach the local Sketch2Solve backend. Check that Flask is running on port 5000.')
+    const isLocal = API_BASE.includes('localhost') || API_BASE.includes('127.0.0.1')
+    throw new Error(
+      isLocal
+        ? 'Could not reach the local Sketch2Solve backend. Check that Flask is running on port 5000.'
+        : `Could not reach the Sketch2Solve backend at ${API_BASE}. Check your network connection or server status.`
+    )
   }
 
   const contentType = response.headers.get('content-type') || ''

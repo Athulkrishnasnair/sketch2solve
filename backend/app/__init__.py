@@ -2,7 +2,7 @@ from dataclasses import asdict
 import os
 from pathlib import Path
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from werkzeug.exceptions import BadRequest
 
@@ -25,10 +25,19 @@ def create_app(test_config=None):
     Path(app.instance_path).mkdir(parents=True, exist_ok=True)
     os.chmod(app.instance_path, 0o700)
     default_database = Path(app.instance_path) / "sketch2solve.sqlite"
+    database_url = os.environ.get("DATABASE_URL")
+    if database_url:
+        if database_url.startswith("postgres://"):
+            database_url = database_url.replace("postgres://", "postgresql://", 1)
+    else:
+        database_url = f"sqlite:///{default_database}"
+
+    upload_folder = os.environ.get("UPLOAD_FOLDER", str(Path(app.instance_path) / "uploads"))
+
     app.config.from_mapping(
-        SQLALCHEMY_DATABASE_URI=os.environ.get("DATABASE_URL", f"sqlite:///{default_database}"),
+        SQLALCHEMY_DATABASE_URI=database_url,
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
-        UPLOAD_FOLDER=str(Path(app.instance_path) / "uploads"),
+        UPLOAD_FOLDER=upload_folder,
         MAX_ANALYSIS_IMAGE_BYTES=MAX_IMAGE_BYTES,
         MAX_CONTENT_LENGTH=MAX_IMAGE_BYTES + 256 * 1024,
     )
@@ -39,23 +48,36 @@ def create_app(test_config=None):
 
     # Cors config
     configured_origins = os.environ.get("CORS_ORIGINS")
-    allowed_origins = (
-        [origin.strip() for origin in configured_origins.split(",") if origin.strip()]
-        if configured_origins
-        else [
-            "http://localhost:5173",
-            "http://127.0.0.1:5173",
-            "http://localhost:5174",
-            "http://127.0.0.1:5174",
-            "http://localhost:4173",
-            "http://127.0.0.1:4173",
-            "http://localhost:3000",
-            "http://127.0.0.1:3000",
+    default_origins = [
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://localhost:5174",
+        "http://127.0.0.1:5174",
+        "http://localhost:4173",
+        "http://127.0.0.1:4173",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
+    if configured_origins:
+        custom_origins = [
+            origin.strip()
+            for origin in configured_origins.split(",")
+            if origin.strip() and origin.strip() != "*"
         ]
-    )
+        allowed_origins = custom_origins + [o for o in default_origins if o not in custom_origins]
+    else:
+        allowed_origins = default_origins
+
     CORS(
         app,
-        resources={r"/api/*": {"origins": allowed_origins}}
+        resources={
+            r"/api/*": {
+                "origins": allowed_origins,
+                "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+                "allow_headers": ["Content-Type", "Authorization"],
+            }
+        },
+        supports_credentials=False,
     )
     app.register_blueprint(analyses_api)
 
@@ -63,6 +85,22 @@ def create_app(test_config=None):
     # existing tables/rows intact. No automatic drop, reset, or migration runs.
     with app.app_context():
         db.create_all()
+
+    # Optional static frontend serving for single-service deployments
+    frontend_dist = os.environ.get(
+        "FRONTEND_DIST",
+        str(Path(__file__).resolve().parent.parent.parent / "frontend" / "dist"),
+    )
+    if Path(frontend_dist).is_dir():
+        @app.route("/", defaults={"path": ""})
+        @app.route("/<path:path>")
+        def serve_frontend(path):
+            if path.startswith("api/"):
+                return jsonify({"error_code": "NOT_FOUND", "message": "API endpoint not found."}), 404
+            target = Path(frontend_dist) / path
+            if path and target.is_file():
+                return send_from_directory(frontend_dist, path)
+            return send_from_directory(frontend_dist, "index.html")
 
     @app.get("/api/health")
     def health():
