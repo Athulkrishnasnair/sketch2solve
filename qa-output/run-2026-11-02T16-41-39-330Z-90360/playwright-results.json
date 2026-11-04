@@ -1,0 +1,188 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/athulkrishna_s_nair/sketch2solve/frontend/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/e2e/playwright.config.js",
+      "-g",
+      "contextual on-canvas issue highlighting"
+    ],
+    "configFile": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/playwright.config.js",
+    "rootDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-02T16-41-39-330Z-90360/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-02T16-41-39-330Z-90360/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "snapshotDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.js",
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5174",
+          "browserName": "chromium",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "video": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-02T16-41-39-330Z-90360/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "application.spec.js",
+      "file": "application.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "contextual on-canvas issue highlighting, floating action card, and AI repair workflow",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 45959,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                        "column": 3,
+                        "line": 30
+                      },
+                      "message": "Error: locator.setInputFiles: Test timeout of 45000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"file\"]')\u001b[22m\n\n\n  28 |\n  29 | async function submitFile(page, { name, mimeType, buffer }) {\n> 30 |   await page.locator('input[type=\"file\"]').setInputFiles({ name, mimeType, buffer })\n     |   ^\n  31 |   await expect(page.getByRole('button', { name: 'Start analysis' })).toBeEnabled()\n  32 |   const responsePromise = page.waitForResponse((response) =>\n  33 |     response.request().method() === 'POST' && new URL(response.url()).pathname === '/api/analyses',\n    at submitFile (/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:30:3)\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:471:30"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T16:41:42.963Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-02T16-41-42-931Z-90473/playwright-artifacts/application-contextual-on--39200-card-and-AI-repair-workflow/test-failed-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-02T16-41-42-931Z-90473/playwright-artifacts/application-contextual-on--39200-card-and-AI-repair-workflow/video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-02T16-41-42-931Z-90473/playwright-artifacts/application-contextual-on--39200-card-and-AI-repair-workflow/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-02T16-41-42-931Z-90473/playwright-artifacts/application-contextual-on--39200-card-and-AI-repair-workflow/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-e740d33c2caf670c1d0d",
+          "file": "application.spec.js",
+          "line": 469,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-02T16:41:39.336Z",
+    "duration": 49830.242,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

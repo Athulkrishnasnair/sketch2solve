@@ -1,0 +1,245 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: phase1-polish.spec.js >> Phase 1 Polish Verification >> 3. P1 Fix: AnalysisResultsPanel viewport management, lower joints clickability, expand/minimize states, and pan/zoom
+- Location: tests/e2e/phase1-polish.spec.js:70:3
+
+# Error details
+
+```
+Test timeout of 45000ms exceeded.
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - link "Sketch2Solve STRUCTURE REVIEW" [ref=e5] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e13]:
+        - strong [ref=e14]: Sketch2Solve
+        - generic [ref=e15]: STRUCTURE REVIEW
+    - generic [ref=e16]: Local workspace
+    - navigation "Main navigation" [ref=e18]:
+      - button "Dashboard" [ref=e19] [cursor=pointer]
+      - button "Natural Language Design" [ref=e26] [cursor=pointer]
+      - button "New analysis" [ref=e32] [cursor=pointer]
+      - button "Analysis history 0" [ref=e36] [cursor=pointer]:
+        - generic [ref=e42]: Analysis history
+        - generic [ref=e43]: "0"
+    - generic [ref=e49]:
+      - strong [ref=e50]: Private by default
+      - paragraph [ref=e51]: Runs stay in your local backend. Don’t expose this workspace publicly.
+    - generic [ref=e52]: Backend API · localhost:5000
+  - main [ref=e54]:
+    - generic [ref=e55]:
+      - generic [ref=e56]:
+        - generic:
+          - button "Back to analysis" [ref=e57] [cursor=pointer]: Back
+          - generic:
+            - strong: Triangular Truss
+            - generic:
+              - text: "#88F09BEA"
+              - generic [ref=e61]: submitted
+        - generic [ref=e62]:
+          - button "Undo" [disabled] [ref=e63]
+          - button "Redo" [disabled] [ref=e67]
+          - generic [ref=e72]:
+            - generic [ref=e73]: Length
+            - combobox [ref=e74] [cursor=pointer]:
+              - option "m" [selected]
+              - option "mm"
+              - option "ft"
+            - generic [ref=e75]: Force
+            - combobox [ref=e76] [cursor=pointer]:
+              - option "kN" [selected]
+              - option "N"
+              - option "lbf"
+          - generic [ref=e77] [cursor=pointer]:
+            - checkbox "Coords Confirmed" [checked] [ref=e78]
+            - generic [ref=e79]: Coords Confirmed
+        - generic [ref=e80]:
+          - button "Saved" [ref=e81] [cursor=pointer]
+          - button "Mark Reviewed" [ref=e87] [cursor=pointer]
+          - button "Solve" [disabled] [ref=e91]
+          - button "Results" [ref=e95] [cursor=pointer]
+          - button "Design with AI" [ref=e100] [cursor=pointer]
+      - generic [ref=e105]:
+        - generic [ref=e106]:
+          - generic [ref=e107]:
+            - toolbar "Canvas view controls" [ref=e108]:
+              - button "Zoom in" [ref=e109] [cursor=pointer]
+              - button "Zoom out" [ref=e113] [cursor=pointer]
+              - button "Fit content to view" [ref=e117] [cursor=pointer]
+              - separator [ref=e123]
+              - button "Toggle grid" [pressed] [ref=e124] [cursor=pointer]
+              - button "Snap to grid" [pressed] [ref=e127] [cursor=pointer]
+              - button "Toggle AI proposal layer" [pressed] [ref=e132] [cursor=pointer]
+              - separator [ref=e136]
+              - button "Hide member force labels" [pressed] [ref=e137] [cursor=pointer]
+              - button "Toggle Analysis Results panel" [pressed] [ref=e141] [cursor=pointer]
+            - generic "Analysis Legend" [ref=e144]:
+              - generic [ref=e145]: Forces Legend
+              - generic [ref=e146]:
+                - generic [ref=e147]: Tension (+)
+                - generic [ref=e150]: Compression (−)
+                - generic [ref=e153]: Zero-Force (0)
+                - generic [ref=e156]: Reaction (R)
+            - generic: "X: 0.000 m · Y: 0.000 m"
+            - img [ref=e159]:
+              - generic [ref=e161]: (0,0)
+              - generic [ref=e164]:
+                - generic [ref=e165]:
+                  - generic [ref=e166] [cursor=pointer]: M1
+                  - generic [ref=e167]: +5.00 kN
+                - generic [ref=e168]:
+                  - generic [ref=e169] [cursor=pointer]
+                  - generic [ref=e170] [cursor=pointer]: M2
+                  - generic [ref=e171]: "-7.07 kN"
+                - generic [ref=e172]:
+                  - generic [ref=e173] [cursor=pointer]
+                  - generic [ref=e174] [cursor=pointer]: M3
+                  - generic [ref=e175]: "-7.07 kN"
+              - generic [ref=e183]:
+                - generic [ref=e184]: "Ry: +5.00 kN"
+                - generic [ref=e185]: "Ry: +5.00 kN"
+              - generic [ref=e186]: "L1: -10 kN"
+              - generic [ref=e189]:
+                - generic [ref=e190]:
+                  - generic [ref=e191] [cursor=pointer]
+                  - generic: J1
+                - generic [ref=e192]:
+                  - generic [ref=e193] [cursor=pointer]
+                  - generic: J2
+                - generic [ref=e194]:
+                  - generic [ref=e195] [cursor=pointer]
+                  - generic: J3
+          - region "Analysis Results Panel" [ref=e196]:
+            - generic [ref=e197]:
+              - generic [ref=e198]:
+                - generic [ref=e199]: SOLVED
+                - heading "Analysis Results" [level=3] [ref=e204]
+                - generic [ref=e205]: m · kN
+              - navigation "Analysis Results Navigation" [ref=e207]:
+                - button "Summary & Matrix" [ref=e208] [cursor=pointer]
+                - button "Member Forces (3)" [ref=e209] [cursor=pointer]
+                - button "Support Reactions (2)" [ref=e210] [cursor=pointer]
+                - button "Limitations" [ref=e211] [cursor=pointer]
+              - generic [ref=e212]:
+                - button "Hide force labels on canvas" [ref=e213] [cursor=pointer]:
+                  - generic [ref=e217]: Labels On
+                - button "Minimize results panel" [ref=e218] [cursor=pointer]
+                - button "Collapse panel height" [active] [ref=e221] [cursor=pointer]
+                - button "Close results panel" [ref=e227] [cursor=pointer]
+            - generic [ref=e233]:
+              - generic [ref=e234]:
+                - heading "Structural Counts" [level=4] [ref=e235]
+                - generic [ref=e236]:
+                  - generic [ref=e237]:
+                    - generic [ref=e238]: Joints (N)
+                    - generic [ref=e239]: "3"
+                  - generic [ref=e240]:
+                    - generic [ref=e241]: Members (M)
+                    - generic [ref=e242]: "3"
+                  - generic [ref=e243]:
+                    - generic [ref=e244]: Equilibrium Equations (2N)
+                    - generic [ref=e245]: "6"
+                  - generic [ref=e246]:
+                    - generic [ref=e247]: Unknowns (M + R)
+                    - generic [ref=e248]: "6"
+              - generic [ref=e249]:
+                - heading "Equilibrium Matrix Diagnostics" [level=4] [ref=e250]
+                - generic [ref=e251]:
+                  - generic [ref=e252]:
+                    - generic [ref=e253]: Matrix Shape
+                    - generic [ref=e254]: 6 × 6
+                  - generic [ref=e255]:
+                    - generic [ref=e256]: Numerical Rank
+                    - generic [ref=e257]: "6"
+                  - generic [ref=e258]:
+                    - generic [ref=e259]: Condition Number (κ)
+                    - generic [ref=e260]: "4.07"
+                  - generic [ref=e261]:
+                    - generic [ref=e262]: Classification
+                    - generic [ref=e263]: SQUARE_FULL_RANK
+              - generic [ref=e264]:
+                - heading "Equilibrium Verification" [level=4] [ref=e265]
+                - generic [ref=e266]:
+                  - generic [ref=e267]:
+                    - generic [ref=e268]: Max Nodal Residual
+                    - generic [ref=e269]: 0.00 kN
+                  - generic [ref=e270]:
+                    - generic [ref=e271]: Residual Tolerance
+                    - generic [ref=e272]: 1.00e-9 kN
+                  - generic [ref=e273]:
+                    - generic [ref=e274]: Equilibrium Status
+                    - generic [ref=e275]: Verified Closed
+                  - generic [ref=e279]:
+                    - generic [ref=e280]: External Loads
+                    - generic [ref=e281]: 1 applied
+        - complementary [ref=e282]:
+          - generic [ref=e283]:
+            - generic [ref=e284]:
+              - generic [ref=e285]: Navigate
+              - generic [ref=e286]:
+                - button "Select" [ref=e287] [cursor=pointer]
+                - button "Pan" [ref=e291] [cursor=pointer]
+            - generic [ref=e297]:
+              - generic [ref=e298]: Construction
+              - generic [ref=e299]:
+                - button "Joint" [ref=e300] [cursor=pointer]
+                - button "Member" [ref=e303] [cursor=pointer]
+                - button "Measure" [ref=e308] [cursor=pointer]
+            - generic [ref=e315]:
+              - generic [ref=e316]: Structural
+              - generic [ref=e317]:
+                - button "Pin" [ref=e318] [cursor=pointer]
+                - button "Roller" [ref=e322] [cursor=pointer]
+                - button "Load" [ref=e326] [cursor=pointer]
+            - generic [ref=e329]:
+              - generic [ref=e330]: Edit
+              - button "Delete" [ref=e332] [cursor=pointer]
+          - generic [ref=e337]:
+            - generic [ref=e338]:
+              - heading "Joint" [level=3] [ref=e339]
+              - generic [ref=e340]: J1
+            - generic [ref=e341]:
+              - generic [ref=e342]:
+                - generic [ref=e343]: Joint ID
+                - textbox [ref=e344]: J1
+              - generic [ref=e345]:
+                - generic [ref=e346]:
+                  - generic [ref=e347]: X (m)
+                  - spinbutton [ref=e348]: "0"
+                - generic [ref=e349]:
+                  - generic [ref=e350]: Y (m)
+                  - spinbutton [ref=e351]: "0"
+              - generic [ref=e352]:
+                - generic [ref=e353]: Support
+                - combobox [ref=e354]:
+                  - option "None (Free)"
+                  - option "Pin (Fx & Fy)" [selected]
+                  - option "Roller (Fy)"
+              - generic [ref=e355]:
+                - generic [ref=e356]: Point Load (kN)
+                - generic [ref=e357]:
+                  - spinbutton "Fx" [ref=e358]: "0"
+                  - spinbutton "Fy" [ref=e359]: "0"
+              - generic [ref=e360]:
+                - generic [ref=e361]: Connected Members
+                - generic [ref=e362]:
+                  - 'button "M1: J1 → J2" [ref=e363] [cursor=pointer]'
+                  - 'button "M3: J3 → J1" [ref=e367] [cursor=pointer]'
+              - button "Delete Joint" [ref=e371] [cursor=pointer]
+      - generic [ref=e375]:
+        - generic [ref=e376]:
+          - generic [ref=e377]: SOLVED
+          - generic [ref=e381]: Analysis complete — results available
+        - generic [ref=e382]: 3 joints · 3 members · 0.00, 0.00
+```

@@ -1,0 +1,36 @@
+{"version":10,"type":"context-options","origin":"library","browserName":"","playwrightVersion":"1.64.1","options":{},"platform":"linux","wallTime":1793754792723,"monotonicTime":11178.374,"sdkLanguage":"javascript","title":"application.spec.js:91 › uploads evaluation sketch test1.jpg through the UI"}
+{"type":"before","callId":"gdzi@188","startTime":12351.698,"class":"APIRequestContext","method":"fetch","params":{"url":"/api/analyses/49ea9c83659b4a44a1e4609fc1435d80","method":"GET"}}
+{"type":"log","callId":"gdzi@188","time":12354.07,"message":"→ GET http://127.0.0.1:5174/api/analyses/49ea9c83659b4a44a1e4609fc1435d80"}
+{"type":"log","callId":"gdzi@188","time":12354.091,"message":"  user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36"}
+{"type":"log","callId":"gdzi@188","time":12354.097,"message":"  accept: */*"}
+{"type":"log","callId":"gdzi@188","time":12354.102,"message":"  accept-encoding: gzip,deflate,br"}
+{"type":"log","callId":"gdzi@188","time":12365.647,"message":"← 200 OK"}
+{"type":"log","callId":"gdzi@188","time":12365.663,"message":"  vary: Origin"}
+{"type":"log","callId":"gdzi@188","time":12365.669,"message":"  server: Werkzeug/3.1.9 Python/3.14.4"}
+{"type":"log","callId":"gdzi@188","time":12365.674,"message":"  date: Wed, 04 Nov 2026 01:13:13 GMT"}
+{"type":"log","callId":"gdzi@188","time":12365.679,"message":"  content-type: application/json"}
+{"type":"log","callId":"gdzi@188","time":12365.684,"message":"  content-length: 40908"}
+{"type":"log","callId":"gdzi@188","time":12365.688,"message":"  access-control-allow-origin: http://127.0.0.1:3000"}
+{"type":"log","callId":"gdzi@188","time":12365.693,"message":"  connection: close"}
+{"type":"after","callId":"gdzi@188","endTime":12365.853,"result":{"response":{"url":"http://127.0.0.1:5174/api/analyses/49ea9c83659b4a44a1e4609fc1435d80","status":200,"statusText":"OK","headers":[{"name":"vary","value":"Origin"},{"name":"server","value":"Werkzeug/3.1.9 Python/3.14.4"},{"name":"date","value":"Wed, 04 Nov 2026 01:13:13 GMT"},{"name":"content-type","value":"application/json"},{"name":"content-length","value":"40908"},{"name":"access-control-allow-origin","value":"http://127.0.0.1:3000"},{"name":"connection","value":"close"}],"serverAddr":{"ipAddress":"127.0.0.1","port":5174},"timing":{"startTime":1793754793898,"domainLookupStart":-1,"domainLookupEnd":-1,"connectStart":0,"secureConnectionStart":-1,"connectEnd":1.161999999998443,"requestStart":1.161999999998443,"responseStart":10.822999999998501},"responseEndTiming":11.495999999999185,"fetchUid":"eaa0ddb87dbb46e4bd19769b34d0d205"}}}
+{"type":"before","callId":"gdzi@192","startTime":12370.739,"class":"APIRequestContext","method":"fetch","params":{"url":"/api/analyses/49ea9c83659b4a44a1e4609fc1435d80/image","method":"GET"}}
+{"type":"log","callId":"gdzi@192","time":12373.423,"message":"→ GET http://127.0.0.1:5174/api/analyses/49ea9c83659b4a44a1e4609fc1435d80/image"}
+{"type":"log","callId":"gdzi@192","time":12373.463,"message":"  user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36"}
+{"type":"log","callId":"gdzi@192","time":12373.474,"message":"  accept: */*"}
+{"type":"log","callId":"gdzi@192","time":12373.483,"message":"  accept-encoding: gzip,deflate,br"}
+{"type":"log","callId":"gdzi@192","time":12383.828,"message":"← 200 OK"}
+{"type":"log","callId":"gdzi@192","time":12383.95,"message":"  vary: Origin"}
+{"type":"log","callId":"gdzi@192","time":12383.96,"message":"  server: Werkzeug/3.1.9 Python/3.14.4"}
+{"type":"log","callId":"gdzi@192","time":12383.966,"message":"  date: Wed, 04 Nov 2026 01:13:13 GMT, Wed, 04 Nov 2026 01:13:13 GMT"}
+{"type":"log","callId":"gdzi@192","time":12383.982,"message":"  content-disposition: inline; filename=sketch.webp"}
+{"type":"log","callId":"gdzi@192","time":12383.989,"message":"  content-type: image/webp"}
+{"type":"log","callId":"gdzi@192","time":12383.995,"message":"  content-length: 109870"}
+{"type":"log","callId":"gdzi@192","time":12384,"message":"  last-modified: Wed, 04 Nov 2026 01:13:13 GMT"}
+{"type":"log","callId":"gdzi@192","time":12384.006,"message":"  cache-control: private, no-store"}
+{"type":"log","callId":"gdzi@192","time":12384.015,"message":"  expires: Wed, 04 Nov 2026 01:13:13 GMT"}
+{"type":"log","callId":"gdzi@192","time":12384.021,"message":"  etag: \"1793754793.6797254-109870-3553500098\""}
+{"type":"log","callId":"gdzi@192","time":12384.027,"message":"  accept-ranges: bytes"}
+{"type":"log","callId":"gdzi@192","time":12384.033,"message":"  x-content-type-options: nosniff"}
+{"type":"log","callId":"gdzi@192","time":12384.038,"message":"  access-control-allow-origin: http://127.0.0.1:3000"}
+{"type":"log","callId":"gdzi@192","time":12384.057,"message":"  connection: close"}
+{"type":"after","callId":"gdzi@192","endTime":12386.14,"result":{"response":{"url":"http://127.0.0.1:5174/api/analyses/49ea9c83659b4a44a1e4609fc1435d80/image","status":200,"statusText":"OK","headers":[{"name":"vary","value":"Origin"},{"name":"server","value":"Werkzeug/3.1.9 Python/3.14.4"},{"name":"date","value":"Wed, 04 Nov 2026 01:13:13 GMT, Wed, 04 Nov 2026 01:13:13 GMT"},{"name":"content-disposition","value":"inline; filename=sketch.webp"},{"name":"content-type","value":"image/webp"},{"name":"content-length","value":"109870"},{"name":"last-modified","value":"Wed, 04 Nov 2026 01:13:13 GMT"},{"name":"cache-control","value":"private, no-store"},{"name":"expires","value":"Wed, 04 Nov 2026 01:13:13 GMT"},{"name":"etag","value":"\"1793754793.6797254-109870-3553500098\""},{"name":"accept-ranges","value":"bytes"},{"name":"x-content-type-options","value":"nosniff"},{"name":"access-control-allow-origin","value":"http://127.0.0.1:3000"},{"name":"connection","value":"close"}],"serverAddr":{"ipAddress":"127.0.0.1","port":5174},"timing":{"startTime":1793754793917,"domainLookupStart":-1,"domainLookupEnd":-1,"connectStart":0,"secureConnectionStart":-1,"connectEnd":1.9130000000004657,"requestStart":1.9130000000004657,"responseStart":10.88799999999901},"responseEndTiming":12.207000000000335,"fetchUid":"2756adf78f7afeca499c05f4d0e66063"}}}

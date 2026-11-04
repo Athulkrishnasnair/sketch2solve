@@ -1,0 +1,31 @@
+{"version":10,"type":"context-options","origin":"library","browserName":"","playwrightVersion":"1.64.1","options":{},"platform":"linux","wallTime":1793754826091,"monotonicTime":44546.095,"sdkLanguage":"javascript","title":"application.spec.js:596 › solver-result experience: triangular reference model verification, results panel, on-canvas forces, reactions, legend, and stale protection"}
+{"type":"before","callId":"gdzi@3268","startTime":45235.382,"class":"APIRequestContext","method":"fetch","params":{"url":"/api/analyses/1c06c10cb93741c087e8ba917b702567/draft","method":"PUT","jsonData":"{\"geometry\":{\"schema_version\":\"1.0\",\"metadata\":{\"name\":\"Triangular Reference Truss\",\"units\":{\"length\":\"m\",\"force\":\"kN\"}},\"model\":{\"nodes\":[{\"id\":\"A\",\"x\":0,\"y\":0},{\"id\":\"B\",\"x\":4,\"y\":0},{\"id\":\"C\",\"x\":2,\"y\":3}],\"members\":[{\"id\":\"AB\",\"node_i\":\"A\",\"node_j\":\"B\"},{\"id\":\"AC\",\"node_i\":\"A\",\"node_j\":\"C\"},{\"id\":\"BC\",\"node_i\":\"B\",\"node_j\":\"C\"}],\"supports\":[{\"id\":\"S_A\",\"node\":\"A\",\"type\":\"pin\"},{\"id\":\"S_B\",\"node\":\"B\",\"type\":\"roller\",\"direction\":\"vertical\"}],\"loads\":[{\"id\":\"L_C\",\"node\":\"C\",\"fx\":0,\"fy\":-10}]}},\"coordinates_confirmed\":true}"}}
+{"type":"log","callId":"gdzi@3268","time":45238.704,"message":"→ PUT http://127.0.0.1:5174/api/analyses/1c06c10cb93741c087e8ba917b702567/draft"}
+{"type":"log","callId":"gdzi@3268","time":45238.729,"message":"  user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36"}
+{"type":"log","callId":"gdzi@3268","time":45238.737,"message":"  accept: */*"}
+{"type":"log","callId":"gdzi@3268","time":45238.743,"message":"  accept-encoding: gzip,deflate,br"}
+{"type":"log","callId":"gdzi@3268","time":45238.747,"message":"  content-type: application/json"}
+{"type":"log","callId":"gdzi@3268","time":45238.751,"message":"  content-length: 529"}
+{"type":"log","callId":"gdzi@3268","time":45250.949,"message":"← 200 OK"}
+{"type":"log","callId":"gdzi@3268","time":45250.962,"message":"  vary: Origin"}
+{"type":"log","callId":"gdzi@3268","time":45250.966,"message":"  server: Werkzeug/3.1.9 Python/3.14.4"}
+{"type":"log","callId":"gdzi@3268","time":45250.97,"message":"  date: Wed, 04 Nov 2026 01:13:46 GMT"}
+{"type":"log","callId":"gdzi@3268","time":45250.973,"message":"  content-type: application/json"}
+{"type":"log","callId":"gdzi@3268","time":45250.977,"message":"  content-length: 615"}
+{"type":"log","callId":"gdzi@3268","time":45250.981,"message":"  access-control-allow-origin: http://127.0.0.1:3000"}
+{"type":"log","callId":"gdzi@3268","time":45250.984,"message":"  connection: close"}
+{"type":"after","callId":"gdzi@3268","endTime":45251.157,"result":{"response":{"url":"http://127.0.0.1:5174/api/analyses/1c06c10cb93741c087e8ba917b702567/draft","status":200,"statusText":"OK","headers":[{"name":"vary","value":"Origin"},{"name":"server","value":"Werkzeug/3.1.9 Python/3.14.4"},{"name":"date","value":"Wed, 04 Nov 2026 01:13:46 GMT"},{"name":"content-type","value":"application/json"},{"name":"content-length","value":"615"},{"name":"access-control-allow-origin","value":"http://127.0.0.1:3000"},{"name":"connection","value":"close"}],"serverAddr":{"ipAddress":"127.0.0.1","port":5174},"timing":{"startTime":1793754826782,"domainLookupStart":-1,"domainLookupEnd":-1,"connectStart":0,"secureConnectionStart":-1,"connectEnd":1.8410000000003492,"requestStart":1.8410000000003492,"responseStart":12.348999999994703},"responseEndTiming":12.694999999999709,"fetchUid":"0d7866bd92e63daa8aa0a8ceb48e6b44"}}}
+{"type":"before","callId":"gdzi@3271","startTime":45254.068,"class":"APIRequestContext","method":"fetch","params":{"url":"/api/analyses/1c06c10cb93741c087e8ba917b702567/review","method":"POST"}}
+{"type":"log","callId":"gdzi@3271","time":45258.238,"message":"→ POST http://127.0.0.1:5174/api/analyses/1c06c10cb93741c087e8ba917b702567/review"}
+{"type":"log","callId":"gdzi@3271","time":45258.266,"message":"  user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36"}
+{"type":"log","callId":"gdzi@3271","time":45258.278,"message":"  accept: */*"}
+{"type":"log","callId":"gdzi@3271","time":45258.282,"message":"  accept-encoding: gzip,deflate,br"}
+{"type":"log","callId":"gdzi@3271","time":45268.324,"message":"← 200 OK"}
+{"type":"log","callId":"gdzi@3271","time":45268.345,"message":"  vary: Origin"}
+{"type":"log","callId":"gdzi@3271","time":45268.352,"message":"  server: Werkzeug/3.1.9 Python/3.14.4"}
+{"type":"log","callId":"gdzi@3271","time":45268.358,"message":"  date: Wed, 04 Nov 2026 01:13:46 GMT"}
+{"type":"log","callId":"gdzi@3271","time":45268.363,"message":"  content-type: application/json"}
+{"type":"log","callId":"gdzi@3271","time":45268.37,"message":"  content-length: 19388"}
+{"type":"log","callId":"gdzi@3271","time":45268.375,"message":"  access-control-allow-origin: http://127.0.0.1:3000"}
+{"type":"log","callId":"gdzi@3271","time":45268.381,"message":"  connection: close"}
+{"type":"after","callId":"gdzi@3271","endTime":45268.6,"result":{"response":{"url":"http://127.0.0.1:5174/api/analyses/1c06c10cb93741c087e8ba917b702567/review","status":200,"statusText":"OK","headers":[{"name":"vary","value":"Origin"},{"name":"server","value":"Werkzeug/3.1.9 Python/3.14.4"},{"name":"date","value":"Wed, 04 Nov 2026 01:13:46 GMT"},{"name":"content-type","value":"application/json"},{"name":"content-length","value":"19388"},{"name":"access-control-allow-origin","value":"http://127.0.0.1:3000"},{"name":"connection","value":"close"}],"serverAddr":{"ipAddress":"127.0.0.1","port":5174},"timing":{"startTime":1793754826802,"domainLookupStart":-1,"domainLookupEnd":-1,"connectStart":0,"secureConnectionStart":-1,"connectEnd":0.7510000000038417,"requestStart":0.7510000000038417,"responseStart":9.660000000003492},"responseEndTiming":9.923999999999069,"fetchUid":"6c69b582e9c5c13148dee0e46d506dfb"}}}

@@ -1,0 +1,17 @@
+{"version":10,"type":"context-options","origin":"library","browserName":"","playwrightVersion":"1.64.1","options":{},"platform":"linux","wallTime":1793754819611,"monotonicTime":38066.29,"sdkLanguage":"javascript","title":"application.spec.js:444 › a missing stored image is explained while geometry remains available"}
+{"type":"before","callId":"gdzi@2722","startTime":38116.817,"class":"APIRequestContext","method":"fetch","params":{"url":"/api/analyses","method":"POST","multipartData":[{"name":"provider","value":"gemini"},{"name":"image","file":{"name":"missing-image.png","mimeType":"image/png","buffer":"<Buffer>"}}]}}
+{"type":"log","callId":"gdzi@2722","time":38119.818,"message":"→ POST http://127.0.0.1:5174/api/analyses"}
+{"type":"log","callId":"gdzi@2722","time":38119.925,"message":"  user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36"}
+{"type":"log","callId":"gdzi@2722","time":38119.941,"message":"  accept: */*"}
+{"type":"log","callId":"gdzi@2722","time":38119.948,"message":"  accept-encoding: gzip,deflate,br"}
+{"type":"log","callId":"gdzi@2722","time":38119.955,"message":"  content-type: multipart/form-data; boundary=----WebKitFormBoundaryRcFceUQCUgNDMpli"}
+{"type":"log","callId":"gdzi@2722","time":38119.961,"message":"  content-length: 75913"}
+{"type":"log","callId":"gdzi@2722","time":38175.463,"message":"← 201 CREATED"}
+{"type":"log","callId":"gdzi@2722","time":38175.478,"message":"  vary: Origin"}
+{"type":"log","callId":"gdzi@2722","time":38175.483,"message":"  server: Werkzeug/3.1.9 Python/3.14.4"}
+{"type":"log","callId":"gdzi@2722","time":38175.503,"message":"  date: Wed, 04 Nov 2026 01:13:39 GMT"}
+{"type":"log","callId":"gdzi@2722","time":38175.507,"message":"  content-type: application/json"}
+{"type":"log","callId":"gdzi@2722","time":38175.511,"message":"  content-length: 19003"}
+{"type":"log","callId":"gdzi@2722","time":38175.515,"message":"  access-control-allow-origin: http://127.0.0.1:3000"}
+{"type":"log","callId":"gdzi@2722","time":38175.519,"message":"  connection: close"}
+{"type":"after","callId":"gdzi@2722","endTime":38175.731,"result":{"response":{"url":"http://127.0.0.1:5174/api/analyses","status":201,"statusText":"CREATED","headers":[{"name":"vary","value":"Origin"},{"name":"server","value":"Werkzeug/3.1.9 Python/3.14.4"},{"name":"date","value":"Wed, 04 Nov 2026 01:13:39 GMT"},{"name":"content-type","value":"application/json"},{"name":"content-length","value":"19003"},{"name":"access-control-allow-origin","value":"http://127.0.0.1:3000"},{"name":"connection","value":"close"}],"serverAddr":{"ipAddress":"127.0.0.1","port":5174},"timing":{"startTime":1793754819664,"domainLookupStart":-1,"domainLookupEnd":-1,"connectStart":0,"secureConnectionStart":-1,"connectEnd":1.0509999999994761,"requestStart":1.0509999999994761,"responseStart":55.291000000004715},"responseEndTiming":55.64300000000367,"fetchUid":"4b40b87902d0fc8919eeffb229123d88"}}}

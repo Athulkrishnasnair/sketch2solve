@@ -1,0 +1,260 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/athulkrishna_s_nair/sketch2solve/frontend/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/e2e/playwright.config.js",
+      "tests/e2e/comprehensive-audit.spec.js"
+    ],
+    "configFile": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/playwright.config.js",
+    "rootDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T00-59-36-387Z-43/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T00-59-36-387Z-43/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "snapshotDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.js",
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5174",
+          "browserName": "chromium",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "video": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T00-59-36-387Z-43/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "comprehensive-audit.spec.js",
+      "file": "comprehensive-audit.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Comprehensive Application Audit",
+          "file": "comprehensive-audit.spec.js",
+          "line": 15,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Audit 1: Layout Overflow and Responsiveness across all viewports",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12779,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "--- OVERFLOW FINDINGS ---\n"
+                        },
+                        {
+                          "text": "[]\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T00:59:42.875Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6649999aa6270d63e117-aeb6e85493be083418c4",
+              "file": "comprehensive-audit.spec.js",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "Audit 2: Complete Interactive Element Inventory & State Checks",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6478,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "--- INTERACTIVE ELEMENT AUDIT LOG ---\n"
+                        },
+                        {
+                          "text": "[\n  {\n    \"page\": \"Dashboard\",\n    \"element\": \"button.dashboard-primary\",\n    \"label\": \"＋ New analysis\",\n    \"hasHandler\": true,\n    \"enabled\": true\n  },\n  {\n    \"page\": \"Dashboard\",\n    \"element\": \"button.dashboard-ai-btn\",\n    \"label\": \"Create with AI\",\n    \"hasHandler\": true,\n    \"togglesWorkbench\": true\n  },\n  {\n    \"page\": \"Dashboard\",\n    \"element\": \"button.btn-close-workbench\",\n    \"label\": \"✕\",\n    \"hasHandler\": true,\n    \"closesWorkbench\": true\n  },\n  {\n    \"page\": \"Dashboard\",\n    \"element\": \"button.dashboard-link\",\n    \"label\": \"Browse all history ↗\",\n    \"hasHandler\": true,\n    \"enabled\": true\n  },\n  {\n    \"page\": \"Dashboard\",\n    \"element\": \".workbench-chip\",\n    \"count\": 4,\n    \"label\": \"Example Prompt Chips\",\n    \"hasHandler\": true\n  },\n  {\n    \"page\": \"Dashboard\",\n    \"element\": \".design-proposal-card\",\n    \"label\": \"Generated Proposal Card\",\n    \"rendered\": true,\n    \"hasApply\": true,\n    \"hasDiscard\": true\n  },\n  {\n    \"page\": \"TrussEditor\",\n    \"element\": \"topbar buttons\",\n    \"back\": {\n      \"visible\": true,\n      \"enabled\": true\n    },\n    \"undo\": {\n      \"visible\": true,\n      \"enabled\": false\n    },\n    \"redo\": {\n      \"visible\": true,\n      \"enabled\": false\n    },\n    \"save\": {\n      \"visible\": true,\n      \"enabled\": true\n    },\n    \"review\": {\n      \"visible\": true,\n      \"enabled\": true\n    },\n    \"solve\": {\n      \"visible\": true,\n      \"enabled\": false\n    },\n    \"designAi\": {\n      \"visible\": true,\n      \"enabled\": true\n    }\n  },\n  {\n    \"page\": \"TrussEditor\",\n    \"element\": \"tool palette\",\n    \"tools\": {\n      \"select\": {\n        \"exists\": true,\n        \"activates\": true\n      },\n      \"pan\": {\n        \"exists\": true,\n        \"activates\": true\n      },\n      \"joint\": {\n        \"exists\": true,\n        \"activates\": true\n      },\n      \"member\": {\n        \"exists\": true,\n        \"activates\": true\n      },\n      \"measure\": {\n        \"exists\": true,\n        \"activates\": true\n      },\n      \"pin\": {\n        \"exists\": true,\n        \"activates\": true\n      },\n      \"roller\": {\n        \"exists\": true,\n        \"activates\": true\n      },\n      \"load\": {\n        \"exists\": true,\n        \"activates\": true\n      },\n      \"delete\": {\n        \"exists\": true,\n        \"activates\": true\n      }\n    }\n  },\n  {\n    \"page\": \"TrussEditor\",\n    \"element\": \"floating canvas toolbar\",\n    \"zoomIn\": true,\n    \"zoomOut\": true,\n    \"fitView\": true,\n    \"gridToggle\": true,\n    \"snapToggle\": true,\n    \"aiLayerToggle\": true\n  },\n  {\n    \"page\": \"ResultsPanel\",\n    \"element\": \"tabs\",\n    \"tabs\": {\n      \"Summary & Matrix\": {\n        \"clickable\": true\n      },\n      \"Member Forces\": {\n        \"clickable\": true\n      },\n      \"Support Reactions\": {\n        \"clickable\": true\n      },\n      \"Limitations\": {\n        \"clickable\": true\n      }\n    }\n  },\n  {\n    \"page\": \"TrussEditor\",\n    \"element\": \"stale results detection\",\n    \"staleBannerVisible\": true,\n    \"statusBarShowsStale\": true\n  }\n]\n"
+                        },
+                        {
+                          "text": "--- CONSOLE MESSAGES ---\n"
+                        },
+                        {
+                          "text": "[\n  {\n    \"type\": \"debug\",\n    \"text\": \"[vite] connecting...\"\n  },\n  {\n    \"type\": \"debug\",\n    \"text\": \"[vite] connected.\"\n  }\n]\n"
+                        },
+                        {
+                          "text": "--- FAILED REQUESTS ---\n"
+                        },
+                        {
+                          "text": "[]\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T00:59:55.855Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6649999aa6270d63e117-fff74e017ea9b9bda11a",
+              "file": "comprehensive-audit.spec.js",
+              "line": 80,
+              "column": 3
+            },
+            {
+              "title": "Audit 3: Design Studio CREATE, MODIFY, EXPLAIN & Target Selection",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3946,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "--- DESIGN STUDIO AUDIT ---\n"
+                        },
+                        {
+                          "text": "{\n  \"targetSelector\": {\n    \"optionsCount\": 2\n  },\n  \"intentTab_Auto\": true,\n  \"intentTab_Create\": true,\n  \"intentTab_Modify\": true,\n  \"intentTab_Explain\": true,\n  \"createProposal\": {\n    \"intent\": \" CREATE\",\n    \"valid\": \" Valid \",\n    \"cadSvgRendered\": true\n  },\n  \"proposalDiscarded\": true,\n  \"explainProposal\": {\n    \"intent\": \" EXPLAIN\",\n    \"hasExplanation\": true\n  }\n}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T01:00:02.356Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6649999aa6270d63e117-f785552a6b46b699c9c1",
+              "file": "comprehensive-audit.spec.js",
+              "line": 302,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-04T00:59:36.397Z",
+    "duration": 30070.291,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

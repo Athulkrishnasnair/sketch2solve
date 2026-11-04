@@ -1,0 +1,196 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/athulkrishna_s_nair/sketch2solve/frontend/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/e2e/playwright.config.js",
+      "-g",
+      "corrupt and unsupported uploads"
+    ],
+    "configFile": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/playwright.config.js",
+    "rootDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-32-43-822Z-40/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-32-43-822Z-40/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "snapshotDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.js",
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5174",
+          "browserName": "chromium",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "video": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-32-43-822Z-40/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "application.spec.js",
+      "file": "application.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "corrupt and unsupported uploads show clear messages and persist failed attempts",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9017,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"\u001b[7mChoose a JPEG, PNG, or WebP image\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7m!The saved image is not a supported format.UNSUPPORTED_IMAGE_TYPE · This attempt was saved to history. Retry only when you choose to submit another provider request\u001b[27m.\"\u001b[39m\nTimeout: 8000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('alert') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\u001b[2m    20 × locator resolved to <div role=\"alert\" class=\"alert alert-error analysis-alert\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"!The saved image is not a supported format.UNSUPPORTED_IMAGE_TYPE · This attempt was saved to history. Retry only when you choose to submit another provider request.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"\u001b[7mChoose a JPEG, PNG, or WebP image\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7m!The saved image is not a supported format.UNSUPPORTED_IMAGE_TYPE · This attempt was saved to history. Retry only when you choose to submit another provider request\u001b[27m.\"\u001b[39m\nTimeout: 8000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('alert') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\u001b[2m    20 × locator resolved to <div role=\"alert\" class=\"alert alert-error analysis-alert\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"!The saved image is not a supported format.UNSUPPORTED_IMAGE_TYPE · This attempt was saved to history. Retry only when you choose to submit another provider request.\"\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:225:41",
+                    "location": {
+                      "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                      "column": 41,
+                      "line": 225
+                    },
+                    "snippet": "  223 |   expect(unsupported.response.status()).toBe(415)\n  224 |   expect(unsupported.body.error_code).toBe('UNSUPPORTED_IMAGE_TYPE')\n> 225 |   await expect(page.getByRole('alert')).toContainText('Choose a JPEG, PNG, or WebP image.')\n      |                                         ^\n  226 |\n  227 |   for (const body of [corrupted.body, unsupported.body]) {\n  228 |     const saved = await page.request.get(`/api/analyses/${body.analysis_id}`)"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                        "column": 41,
+                        "line": 225
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"\u001b[7mChoose a JPEG, PNG, or WebP image\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7m!The saved image is not a supported format.UNSUPPORTED_IMAGE_TYPE · This attempt was saved to history. Retry only when you choose to submit another provider request\u001b[27m.\"\u001b[39m\nTimeout: 8000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('alert') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\u001b[2m    20 × locator resolved to <div role=\"alert\" class=\"alert alert-error analysis-alert\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"!The saved image is not a supported format.UNSUPPORTED_IMAGE_TYPE · This attempt was saved to history. Retry only when you choose to submit another provider request.\"\u001b[22m\n\n\n  223 |   expect(unsupported.response.status()).toBe(415)\n  224 |   expect(unsupported.body.error_code).toBe('UNSUPPORTED_IMAGE_TYPE')\n> 225 |   await expect(page.getByRole('alert')).toContainText('Choose a JPEG, PNG, or WebP image.')\n      |                                         ^\n  226 |\n  227 |   for (const body of [corrupted.body, unsupported.body]) {\n  228 |     const saved = await page.request.get(`/api/analyses/${body.analysis_id}`)\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:225:41"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:32:47.320Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-32-47-292Z-137/playwright-artifacts/application-corrupt-and-un-339f4-and-persist-failed-attempts/test-failed-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-32-47-292Z-137/playwright-artifacts/application-corrupt-and-un-339f4-and-persist-failed-attempts/video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-32-47-292Z-137/playwright-artifacts/application-corrupt-and-un-339f4-and-persist-failed-attempts/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-32-47-292Z-137/playwright-artifacts/application-corrupt-and-un-339f4-and-persist-failed-attempts/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                    "column": 41,
+                    "line": 225
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-d16e5792a36dd0c2b584",
+          "file": "application.spec.js",
+          "line": 206,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-03T15:32:43.828Z",
+    "duration": 12780.363000000001,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

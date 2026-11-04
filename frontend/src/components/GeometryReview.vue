@@ -127,6 +127,7 @@ async function saveDraft() {
     editing.value = false
     loadedGeometry.value = null
     message.value = 'Draft saved and schema validation passed. It is still unapproved.'
+    busy.value = ''
     emit('updated')
   } catch (error) {
     requestError.value = error.body || { message: error.message }
@@ -244,8 +245,8 @@ watch(() => props.analysis.analysis_id, () => cancelEditing())
 
     <div v-else class="review-actions">
       <button v-if="!submitted" type="button" class="button button-secondary" :disabled="busy === 'load'" @click="beginEditing">{{ busy === 'load' ? 'Loading draft…' : savedGeometry ? 'Edit saved draft' : 'Correct interpretation' }}</button>
-      <button v-if="savedGeometry && !reviewed && !submitted" type="button" class="button button-primary" :disabled="busy" @click="markReviewed">{{ busy === 'review' ? 'Checking…' : 'Mark reviewed' }}</button>
-      <button v-if="reviewed && !submitted" type="button" class="button button-primary" :disabled="busy" @click="solveReviewed">{{ busy === 'solve' ? 'Solving…' : 'Submit reviewed geometry to solver' }}</button>
+      <button v-if="savedGeometry && !reviewed && !submitted" type="button" class="button button-primary" :disabled="Boolean(busy)" @click="markReviewed">{{ busy === 'review' ? 'Checking…' : 'Mark reviewed' }}</button>
+      <button v-if="reviewed && !submitted" type="button" class="button button-primary" :disabled="Boolean(busy)" @click="solveReviewed">{{ busy === 'solve' ? 'Solving…' : 'Submit reviewed geometry to solver' }}</button>
       <span v-if="submitted" class="submitted-note">Submitted geometry and results are saved with this sketch.</span>
     </div>
     <p v-if="analysis.solver_results" class="solver-caveat">A numerical solution does not establish physical stability, code compliance, or engineering suitability. Check diagnostics and units.</p>

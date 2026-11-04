@@ -1,0 +1,230 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/athulkrishna_s_nair/sketch2solve/frontend/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/e2e/playwright.config.js",
+      "-g",
+      "issue"
+    ],
+    "configFile": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/playwright.config.js",
+    "rootDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-02T17-34-06-167Z-106265/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-02T17-34-06-167Z-106265/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "snapshotDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.js",
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5174",
+          "browserName": "chromium",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "video": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-02T17-34-06-167Z-106265/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "application.spec.js",
+      "file": "application.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "contextual on-canvas issue highlighting, floating action card, and AI repair workflow",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9448,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.contextual-action-card')\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.contextual-action-card') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('.contextual-action-card')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.contextual-action-card')\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.contextual-action-card') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('.contextual-action-card')\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:499:28",
+                    "location": {
+                      "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                      "column": 28,
+                      "line": 499
+                    },
+                    "snippet": "  497 |   // Test re-enabling highlight via status bar toggle\n  498 |   await page.locator('.status-warnings-toggle').click()\n> 499 |   await expect(actionCard).toBeVisible()\n      |                            ^\n  500 |\n  501 |   // Click 'Fix with AI'\n  502 |   await actionCard.getByRole('button', { name: 'Fix with AI' }).click()"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                        "column": 28,
+                        "line": 499
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.contextual-action-card')\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.contextual-action-card') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('.contextual-action-card')\u001b[22m\n\n\n  497 |   // Test re-enabling highlight via status bar toggle\n  498 |   await page.locator('.status-warnings-toggle').click()\n> 499 |   await expect(actionCard).toBeVisible()\n      |                            ^\n  500 |\n  501 |   // Click 'Fix with AI'\n  502 |   await actionCard.getByRole('button', { name: 'Fix with AI' }).click()\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:499:28"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T17:34:09.733Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-02T17-34-09-704Z-106375/playwright-artifacts/application-contextual-on--39200-card-and-AI-repair-workflow/test-failed-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-02T17-34-09-704Z-106375/playwright-artifacts/application-contextual-on--39200-card-and-AI-repair-workflow/video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-02T17-34-09-704Z-106375/playwright-artifacts/application-contextual-on--39200-card-and-AI-repair-workflow/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-02T17-34-09-704Z-106375/playwright-artifacts/application-contextual-on--39200-card-and-AI-repair-workflow/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                    "column": 28,
+                    "line": 499
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-e740d33c2caf670c1d0d",
+          "file": "application.spec.js",
+          "line": 469,
+          "column": 1
+        },
+        {
+          "title": "issue resolution assistant independent scrolling, mouse-wheel isolation, and sticky footer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1930,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T17:34:20.175Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-91f896dacce724012a9c",
+          "file": "application.spec.js",
+          "line": 520,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-02T17:34:06.172Z",
+    "duration": 16080.948,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

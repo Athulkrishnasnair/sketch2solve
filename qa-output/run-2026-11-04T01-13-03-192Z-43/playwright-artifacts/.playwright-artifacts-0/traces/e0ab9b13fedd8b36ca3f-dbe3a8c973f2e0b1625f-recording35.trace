@@ -1,0 +1,15 @@
+{"version":10,"type":"context-options","origin":"library","browserName":"","playwrightVersion":"1.64.1","options":{},"platform":"linux","wallTime":1793754814704,"monotonicTime":33159.805,"sdkLanguage":"javascript","title":"application.spec.js:266 › provider failure INVALID_GEMINI_RESPONSE is saved and explained without secrets"}
+{"type":"before","callId":"gdzi@2187","startTime":33989.288,"class":"APIRequestContext","method":"fetch","params":{"url":"/api/analyses/c5c65caab07a42d6994f42488703c9d3","method":"GET"}}
+{"type":"log","callId":"gdzi@2187","time":33992.033,"message":"→ GET http://127.0.0.1:5174/api/analyses/c5c65caab07a42d6994f42488703c9d3"}
+{"type":"log","callId":"gdzi@2187","time":33992.055,"message":"  user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36"}
+{"type":"log","callId":"gdzi@2187","time":33992.06,"message":"  accept: */*"}
+{"type":"log","callId":"gdzi@2187","time":33992.064,"message":"  accept-encoding: gzip,deflate,br"}
+{"type":"log","callId":"gdzi@2187","time":33998.92,"message":"← 200 OK"}
+{"type":"log","callId":"gdzi@2187","time":33998.934,"message":"  vary: Origin"}
+{"type":"log","callId":"gdzi@2187","time":33998.939,"message":"  server: Werkzeug/3.1.9 Python/3.14.4"}
+{"type":"log","callId":"gdzi@2187","time":33998.943,"message":"  date: Wed, 04 Nov 2026 01:13:35 GMT"}
+{"type":"log","callId":"gdzi@2187","time":33998.947,"message":"  content-type: application/json"}
+{"type":"log","callId":"gdzi@2187","time":33998.951,"message":"  content-length: 18208"}
+{"type":"log","callId":"gdzi@2187","time":33998.955,"message":"  access-control-allow-origin: http://127.0.0.1:3000"}
+{"type":"log","callId":"gdzi@2187","time":33998.958,"message":"  connection: close"}
+{"type":"after","callId":"gdzi@2187","endTime":33999.104,"result":{"response":{"url":"http://127.0.0.1:5174/api/analyses/c5c65caab07a42d6994f42488703c9d3","status":200,"statusText":"OK","headers":[{"name":"vary","value":"Origin"},{"name":"server","value":"Werkzeug/3.1.9 Python/3.14.4"},{"name":"date","value":"Wed, 04 Nov 2026 01:13:35 GMT"},{"name":"content-type","value":"application/json"},{"name":"content-length","value":"18208"},{"name":"access-control-allow-origin","value":"http://127.0.0.1:3000"},{"name":"connection","value":"close"}],"serverAddr":{"ipAddress":"127.0.0.1","port":5174},"timing":{"startTime":1793754815536,"domainLookupStart":-1,"domainLookupEnd":-1,"connectStart":0,"secureConnectionStart":-1,"connectEnd":1.006999999997788,"requestStart":1.006999999997788,"responseStart":6.536000000000058},"responseEndTiming":6.923999999999069,"fetchUid":"4e1f2d49e33321c7b9e3aee19e17cbb5"}}}

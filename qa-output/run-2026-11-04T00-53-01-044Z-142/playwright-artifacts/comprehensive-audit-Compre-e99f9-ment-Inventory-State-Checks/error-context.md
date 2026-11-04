@@ -1,0 +1,197 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: comprehensive-audit.spec.js >> Comprehensive Application Audit >> Audit 2: Complete Interactive Element Inventory & State Checks
+- Location: tests/e2e/comprehensive-audit.spec.js:80:3
+
+# Error details
+
+```
+Test timeout of 45000ms exceeded.
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - link "Sketch2Solve STRUCTURE REVIEW" [ref=e5] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e13]:
+        - strong [ref=e14]: Sketch2Solve
+        - generic [ref=e15]: STRUCTURE REVIEW
+    - generic [ref=e16]: Local workspace
+    - navigation "Main navigation" [ref=e18]:
+      - button "Dashboard" [ref=e19] [cursor=pointer]
+      - button "Natural Language Design" [ref=e26] [cursor=pointer]
+      - button "New analysis" [ref=e32] [cursor=pointer]
+      - button "Analysis history 1" [ref=e36] [cursor=pointer]:
+        - generic [ref=e42]: Analysis history
+        - generic [ref=e43]: "1"
+    - generic [ref=e49]:
+      - strong [ref=e50]: Private by default
+      - paragraph [ref=e51]: Runs stay in your local backend. Don’t expose this workspace publicly.
+    - generic [ref=e52]: Backend API · localhost:5000
+  - main [ref=e54]:
+    - generic [ref=e55]:
+      - generic [ref=e56]:
+        - generic:
+          - button "Back" [ref=e57] [cursor=pointer]
+          - generic:
+            - strong: Triangular Truss
+            - generic:
+              - text: "#454B969D"
+              - generic [ref=e61]: submitted
+        - generic [ref=e62]:
+          - button "Undo (Ctrl+Z)" [disabled] [ref=e63]
+          - button "Redo (Ctrl+Y)" [disabled] [ref=e67]
+          - generic [ref=e72]:
+            - generic [ref=e73]: Length
+            - combobox [ref=e74] [cursor=pointer]:
+              - option "m" [selected]
+              - option "mm"
+              - option "ft"
+            - generic [ref=e75]: Force
+            - combobox [ref=e76] [cursor=pointer]:
+              - option "kN" [selected]
+              - option "N"
+              - option "lbf"
+          - generic [ref=e77] [cursor=pointer]:
+            - checkbox "Coords Confirmed" [checked] [ref=e78]
+            - generic [ref=e79]: Coords Confirmed
+        - generic [ref=e80]:
+          - button "Saved" [ref=e81] [cursor=pointer]
+          - button "Mark Reviewed" [ref=e87] [cursor=pointer]
+          - button "Solve" [disabled] [ref=e91]
+          - button "Results" [ref=e95] [cursor=pointer]
+          - button "Design with AI" [ref=e100] [cursor=pointer]
+      - generic [ref=e105]:
+        - generic [ref=e106]:
+          - generic [ref=e107]:
+            - button "Zoom In" [ref=e108] [cursor=pointer]
+            - button "Zoom Out" [ref=e112] [cursor=pointer]
+            - button "Fit Content" [ref=e116] [cursor=pointer]
+            - button "Toggle Grid" [ref=e123] [cursor=pointer]
+            - button "Snap to Grid" [ref=e126] [cursor=pointer]
+            - button "AI Proposal Layer" [ref=e131] [cursor=pointer]
+            - button "Hide member force labels" [ref=e136] [cursor=pointer]
+            - button "Toggle Analysis Results panel" [ref=e140] [cursor=pointer]
+          - generic "Analysis Legend" [ref=e143]:
+            - generic [ref=e144]: Forces Legend
+            - generic [ref=e145]:
+              - generic [ref=e146]: Tension (+)
+              - generic [ref=e149]: Compression (−)
+              - generic [ref=e152]: Zero-Force (0)
+              - generic [ref=e155]: Reaction (R)
+          - generic: "X: 4.879 m · Y: 0.734 m"
+          - img [ref=e158]:
+            - generic [ref=e160]: (0,0)
+            - generic [ref=e163]:
+              - generic [ref=e164]:
+                - generic [ref=e165] [cursor=pointer]: M1
+                - generic [ref=e166]: +5.00 kN
+              - generic [ref=e167]:
+                - generic [ref=e168] [cursor=pointer]
+                - generic [ref=e169] [cursor=pointer]: M2
+                - generic [ref=e170]: "-7.07 kN"
+              - generic [ref=e171]:
+                - generic [ref=e172] [cursor=pointer]
+                - generic [ref=e173] [cursor=pointer]: M3
+                - generic [ref=e174]: "-7.07 kN"
+            - generic [ref=e182]:
+              - generic [ref=e183]: "Ry: +5.00 kN"
+              - generic [ref=e184]: "Ry: +5.00 kN"
+            - generic [ref=e185]: "L1: -10 kN"
+            - generic [ref=e188]:
+              - generic [ref=e189]:
+                - generic [ref=e190] [cursor=pointer]
+                - generic: J1
+              - generic [ref=e191]:
+                - generic [ref=e192] [cursor=pointer]
+                - generic: J2
+              - generic [ref=e193]:
+                - generic [ref=e194] [cursor=pointer]
+                - generic: J3
+          - region "Analysis Results Panel" [ref=e195]:
+            - generic [ref=e196]:
+              - generic [ref=e197]:
+                - generic [ref=e198]: SOLVED
+                - heading "Analysis Results" [level=3] [ref=e203]
+                - generic [ref=e204]: m · kN
+              - navigation [ref=e206]:
+                - button "Summary & Matrix" [ref=e207] [cursor=pointer]
+                - button "Member Forces (3)" [ref=e208] [cursor=pointer]
+                - button "Support Reactions (2)" [ref=e209] [cursor=pointer]
+                - button "Limitations" [active] [ref=e210] [cursor=pointer]
+              - generic [ref=e211]:
+                - button "Labels On" [ref=e212] [cursor=pointer]
+                - button "Expand panel height" [ref=e217] [cursor=pointer]
+                - button "Close results panel" [ref=e223] [cursor=pointer]
+            - generic [ref=e229]:
+              - generic [ref=e233]:
+                - strong [ref=e234]: Engineering Solver Disclaimer
+                - paragraph [ref=e235]: A numerical solution does not establish physical stability or engineering suitability.
+              - generic [ref=e236]:
+                - heading "Key Engineering Assumptions" [level=5] [ref=e237]
+                - list [ref=e238]:
+                  - listitem [ref=e239]:
+                    - strong [ref=e240]: "Planar Ideal Pin-Jointed System:"
+                    - text: All joints are modeled as frictionless hinges transmitting only axial tension or compression.
+                  - listitem [ref=e241]:
+                    - strong [ref=e242]: "Small Displacement Theory:"
+                    - text: First-order static equilibrium is assembled on undeformed initial geometry. Geometric non-linearities and large deflections are neglected.
+                  - listitem [ref=e243]:
+                    - strong [ref=e244]: "Elastic & Buckling Limits Unchecked:"
+                    - text: Euler buckling capacity, cross-sectional slenderness ratios ($L/r$), and material yield limits require defined cross-section profiles and materials, which are not evaluated in basic geometry analysis.
+        - complementary [ref=e245]:
+          - generic [ref=e246]:
+            - generic [ref=e247]:
+              - generic [ref=e248]: Navigate
+              - generic [ref=e249]:
+                - button "Select" [ref=e250] [cursor=pointer]
+                - button "Pan" [ref=e254] [cursor=pointer]
+            - generic [ref=e260]:
+              - generic [ref=e261]: Construction
+              - generic [ref=e262]:
+                - button "Joint" [ref=e263] [cursor=pointer]
+                - button "Member" [ref=e266] [cursor=pointer]
+                - button "Measure" [ref=e271] [cursor=pointer]
+            - generic [ref=e278]:
+              - generic [ref=e279]: Structural
+              - generic [ref=e280]:
+                - button "Pin" [ref=e281] [cursor=pointer]
+                - button "Roller" [ref=e285] [cursor=pointer]
+                - button "Load" [ref=e289] [cursor=pointer]
+            - generic [ref=e292]:
+              - generic [ref=e293]: Edit
+              - button "Delete" [ref=e295] [cursor=pointer]
+          - generic [ref=e300]:
+            - generic [ref=e301]:
+              - heading "Model" [level=3] [ref=e302]
+              - generic [ref=e303]: TRUSS
+            - generic [ref=e304]:
+              - generic [ref=e305]:
+                - text: Joints
+                - strong [ref=e306]: "3"
+              - generic [ref=e307]:
+                - text: Members
+                - strong [ref=e308]: "3"
+              - generic [ref=e309]:
+                - text: Supports
+                - strong [ref=e310]: "2"
+              - generic [ref=e311]:
+                - text: Loads
+                - strong [ref=e312]: "1"
+            - paragraph [ref=e313]: Select a joint or member to inspect and edit its properties.
+            - button "Clear All Model Elements" [ref=e314] [cursor=pointer]
+      - generic [ref=e318]:
+        - generic [ref=e319]:
+          - generic [ref=e320]: SOLVED
+          - generic [ref=e324]: Analysis complete — results available
+        - generic [ref=e325]: 3 joints · 3 members · 4.88, 0.73
+```

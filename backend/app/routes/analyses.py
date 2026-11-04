@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 from dataclasses import asdict
 from pathlib import Path
 
@@ -18,6 +19,11 @@ from app.services.analysis_persistence import (
     commit_analysis,
     private_image_path,
     save_private_image,
+)
+from app.services.ai_assistant import resolve_geometry_issue
+from app.services.natural_language_design import (
+    process_design_request,
+    validate_design_input,
 )
 from app.services.perception import MAX_IMAGE_BYTES, PerceptionInputError, detect_candidate_geometry
 from app.services.solver import SolverAssemblyError, assemble_equilibrium_system, diagnose_equilibrium_system, solve_equilibrium_system
@@ -181,6 +187,213 @@ def preview_analysis_geometry(analysis_id: str):
     return jsonify(result), 200
 
 
+@analyses_api.post("/api/ai/assistant")
+def ai_assistant_resolve_issue():
+    """Resolve an identified structural geometry/stability issue using AI assistance."""
+    body, error = _json_body()
+    if error:
+        return error
+    if not isinstance(body, dict) or "geometry" not in body or "issue" not in body:
+        return jsonify({"error_code": "INVALID_REQUEST", "message": "Request must contain 'geometry' and 'issue' fields."}), 400
+
+    geometry = body.get("geometry")
+    issue = body.get("issue")
+    diagnostics = body.get("diagnostics")
+    provider = body.get("provider")
+
+    try:
+        result = resolve_geometry_issue(
+            geometry=geometry,
+            issue=issue,
+            diagnostics=diagnostics,
+            provider=provider,
+        )
+        return jsonify(result), 200
+    except ValueError as err:
+        return jsonify({"error_code": "INVALID_GEOMETRY_PAYLOAD", "message": str(err)}), 400
+    except Exception as err:
+        return jsonify({"error_code": "ASSISTANT_FAILED", "message": "Issue resolution assistant failed."}), 500
+
+
+@analyses_api.post("/api/ai/design")
+def ai_conversational_design():
+    """Natural-language conversational truss design (CREATE, MODIFY, EXPLAIN)."""
+    body, error = _json_body()
+    if error:
+        return error
+    if not isinstance(body, dict) or "message" not in body:
+        return jsonify({"error_code": "INVALID_REQUEST", "message": "Request body must be an object containing a 'message' field."}), 400
+
+    message = body.get("message")
+    intent = body.get("intent")
+    context = body.get("context") or {}
+
+    is_valid, err_code, err_msg = validate_design_input(message, context)
+    if not is_valid:
+        if err_code == "OUT_OF_SCOPE":
+            return jsonify({"error": "OUT_OF_SCOPE", "message": err_msg}), 400
+        return jsonify({"error_code": err_code, "message": err_msg}), 400
+
+    # If context references an analysis_id, verify existence and check revisions
+    analysis_id = context.get("analysis_id")
+    if analysis_id:
+        try:
+            record = db.session.get(SketchAnalysis, analysis_id)
+        except Exception:
+            return _history_unavailable(analysis_id)
+        if record is None:
+            return jsonify({"error_code": "ANALYSIS_NOT_FOUND", "message": "Referenced analysis was not found."}), 404
+
+        # If context has no model provided, load from draft or proposal
+        if not context.get("model"):
+            if record.human_geometry_json:
+                context["model"] = record.human_geometry_json
+            elif record.proposal_json:
+                context["model"] = record.proposal_json
+
+    try:
+        result = process_design_request(
+            message=message,
+            context=context,
+            intent=intent,
+            provider=context.get("provider") or body.get("provider"),
+        )
+        return jsonify(result), 200
+    except ValueError as err:
+        return jsonify({"error_code": "INVALID_DESIGN_REQUEST", "message": str(err)}), 400
+    except Exception as err:
+        return jsonify({"error_code": "DESIGN_FAILED", "message": "Conversational design engine encountered an error."}), 500
+
+
+@analyses_api.post("/api/ai/design/apply")
+def ai_apply_design_proposal():
+    """Atomically approve and apply a design proposal with revision gating."""
+    body, error = _json_body()
+    if error:
+        return error
+    if not isinstance(body, dict) or "proposed_model" not in body:
+        return jsonify({"error_code": "INVALID_REQUEST", "message": "Request must contain a 'proposed_model' field."}), 400
+
+    proposed_model = body.get("proposed_model")
+    if not isinstance(proposed_model, dict):
+        return jsonify({"error_code": "INVALID_REQUEST", "message": "'proposed_model' must be an object."}), 400
+
+    # Re-validate proposed geometry deterministically
+    val = validate_truss_request(proposed_model)
+    if not val.is_valid:
+        return jsonify({
+            "error_code": "INVALID_PROPOSAL_GEOMETRY",
+            "message": "Proposed model failed geometry validation and cannot be applied.",
+            "validation_issues": [asdict(i) for i in val.errors],
+        }), 422
+
+    analysis_id = body.get("analysis_id")
+    base_revision = body.get("base_revision")
+
+    if analysis_id:
+        try:
+            record = db.session.get(SketchAnalysis, analysis_id)
+        except Exception:
+            return _history_unavailable(analysis_id)
+        if record is None:
+            return jsonify({"error_code": "ANALYSIS_NOT_FOUND", "message": "Analysis was not found."}), 404
+        if record.review_status == "submitted":
+            return jsonify({
+                "error_code": "DRAFT_ALREADY_SUBMITTED",
+                "message": "This reviewed geometry was already submitted to the solver and cannot be modified.",
+            }), 409
+
+        current_rev = 1
+        if isinstance(record.validation_json, dict) and "revision" in record.validation_json:
+            current_rev = record.validation_json["revision"]
+        elif isinstance(record.human_geometry_json, dict) and "revision" in record.human_geometry_json.get("metadata", {}):
+            current_rev = record.human_geometry_json["metadata"]["revision"]
+
+        if base_revision is not None and base_revision != current_rev:
+            return jsonify({
+                "error_code": "REVISION_CONFLICT",
+                "message": f"Proposal is stale: base revision {base_revision} does not match current model revision {current_rev}.",
+                "current_revision": current_rev,
+            }), 409
+
+        new_rev = current_rev + 1
+        saved_model = copy.deepcopy(proposed_model)
+        record.human_geometry_json = saved_model
+        record.validation_json = {"status": "valid", "issues": [], "revision": new_rev}
+        record.review_status = "draft"
+        try:
+            commit_analysis()
+        except AnalysisPersistenceError:
+            return _history_unavailable(record.id)
+
+        return jsonify({
+            "status": "applied",
+            "proposal_id": body.get("proposal_id"),
+            "analysis_id": record.id,
+            "model_revision": new_rev,
+            "model": saved_model,
+            "validation": {"status": "valid", "issues": []},
+            "message": "Design proposal applied and saved successfully.",
+        }), 200
+
+    if body.get("persist") is True or body.get("create_record") is True:
+        # Create a new SketchAnalysis record for the designed truss
+        name = proposed_model.get("metadata", {}).get("name", "Natural Language Design")
+        record = SketchAnalysis(
+            analysis_type="design",
+            status="pending_review",
+            review_status="draft",
+            original_filename=name,
+            provider="conversational_ai",
+            proposal_json=proposed_model,
+            human_geometry_json=copy.deepcopy(proposed_model),
+            validation_json={"status": "valid", "issues": [], "revision": 1},
+        )
+        db.session.add(record)
+        try:
+            commit_analysis()
+        except AnalysisPersistenceError:
+            return _history_unavailable()
+        return jsonify({
+            "status": "applied",
+            "proposal_id": body.get("proposal_id"),
+            "analysis_id": record.id,
+            "model_revision": 1,
+            "model": copy.deepcopy(proposed_model),
+            "validation": {"status": "valid", "issues": []},
+            "message": "Design proposal applied and new analysis created successfully.",
+        }), 200
+
+    # Non-persisted (canvas-only or brand-new model)
+    base_rev = base_revision or 1
+    new_rev = base_rev + 1
+    saved_model = copy.deepcopy(proposed_model)
+    saved_model.setdefault("metadata", {})["revision"] = new_rev
+
+    return jsonify({
+        "status": "applied",
+        "proposal_id": body.get("proposal_id"),
+        "analysis_id": None,
+        "model_revision": new_rev,
+        "model": saved_model,
+        "validation": {"status": "valid", "issues": []},
+        "message": "Design proposal applied successfully.",
+    }), 200
+
+
+@analyses_api.post("/api/ai/design/reject")
+def ai_reject_design_proposal():
+    """Acknowledge proposal rejection without mutating state."""
+    body, error = _json_body()
+    if error:
+        return error
+    return jsonify({
+        "status": "rejected",
+        "proposal_id": body.get("proposal_id") if isinstance(body, dict) else None,
+        "message": "Design proposal was rejected. Original geometry was preserved without changes.",
+    }), 200
+
+
 @analyses_api.put("/api/analyses/<analysis_id>/draft")
 def save_analysis_draft(analysis_id: str):
     record, error = _review_record(analysis_id)
@@ -289,8 +502,18 @@ def solve_reviewed_analysis(analysis_id: str):
     reactions = {}
     for (support_id, axis), value in solution.support_reactions.items():
         reactions.setdefault(support_id, {})[axis] = value
+    member_states = {}
+    if solution.member_forces:
+        for m_id, force in solution.member_forces.items():
+            if abs(force) < 1e-6:
+                member_states[m_id] = "zero"
+            elif force > 0:
+                member_states[m_id] = "tension"
+            else:
+                member_states[m_id] = "compression"
     result_data = {
         "member_forces": solution.member_forces,
+        "member_states": member_states,
         "support_reactions": reactions,
         "max_equilibrium_residual": solution.max_residual,
         "residual_tolerance": solution.residual_tolerance,
@@ -353,7 +576,7 @@ def _review_record(analysis_id: str):
         return None, _history_unavailable(analysis_id)
     if record is None:
         return None, _not_found()
-    if record.analysis_type != "sketch" or record.proposal_json is None:
+    if record.analysis_type not in ("sketch", "design") or record.proposal_json is None:
         return None, (jsonify({
             "error_code": "REVIEW_UNAVAILABLE",
             "message": "This analysis has no saved sketch proposal to review.",

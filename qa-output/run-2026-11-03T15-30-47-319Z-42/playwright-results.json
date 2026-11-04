@@ -1,0 +1,1393 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/athulkrishna_s_nair/sketch2solve/frontend/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/e2e/playwright.config.js"
+    ],
+    "configFile": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/playwright.config.js",
+    "rootDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-30-47-319Z-42/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-30-47-319Z-42/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "snapshotDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.js",
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5174",
+          "browserName": "chromium",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "video": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-30-47-319Z-42/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "application.spec.js",
+      "file": "application.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "health endpoint, dashboard, and primary navigation load",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 552,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:30:50.858Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-3448a4c9af6d3b4963ae",
+          "file": "application.spec.js",
+          "line": 74,
+          "column": 1
+        },
+        {
+          "title": "uploads evaluation sketch test1.jpg through the UI",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 749,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:30:51.513Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-1c7e02f70b41947f2e14",
+          "file": "application.spec.js",
+          "line": 91,
+          "column": 3
+        },
+        {
+          "title": "uploads evaluation sketch test2.jpg through the UI",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 711,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:30:52.275Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-0cb4d838d79afdc6ca2d",
+          "file": "application.spec.js",
+          "line": 91,
+          "column": 3
+        },
+        {
+          "title": "uploads evaluation sketch test3.png through the UI",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 581,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:30:52.997Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-342f9663b08e078de8dc",
+          "file": "application.spec.js",
+          "line": 91,
+          "column": 3
+        },
+        {
+          "title": "uploads evaluation sketch test4.jpg through the UI",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 521,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:30:53.590Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-e33cfd46c0fd894a478b",
+          "file": "application.spec.js",
+          "line": 91,
+          "column": 3
+        },
+        {
+          "title": "uploads evaluation sketch test5.png through the UI",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1128,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:30:54.126Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-4a12c39d6b556b945a67",
+          "file": "application.spec.js",
+          "line": 91,
+          "column": 3
+        },
+        {
+          "title": "existing analysis details expose image, detection/proposal toggles, zoom, and review controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 729,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:30:55.266Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-8b0cdc1768418aaa5749",
+          "file": "application.spec.js",
+          "line": 137,
+          "column": 1
+        },
+        {
+          "title": "history refreshes without breaking saved records",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 396,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:30:56.007Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-ddf631baf0d32570dff3",
+          "file": "application.spec.js",
+          "line": 159,
+          "column": 1
+        },
+        {
+          "title": "history displays an understandable backend error",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 345,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:30:56.414Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-e09ed851971fbb39f617",
+          "file": "application.spec.js",
+          "line": 167,
+          "column": 1
+        },
+        {
+          "title": "valid WebP uploads and misleading extension is resolved from image bytes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 675,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:30:56.772Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-35e11c62980441b65a99",
+          "file": "application.spec.js",
+          "line": 179,
+          "column": 1
+        },
+        {
+          "title": "corrupt and unsupported uploads show clear messages and persist failed attempts",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8952,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"\u001b[7mChoose a JPEG, PNG, or WebP image\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7m!The saved image is not a supported format.UNSUPPORTED_IMAGE_TYPE · This attempt was saved to history. Retry only when you choose to submit another provider request\u001b[27m.\"\u001b[39m\nTimeout: 8000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('alert') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\u001b[2m    20 × locator resolved to <div role=\"alert\" class=\"alert alert-error analysis-alert\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"!The saved image is not a supported format.UNSUPPORTED_IMAGE_TYPE · This attempt was saved to history. Retry only when you choose to submit another provider request.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"\u001b[7mChoose a JPEG, PNG, or WebP image\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7m!The saved image is not a supported format.UNSUPPORTED_IMAGE_TYPE · This attempt was saved to history. Retry only when you choose to submit another provider request\u001b[27m.\"\u001b[39m\nTimeout: 8000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('alert') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\u001b[2m    20 × locator resolved to <div role=\"alert\" class=\"alert alert-error analysis-alert\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"!The saved image is not a supported format.UNSUPPORTED_IMAGE_TYPE · This attempt was saved to history. Retry only when you choose to submit another provider request.\"\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:225:41",
+                    "location": {
+                      "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                      "column": 41,
+                      "line": 225
+                    },
+                    "snippet": "  223 |   expect(unsupported.response.status()).toBe(415)\n  224 |   expect(unsupported.body.error_code).toBe('UNSUPPORTED_IMAGE_TYPE')\n> 225 |   await expect(page.getByRole('alert')).toContainText('Choose a JPEG, PNG, or WebP image.')\n      |                                         ^\n  226 |\n  227 |   for (const body of [corrupted.body, unsupported.body]) {\n  228 |     const saved = await page.request.get(`/api/analyses/${body.analysis_id}`)"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                        "column": 41,
+                        "line": 225
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"\u001b[7mChoose a JPEG, PNG, or WebP image\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7m!The saved image is not a supported format.UNSUPPORTED_IMAGE_TYPE · This attempt was saved to history. Retry only when you choose to submit another provider request\u001b[27m.\"\u001b[39m\nTimeout: 8000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('alert') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\u001b[2m    20 × locator resolved to <div role=\"alert\" class=\"alert alert-error analysis-alert\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"!The saved image is not a supported format.UNSUPPORTED_IMAGE_TYPE · This attempt was saved to history. Retry only when you choose to submit another provider request.\"\u001b[22m\n\n\n  223 |   expect(unsupported.response.status()).toBe(415)\n  224 |   expect(unsupported.body.error_code).toBe('UNSUPPORTED_IMAGE_TYPE')\n> 225 |   await expect(page.getByRole('alert')).toContainText('Choose a JPEG, PNG, or WebP image.')\n      |                                         ^\n  226 |\n  227 |   for (const body of [corrupted.body, unsupported.body]) {\n  228 |     const saved = await page.request.get(`/api/analyses/${body.analysis_id}`)\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:225:41"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:30:57.460Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-30-50-821Z-139/playwright-artifacts/application-corrupt-and-un-339f4-and-persist-failed-attempts/test-failed-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-30-50-821Z-139/playwright-artifacts/application-corrupt-and-un-339f4-and-persist-failed-attempts/video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-30-50-821Z-139/playwright-artifacts/application-corrupt-and-un-339f4-and-persist-failed-attempts/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-30-50-821Z-139/playwright-artifacts/application-corrupt-and-un-339f4-and-persist-failed-attempts/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                    "column": 41,
+                    "line": 225
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-d16e5792a36dd0c2b584",
+          "file": "application.spec.js",
+          "line": 206,
+          "column": 1
+        },
+        {
+          "title": "oversized UI upload is blocked and backend limit returns a recorded 413",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1753,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:31:07.290Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-bf75a5ca6d53ee0a6bd9",
+          "file": "application.spec.js",
+          "line": 234,
+          "column": 1
+        },
+        {
+          "title": "provider failure MISSING_GEMINI_API_KEY is saved and explained without secrets",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8802,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:274:68",
+                    "location": {
+                      "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                      "column": 68,
+                      "line": 274
+                    },
+                    "snippet": "  272 |     expect(body.error_code).toBe(scenario)\n  273 |     expect(JSON.stringify(body)).not.toContain('API_KEY=')\n> 274 |     await expect(page.getByRole('heading', { name: 'test3.png' })).toBeVisible()\n      |                                                                    ^\n  275 |     await expect(page.getByRole('alert')).toContainText(expectedMessage)\n  276 |     const record = await page.request.get(`/api/analyses/${body.analysis_id}`)\n  277 |     const detail = await record.json()"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                        "column": 68,
+                        "line": 274
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n\n\n  272 |     expect(body.error_code).toBe(scenario)\n  273 |     expect(JSON.stringify(body)).not.toContain('API_KEY=')\n> 274 |     await expect(page.getByRole('heading', { name: 'test3.png' })).toBeVisible()\n      |                                                                    ^\n  275 |     await expect(page.getByRole('alert')).toContainText(expectedMessage)\n  276 |     const record = await page.request.get(`/api/analyses/${body.analysis_id}`)\n  277 |     const detail = await record.json()\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:274:68"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:31:09.145Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-07-255Z-564/playwright-artifacts/application-provider-failu-4a50f-d-explained-without-secrets/test-failed-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-07-255Z-564/playwright-artifacts/application-provider-failu-4a50f-d-explained-without-secrets/video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-07-255Z-564/playwright-artifacts/application-provider-failu-4a50f-d-explained-without-secrets/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-07-255Z-564/playwright-artifacts/application-provider-failu-4a50f-d-explained-without-secrets/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                    "column": 68,
+                    "line": 274
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-9e6b12870e183ac04b45",
+          "file": "application.spec.js",
+          "line": 266,
+          "column": 3
+        },
+        {
+          "title": "provider failure GEMINI_AUTHENTICATION_FAILED is saved and explained without secrets",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8831,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:274:68",
+                    "location": {
+                      "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                      "column": 68,
+                      "line": 274
+                    },
+                    "snippet": "  272 |     expect(body.error_code).toBe(scenario)\n  273 |     expect(JSON.stringify(body)).not.toContain('API_KEY=')\n> 274 |     await expect(page.getByRole('heading', { name: 'test3.png' })).toBeVisible()\n      |                                                                    ^\n  275 |     await expect(page.getByRole('alert')).toContainText(expectedMessage)\n  276 |     const record = await page.request.get(`/api/analyses/${body.analysis_id}`)\n  277 |     const detail = await record.json()"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                        "column": 68,
+                        "line": 274
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n\n\n  272 |     expect(body.error_code).toBe(scenario)\n  273 |     expect(JSON.stringify(body)).not.toContain('API_KEY=')\n> 274 |     await expect(page.getByRole('heading', { name: 'test3.png' })).toBeVisible()\n      |                                                                    ^\n  275 |     await expect(page.getByRole('alert')).toContainText(expectedMessage)\n  276 |     const record = await page.request.get(`/api/analyses/${body.analysis_id}`)\n  277 |     const detail = await record.json()\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:274:68"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:31:18.781Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-18-744Z-700/playwright-artifacts/application-provider-failu-ddc44-d-explained-without-secrets/test-failed-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-18-744Z-700/playwright-artifacts/application-provider-failu-ddc44-d-explained-without-secrets/video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-18-744Z-700/playwright-artifacts/application-provider-failu-ddc44-d-explained-without-secrets/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-18-744Z-700/playwright-artifacts/application-provider-failu-ddc44-d-explained-without-secrets/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                    "column": 68,
+                    "line": 274
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-dcee67c601e6d90f8ba0",
+          "file": "application.spec.js",
+          "line": 266,
+          "column": 3
+        },
+        {
+          "title": "provider failure GEMINI_RATE_LIMITED is saved and explained without secrets",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8835,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:274:68",
+                    "location": {
+                      "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                      "column": 68,
+                      "line": 274
+                    },
+                    "snippet": "  272 |     expect(body.error_code).toBe(scenario)\n  273 |     expect(JSON.stringify(body)).not.toContain('API_KEY=')\n> 274 |     await expect(page.getByRole('heading', { name: 'test3.png' })).toBeVisible()\n      |                                                                    ^\n  275 |     await expect(page.getByRole('alert')).toContainText(expectedMessage)\n  276 |     const record = await page.request.get(`/api/analyses/${body.analysis_id}`)\n  277 |     const detail = await record.json()"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                        "column": 68,
+                        "line": 274
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n\n\n  272 |     expect(body.error_code).toBe(scenario)\n  273 |     expect(JSON.stringify(body)).not.toContain('API_KEY=')\n> 274 |     await expect(page.getByRole('heading', { name: 'test3.png' })).toBeVisible()\n      |                                                                    ^\n  275 |     await expect(page.getByRole('alert')).toContainText(expectedMessage)\n  276 |     const record = await page.request.get(`/api/analyses/${body.analysis_id}`)\n  277 |     const detail = await record.json()\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:274:68"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:31:28.505Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-28-471Z-808/playwright-artifacts/application-provider-failu-c7a19-d-explained-without-secrets/test-failed-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-28-471Z-808/playwright-artifacts/application-provider-failu-c7a19-d-explained-without-secrets/video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-28-471Z-808/playwright-artifacts/application-provider-failu-c7a19-d-explained-without-secrets/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-28-471Z-808/playwright-artifacts/application-provider-failu-c7a19-d-explained-without-secrets/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                    "column": 68,
+                    "line": 274
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-a4d230f4cdba783d3c5e",
+          "file": "application.spec.js",
+          "line": 266,
+          "column": 3
+        },
+        {
+          "title": "provider failure GEMINI_TIMEOUT is saved and explained without secrets",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8803,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:274:68",
+                    "location": {
+                      "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                      "column": 68,
+                      "line": 274
+                    },
+                    "snippet": "  272 |     expect(body.error_code).toBe(scenario)\n  273 |     expect(JSON.stringify(body)).not.toContain('API_KEY=')\n> 274 |     await expect(page.getByRole('heading', { name: 'test3.png' })).toBeVisible()\n      |                                                                    ^\n  275 |     await expect(page.getByRole('alert')).toContainText(expectedMessage)\n  276 |     const record = await page.request.get(`/api/analyses/${body.analysis_id}`)\n  277 |     const detail = await record.json()"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                        "column": 68,
+                        "line": 274
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n\n\n  272 |     expect(body.error_code).toBe(scenario)\n  273 |     expect(JSON.stringify(body)).not.toContain('API_KEY=')\n> 274 |     await expect(page.getByRole('heading', { name: 'test3.png' })).toBeVisible()\n      |                                                                    ^\n  275 |     await expect(page.getByRole('alert')).toContainText(expectedMessage)\n  276 |     const record = await page.request.get(`/api/analyses/${body.analysis_id}`)\n  277 |     const detail = await record.json()\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:274:68"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:31:38.243Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-38-213Z-915/playwright-artifacts/application-provider-failu-88ec7-d-explained-without-secrets/test-failed-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-38-213Z-915/playwright-artifacts/application-provider-failu-88ec7-d-explained-without-secrets/video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-38-213Z-915/playwright-artifacts/application-provider-failu-88ec7-d-explained-without-secrets/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-38-213Z-915/playwright-artifacts/application-provider-failu-88ec7-d-explained-without-secrets/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                    "column": 68,
+                    "line": 274
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-7356a62098670e735c52",
+          "file": "application.spec.js",
+          "line": 266,
+          "column": 3
+        },
+        {
+          "title": "provider failure GEMINI_NETWORK_ERROR is saved and explained without secrets",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8793,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:274:68",
+                    "location": {
+                      "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                      "column": 68,
+                      "line": 274
+                    },
+                    "snippet": "  272 |     expect(body.error_code).toBe(scenario)\n  273 |     expect(JSON.stringify(body)).not.toContain('API_KEY=')\n> 274 |     await expect(page.getByRole('heading', { name: 'test3.png' })).toBeVisible()\n      |                                                                    ^\n  275 |     await expect(page.getByRole('alert')).toContainText(expectedMessage)\n  276 |     const record = await page.request.get(`/api/analyses/${body.analysis_id}`)\n  277 |     const detail = await record.json()"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                        "column": 68,
+                        "line": 274
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n\n\n  272 |     expect(body.error_code).toBe(scenario)\n  273 |     expect(JSON.stringify(body)).not.toContain('API_KEY=')\n> 274 |     await expect(page.getByRole('heading', { name: 'test3.png' })).toBeVisible()\n      |                                                                    ^\n  275 |     await expect(page.getByRole('alert')).toContainText(expectedMessage)\n  276 |     const record = await page.request.get(`/api/analyses/${body.analysis_id}`)\n  277 |     const detail = await record.json()\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:274:68"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:31:47.916Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-47-882Z-1023/playwright-artifacts/application-provider-failu-6165e-d-explained-without-secrets/test-failed-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-47-882Z-1023/playwright-artifacts/application-provider-failu-6165e-d-explained-without-secrets/video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-47-882Z-1023/playwright-artifacts/application-provider-failu-6165e-d-explained-without-secrets/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-47-882Z-1023/playwright-artifacts/application-provider-failu-6165e-d-explained-without-secrets/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                    "column": 68,
+                    "line": 274
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-480a21e30f331bd2f18f",
+          "file": "application.spec.js",
+          "line": 266,
+          "column": 3
+        },
+        {
+          "title": "provider failure INVALID_GEMINI_RESPONSE is saved and explained without secrets",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8791,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:274:68",
+                    "location": {
+                      "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                      "column": 68,
+                      "line": 274
+                    },
+                    "snippet": "  272 |     expect(body.error_code).toBe(scenario)\n  273 |     expect(JSON.stringify(body)).not.toContain('API_KEY=')\n> 274 |     await expect(page.getByRole('heading', { name: 'test3.png' })).toBeVisible()\n      |                                                                    ^\n  275 |     await expect(page.getByRole('alert')).toContainText(expectedMessage)\n  276 |     const record = await page.request.get(`/api/analyses/${body.analysis_id}`)\n  277 |     const detail = await record.json()"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                        "column": 68,
+                        "line": 274
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'test3.png' })\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'test3.png' }) with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'test3.png' })\u001b[22m\n\n\n  272 |     expect(body.error_code).toBe(scenario)\n  273 |     expect(JSON.stringify(body)).not.toContain('API_KEY=')\n> 274 |     await expect(page.getByRole('heading', { name: 'test3.png' })).toBeVisible()\n      |                                                                    ^\n  275 |     await expect(page.getByRole('alert')).toContainText(expectedMessage)\n  276 |     const record = await page.request.get(`/api/analyses/${body.analysis_id}`)\n  277 |     const detail = await record.json()\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:274:68"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:31:57.573Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-57-545Z-1129/playwright-artifacts/application-provider-failu-c1452-d-explained-without-secrets/test-failed-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-57-545Z-1129/playwright-artifacts/application-provider-failu-c1452-d-explained-without-secrets/video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-57-545Z-1129/playwright-artifacts/application-provider-failu-c1452-d-explained-without-secrets/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-31-57-545Z-1129/playwright-artifacts/application-provider-failu-c1452-d-explained-without-secrets/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                    "column": 68,
+                    "line": 274
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-dbe3a8c973f2e0b1625f",
+          "file": "application.spec.js",
+          "line": 266,
+          "column": 3
+        },
+        {
+          "title": "empty proposal stays unapproved and visible as having no candidate elements",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 555,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:32:07.248Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-9d1d8b1a073fc78e080b",
+          "file": "application.spec.js",
+          "line": 296,
+          "column": 1
+        },
+        {
+          "title": "geometry review saves, validates, explicitly reviews, solves, and reloads persisted results",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1085,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('DRAFT SAVED')\nExpected: visible\nError: strict mode violation: getByText('DRAFT SAVED') resolved to 3 elements:\n    1) <span class=\"review-state\">…</span> aka getByText('Draft saved').first()\n    2) <span class=\"draft-state\">DRAFT SAVED</span> aka getByText('DRAFT SAVED', { exact: true })\n    3) <span class=\"review-status-label\">…</span> aka getByText('Draft saved').nth(2)\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('DRAFT SAVED') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByText('DRAFT SAVED')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('DRAFT SAVED')\nExpected: visible\nError: strict mode violation: getByText('DRAFT SAVED') resolved to 3 elements:\n    1) <span class=\"review-state\">…</span> aka getByText('Draft saved').first()\n    2) <span class=\"draft-state\">DRAFT SAVED</span> aka getByText('DRAFT SAVED', { exact: true })\n    3) <span class=\"review-status-label\">…</span> aka getByText('Draft saved').nth(2)\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('DRAFT SAVED') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByText('DRAFT SAVED')\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:341:47",
+                    "location": {
+                      "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                      "column": 47,
+                      "line": 341
+                    },
+                    "snippet": "  339 |   await page.getByRole('checkbox', { name: /I replaced or verified every joint coordinate/ }).check()\n  340 |   await page.getByRole('button', { name: 'Validate and save draft' }).click()\n> 341 |   await expect(page.getByText('DRAFT SAVED')).toBeVisible()\n      |                                               ^\n  342 |   await expect(page.getByRole('button', { name: 'Mark reviewed' })).toBeEnabled()\n  343 |   const savedBeforeReview = await page.request.get(`/api/analyses/${body.analysis_id}`)\n  344 |   const unreviewedDetail = await savedBeforeReview.json()"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                        "column": 47,
+                        "line": 341
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('DRAFT SAVED')\nExpected: visible\nError: strict mode violation: getByText('DRAFT SAVED') resolved to 3 elements:\n    1) <span class=\"review-state\">…</span> aka getByText('Draft saved').first()\n    2) <span class=\"draft-state\">DRAFT SAVED</span> aka getByText('DRAFT SAVED', { exact: true })\n    3) <span class=\"review-status-label\">…</span> aka getByText('Draft saved').nth(2)\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('DRAFT SAVED') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByText('DRAFT SAVED')\u001b[22m\n\n\n  339 |   await page.getByRole('checkbox', { name: /I replaced or verified every joint coordinate/ }).check()\n  340 |   await page.getByRole('button', { name: 'Validate and save draft' }).click()\n> 341 |   await expect(page.getByText('DRAFT SAVED')).toBeVisible()\n      |                                               ^\n  342 |   await expect(page.getByRole('button', { name: 'Mark reviewed' })).toBeEnabled()\n  343 |   const savedBeforeReview = await page.request.get(`/api/analyses/${body.analysis_id}`)\n  344 |   const unreviewedDetail = await savedBeforeReview.json()\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:341:47"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:32:07.895Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-32-07-216Z-1236/playwright-artifacts/application-geometry-revie-d5ec2-d-reloads-persisted-results/test-failed-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-32-07-216Z-1236/playwright-artifacts/application-geometry-revie-d5ec2-d-reloads-persisted-results/video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-32-07-216Z-1236/playwright-artifacts/application-geometry-revie-d5ec2-d-reloads-persisted-results/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-32-07-216Z-1236/playwright-artifacts/application-geometry-revie-d5ec2-d-reloads-persisted-results/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                    "column": 47,
+                    "line": 341
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-dd78af0c0f126990f226",
+          "file": "application.spec.js",
+          "line": 309,
+          "column": 1
+        },
+        {
+          "title": "invalid geometry, missing units, and solver failures preserve the unapproved or reviewed draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 235,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:32:09.788Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-67602a598ad535e92b6a",
+          "file": "application.spec.js",
+          "line": 367,
+          "column": 1
+        },
+        {
+          "title": "a missing stored image is explained while geometry remains available",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 472,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:32:10.118Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-549ec620bedc1610ac8c",
+          "file": "application.spec.js",
+          "line": 444,
+          "column": 1
+        },
+        {
+          "title": "network failure displays the local backend connection message",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 343,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:32:10.603Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-916d3755b810e008fbb4",
+          "file": "application.spec.js",
+          "line": 461,
+          "column": 1
+        },
+        {
+          "title": "contextual on-canvas issue highlighting, floating action card, and AI repair workflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1110,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:32:10.962Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-e740d33c2caf670c1d0d",
+          "file": "application.spec.js",
+          "line": 469,
+          "column": 1
+        },
+        {
+          "title": "issue resolution assistant independent scrolling, mouse-wheel isolation, and sticky footer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1925,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:32:12.089Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-91f896dacce724012a9c",
+          "file": "application.spec.js",
+          "line": 520,
+          "column": 1
+        },
+        {
+          "title": "solver-result experience: triangular reference model verification, results panel, on-canvas forces, reactions, legend, and stale protection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2530,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:32:14.026Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-90e7df6681b439f8df04",
+          "file": "application.spec.js",
+          "line": 596,
+          "column": 1
+        },
+        {
+          "title": "Conversational natural-language truss design workflows across dashboard, sidebar studio, and editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5550,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:32:16.567Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-be02a5fc51f43f00e3ff",
+          "file": "application.spec.js",
+          "line": 784,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-03T15:30:47.326Z",
+    "duration": 94881.886,
+    "expected": 19,
+    "skipped": 0,
+    "unexpected": 8,
+    "flaky": 0
+  }
+}

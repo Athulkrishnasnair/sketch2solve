@@ -1,0 +1,231 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: application.spec.js >> solver-result experience: triangular reference model verification, results panel, on-canvas forces, reactions, legend, and stale protection
+- Location: tests/e2e/application.spec.js:596:1
+
+# Error details
+
+```
+Test timeout of 45000ms exceeded.
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=f1e3]:
+  - complementary [ref=f1e4]:
+    - link "Sketch2Solve STRUCTURE REVIEW" [ref=f1e5] [cursor=pointer]:
+      - /url: /
+      - generic [ref=f1e13]:
+        - strong [ref=f1e14]: Sketch2Solve
+        - generic [ref=f1e15]: STRUCTURE REVIEW
+    - generic [ref=f1e16]: Local workspace
+    - navigation "Main navigation" [ref=f1e18]:
+      - button "Dashboard" [ref=f1e19] [cursor=pointer]
+      - button "New analysis" [ref=f1e26] [cursor=pointer]
+      - button "Analysis history 0" [ref=f1e30] [cursor=pointer]:
+        - generic [ref=f1e36]: Analysis history
+        - generic [ref=f1e37]: "0"
+    - generic [ref=f1e43]:
+      - strong [ref=f1e44]: Private by default
+      - paragraph [ref=f1e45]: Runs stay in your local backend. Don’t expose this workspace publicly.
+    - generic [ref=f1e46]: Backend API · localhost:5000
+  - main [ref=f1e48]:
+    - generic [ref=f1e49]:
+      - generic [ref=f1e50]:
+        - generic [ref=f1e51]:
+          - button "Back" [ref=f1e52] [cursor=pointer]
+          - generic:
+            - strong: Triangular Reference Truss
+            - generic:
+              - text: "#47E6D001"
+              - generic [ref=f1e56]: submitted
+        - generic [ref=f1e57]:
+          - button "Undo (Ctrl+Z)" [disabled] [ref=f1e58]
+          - button "Redo (Ctrl+Y)" [disabled] [ref=f1e62]
+          - generic [ref=f1e67]:
+            - generic [ref=f1e68]: Length
+            - combobox [ref=f1e69] [cursor=pointer]:
+              - option "m" [selected]
+              - option "mm"
+              - option "ft"
+            - generic [ref=f1e70]: Force
+            - combobox [ref=f1e71] [cursor=pointer]:
+              - option "kN" [selected]
+              - option "N"
+              - option "lbf"
+          - generic [ref=f1e72] [cursor=pointer]:
+            - checkbox "Coords Confirmed" [checked] [ref=f1e73]
+            - generic [ref=f1e74]: Coords Confirmed
+        - generic [ref=f1e75]:
+          - button "Saved" [ref=f1e76] [cursor=pointer]
+          - button "Mark Reviewed" [ref=f1e82] [cursor=pointer]
+          - button "Solve" [disabled] [ref=f1e86]
+          - button "Results" [ref=f1e90] [cursor=pointer]
+          - button "AI" [ref=f1e95] [cursor=pointer]
+      - generic [ref=f1e99]:
+        - generic [ref=f1e100]:
+          - generic [ref=f1e101]:
+            - button "Zoom In" [ref=f1e102] [cursor=pointer]
+            - button "Zoom Out" [ref=f1e106] [cursor=pointer]
+            - button "Fit Content" [ref=f1e110] [cursor=pointer]
+            - button "Toggle Grid" [ref=f1e117] [cursor=pointer]
+            - button "Snap to Grid" [ref=f1e120] [cursor=pointer]
+            - button "AI Proposal Layer" [ref=f1e125] [cursor=pointer]
+            - button "Hide member force labels" [ref=f1e130] [cursor=pointer]
+            - button "Toggle Analysis Results panel" [ref=f1e134] [cursor=pointer]
+          - generic "Analysis Legend" [ref=f1e137]:
+            - generic [ref=f1e138]: Forces Legend
+            - generic [ref=f1e139]:
+              - generic [ref=f1e140]: Tension (+)
+              - generic [ref=f1e143]: Compression (−)
+              - generic [ref=f1e146]: Zero-Force (0)
+              - generic [ref=f1e149]: Reaction (R)
+          - generic: "X: 2.000 m · Y: 0.223 m"
+          - img [ref=f1e152]:
+            - generic [ref=f1e154]: (0,0)
+            - generic [ref=f1e157]:
+              - generic [ref=f1e158] [cursor=pointer]
+              - generic [ref=f1e159] [cursor=pointer]
+              - generic [ref=f1e160] [cursor=pointer]
+              - generic [ref=f1e161] [cursor=pointer]
+              - generic [ref=f1e162] [cursor=pointer]
+            - generic [ref=f1e163]:
+              - generic [ref=f1e164]:
+                - generic [ref=f1e165] [cursor=pointer]: AB
+                - generic [ref=f1e166]: +3.33 kN
+              - generic [ref=f1e167]:
+                - generic [ref=f1e168] [cursor=pointer]
+                - generic [ref=f1e169] [cursor=pointer]: AC
+                - generic [ref=f1e170]: "-6.01 kN"
+              - generic [ref=f1e171]:
+                - generic [ref=f1e172] [cursor=pointer]
+                - generic [ref=f1e173] [cursor=pointer]: BC
+                - generic [ref=f1e174]: "-6.01 kN"
+            - generic [ref=f1e182]:
+              - generic [ref=f1e183]: "Ry: +5.00 kN"
+              - generic [ref=f1e184]: "Ry: +5.00 kN"
+            - generic [ref=f1e185]: "L_C: -10 kN"
+            - generic [ref=f1e188]:
+              - generic [ref=f1e189]:
+                - generic [ref=f1e190] [cursor=pointer]
+                - generic: A
+              - generic [ref=f1e191]:
+                - generic [ref=f1e192] [cursor=pointer]
+                - generic: B
+              - generic [ref=f1e193]:
+                - generic [ref=f1e194] [cursor=pointer]
+                - generic: C
+          - region "Analysis Results Panel" [ref=f1e195]:
+            - generic [ref=f1e196]:
+              - generic [ref=f1e197]:
+                - generic [ref=f1e198]: SOLVED
+                - heading "Analysis Results" [level=3] [ref=f1e203]
+                - generic [ref=f1e204]: m · kN
+              - navigation [ref=f1e206]:
+                - button "Summary & Matrix" [ref=f1e207] [cursor=pointer]
+                - button "Member Forces (3)" [ref=f1e208] [cursor=pointer]
+                - button "Support Reactions (2)" [ref=f1e209] [cursor=pointer]
+                - button "Limitations" [ref=f1e210] [cursor=pointer]
+              - generic [ref=f1e211]:
+                - button "Labels On" [ref=f1e212] [cursor=pointer]
+                - button "Expand panel height" [ref=f1e217] [cursor=pointer]
+                - button "Close results panel" [ref=f1e223] [cursor=pointer]
+            - table "Member Forces Table" [ref=f1e230]:
+              - rowgroup [ref=f1e231]:
+                - row [ref=f1e232]:
+                  - columnheader "Member" [ref=f1e233]
+                  - columnheader "Joints" [ref=f1e234]
+                  - columnheader "Length (m)" [ref=f1e235]
+                  - columnheader "Axial Force (kN)" [ref=f1e236]
+                  - columnheader "Classification" [ref=f1e237]
+                  - columnheader "Action" [ref=f1e238]
+              - rowgroup [ref=f1e239]:
+                - row [ref=f1e240] [cursor=pointer]:
+                  - cell "AB" [ref=f1e241]
+                  - cell "A → B" [ref=f1e242]
+                  - cell "4.000" [ref=f1e243]
+                  - cell "+3.333 kN" [ref=f1e244]
+                  - cell "Tension (+)" [ref=f1e245]
+                  - cell [ref=f1e247]:
+                    - button "Inspect" [ref=f1e248]
+                - row [ref=f1e252] [cursor=pointer]:
+                  - cell "AC" [ref=f1e253]
+                  - cell "A → C" [ref=f1e254]
+                  - cell "3.606" [ref=f1e255]
+                  - cell "-6.009 kN" [ref=f1e256]
+                  - cell "Compression (−)" [ref=f1e257]
+                  - cell [ref=f1e259]:
+                    - button "Inspect" [ref=f1e260]
+                - row [ref=f1e264] [cursor=pointer]:
+                  - cell "BC" [ref=f1e265]
+                  - cell "B → C" [ref=f1e266]
+                  - cell "3.606" [ref=f1e267]
+                  - cell "-6.009 kN" [ref=f1e268]
+                  - cell "Compression (−)" [ref=f1e269]
+                  - cell [ref=f1e271]:
+                    - button "Inspect" [ref=f1e272]
+        - complementary [ref=f1e276]:
+          - generic [ref=f1e277]:
+            - generic [ref=f1e278]:
+              - generic [ref=f1e279]: Navigate
+              - generic [ref=f1e280]:
+                - button "Select" [ref=f1e281] [cursor=pointer]
+                - button "Pan" [ref=f1e285] [cursor=pointer]
+            - generic [ref=f1e291]:
+              - generic [ref=f1e292]: Construction
+              - generic [ref=f1e293]:
+                - button "Joint" [ref=f1e294] [cursor=pointer]
+                - button "Member" [ref=f1e297] [cursor=pointer]
+                - button "Measure" [ref=f1e302] [cursor=pointer]
+            - generic [ref=f1e309]:
+              - generic [ref=f1e310]: Structural
+              - generic [ref=f1e311]:
+                - button "Pin" [ref=f1e312] [cursor=pointer]
+                - button "Roller" [ref=f1e316] [cursor=pointer]
+                - button "Load" [ref=f1e320] [cursor=pointer]
+            - generic [ref=f1e323]:
+              - generic [ref=f1e324]: Edit
+              - button "Delete" [ref=f1e326] [cursor=pointer]
+          - generic [ref=f1e331]:
+            - generic [ref=f1e332]:
+              - heading "Member" [level=3] [ref=f1e333]
+              - generic [ref=f1e334]: AB
+            - generic [ref=f1e335]:
+              - generic [ref=f1e336]:
+                - generic [ref=f1e337]: Member ID
+                - textbox [ref=f1e338]: AB
+              - generic [ref=f1e339]:
+                - generic [ref=f1e340]:
+                  - generic [ref=f1e341]: Joint i
+                  - combobox [ref=f1e342]:
+                    - option "A" [selected]
+                    - option "B"
+                    - option "C"
+                - generic [ref=f1e343]:
+                  - generic [ref=f1e344]: Joint j
+                  - combobox [ref=f1e345]:
+                    - option "A"
+                    - option "B" [selected]
+                    - option "C"
+              - generic [ref=f1e346]:
+                - text: Length
+                - strong [ref=f1e347]: 4.000 m
+              - generic [ref=f1e348]:
+                - generic [ref=f1e349]: Analysis Result
+                - generic [ref=f1e350]:
+                  - generic [ref=f1e351]: +3.33 kN
+                  - generic [ref=f1e352]: TENSION
+              - button "Delete Member" [ref=f1e353] [cursor=pointer]
+      - generic [ref=f1e357]:
+        - generic [ref=f1e358]:
+          - generic [ref=f1e359]: SOLVED
+          - generic [ref=f1e363]: Analysis complete — results available
+        - generic [ref=f1e364]: 3 joints · 3 members · 2.00, 0.22
+```

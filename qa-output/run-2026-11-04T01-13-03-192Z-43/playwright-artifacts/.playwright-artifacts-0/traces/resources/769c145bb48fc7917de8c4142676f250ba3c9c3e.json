@@ -1,0 +1,1 @@
+{"error_code":"VALIDATION_FAILED","message":"Correct the listed geometry issues before saving or reviewing this draft.","validation_issues":[{"code":"INVALID_VALUE","message":"Must be one of: ft, m, mm.","path":"/metadata/units/length"}]}

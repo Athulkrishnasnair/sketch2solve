@@ -1,0 +1,15 @@
+{"version":10,"type":"context-options","origin":"library","browserName":"","playwrightVersion":"1.64.1","options":{},"platform":"linux","wallTime":1793754813585,"monotonicTime":32040.676,"sdkLanguage":"javascript","title":"application.spec.js:266 › provider failure GEMINI_NETWORK_ERROR is saved and explained without secrets"}
+{"type":"before","callId":"gdzi@2065","startTime":32893.247,"class":"APIRequestContext","method":"fetch","params":{"url":"/api/analyses/ee66b242abb04b3bbb53c56c03440841","method":"GET"}}
+{"type":"log","callId":"gdzi@2065","time":32894.953,"message":"→ GET http://127.0.0.1:5174/api/analyses/ee66b242abb04b3bbb53c56c03440841"}
+{"type":"log","callId":"gdzi@2065","time":32894.974,"message":"  user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36"}
+{"type":"log","callId":"gdzi@2065","time":32894.979,"message":"  accept: */*"}
+{"type":"log","callId":"gdzi@2065","time":32894.983,"message":"  accept-encoding: gzip,deflate,br"}
+{"type":"log","callId":"gdzi@2065","time":32902.672,"message":"← 200 OK"}
+{"type":"log","callId":"gdzi@2065","time":32902.687,"message":"  vary: Origin"}
+{"type":"log","callId":"gdzi@2065","time":32902.692,"message":"  server: Werkzeug/3.1.9 Python/3.14.4"}
+{"type":"log","callId":"gdzi@2065","time":32902.696,"message":"  date: Wed, 04 Nov 2026 01:13:34 GMT"}
+{"type":"log","callId":"gdzi@2065","time":32902.701,"message":"  content-type: application/json"}
+{"type":"log","callId":"gdzi@2065","time":32902.705,"message":"  content-length: 18265"}
+{"type":"log","callId":"gdzi@2065","time":32902.709,"message":"  access-control-allow-origin: http://127.0.0.1:3000"}
+{"type":"log","callId":"gdzi@2065","time":32902.714,"message":"  connection: close"}
+{"type":"after","callId":"gdzi@2065","endTime":32902.942,"result":{"response":{"url":"http://127.0.0.1:5174/api/analyses/ee66b242abb04b3bbb53c56c03440841","status":200,"statusText":"OK","headers":[{"name":"vary","value":"Origin"},{"name":"server","value":"Werkzeug/3.1.9 Python/3.14.4"},{"name":"date","value":"Wed, 04 Nov 2026 01:13:34 GMT"},{"name":"content-type","value":"application/json"},{"name":"content-length","value":"18265"},{"name":"access-control-allow-origin","value":"http://127.0.0.1:3000"},{"name":"connection","value":"close"}],"serverAddr":{"ipAddress":"127.0.0.1","port":5174},"timing":{"startTime":1793754814439,"domainLookupStart":-1,"domainLookupEnd":-1,"connectStart":0,"secureConnectionStart":-1,"connectEnd":0.8699999999953434,"requestStart":0.8699999999953434,"responseStart":7.10399999999936},"responseEndTiming":7.689999999995052,"fetchUid":"471f0950366993675ac73b143b3ceafd"}}}

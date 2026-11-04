@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import {
   MousePointer,
   Hand,
@@ -19,6 +19,7 @@ import {
   Magnet,
   Sparkles,
   Eye,
+  EyeOff,
   AlertTriangle,
   CheckCircle2,
   XCircle,
@@ -31,6 +32,8 @@ import {
   Check,
   Loader2,
   Link2,
+  BarChart3,
+  Tag,
 } from 'lucide-vue-next'
 import {
   getAnalysis,
@@ -39,8 +42,14 @@ import {
   previewAnalysisGeometry,
   saveAnalysisDraft,
   solveReviewedAnalysis,
+  designTruss,
+  applyDesignProposal,
+  rejectDesignProposal,
 } from '../api/analyses'
 import ConfirmDialog from '../components/ConfirmDialog.vue'
+import IssueResolutionAssistant from '../components/IssueResolutionAssistant.vue'
+import AnalysisResultsPanel from '../components/AnalysisResultsPanel.vue'
+import DesignInstructionPanel from '../components/DesignInstructionPanel.vue'
 
 const props = defineProps({
   analysisId: { type: String, required: true },
@@ -113,7 +122,57 @@ const calculating = ref(false)
 let previewSeq = 0
 let previewDebounceTimer = null
 
-// AI Assistant
+// AI Assistant & Conversational Natural-Language Design Studio
+const showDesignAssistant = ref(false)
+const designModelRevision = ref(1)
+const designProposal = ref(null)
+const designBusy = ref(false)
+const designError = ref('')
+
+const memberMap = computed(() => {
+  const map = {}
+  for (const m of members.value) {
+    map[m.id] = m
+  }
+  return map
+})
+
+const effectiveNodeMap = computed(() => {
+  const map = { ...nodeMap.value }
+  if (designProposal.value?.operations) {
+    for (const op of designProposal.value.operations) {
+      if (op.op === 'add_joint') {
+        map[op.id] = { id: op.id, x: op.x ?? 0, y: op.y ?? 0 }
+      } else if (op.op === 'update_joint') {
+        const cur = map[op.id] || { id: op.id, x: 0, y: 0 }
+        const newX = op.x !== undefined ? op.x : (cur.x + (op.dx || 0))
+        const newY = op.y !== undefined ? op.y : (cur.y + (op.dy || 0))
+        map[op.id] = { id: op.id, x: newX, y: newY }
+      }
+    }
+  }
+  return map
+})
+
+const designProposedAdditions = computed(() => {
+  if (!designProposal.value?.operations) return []
+  return designProposal.value.operations.filter((op) => op.op === 'add_member')
+})
+
+const designProposedRemovals = computed(() => {
+  if (!designProposal.value?.operations) return []
+  return designProposal.value.operations
+    .filter((op) => op.op === 'remove_member')
+    .map((op) => op.id)
+})
+
+const designProposedJointOps = computed(() => {
+  if (!designProposal.value?.operations) return []
+  return designProposal.value.operations.filter(
+    (op) => op.op === 'add_joint' || op.op === 'update_joint'
+  )
+})
+
 const aiAssistantMessage = ref('')
 const aiSuggestions = ref([])
 const aiAnalyzing = ref(false)
@@ -169,12 +228,284 @@ const proposalMembers = computed(() => proposal.value?.members || [])
 const validationErrors = computed(() => previewResult.value?.validation?.errors || [])
 const validationWarnings = computed(() => previewResult.value?.validation?.warnings || [])
 const solvability = computed(() => previewResult.value?.solvability || { status: 'incomplete', message: 'Ready' })
-const solverResults = computed(() => previewResult.value?.solver_results || null)
+
+// Solver Results & Transition State
+const persistedSolverData = ref(null)
+const resultsStale = ref(false)
+const showResultsPanel = ref(false)
+const showForceLabels = ref(true)
+
+function handleResultsPanelResize() {
+  fitView()
+  setTimeout(() => {
+    fitView()
+  }, 220)
+}
+
+watch(showResultsPanel, (isOpen) => {
+  if (isOpen) {
+    fitView()
+    setTimeout(() => {
+      fitView()
+    }, 220)
+  }
+})
+
+const hasSolvedResults = computed(() => Boolean(persistedSolverData.value?.results))
+const isUnloaded = computed(() => !loads.value || loads.value.length === 0)
+
+const solverResults = computed(() => {
+  if (resultsStale.value) return null
+  return persistedSolverData.value?.results || null
+})
+
+// Unified list of actionable structural and geometry issues for the AI Issue Assistant
+const activeIssues = computed(() => {
+  const list = []
+
+  // 1. Schema Validation Errors (highest severity)
+  for (const [idx, err] of validationErrors.value.entries()) {
+    const elemId = err.element_id || (err.path ? err.path.split('/').pop() : '')
+    list.push({
+      id: `err-${idx}-${err.code || 'error'}`,
+      code: err.code || 'VALIDATION_ERROR',
+      title: err.code ? err.code.replace(/_/g, ' ') : 'Validation Error',
+      severity: 'error',
+      classification: err.classification || 'invalid_geometry',
+      message: err.message,
+      summary: err.message,
+      element_id: elemId,
+      path: err.path || '',
+      affected_elements: err.affected_elements || {
+        nodes: elemId && nodes.value.some((n) => n.id === elemId) ? [elemId] : [],
+        members: elemId && members.value.some((m) => m.id === elemId) ? [elemId] : [],
+        supports: [],
+      },
+      localization_precision: err.localization_precision || 'exact',
+      details: err.path ? `Field: ${err.path}` : '',
+    })
+  }
+
+  // 2. Semantic Engineering Warnings (e.g. INSUFFICIENT_SUPPORTS, DISCONNECTED_JOINT)
+  for (const [idx, warn] of validationWarnings.value.entries()) {
+    const elemId = warn.element_id || ''
+    const isDisc = warn.code === 'DISCONNECTED_JOINT'
+    const isSupp = warn.code === 'INSUFFICIENT_SUPPORTS'
+    list.push({
+      id: `warn-${idx}-${warn.code || 'warn'}`,
+      code: warn.code || 'WARNING',
+      title: warn.code ? warn.code.replace(/_/g, ' ') : 'Structural Warning',
+      severity: isSupp ? 'error' : 'warning',
+      classification: warn.classification || (isDisc ? 'disconnected_geometry' : isSupp ? 'underconstrained_system' : 'invalid_geometry'),
+      message: warn.message,
+      summary: warn.message,
+      element_id: elemId,
+      path: warn.path || '',
+      affected_elements: warn.affected_elements || {
+        nodes: isDisc ? [elemId] : isSupp ? (supports.value.length ? supports.value.map((s) => s.node) : nodes.value.map((n) => n.id)) : [],
+        members: elemId && members.value.some((m) => m.id === elemId) ? [elemId] : [],
+        supports: isSupp ? supports.value.map((s) => s.id) : [],
+      },
+      localization_precision: warn.localization_precision || 'exact',
+      details: elemId ? `Element: ${elemId}` : '',
+    })
+  }
+
+  // 3. Solvability Diagnostics (e.g. UNDERDETERMINED, SINGULAR_SQUARE, OVERDETERMINED)
+  if (solvability.value?.status === 'unsolvable' && solvability.value?.category) {
+    const cat = solvability.value.category
+    const isMech = cat === 'UNDERDETERMINED' || cat === 'SINGULAR_SQUARE'
+    list.push({
+      id: `diag-${cat}`,
+      code: cat,
+      title: isMech
+        ? 'Kinematic Mechanism / Stability Issue'
+        : cat === 'OVERDETERMINED'
+          ? 'Statically Indeterminate System'
+          : 'Solver Diagnostic',
+      severity: isMech ? 'mechanism' : 'error',
+      classification: solvability.value.classification || (isMech ? 'mechanism' : cat === 'OVERDETERMINED' ? 'statically_indeterminate' : 'solver_diagnostic'),
+      message: solvability.value.message || 'The structure cannot be solved in static equilibrium.',
+      summary: solvability.value.message || 'System is kinematically unstable or rank deficient.',
+      affected_elements: solvability.value.affected_elements || {
+        nodes: nodes.value.map((n) => n.id),
+        members: members.value.map((m) => m.id),
+        supports: supports.value.map((s) => s.id),
+      },
+      localization_precision: solvability.value.localization_precision || 'component_level',
+      uncertainty_explanation:
+        solvability.value.uncertainty_explanation ||
+        'Numerical rank deficiency detected. The kinematic mechanism is distributed across this connected component; the exact affected member cannot be uniquely isolated without additional panel bracing.',
+      details: `Equations: ${solvability.value.equation_count || 0}, Unknowns: ${solvability.value.unknown_count || 0}, Numerical Rank: ${solvability.value.rank ?? 'N/A'}`,
+    })
+  }
+
+  // 4. Excessive Axial Force Advisory (differentiating stability from strength failures)
+  if (solverResults.value?.member_forces) {
+    for (const [mId, forceVal] of Object.entries(solverResults.value.member_forces)) {
+      const forceNum = Number(forceVal)
+      if (Math.abs(forceNum) >= 1000.0) {
+        const memObj = members.value.find((m) => m.id === mId)
+        list.push({
+          id: `force-${mId}`,
+          code: 'HIGH_AXIAL_FORCE',
+          title: 'High Axial Force Advisory',
+          severity: 'warning',
+          classification: 'high_axial_force',
+          element_id: mId,
+          affected_elements: {
+            nodes: memObj ? [memObj.node_i, memObj.node_j] : [],
+            members: [mId],
+            supports: [],
+          },
+          localization_precision: 'exact',
+          message: `Member ${mId} carries high axial force (${forceNum.toFixed(1)} ${solverResults.value.force_unit || 'kN'}). Note: material yield strength and cross-sectional properties are not declared in schema; this indicates high loading, not certified strength failure.`,
+          summary: `High member load (${forceNum.toFixed(1)} ${solverResults.value.force_unit || 'kN'}). Capacity check requires material properties.`,
+          details: `Force: ${forceNum.toFixed(2)}, State: ${solverResults.value.member_states?.[mId] || 'loaded'}`,
+        })
+      }
+    }
+  }
+
+  return list
+})
+
+const selectedIssueId = ref(null)
+const aiPreviewFix = ref(null)
+const userClearedHighlight = ref(false)
+
+// Automatically select the first issue when issues appear, or clear when resolved
+watch(
+  () => activeIssues.value,
+  (issues) => {
+    if (!issues.length) {
+      selectedIssueId.value = null
+      userClearedHighlight.value = false
+      return
+    }
+    // If user explicitly cleared highlighting, preserve their choice during background recalculation
+    if (userClearedHighlight.value) return
+
+    if (!selectedIssueId.value || !issues.some((i) => i.id === selectedIssueId.value)) {
+      selectedIssueId.value = issues[0].id
+      focusOnIssue(issues[0])
+    }
+  },
+  { immediate: true }
+)
+
+const selectedIssue = computed(() => {
+  if (!selectedIssueId.value) return null
+  return activeIssues.value.find((i) => i.id === selectedIssueId.value) || null
+})
+
+const isHighlightActive = computed(() => Boolean(selectedIssue.value))
+const affectedNodeIds = computed(() => new Set(selectedIssue.value?.affected_elements?.nodes || []))
+const affectedMemberIds = computed(() => new Set(selectedIssue.value?.affected_elements?.members || []))
+
+function toggleHighlightMode() {
+  if (isHighlightActive.value) {
+    userClearedHighlight.value = true
+    selectedIssueId.value = null
+    aiPreviewFix.value = null
+  } else if (activeIssues.value.length) {
+    userClearedHighlight.value = false
+    selectedIssueId.value = activeIssues.value[0].id
+    focusOnIssue(activeIssues.value[0])
+  }
+}
+
+function handleSelectIssue(issue) {
+  if (!issue) return
+  userClearedHighlight.value = false
+  selectedIssueId.value = issue.id
+  focusOnIssue(issue)
+}
+
+function handleClearHighlight() {
+  userClearedHighlight.value = true
+  selectedIssueId.value = null
+  aiPreviewFix.value = null
+}
+
+function focusOnIssue(issue) {
+  if (!issue) return
+  const affectedNodes = (issue.affected_elements?.nodes || [])
+    .map((nid) => nodeMap.value[nid])
+    .filter(Boolean)
+
+  let targetX = 0
+  let targetY = 0
+
+  if (affectedNodes.length > 0) {
+    targetX = affectedNodes.reduce((sum, n) => sum + n.x, 0) / affectedNodes.length
+    targetY = affectedNodes.reduce((sum, n) => sum + n.y, 0) / affectedNodes.length
+  } else if (issue.affected_elements?.members?.length > 0) {
+    const mem = members.value.find((m) => m.id === issue.affected_elements.members[0])
+    if (mem && nodeMap.value[mem.node_i] && nodeMap.value[mem.node_j]) {
+      targetX = (nodeMap.value[mem.node_i].x + nodeMap.value[mem.node_j].x) / 2
+      targetY = (nodeMap.value[mem.node_i].y + nodeMap.value[mem.node_j].y) / 2
+    } else {
+      return
+    }
+  } else {
+    return
+  }
+
+  const rect = svgRef.value?.getBoundingClientRect()
+  if (rect) {
+    pan.value = {
+      x: rect.width / 2 - targetX * scale.value,
+      y: rect.height / 2 + targetY * scale.value,
+    }
+  }
+}
+
+// Compute dynamic screen anchor position for floating contextual card
+const contextualCardPosition = computed(() => {
+  if (!selectedIssue.value) return null
+  const issue = selectedIssue.value
+  const affectedNodes = (issue.affected_elements?.nodes || [])
+    .map((nid) => nodeMap.value[nid])
+    .filter(Boolean)
+
+  let wx = 0
+  let wy = 0
+
+  if (affectedNodes.length > 0) {
+    wx = affectedNodes.reduce((sum, n) => sum + n.x, 0) / affectedNodes.length
+    wy = affectedNodes.reduce((sum, n) => sum + n.y, 0) / affectedNodes.length
+  } else if (issue.affected_elements?.members?.length > 0) {
+    const mem = members.value.find((m) => m.id === issue.affected_elements.members[0])
+    if (mem && nodeMap.value[mem.node_i] && nodeMap.value[mem.node_j]) {
+      wx = (nodeMap.value[mem.node_i].x + nodeMap.value[mem.node_j].x) / 2
+      wy = (nodeMap.value[mem.node_i].y + nodeMap.value[mem.node_j].y) / 2
+    } else {
+      return null
+    }
+  } else {
+    return null
+  }
+
+  const screen = toScreen(wx, wy)
+  const rect = svgRef.value?.getBoundingClientRect()
+  const cw = rect ? rect.width : 800
+  const ch = rect ? rect.height : 600
+
+  const cardWidth = 360
+  const cardHeight = 440
+
+  return {
+    x: Math.max(16, Math.min(screen.x + 28, Math.max(16, cw - cardWidth - 16))),
+    y: Math.max(16, Math.min(screen.y - 40, Math.max(16, ch - cardHeight - 16))),
+  }
+})
 
 const statusCategory = computed(() => {
   if (calculating.value) return 'calculating'
+  if (resultsStale.value && persistedSolverData.value) return 'stale'
+  if (hasSolvedResults.value && !resultsStale.value) return 'solved'
   if (!previewResult.value) return 'neutral'
-  if (isDirty.value && solverResults.value) return 'stale'
   if (!previewResult.value.is_valid) return 'red'
   if (solvability.value.status === 'solvable') return 'green'
   if (solvability.value.status === 'incomplete') return 'yellow'
@@ -183,7 +514,8 @@ const statusCategory = computed(() => {
 
 const statusPillLabel = computed(() => {
   if (calculating.value) return 'Calculating…'
-  if (statusCategory.value === 'stale') return 'Stale — Editing'
+  if (statusCategory.value === 'stale') return 'STALE — EDITING'
+  if (statusCategory.value === 'solved') return 'SOLVED'
   return solvability.value.status.toUpperCase()
 })
 
@@ -267,6 +599,9 @@ function pushHistory() {
   historyStack.value.push(snapshot)
   historyIndex.value = historyStack.value.length - 1
   isDirty.value = true
+  if (persistedSolverData.value) {
+    resultsStale.value = true
+  }
   schedulePreview()
 }
 
@@ -276,6 +611,9 @@ function undo() {
     historyIndex.value -= 1
     geometry.value = JSON.parse(historyStack.value[historyIndex.value])
     isDirty.value = true
+    if (persistedSolverData.value) {
+      resultsStale.value = true
+    }
     isHistoryNavigating.value = false
     schedulePreview()
   }
@@ -287,6 +625,9 @@ function redo() {
     historyIndex.value += 1
     geometry.value = JSON.parse(historyStack.value[historyIndex.value])
     isDirty.value = true
+    if (persistedSolverData.value) {
+      resultsStale.value = true
+    }
     isHistoryNavigating.value = false
     schedulePreview()
   }
@@ -472,6 +813,9 @@ function clearModel() {
     onConfirm: () => {
       geometry.value.model = { nodes: [], members: [], supports: [], loads: [] }
       selectedElement.value = null
+      if (persistedSolverData.value) {
+        resultsStale.value = true
+      }
       pushHistory()
     },
   })
@@ -495,12 +839,13 @@ function fitView() {
   const spanY = Math.max(maxY - minY, 1)
 
   const rect = svgRef.value?.getBoundingClientRect() || { width: 800, height: 600 }
-  const padding = 100
-  const availW = Math.max(rect.width - padding * 2, 200)
-  const availH = Math.max(rect.height - padding * 2, 200)
+  const paddingX = Math.min(60, Math.max(16, Math.floor(rect.width * 0.08)))
+  const paddingY = Math.min(50, Math.max(16, Math.floor(rect.height * 0.1)))
+  const availW = Math.max(rect.width - paddingX * 2, 80)
+  const availH = Math.max(rect.height - paddingY * 2, 60)
 
   const fitScale = Math.min(availW / spanX, availH / spanY, 150)
-  scale.value = Math.max(fitScale, 20)
+  scale.value = Math.max(fitScale, 15)
 
   const midX = (minX + maxX) / 2
   const midY = (minY + maxY) / 2
@@ -526,12 +871,21 @@ function zoomAt(factor, clientX, clientY) {
 }
 
 function handleWheel(e) {
+  // If the event originated inside floating UI (issue assistant, status bar, drawers), do not zoom canvas
+  if (e.target && e.target.closest && e.target.closest('.contextual-action-card, .assistant-minimized-pill, .warnings-drawer, .editor-statusbar, .analysis-results-panel')) {
+    return
+  }
   e.preventDefault()
   const factor = e.deltaY < 0 ? 1.15 : 0.87
   zoomAt(factor, e.clientX, e.clientY)
 }
 
 function handlePointerDown(e) {
+  // If pointer event originated inside floating UI controls, do not handle canvas interactions
+  if (e.target && e.target.closest && e.target.closest('.contextual-action-card, .assistant-minimized-pill, .warnings-drawer, .editor-statusbar, .analysis-results-panel')) {
+    return
+  }
+
   if (e.button === 1 || activeTool.value === 'pan' || e.spaceKey) {
     isDragging.value = true
     dragStart.value = { x: e.clientX, y: e.clientY }
@@ -568,6 +922,10 @@ function handlePointerDown(e) {
 }
 
 function handlePointerMove(e) {
+  if (e.target && e.target.closest && e.target.closest('.contextual-action-card, .assistant-minimized-pill, .warnings-drawer, .editor-statusbar') && !isDragging.value && !draggingNodeId.value) {
+    return
+  }
+
   const rect = svgRef.value.getBoundingClientRect()
   const sx = e.clientX - rect.left
   const sy = e.clientY - rect.top
@@ -585,6 +943,9 @@ function handlePointerMove(e) {
     if (node) {
       node.x = Number(snap(world.x).toFixed(3))
       node.y = Number(snap(world.y).toFixed(3))
+      if (persistedSolverData.value) {
+        resultsStale.value = true
+      }
       schedulePreview()
     }
   }
@@ -665,15 +1026,85 @@ function memberLine(member) {
 }
 
 function memberState(memberId) {
-  return solverResults.value?.member_states?.[memberId] || 'unsolved'
+  if (resultsStale.value || !solverResults.value) return 'unsolved'
+  if (solverResults.value.member_states?.[memberId]) {
+    return solverResults.value.member_states[memberId]
+  }
+  const val = solverResults.value.member_forces?.[memberId]
+  if (val == null) return 'unsolved'
+  const force = Number(val)
+  if (Math.abs(force) < 1e-6) return 'zero'
+  return force > 0 ? 'tension' : 'compression'
 }
 
 function memberForceText(memberId) {
-  const val = solverResults.value?.member_forces?.[memberId]
+  if (resultsStale.value || !solverResults.value) return ''
+  const val = solverResults.value.member_forces?.[memberId]
   if (val == null) return ''
   const force = Number(val).toFixed(2)
-  const unit = geometry.value.metadata.units.force || 'kN'
-  return `${force > 0 ? '+' : ''}${force} ${unit}`
+  const unit = solverResults.value.force_unit || geometry.value.metadata?.units?.force || 'kN'
+  return `${Number(val) > 0 ? '+' : ''}${force} ${unit}`
+}
+
+const calculatedReactions = computed(() => {
+  if (resultsStale.value || !solverResults.value?.support_reactions) return []
+  const reactionsObj = solverResults.value.support_reactions
+  const list = []
+  const forceUnit = solverResults.value.force_unit || geometry.value.metadata?.units?.force || 'kN'
+
+  for (const sup of supports.value) {
+    const rxData = reactionsObj[sup.id] || reactionsObj[sup.node] || {}
+    const fx = typeof rxData.x === 'number' ? rxData.x : 0
+    const fy = typeof rxData.y === 'number' ? rxData.y : 0
+    const node = nodeMap.value[sup.node]
+    if (!node) continue
+
+    const pt = toScreen(node.x, node.y)
+    const hasFx = Math.abs(fx) >= 1e-4
+    const hasFy = Math.abs(fy) >= 1e-4
+    const magnitude = Math.sqrt(fx * fx + fy * fy)
+
+    list.push({
+      supportId: sup.id,
+      nodeId: sup.node,
+      supportType: sup.type,
+      pt,
+      fx,
+      fy,
+      hasFx,
+      hasFy,
+      isZero: !hasFx && !hasFy,
+      magnitude,
+      forceUnit,
+      fxLabel: `Rx: ${fx >= 0 ? '+' : ''}${fx.toFixed(2)} ${forceUnit}`,
+      fyLabel: `Ry: ${fy >= 0 ? '+' : ''}${fy.toFixed(2)} ${forceUnit}`,
+      zeroLabel: `R: 0.00 ${forceUnit}`,
+    })
+  }
+  return list
+})
+
+function handleSelectMemberFromResults(memberId) {
+  selectedElement.value = { type: 'member', id: memberId }
+  const member = members.value.find((m) => m.id === memberId)
+  if (member) {
+    const coords = memberLine(member)
+    if (coords && svgRef.value) {
+      const rect = svgRef.value.getBoundingClientRect()
+      pan.value = {
+        x: rect.width / 2 - (coords.mx - pan.value.x),
+        y: rect.height / 2 - (coords.my - pan.value.y),
+      }
+    }
+  }
+}
+
+async function handleReSolve() {
+  if (reviewStatus.value !== 'reviewed') {
+    await saveDraft()
+    await markReviewed()
+  }
+  await submitToSolver()
 }
 
 function memberLength(member) {
@@ -748,12 +1179,17 @@ async function submitToSolver() {
     onConfirm: async () => {
       solving.value = true
       try {
-        await solveReviewedAnalysis(props.analysisId)
+        const res = await solveReviewedAnalysis(props.analysisId)
         reviewStatus.value = 'submitted'
-        statusMessage.value = 'Solver completed.'
-        showToast('Solver completed successfully.', 'success')
+        persistedSolverData.value = res
+        resultsStale.value = false
+        showResultsPanel.value = true
+        statusMessage.value = 'Truss solved successfully.'
+        showToast('Truss solved successfully — analysis results available.', 'success')
         emit('updated')
         await runPreview()
+        await nextTick()
+        fitView()
       } catch (err) {
         showToast(err.message || 'Solver failed.', 'error')
       } finally {
@@ -834,6 +1270,199 @@ function applySuggestion(sugg) {
   aiAssistantMessage.value = `Applied: ${sugg.title}. Model updated.`
 }
 
+// --- Natural Language Conversational Design Assistant Handlers ---
+async function handleDesignSubmit({ message, intent }) {
+  designBusy.value = true
+  designError.value = ''
+
+  const currentSnapshot = JSON.parse(JSON.stringify(geometry.value))
+
+  const context = {
+    analysis_id: props.analysisId || undefined,
+    model_revision: designModelRevision.value,
+    model: currentSnapshot,
+    units: geometry.value?.metadata?.units || { length: 'm', force: 'kN' },
+    selected_element: selectedElement.value ? {
+      type: selectedElement.value.type,
+      id: selectedElement.value.id,
+    } : null,
+    diagnostics: previewResult.value?.solvability || null,
+    solver_results: (!resultsStale.value && hasSolvedResults.value) ? solverResults.value : null,
+  }
+
+  try {
+    const res = await designTruss({
+      message,
+      intent,
+      context,
+    })
+    designProposal.value = res
+    if (res.intent === 'explain') {
+      showToast('Engineering explanation generated.', 'info')
+    } else {
+      showToast('Design proposal formulated. Review on-canvas preview.', 'info')
+    }
+  } catch (err) {
+    if (err.body?.error === 'OUT_OF_SCOPE' || err.status === 400) {
+      designError.value = err.message || 'Request is out of scope for structural design.'
+    } else {
+      designError.value = err.message || 'Design assistant encountered an error.'
+    }
+  } finally {
+    designBusy.value = false
+  }
+}
+
+async function handleApplyDesignProposal(proposal) {
+  if (!proposal || !proposal.proposed_model) return
+  designBusy.value = true
+  designError.value = ''
+
+  try {
+    const res = await applyDesignProposal({
+      proposal_id: proposal.proposal_id,
+      analysis_id: props.analysisId || null,
+      base_revision: proposal.base_revision ?? designModelRevision.value,
+      proposed_model: proposal.proposed_model,
+      create_record: false,
+    })
+
+    if (res.status === 'applied') {
+      geometry.value = JSON.parse(JSON.stringify(res.model))
+      pushHistory()
+      isDirty.value = true
+      designModelRevision.value = res.model_revision || (designModelRevision.value + 1)
+      designProposal.value = null
+
+      // Invalidate solver results associated with previous revision
+      persistedSolverData.value = null
+      resultsStale.value = true
+
+      await runPreview()
+      showToast('Design proposal applied successfully.', 'success')
+      emit('updated')
+    }
+  } catch (err) {
+    if (err.status === 409) {
+      designError.value = 'Revision conflict: Canvas model was modified after this proposal was generated. Please formulate a fresh request.'
+    } else {
+      designError.value = err.message || 'Failed to apply design proposal.'
+    }
+  } finally {
+    designBusy.value = false
+  }
+}
+
+async function handleRejectDesignProposal(proposal) {
+  if (!proposal) return
+  designBusy.value = true
+  try {
+    await rejectDesignProposal({
+      proposal_id: proposal.proposal_id,
+      analysis_id: props.analysisId || null,
+      base_revision: proposal.base_revision ?? designModelRevision.value,
+    })
+    designProposal.value = null
+    showToast('Design proposal discarded. Canvas geometry preserved.', 'info')
+  } catch (err) {
+    designProposal.value = null
+  } finally {
+    designBusy.value = false
+  }
+}
+
+// --- Floating AI Issue Resolution Assistant Handlers ---
+function handleHighlightIssue(issue) {
+  if (!issue) return
+  if (issue.element_id) {
+    if (nodes.value.some((n) => n.id === issue.element_id)) {
+      selectedElement.value = { type: 'node', id: issue.element_id }
+    } else if (members.value.some((m) => m.id === issue.element_id)) {
+      selectedElement.value = { type: 'member', id: issue.element_id }
+    }
+  }
+}
+
+function handlePreviewFix(fix) {
+  aiPreviewFix.value = fix
+}
+
+function handleClearPreview() {
+  aiPreviewFix.value = null
+}
+
+function applyAiFix(fix) {
+  if (!fix || !fix.modifications) return
+
+  const mods = fix.modifications
+  const model = geometry.value.model
+
+  // 1. Removals
+  if (mods.nodes_to_remove?.length) {
+    const toRemove = new Set(mods.nodes_to_remove)
+    model.nodes = model.nodes.filter((n) => !toRemove.has(n.id))
+    model.members = model.members.filter((m) => !toRemove.has(m.node_i) && !toRemove.has(m.node_j))
+    model.supports = model.supports.filter((s) => !toRemove.has(s.node))
+    model.loads = model.loads.filter((l) => !toRemove.has(l.node))
+  }
+
+  if (mods.members_to_remove?.length) {
+    const toRemove = new Set(mods.members_to_remove)
+    model.members = model.members.filter((m) => !toRemove.has(m.id))
+  }
+
+  if (mods.supports_to_remove?.length) {
+    const toRemove = new Set(mods.supports_to_remove)
+    model.supports = model.supports.filter((s) => !toRemove.has(s.id))
+  }
+
+  if (mods.loads_to_remove?.length) {
+    const toRemove = new Set(mods.loads_to_remove)
+    model.loads = model.loads.filter((l) => !toRemove.has(l.id))
+  }
+
+  // 2. Additions
+  if (mods.nodes_to_add?.length) {
+    for (const n of mods.nodes_to_add) {
+      if (!model.nodes.some((existing) => existing.id === n.id)) {
+        model.nodes.push({ id: n.id, x: Number(n.x), y: Number(n.y) })
+      }
+    }
+  }
+
+  if (mods.members_to_add?.length) {
+    for (const m of mods.members_to_add) {
+      if (!model.members.some((existing) => existing.id === m.id)) {
+        model.members.push({ id: m.id, node_i: m.node_i, node_j: m.node_j })
+      }
+    }
+  }
+
+  if (mods.supports_to_add?.length) {
+    for (const s of mods.supports_to_add) {
+      if (!model.supports.some((existing) => existing.id === s.id)) {
+        const supRecord = { id: s.id, node: s.node, type: s.type }
+        if (s.type === 'roller') {
+          supRecord.direction = s.direction === 'horizontal' ? 'horizontal' : 'vertical'
+        }
+        model.supports.push(supRecord)
+      }
+    }
+  }
+
+  if (mods.loads_to_add?.length) {
+    for (const l of mods.loads_to_add) {
+      if (!model.loads.some((existing) => existing.id === l.id)) {
+        model.loads.push({ id: l.id, node: l.node, fx: Number(l.fx), fy: Number(l.fy) })
+      }
+    }
+  }
+
+  aiPreviewFix.value = null
+  pushHistory()
+  showToast(`Applied fix: ${fix.title}`, 'success')
+}
+
 // --- Lifecycle & Init ---
 async function loadData() {
   loading.value = true
@@ -852,6 +1481,19 @@ async function loadData() {
       coordinatesConfirmed.value = true
     } else if (proposalJoints.value.length) {
       importAllProposal()
+    }
+
+    designModelRevision.value = analysisData.validation_json?.revision || (draftData.draft?.metadata?.revision || 1)
+
+    if (analysisData.status === 'solved' && analysisData.solver_results) {
+      persistedSolverData.value = {
+        analysis_id: analysisData.id,
+        status: 'SOLVED',
+        diagnostics: analysisData.diagnostics,
+        results: analysisData.solver_results,
+        warning: 'A numerical solution does not establish physical stability or engineering suitability.',
+      }
+      resultsStale.value = false
     }
 
     pushHistory()
@@ -886,6 +1528,23 @@ function handleKeydown(e) {
   }
 }
 
+let resizeObserver = null
+
+watch(svgRef, (el) => {
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+    resizeObserver = null
+  }
+  if (el && typeof window !== 'undefined' && window.ResizeObserver) {
+    resizeObserver = new ResizeObserver(() => {
+      if (!isDragging.value && !draggingNodeId.value) {
+        fitView()
+      }
+    })
+    resizeObserver.observe(el)
+  }
+})
+
 onMounted(() => {
   window.addEventListener('keydown', handleKeydown)
   loadData()
@@ -895,6 +1554,10 @@ onBeforeUnmount(() => {
   window.removeEventListener('keydown', handleKeydown)
   clearTimeout(previewDebounceTimer)
   clearTimeout(toastTimer)
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+    resizeObserver = null
+  }
 })
 </script>
 
@@ -932,7 +1595,7 @@ onBeforeUnmount(() => {
     <header class="editor-topbar">
       <!-- Left: Navigation + Title -->
       <div class="topbar-left">
-        <button class="back-btn" type="button" title="Back to analysis" @click="emit('back')">
+        <button class="back-btn" type="button" title="Back to analysis" aria-label="Back to analysis" @click="emit('back')">
           <ArrowLeft :size="14" /> Back
         </button>
         <div class="toolbar-separator" />
@@ -949,10 +1612,10 @@ onBeforeUnmount(() => {
 
       <!-- Center: Undo/Redo, Units, Coordinate Confirm -->
       <div class="topbar-center">
-        <button class="tool-btn" type="button" title="Undo (Ctrl+Z)" :disabled="historyIndex <= 0" @click="undo">
+        <button class="tool-btn" type="button" title="Undo (Ctrl+Z)" aria-label="Undo" :disabled="historyIndex <= 0" @click="undo">
           <Undo2 :size="15" />
         </button>
-        <button class="tool-btn" type="button" title="Redo (Ctrl+Y)" :disabled="historyIndex >= historyStack.length - 1" @click="redo">
+        <button class="tool-btn" type="button" title="Redo (Ctrl+Y)" aria-label="Redo" :disabled="historyIndex >= historyStack.length - 1" @click="redo">
           <Redo2 :size="15" />
         </button>
 
@@ -989,13 +1652,32 @@ onBeforeUnmount(() => {
           <Check :size="14" />
           <span>{{ reviewing ? 'Reviewing…' : 'Mark Reviewed' }}</span>
         </button>
-        <button class="action-btn btn-solve" type="button" :disabled="!canSolve" @click="submitToSolver">
-          <Play :size="14" />
+        <button class="action-btn btn-solve" type="button" :disabled="!canSolve || solving" @click="submitToSolver">
+          <Loader2 v-if="solving" :size="14" class="spin-icon" />
+          <Play v-else :size="14" />
           <span>{{ solving ? 'Solving…' : 'Solve' }}</span>
         </button>
+        <button
+          v-if="hasSolvedResults"
+          class="action-btn btn-results"
+          :class="{ active: showResultsPanel, stale: resultsStale }"
+          type="button"
+          :title="showResultsPanel ? 'Hide Analysis Results' : 'View Analysis Results'"
+          @click="showResultsPanel = !showResultsPanel"
+        >
+          <BarChart3 :size="14" />
+          <span>{{ resultsStale ? 'Results *' : 'Results' }}</span>
+        </button>
         <div class="toolbar-separator" />
-        <button class="action-btn btn-ai" type="button" title="AI Engineering Assistant" @click="openAiAssistant">
-          <Bot :size="14" /> AI
+        <button
+          class="action-btn btn-ai"
+          :class="{ active: showDesignAssistant }"
+          type="button"
+          title="Natural Language Design Assistant"
+          @click="showDesignAssistant = !showDesignAssistant"
+        >
+          <Sparkles :size="14" />
+          <span>Design with AI</span>
         </button>
       </div>
     </header>
@@ -1021,25 +1703,77 @@ onBeforeUnmount(() => {
         </div>
       </div>
 
-      <!-- ─── Engineering Canvas ─── -->
-      <div
-        v-else
-        class="canvas-container"
-        :class="{ panning: isDragging || activeTool === 'pan' }"
-        @wheel.passive="handleWheel"
-        @pointerdown="handlePointerDown"
-        @pointermove="handlePointerMove"
-        @pointerup="handlePointerUp"
-      >
-        <!-- Floating View Controls -->
-        <div class="canvas-floating-controls">
-          <button class="tool-btn" type="button" title="Zoom In"     @click="zoomAt(1.2, 400, 300)"><ZoomIn  :size="14" /></button>
-          <button class="tool-btn" type="button" title="Zoom Out"    @click="zoomAt(0.83, 400, 300)"><ZoomOut :size="14" /></button>
-          <button class="tool-btn" type="button" title="Fit Content" @click="fitView"><Maximize2 :size="14" /></button>
-          <div class="toolbar-separator" />
-          <button class="tool-btn" :class="{ active: showGrid }"      type="button" title="Toggle Grid"     @click="showGrid = !showGrid"><Grid3x3 :size="14" /></button>
-          <button class="tool-btn" :class="{ active: snapToGrid }"    type="button" title="Snap to Grid"    @click="snapToGrid = !snapToGrid"><Magnet :size="14" /></button>
-          <button class="tool-btn" :class="{ active: showAiProposal }" type="button" title="AI Proposal Layer" @click="showAiProposal = !showAiProposal"><Sparkles :size="14" /></button>
+      <!-- ─── Center Canvas & Results Viewport Column ─── -->
+      <div v-else class="editor-canvas-column">
+        <!-- ─── Engineering Canvas Viewport ─── -->
+        <div
+          class="canvas-container"
+          :class="{ panning: isDragging || activeTool === 'pan' }"
+          @wheel="handleWheel"
+          @pointerdown="handlePointerDown"
+          @pointermove="handlePointerMove"
+          @pointerup="handlePointerUp"
+        >
+          <!-- Floating View Controls -->
+          <div class="canvas-floating-controls" role="toolbar" aria-label="Canvas view controls">
+            <button class="tool-btn" type="button" title="Zoom In" aria-label="Zoom in" @click="zoomAt(1.2, 400, 300)"><ZoomIn :size="14" /></button>
+            <button class="tool-btn" type="button" title="Zoom Out" aria-label="Zoom out" @click="zoomAt(0.83, 400, 300)"><ZoomOut :size="14" /></button>
+            <button class="tool-btn" type="button" title="Fit Content" aria-label="Fit content to view" @click="fitView"><Maximize2 :size="14" /></button>
+            <div class="toolbar-separator" role="separator" />
+            <button class="tool-btn" :class="{ active: showGrid }" type="button" title="Toggle Grid" aria-label="Toggle grid" :aria-pressed="showGrid" @click="showGrid = !showGrid"><Grid3x3 :size="14" /></button>
+            <button class="tool-btn" :class="{ active: snapToGrid }" type="button" title="Snap to Grid" aria-label="Snap to grid" :aria-pressed="snapToGrid" @click="snapToGrid = !snapToGrid"><Magnet :size="14" /></button>
+            <button class="tool-btn" :class="{ active: showAiProposal }" type="button" title="AI Proposal Layer" aria-label="Toggle AI proposal layer" :aria-pressed="showAiProposal" @click="showAiProposal = !showAiProposal"><Sparkles :size="14" /></button>
+            <button v-if="activeIssues.length" class="tool-btn" :class="{ active: isHighlightActive }" type="button" :title="isHighlightActive ? 'Clear issue highlighting' : 'Highlight detected issues'" :aria-label="isHighlightActive ? 'Clear issue highlighting' : 'Highlight detected issues'" :aria-pressed="isHighlightActive" @click="toggleHighlightMode"><AlertTriangle :size="14" /></button>
+            <div v-if="hasSolvedResults" class="toolbar-separator" role="separator" />
+            <button
+              v-if="hasSolvedResults && !resultsStale"
+              class="tool-btn"
+              :class="{ active: showForceLabels }"
+              type="button"
+              :title="showForceLabels ? 'Hide member force labels' : 'Show member force labels'"
+              :aria-label="showForceLabels ? 'Hide member force labels' : 'Show member force labels'"
+              :aria-pressed="showForceLabels"
+              @click="showForceLabels = !showForceLabels"
+            >
+              <Tag :size="14" />
+            </button>
+            <button
+              v-if="hasSolvedResults"
+              class="tool-btn"
+              :class="{ active: showResultsPanel }"
+              type="button"
+              title="Toggle Analysis Results panel"
+              aria-label="Toggle Analysis Results panel"
+              :aria-pressed="showResultsPanel"
+              @click="showResultsPanel = !showResultsPanel"
+            >
+              <BarChart3 :size="14" />
+            </button>
+          </div>
+
+        <!-- Floating Forces Color Legend -->
+        <div v-if="hasSolvedResults && !resultsStale" class="canvas-forces-legend" aria-label="Analysis Legend">
+          <div class="legend-header">
+            <span class="legend-title">Forces Legend</span>
+          </div>
+          <div class="legend-grid">
+            <div class="legend-row">
+              <span class="legend-swatch swatch-tension" />
+              <span class="legend-text">Tension (+)</span>
+            </div>
+            <div class="legend-row">
+              <span class="legend-swatch swatch-compression" />
+              <span class="legend-text">Compression (−)</span>
+            </div>
+            <div class="legend-row">
+              <span class="legend-swatch swatch-zero" />
+              <span class="legend-text">Zero-Force (0)</span>
+            </div>
+            <div class="legend-row">
+              <span class="legend-swatch swatch-reaction" />
+              <span class="legend-text">Reaction (R)</span>
+            </div>
+          </div>
         </div>
 
         <!-- Mode hint: member start -->
@@ -1111,17 +1845,31 @@ onBeforeUnmount(() => {
                 <line
                   :x1="memberLine(member).x1" :y1="memberLine(member).y1"
                   :x2="memberLine(member).x2" :y2="memberLine(member).y2"
-                  :class="['truss-member-line', `state-${memberState(member.id)}`, { selected: selectedElement?.id === member.id }]"
+                  :class="[
+                    'truss-member-line',
+                    `state-${memberState(member.id)}`,
+                    {
+                      selected: selectedElement?.id === member.id,
+                      'is-muted': isHighlightActive && !affectedMemberIds.has(member.id),
+                      'issue-highlight-error': isHighlightActive && affectedMemberIds.has(member.id) && (selectedIssue?.severity === 'error' || selectedIssue?.classification === 'invalid_geometry'),
+                      'issue-highlight-mechanism': isHighlightActive && affectedMemberIds.has(member.id) && (selectedIssue?.severity === 'mechanism' || selectedIssue?.classification === 'mechanism'),
+                      'issue-highlight-warning': isHighlightActive && affectedMemberIds.has(member.id) && selectedIssue?.severity === 'warning' && selectedIssue?.classification !== 'mechanism',
+                    }
+                  ]"
                   @click.stop="handleMemberClick(member, $event)"
                 />
-                <text :x="memberLine(member).mx" :y="memberLine(member).my - 7" class="member-label">
+                <text
+                  :x="memberLine(member).mx"
+                  :y="memberLine(member).my - 7"
+                  :class="['member-label', { 'is-muted': isHighlightActive && !affectedMemberIds.has(member.id) }]"
+                >
                   {{ member.id }}
                 </text>
                 <text
-                  v-if="memberForceText(member.id)"
+                  v-if="showForceLabels && !resultsStale && memberForceText(member.id)"
                   :x="memberLine(member).mx"
                   :y="memberLine(member).my + 9"
-                  :class="['member-force-label', memberState(member.id)]"
+                  :class="['member-force-label', memberState(member.id), { 'is-muted': isHighlightActive && !affectedMemberIds.has(member.id) }]"
                 >
                   {{ memberForceText(member.id) }}
                 </text>
@@ -1133,14 +1881,102 @@ onBeforeUnmount(() => {
           <g class="truss-supports-group">
             <g v-for="support in supports" :key="`sup-${support.id}`">
               <template v-if="nodeMap[support.node]">
-                <g v-if="support.type === 'pin'" :transform="`translate(${toScreen(nodeMap[support.node].x, nodeMap[support.node].y).x}, ${toScreen(nodeMap[support.node].x, nodeMap[support.node].y).y})`">
+                <g
+                  v-if="support.type === 'pin'"
+                  :transform="`translate(${toScreen(nodeMap[support.node].x, nodeMap[support.node].y).x}, ${toScreen(nodeMap[support.node].x, nodeMap[support.node].y).y})`"
+                  :class="{ 'is-muted': isHighlightActive && !affectedNodeIds.has(support.node) }"
+                >
                   <polygon points="0,0 -12,18 12,18" class="support-symbol" />
                   <line x1="-16" y1="18" x2="16" y2="18" class="support-hatch" />
                 </g>
-                <g v-else-if="support.type === 'roller'" :transform="`translate(${toScreen(nodeMap[support.node].x, nodeMap[support.node].y).x}, ${toScreen(nodeMap[support.node].x, nodeMap[support.node].y).y})`">
+                <g
+                  v-else-if="support.type === 'roller'"
+                  :transform="`translate(${toScreen(nodeMap[support.node].x, nodeMap[support.node].y).x}, ${toScreen(nodeMap[support.node].x, nodeMap[support.node].y).y})`"
+                  :class="{ 'is-muted': isHighlightActive && !affectedNodeIds.has(support.node) }"
+                >
                   <circle cx="0" cy="8" r="7" class="support-symbol" />
                   <line x1="-14" y1="16" x2="14" y2="16" class="support-hatch" />
                 </g>
+              </template>
+            </g>
+          </g>
+
+          <!-- 5b. Support Reaction Vectors (rendered when solved and not stale) -->
+          <g v-if="hasSolvedResults && !resultsStale" class="truss-reactions-group">
+            <g v-for="rx in calculatedReactions" :key="`rx-vec-${rx.supportId}`">
+              <!-- Vertical Reaction Vector Fy -->
+              <template v-if="rx.hasFy">
+                <!-- Upward reaction (+Fy) -->
+                <template v-if="rx.fy > 0">
+                  <line
+                    :x1="rx.pt.x" :y1="rx.pt.y + 42"
+                    :x2="rx.pt.x" :y2="rx.pt.y + 14"
+                    class="reaction-vector-line"
+                  />
+                  <polygon
+                    :points="`${rx.pt.x},${rx.pt.y + 10} ${rx.pt.x - 5},${rx.pt.y + 19} ${rx.pt.x + 5},${rx.pt.y + 19}`"
+                    class="reaction-arrowhead"
+                  />
+                  <text :x="rx.pt.x + 8" :y="rx.pt.y + 34" class="reaction-vector-label">
+                    {{ rx.fyLabel }}
+                  </text>
+                </template>
+                <!-- Downward reaction (-Fy) -->
+                <template v-else>
+                  <line
+                    :x1="rx.pt.x" :y1="rx.pt.y - 42"
+                    :x2="rx.pt.x" :y2="rx.pt.y - 14"
+                    class="reaction-vector-line"
+                  />
+                  <polygon
+                    :points="`${rx.pt.x},${rx.pt.y - 10} ${rx.pt.x - 5},${rx.pt.y - 19} ${rx.pt.x + 5},${rx.pt.y - 19}`"
+                    class="reaction-arrowhead"
+                  />
+                  <text :x="rx.pt.x + 8" :y="rx.pt.y - 26" class="reaction-vector-label">
+                    {{ rx.fyLabel }}
+                  </text>
+                </template>
+              </template>
+
+              <!-- Horizontal Reaction Vector Fx -->
+              <template v-if="rx.hasFx">
+                <!-- Rightward reaction (+Fx) -->
+                <template v-if="rx.fx > 0">
+                  <line
+                    :x1="rx.pt.x - 42" :y1="rx.pt.y"
+                    :x2="rx.pt.x - 14" :y2="rx.pt.y"
+                    class="reaction-vector-line"
+                  />
+                  <polygon
+                    :points="`${rx.pt.x - 10},${rx.pt.y} ${rx.pt.x - 19},${rx.pt.y - 5} ${rx.pt.x - 19},${rx.pt.y + 5}`"
+                    class="reaction-arrowhead"
+                  />
+                  <text :x="rx.pt.x - 44" :y="rx.pt.y - 8" class="reaction-vector-label">
+                    {{ rx.fxLabel }}
+                  </text>
+                </template>
+                <!-- Leftward reaction (-Fx) -->
+                <template v-else>
+                  <line
+                    :x1="rx.pt.x + 42" :y1="rx.pt.y"
+                    :x2="rx.pt.x + 14" :y2="rx.pt.y"
+                    class="reaction-vector-line"
+                  />
+                  <polygon
+                    :points="`${rx.pt.x + 10},${rx.pt.y} ${rx.pt.x + 19},${rx.pt.y - 5} ${rx.pt.x + 19},${rx.pt.y + 5}`"
+                    class="reaction-arrowhead"
+                  />
+                  <text :x="rx.pt.x + 18" :y="rx.pt.y - 8" class="reaction-vector-label">
+                    {{ rx.fxLabel }}
+                  </text>
+                </template>
+              </template>
+
+              <!-- Zero reaction (unloaded case) -->
+              <template v-if="rx.isZero">
+                <text :x="rx.pt.x + 6" :y="rx.pt.y + 26" class="reaction-vector-label zero">
+                  {{ rx.zeroLabel }}
+                </text>
               </template>
             </g>
           </g>
@@ -1154,12 +1990,12 @@ onBeforeUnmount(() => {
                   :y1="toScreen(nodeMap[load.node].x, nodeMap[load.node].y).y + (load.fy || 0) * 2.5"
                   :x2="toScreen(nodeMap[load.node].x, nodeMap[load.node].y).x"
                   :y2="toScreen(nodeMap[load.node].x, nodeMap[load.node].y).y"
-                  class="load-vector-arrow"
+                  :class="['load-vector-arrow', { 'is-muted': isHighlightActive && !affectedNodeIds.has(load.node) }]"
                 />
                 <text
                   :x="toScreen(nodeMap[load.node].x, nodeMap[load.node].y).x - (load.fx || 0) * 2.5"
                   :y="toScreen(nodeMap[load.node].x, nodeMap[load.node].y).y + (load.fy || 0) * 2.5 - 6"
-                  class="load-label"
+                  :class="['load-label', { 'is-muted': isHighlightActive && !affectedNodeIds.has(load.node) }]"
                 >
                   {{ load.id }}: {{ load.fy ? `${load.fy} ${geometry.metadata.units.force}` : `${load.fx} ${geometry.metadata.units.force}` }}
                 </text>
@@ -1178,23 +2014,185 @@ onBeforeUnmount(() => {
                   'truss-joint-node',
                   {
                     selected: selectedElement?.id === node.id,
-                    'first-selected': memberStartJoint === node.id
+                    'first-selected': memberStartJoint === node.id,
+                    'is-muted': isHighlightActive && !affectedNodeIds.has(node.id),
                   }
                 ]"
                 @pointerdown="handleJointPointerDown(node, $event)"
                 @click="handleJointClick(node, $event)"
               />
+              <!-- Subtle pulsing glow ring around affected joints -->
+              <circle
+                v-if="isHighlightActive && affectedNodeIds.has(node.id)"
+                :cx="toScreen(node.x, node.y).x"
+                :cy="toScreen(node.x, node.y).y"
+                r="14"
+                :class="[
+                  'joint-issue-pulse-ring',
+                  selectedIssue?.severity === 'error' || selectedIssue?.classification === 'invalid_geometry' ? 'ring-error' : 'ring-warning',
+                ]"
+              />
               <text
                 :x="toScreen(node.x, node.y).x + 9"
                 :y="toScreen(node.x, node.y).y - 9"
-                class="joint-label"
+                :class="['joint-label', { 'is-muted': isHighlightActive && !affectedNodeIds.has(node.id) }]"
               >
                 {{ node.id }}
               </text>
             </g>
           </g>
+
+          <!-- 8. AI Issue Assistant Proposed Fix Preview Layer (distinct Blue/Cyan) -->
+          <g v-if="aiPreviewFix" class="ai-fix-preview-group">
+            <g v-for="m in aiPreviewFix.modifications?.members_to_add || []" :key="`prev-m-${m.id}`">
+              <line
+                v-if="nodeMap[m.node_i] && nodeMap[m.node_j]"
+                :x1="toScreen(nodeMap[m.node_i].x, nodeMap[m.node_i].y).x"
+                :y1="toScreen(nodeMap[m.node_i].x, nodeMap[m.node_i].y).y"
+                :x2="toScreen(nodeMap[m.node_j].x, nodeMap[m.node_j].y).x"
+                :y2="toScreen(nodeMap[m.node_j].x, nodeMap[m.node_j].y).y"
+                class="ai-proposed-member-line"
+              />
+            </g>
+            <g v-for="s in aiPreviewFix.modifications?.supports_to_add || []" :key="`prev-s-${s.id}`">
+              <g v-if="nodeMap[s.node]" :transform="`translate(${toScreen(nodeMap[s.node].x, nodeMap[s.node].y).x}, ${toScreen(nodeMap[s.node].x, nodeMap[s.node].y).y})`">
+                <circle cx="0" cy="0" r="14" class="ai-proposed-support-ring" />
+              </g>
+            </g>
+          </g>
+
+          <!-- 9. Natural Language Conversational Design Proposal Preview Layer -->
+          <g v-if="designProposal && designProposal.operations" class="design-proposal-canvas-layer">
+            <!-- Proposed Added Members: Cyan dashed line (#0284c7) -->
+            <g v-for="(op, idx) in designProposedAdditions" :key="`nl-add-m-${idx}`">
+              <line
+                v-if="effectiveNodeMap[op.node_i] && effectiveNodeMap[op.node_j]"
+                :x1="toScreen(effectiveNodeMap[op.node_i].x, effectiveNodeMap[op.node_i].y).x"
+                :y1="toScreen(effectiveNodeMap[op.node_i].x, effectiveNodeMap[op.node_i].y).y"
+                :x2="toScreen(effectiveNodeMap[op.node_j].x, effectiveNodeMap[op.node_j].y).x"
+                :y2="toScreen(effectiveNodeMap[op.node_j].x, effectiveNodeMap[op.node_j].y).y"
+                class="design-preview-member-added"
+              />
+              <text
+                v-if="effectiveNodeMap[op.node_i] && effectiveNodeMap[op.node_j]"
+                :x="(toScreen(effectiveNodeMap[op.node_i].x, effectiveNodeMap[op.node_i].y).x + toScreen(effectiveNodeMap[op.node_j].x, effectiveNodeMap[op.node_j].y).x) / 2"
+                :y="(toScreen(effectiveNodeMap[op.node_i].x, effectiveNodeMap[op.node_i].y).y + toScreen(effectiveNodeMap[op.node_j].x, effectiveNodeMap[op.node_j].y).y) / 2 - 8"
+                class="design-preview-label added"
+              >
+                +{{ op.id }}
+              </text>
+            </g>
+
+            <!-- Proposed Deleted Members: Red dashed line (#ef4444) -->
+            <g v-for="delId in designProposedRemovals" :key="`nl-del-m-${delId}`">
+              <template v-if="memberMap[delId] && memberLine(memberMap[delId])">
+                <line
+                  :x1="memberLine(memberMap[delId]).x1"
+                  :y1="memberLine(memberMap[delId]).y1"
+                  :x2="memberLine(memberMap[delId]).x2"
+                  :y2="memberLine(memberMap[delId]).y2"
+                  class="design-preview-member-deleted"
+                />
+              </template>
+            </g>
+
+            <!-- Proposed Added or Moved Joints: Cyan / Amber markers -->
+            <g v-for="(op, idx) in designProposedJointOps" :key="`nl-j-op-${idx}`">
+              <template v-if="effectiveNodeMap[op.id]">
+                <circle
+                  :cx="toScreen(effectiveNodeMap[op.id].x, effectiveNodeMap[op.id].y).x"
+                  :cy="toScreen(effectiveNodeMap[op.id].x, effectiveNodeMap[op.id].y).y"
+                  r="9"
+                  :class="['design-preview-joint', op.op === 'add_joint' ? 'added' : 'modified']"
+                />
+                <text
+                  :x="toScreen(effectiveNodeMap[op.id].x, effectiveNodeMap[op.id].y).x + 10"
+                  :y="toScreen(effectiveNodeMap[op.id].x, effectiveNodeMap[op.id].y).y - 10"
+                  class="design-preview-label"
+                >
+                  {{ op.op === 'add_joint' ? `+${op.id}` : `Δ${op.id}` }}
+                </text>
+              </template>
+            </g>
+          </g>
         </svg>
+
+        <!-- ─── Natural Language Conversational Design Assistant (docked floating card) ─── -->
+        <div
+          v-if="showDesignAssistant"
+          class="editor-design-assistant-card"
+          @wheel.stop
+          @pointerdown.stop
+        >
+          <div class="editor-design-header">
+            <div class="header-title">
+              <Sparkles :size="14" class="sparkle-icon" />
+              <strong>Design with AI</strong>
+              <span class="assistant-tag">Context Aware</span>
+            </div>
+            <button
+              type="button"
+              class="assistant-close-btn"
+              aria-label="Close Assistant"
+              @click="showDesignAssistant = false"
+            >
+              ✕
+            </button>
+          </div>
+
+          <DesignInstructionPanel
+            :analysis-id="analysisId"
+            :model-revision="designModelRevision"
+            :selected-element="selectedElement"
+            :is-dirty="isDirty"
+            :proposal="designProposal"
+            :busy="designBusy"
+            :error="designError"
+            :compact="true"
+            @submit="handleDesignSubmit"
+            @apply="handleApplyDesignProposal"
+            @reject="handleRejectDesignProposal"
+            @clear-error="designError = ''"
+          />
+        </div>
+
+        <!-- ─── Floating Contextual Action Card (near affected geometry) ─── -->
+        <IssueResolutionAssistant
+          v-if="activeIssues.length && isHighlightActive"
+          :issues="activeIssues"
+          :selected-issue-id="selectedIssueId"
+          :anchor-position="contextualCardPosition"
+          :geometry="geometry"
+          :diagnostics="solvability"
+          :busy="calculating || saving"
+          @select-issue="handleSelectIssue"
+          @clear-highlight="handleClearHighlight"
+          @apply-fix="applyAiFix"
+          @preview-fix="handlePreviewFix"
+          @clear-preview="handleClearPreview"
+        />
       </div>
+
+      <!-- ─── Analysis Results Panel (docked in canvas column) ─── -->
+      <AnalysisResultsPanel
+        v-if="showResultsPanel && hasSolvedResults"
+        :solver-data="persistedSolverData"
+        :is-stale="resultsStale"
+        :geometry="geometry"
+        :loads="loads"
+        :nodes="nodes"
+        :members="members"
+        :supports="supports"
+        :show-force-labels="showForceLabels"
+        :can-solve="canSolve"
+        :solving="solving"
+        @close="showResultsPanel = false"
+        @select-member="handleSelectMemberFromResults"
+        @re-solve="handleReSolve"
+        @toggle-force-labels="showForceLabels = !showForceLabels"
+        @resize="handleResultsPanelResize"
+      />
+    </div>
 
       <!-- ─── Right Sidebar: Toolbox + Inspector ─── -->
       <aside class="editor-sidebar">
@@ -1375,15 +2373,22 @@ onBeforeUnmount(() => {
               </div>
 
               <!-- Axial force with state pill -->
-              <div v-if="memberForceText(selectedElement.id)" class="field-group">
-                <label>Axial Force</label>
-                <div class="force-display">
+              <div v-if="hasSolvedResults" class="field-group member-analysis-group">
+                <label>Analysis Result</label>
+                <div v-if="resultsStale" class="member-stale-badge">
+                  <AlertTriangle :size="12" /> Results Stale (Geometry modified)
+                </div>
+                <div v-else-if="memberForceText(selectedElement.id)" class="force-display">
                   <span :class="['force-pill', memberState(selectedElement.id)]">
                     {{ memberForceText(selectedElement.id) }}
                   </span>
-                  <span style="font-size:11px;color:var(--color-text-muted)">
+                  <span class="force-state-name">
                     {{ memberState(selectedElement.id).toUpperCase() }}
                   </span>
+                </div>
+                <div v-else-if="isUnloaded" class="force-display">
+                  <span class="force-pill zero">0.00 {{ geometry.metadata.units.force }}</span>
+                  <span class="force-state-name">UNLOADED</span>
                 </div>
               </div>
 
@@ -1477,14 +2482,14 @@ onBeforeUnmount(() => {
       <div class="status-left">
         <span :class="['status-pill', `status-${statusCategory}`]">
           <Loader2 v-if="statusCategory === 'calculating'" :size="11" class="spin-icon" />
-          <CheckCircle2 v-else-if="statusCategory === 'green'" :size="11" />
+          <CheckCircle2 v-else-if="statusCategory === 'green' || statusCategory === 'solved'" :size="11" />
           <AlertTriangle v-else-if="statusCategory === 'yellow' || statusCategory === 'stale'" :size="11" />
           <XCircle v-else-if="statusCategory === 'red'" :size="11" />
           <Eye v-else :size="11" />
           {{ statusPillLabel }}
         </span>
         <span class="status-message">
-          {{ statusCategory === 'stale' ? 'Results stale — geometry was edited after last solve' : (solvability.message || statusMessage) }}
+          {{ statusCategory === 'stale' ? 'Results stale — geometry was edited after last solve' : (hasSolvedResults && !resultsStale ? 'Analysis complete — results available' : (solvability.message || statusMessage)) }}
         </span>
         <span v-if="isDirty" class="status-dirty-dot" title="Unsaved changes" />
       </div>
@@ -1498,15 +2503,16 @@ onBeforeUnmount(() => {
 
       <div class="status-right">
         <button
-          v-if="validationErrors.length || validationWarnings.length"
+          v-if="activeIssues.length"
           class="status-warnings-toggle"
+          :class="{ active: isHighlightActive }"
           type="button"
-          @click="showWarningsDrawer = !showWarningsDrawer"
+          :title="isHighlightActive ? 'Clear on-canvas issue highlight' : 'Highlight issues on canvas'"
+          @click="toggleHighlightMode"
         >
-          <AlertTriangle :size="11" />
-          {{ validationErrors.length + validationWarnings.length }} issues
-          <ChevronUp v-if="!showWarningsDrawer" :size="11" />
-          <ChevronDown v-else :size="11" />
+          <EyeOff v-if="isHighlightActive" :size="11" />
+          <AlertTriangle v-else :size="11" />
+          {{ isHighlightActive ? 'Clear Highlight' : `${activeIssues.length} issues` }}
         </button>
       </div>
     </footer>

@@ -86,3 +86,55 @@ export function createAnalysis(file, provider) {
   body.append('provider', provider)
   return request('/api/analyses', { method: 'POST', body })
 }
+
+export function resolveGeometryIssue(geometry, issue, diagnostics = null) {
+  return request('/api/ai/assistant', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      geometry,
+      issue,
+      diagnostics,
+    }),
+  })
+}
+
+export function designTruss({ message, intent = 'auto', context = {}, provider = null }) {
+  return request('/api/ai/design', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      message,
+      intent,
+      context,
+      provider,
+    }),
+  })
+}
+
+export function applyDesignProposal({ proposal_id, analysis_id = null, base_revision = null, proposed_model, create_record = false }) {
+  return request('/api/ai/design/apply', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      proposal_id,
+      analysis_id,
+      base_revision,
+      proposed_model,
+      create_record,
+      persist: create_record,
+    }),
+  })
+}
+
+export function rejectDesignProposal({ proposal_id, analysis_id = null, base_revision = null }) {
+  return request('/api/ai/design/reject', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      proposal_id,
+      analysis_id,
+      base_revision,
+    }),
+  })
+}

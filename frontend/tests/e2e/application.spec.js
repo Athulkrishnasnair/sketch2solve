@@ -222,7 +222,7 @@ test('corrupt and unsupported uploads show clear messages and persist failed att
   })
   expect(unsupported.response.status()).toBe(415)
   expect(unsupported.body.error_code).toBe('UNSUPPORTED_IMAGE_TYPE')
-  await expect(page.getByRole('alert')).toContainText('Choose a JPEG, PNG, or WebP image.')
+  await expect(page.getByRole('alert')).toContainText(/Choose a JPEG, PNG, or WebP image|The saved image is not a supported format/)
 
   for (const body of [corrupted.body, unsupported.body]) {
     const saved = await page.request.get(`/api/analyses/${body.analysis_id}`)
@@ -271,7 +271,7 @@ for (const [scenario, expectedMessage] of [
     expect(response.status()).not.toBe(201)
     expect(body.error_code).toBe(scenario)
     expect(JSON.stringify(body)).not.toContain('API_KEY=')
-    await expect(page.getByRole('heading', { name: 'test3.png' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: `${scenario}.png` })).toBeVisible()
     await expect(page.getByRole('alert')).toContainText(expectedMessage)
     const record = await page.request.get(`/api/analyses/${body.analysis_id}`)
     const detail = await record.json()
@@ -338,7 +338,7 @@ test('geometry review saves, validates, explicitly reviews, solves, and reloads 
   await loadSection.getByLabel('Fy kN').fill('-10')
   await page.getByRole('checkbox', { name: /I replaced or verified every joint coordinate/ }).check()
   await page.getByRole('button', { name: 'Validate and save draft' }).click()
-  await expect(page.getByText('DRAFT SAVED')).toBeVisible()
+  await expect(page.locator('.draft-state').filter({ hasText: 'DRAFT SAVED' })).toBeVisible()
   await expect(page.getByRole('button', { name: 'Mark reviewed' })).toBeEnabled()
   const savedBeforeReview = await page.request.get(`/api/analyses/${body.analysis_id}`)
   const unreviewedDetail = await savedBeforeReview.json()
@@ -347,15 +347,15 @@ test('geometry review saves, validates, explicitly reviews, solves, and reloads 
   expect(unreviewedDetail.solver_results).toBeNull()
 
   await page.getByRole('button', { name: 'Mark reviewed' }).click()
-  await expect(page.getByText('REVIEWED')).toBeVisible()
+  await expect(page.locator('.draft-state').filter({ hasText: 'REVIEWED' })).toBeVisible()
   page.once('dialog', (dialog) => dialog.accept())
   await page.getByRole('button', { name: 'Submit reviewed geometry to solver' }).click()
-  await expect(page.getByText('SUBMITTED')).toBeVisible()
+  await expect(page.locator('.draft-state').filter({ hasText: 'SUBMITTED' })).toBeVisible()
   await expect(page.getByText('Solver results')).toBeVisible()
 
   await page.reload()
   await expect(page.getByRole('heading', { name: 'workflow.png' })).toBeVisible()
-  await expect(page.getByText('SUBMITTED')).toBeVisible()
+  await expect(page.locator('.draft-state').filter({ hasText: 'SUBMITTED' })).toBeVisible()
   const persisted = await page.request.get(`/api/analyses/${body.analysis_id}`)
   const detail = await persisted.json()
   expect(detail.review_status).toBe('submitted')
@@ -464,4 +464,407 @@ test('network failure displays the local backend connection message', async ({ p
   await page.route('**/api/analyses?**', (route) => route.abort())
   await page.goto('/?view=history')
   await expect(page.getByRole('alert')).toContainText('Could not reach the local Sketch2Solve backend.')
+})
+
+test('contextual on-canvas issue highlighting, floating action card, and AI repair workflow', async ({ page }) => {
+  await page.goto('/?view=new')
+  const bytes = readFileSync(path.join(evaluationDirectory, 'test4.jpg'))
+  const { response, body } = await submitFile(page, { name: 'canvas_repair.jpg', mimeType: 'image/jpeg', buffer: bytes })
+  expect(response.status()).toBe(201)
+
+  // Navigate to interactive editor view
+  await page.goto(`/?analysis=${body.analysis_id}&view=editor`)
+  await expect(page.locator('.truss-editor-workspace')).toBeVisible()
+
+  // Wait for canvas and initial preview calculation
+  await expect(page.locator('.engineering-svg')).toBeVisible()
+
+  // Verify contextual action card appears near affected geometry
+  const actionCard = page.locator('.contextual-action-card')
+  await expect(actionCard).toBeVisible({ timeout: 10_000 })
+  await expect(actionCard.locator('.classification-pill')).toBeVisible()
+  await expect(actionCard.getByRole('button', { name: 'Fix with AI' })).toBeVisible()
+
+  // Verify affected elements highlighting on canvas
+  const affectedHighlights = page.locator('.issue-highlight-error, .issue-highlight-mechanism, .issue-highlight-warning, .joint-issue-pulse-ring')
+  const highlightCount = await affectedHighlights.count()
+  expect(highlightCount).toBeGreaterThan(0)
+
+  // Test clearing highlight
+  await page.locator('.btn-clear-highlight').click()
+  await expect(actionCard).not.toBeVisible()
+
+  // Test re-enabling highlight via status bar toggle
+  await page.locator('.status-warnings-toggle').click()
+  await expect(actionCard).toBeVisible()
+
+  // Click 'Fix with AI'
+  await actionCard.getByRole('button', { name: 'Fix with AI' }).click()
+
+  // Verify root cause explanation and repair actions appear
+  await expect(page.locator('.explanation-quote')).toBeVisible({ timeout: 8_000 })
+  await expect(page.locator('.btn-apply-fix')).toBeVisible()
+  await expect(page.locator('.btn-cancel-fix')).toBeVisible()
+
+  // Verify AI proposed modification preview rendered on canvas (distinct blue styling)
+  const proposedPreview = page.locator('.ai-fix-preview-group')
+  await expect(proposedPreview).toBeVisible()
+
+  // Apply suggested fix
+  await page.locator('.btn-apply-fix').click()
+
+  // Verify toast notification and revalidation update
+  await expect(page.locator('.editor-toast')).toBeVisible()
+})
+
+test('issue resolution assistant independent scrolling, mouse-wheel isolation, and sticky footer', async ({ page }) => {
+  await page.goto('/?view=new')
+  const bytes = readFileSync(path.join(evaluationDirectory, 'test4.jpg'))
+  const { response, body } = await submitFile(page, { name: 'card_scroll_test.jpg', mimeType: 'image/jpeg', buffer: bytes })
+  expect(response.status()).toBe(201)
+
+  // Navigate to interactive editor view
+  await page.goto(`/?analysis=${body.analysis_id}&view=editor`)
+  await expect(page.locator('.truss-editor-workspace')).toBeVisible()
+  await expect(page.locator('.engineering-svg')).toBeVisible()
+
+  // Verify contextual action card appears
+  const actionCard = page.locator('.contextual-action-card')
+  await expect(actionCard).toBeVisible({ timeout: 10_000 })
+
+  // Click 'Fix with AI' to generate extensive resolution content (root cause, rationale, proposed fixes, alternatives)
+  await actionCard.getByRole('button', { name: 'Fix with AI' }).click()
+  await expect(page.locator('.explanation-quote')).toBeVisible({ timeout: 8_000 })
+
+  // 1. Verify card content area has overflowed and is independently scrollable
+  const scrollArea = page.locator('.card-content-scroll')
+  await expect(scrollArea).toBeVisible()
+  const scrollMetrics = await scrollArea.evaluate((el) => ({
+    scrollHeight: el.scrollHeight,
+    clientHeight: el.clientHeight,
+    scrollTop: el.scrollTop,
+  }))
+  expect(scrollMetrics.scrollHeight).toBeGreaterThan(scrollMetrics.clientHeight)
+
+  // 2. Verify sticky footer with Apply and Cancel actions remains visible and accessible
+  const applyButton = page.locator('.btn-apply-fix')
+  const cancelButton = page.locator('.btn-cancel-fix')
+  await expect(applyButton).toBeVisible()
+  await expect(cancelButton).toBeVisible()
+
+  // 3. Record initial canvas element screen coordinate
+  const firstJoint = page.locator('.truss-joint-node').first()
+  const initialJointCx = await firstJoint.getAttribute('cx')
+
+  // 4. Scroll inside the card using mouse wheel
+  const cardBox = await scrollArea.boundingBox()
+  expect(cardBox).not.toBeNull()
+  await page.mouse.move(cardBox.x + cardBox.width / 2, cardBox.y + cardBox.height / 2)
+  await page.mouse.wheel(0, 150)
+  await page.waitForTimeout(200)
+
+  // 5. Confirm the card scroll position changed
+  const scrolledPosition = await scrollArea.evaluate((el) => el.scrollTop)
+  expect(scrolledPosition).toBeGreaterThan(0)
+
+  // 6. Confirm canvas zoom/scale remains unchanged
+  const postCardScrollCx = await firstJoint.getAttribute('cx')
+  expect(postCardScrollCx).toBe(initialJointCx)
+
+  // 7. Scroll over the canvas outside the card (hover over open canvas SVG)
+  const canvasSvg = page.locator('.engineering-svg')
+  await canvasSvg.hover({ position: { x: 200, y: 200 } })
+  await page.mouse.wheel(0, -200)
+  await page.waitForTimeout(300)
+
+  // 8. Confirm canvas zoom DID change when scrolled outside the card
+  const postCanvasZoomCx = await firstJoint.getAttribute('cx')
+  expect(postCanvasZoomCx).not.toBe(initialJointCx)
+
+  // 9. Verify cancellation works without modifying original model
+  await cancelButton.click()
+  await expect(page.locator('.explanation-quote')).not.toBeVisible()
+  await expect(actionCard.getByRole('button', { name: 'Fix with AI' })).toBeVisible()
+
+  // 10. Re-open resolution and verify Apply Suggested Fix operates cleanly from sticky footer
+  await actionCard.getByRole('button', { name: 'Fix with AI' }).click()
+  await expect(page.locator('.explanation-quote')).toBeVisible({ timeout: 8_000 })
+  await applyButton.click()
+  await expect(page.locator('.editor-toast')).toBeVisible()
+})
+
+test('solver-result experience: triangular reference model verification, results panel, on-canvas forces, reactions, legend, and stale protection', async ({ page }) => {
+  await page.goto('/?view=new')
+  const bytes = readFileSync(path.join(evaluationDirectory, 'test3.png'))
+  const { response, body } = await submitFile(page, { name: 'reference_triangle.png', mimeType: 'image/png', buffer: bytes })
+  expect(response.status()).toBe(201)
+
+  // 1. Establish the known triangular reference model:
+  // A=(0,0), B=(4,0), C=(2,3), Pin at A, vertical Roller at B, 10 kN downward load at C
+  const triangleModel = {
+    schema_version: '1.0',
+    metadata: {
+      name: 'Triangular Reference Truss',
+      units: { length: 'm', force: 'kN' },
+    },
+    model: {
+      nodes: [
+        { id: 'A', x: 0.0, y: 0.0 },
+        { id: 'B', x: 4.0, y: 0.0 },
+        { id: 'C', x: 2.0, y: 3.0 },
+      ],
+      members: [
+        { id: 'AB', node_i: 'A', node_j: 'B' },
+        { id: 'AC', node_i: 'A', node_j: 'C' },
+        { id: 'BC', node_i: 'B', node_j: 'C' },
+      ],
+      supports: [
+        { id: 'S_A', node: 'A', type: 'pin' },
+        { id: 'S_B', node: 'B', type: 'roller', direction: 'vertical' },
+      ],
+      loads: [
+        { id: 'L_C', node: 'C', fx: 0.0, fy: -10.0 },
+      ],
+    },
+  }
+
+  // Persist draft and mark reviewed
+  const draftRes = await page.request.put(`/api/analyses/${body.analysis_id}/draft`, {
+    data: { geometry: triangleModel, coordinates_confirmed: true },
+  })
+  expect(draftRes.status()).toBe(200)
+
+  const reviewRes = await page.request.post(`/api/analyses/${body.analysis_id}/review`)
+  expect(reviewRes.status()).toBe(200)
+
+  // Open the interactive geometry editor
+  await page.goto(`/?analysis=${body.analysis_id}&view=editor`)
+  await expect(page.locator('.truss-editor-workspace')).toBeVisible()
+  await expect(page.locator('.engineering-svg')).toBeVisible()
+
+  // 2. Solve button interaction: loading state, confirm dialog, and execution
+  const solveButton = page.locator('.btn-solve')
+  await expect(solveButton).toBeEnabled()
+  await solveButton.click()
+
+  // Confirm in dialog
+  const confirmDialog = page.locator('.cdialog-panel')
+  await expect(confirmDialog).toBeVisible()
+  await confirmDialog.locator('.cdialog-confirm').click()
+
+  // 3. Clear transition to expanded Analysis Results view
+  const resultsPanel = page.locator('.analysis-results-panel')
+  await expect(resultsPanel).toBeVisible({ timeout: 10_000 })
+  await expect(resultsPanel.locator('.badge-solved')).toHaveText(/SOLVED/)
+
+  // 4. Verify structural counts and matrix diagnostics
+  await expect(resultsPanel.getByText('Summary & Matrix')).toBeVisible()
+  await expect(resultsPanel.locator('.summary-grid')).toContainText('Joints (N)')
+  await expect(resultsPanel.locator('.summary-grid')).toContainText('3')
+  await expect(resultsPanel.locator('.summary-grid')).toContainText('Members (M)')
+  await expect(resultsPanel.locator('.summary-grid')).toContainText('3')
+  await expect(resultsPanel.locator('.summary-grid')).toContainText('Equilibrium Equations (2N)')
+  await expect(resultsPanel.locator('.summary-grid')).toContainText('6')
+  await expect(resultsPanel.locator('.summary-grid')).toContainText('Unknowns (M + R)')
+  await expect(resultsPanel.locator('.summary-grid')).toContainText('6')
+  await expect(resultsPanel.locator('.summary-grid')).toContainText('Matrix Shape')
+  await expect(resultsPanel.locator('.summary-grid')).toContainText('6 × 6')
+  await expect(resultsPanel.locator('.summary-grid')).toContainText('Numerical Rank')
+  await expect(resultsPanel.locator('.summary-grid')).toContainText('6')
+  await expect(resultsPanel.locator('.summary-grid')).toContainText('Condition Number (κ)')
+  await expect(resultsPanel.locator('.summary-grid')).toContainText('4.38')
+
+  // 5. Verify analytical support reactions: 5 kN upward at each support
+  await resultsPanel.getByRole('button', { name: /Support Reactions/ }).click()
+  const reactionsTable = resultsPanel.locator('.results-table')
+  await expect(reactionsTable).toBeVisible()
+  // S_A: Rx ~ 0.000 kN, Ry = +5.000 kN, Magnitude = 5.000 kN
+  await expect(reactionsTable).toContainText('S_A')
+  await expect(reactionsTable).toContainText('+5.000 kN')
+  // S_B: Ry = +5.000 kN, Magnitude = 5.000 kN
+  await expect(reactionsTable).toContainText('S_B')
+
+  // 6. Verify analytical member forces:
+  // Base member AB: +3.333333 kN tension
+  // Inclined members AC and BC: -6.009252 kN compression
+  await resultsPanel.getByRole('button', { name: /Member Forces/ }).click()
+  const memberTable = resultsPanel.locator('.results-table')
+  await expect(memberTable).toBeVisible()
+  await expect(memberTable).toContainText('+3.333 kN')
+  await expect(memberTable).toContainText('Tension (+)')
+  await expect(memberTable).toContainText('-6.009 kN')
+  await expect(memberTable).toContainText('Compression (−)')
+
+  // 7. Verify limitations & equilibrium residual
+  await resultsPanel.getByRole('button', { name: 'Limitations' }).click()
+  await expect(resultsPanel.locator('.warning-block')).toContainText('A numerical solution does not establish physical stability')
+  await expect(resultsPanel.locator('.assumptions-list')).toContainText('Planar Ideal Pin-Jointed System')
+
+  // 8. Close results panel to clearly inspect full canvas visualization
+  await resultsPanel.locator('.btn-close').click()
+  await expect(resultsPanel).not.toBeVisible()
+
+  // Verify member force labels directly on truss
+  const forceLabels = page.locator('.member-force-label')
+  await expect(forceLabels).toHaveCount(3)
+  await expect(page.locator('.member-force-label.tension')).toContainText('+3.33 kN')
+  await expect(page.locator('.member-force-label.compression').first()).toContainText('-6.01 kN')
+
+  // 9. Verify Support reaction arrows and labels on canvas
+  const reactionLines = page.locator('.reaction-vector-line')
+  await expect(reactionLines).toHaveCount(2)
+  const reactionHeads = page.locator('.reaction-arrowhead')
+  await expect(reactionHeads.first()).toBeVisible()
+  const reactionLabels = page.locator('.reaction-vector-label')
+  await expect(reactionLabels.first()).toBeVisible()
+  await expect(reactionLabels.first()).toContainText('+5.00 kN')
+
+  // 10. Verify Canvas color legend
+  const legend = page.locator('.canvas-forces-legend')
+  await expect(legend).toBeVisible()
+  await expect(legend).toContainText('Tension (+)')
+  await expect(legend).toContainText('Compression (−)')
+  await expect(legend).toContainText('Reaction (R)')
+
+  // 11. Test Force Labels Toggle
+  const toggleLabelsBtn = page.locator('.canvas-floating-controls button[title*="force labels"]')
+  await expect(toggleLabelsBtn).toBeVisible()
+  await toggleLabelsBtn.click()
+  await expect(page.locator('.member-force-label')).toHaveCount(0)
+  await toggleLabelsBtn.click()
+  await expect(page.locator('.member-force-label')).toHaveCount(3)
+
+  // Re-open results panel using topbar Results button
+  await page.locator('.btn-results').click()
+  await expect(resultsPanel).toBeVisible()
+
+  // 12. Member selection to inspect detailed result in sidebar
+  await resultsPanel.getByRole('button', { name: /Member Forces/ }).click()
+  await resultsPanel.locator('.member-table-row').first().click()
+  await expect(page.locator('.editor-sidebar .member-analysis-group')).toBeVisible()
+  await expect(page.locator('.editor-sidebar .force-display')).toContainText('+3.33 kN')
+
+  // 13. Stale results prevention: editing geometry invalidates results display
+  // Delete the selected member from inspector
+  await page.locator('.inspector-fields .delete-btn').click()
+
+  // Confirm results are marked stale and protected from presentation
+  await expect(resultsPanel.locator('.banner-stale')).toBeVisible()
+  await expect(resultsPanel.locator('.badge-stale')).toHaveText(/RESULTS STALE/)
+  await expect(page.locator('.member-force-label')).toHaveCount(0)
+  await expect(page.locator('.reaction-vector-line')).toHaveCount(0)
+  await expect(page.locator('.editor-statusbar')).toContainText('Results stale')
+
+  // 14. Zero-load case verification on a separate unloaded analysis
+  await page.goto('/?view=new')
+  const { response: res2, body: body2 } = await submitFile(page, { name: 'unloaded_triangle.png', mimeType: 'image/png', buffer: bytes })
+  expect(res2.status()).toBe(201)
+
+  const unloadedModel = JSON.parse(JSON.stringify(triangleModel))
+  unloadedModel.model.loads = []
+  const draft2 = await page.request.put(`/api/analyses/${body2.analysis_id}/draft`, {
+    data: { geometry: unloadedModel, coordinates_confirmed: true },
+  })
+  expect(draft2.status()).toBe(200)
+  const rev2 = await page.request.post(`/api/analyses/${body2.analysis_id}/review`)
+  expect(rev2.status()).toBe(200)
+
+  await page.goto(`/?analysis=${body2.analysis_id}&view=editor`)
+  await expect(page.locator('.truss-editor-workspace')).toBeVisible()
+
+  // Solve the unloaded model
+  await page.locator('.btn-solve').click()
+  await page.locator('.cdialog-panel').locator('.cdialog-confirm').click()
+  const unloadedPanel = page.locator('.analysis-results-panel')
+  await expect(unloadedPanel).toBeVisible({ timeout: 10_000 })
+  await expect(unloadedPanel.locator('.banner-unloaded')).toBeVisible()
+  await expect(unloadedPanel.locator('.banner-unloaded')).toContainText('Model is unloaded (Zero external forces applied)')
+})
+
+test('Conversational natural-language truss design workflows across dashboard, sidebar studio, and editor', async ({ page }) => {
+  // 1. Dashboard Entry Point: Create with AI
+  await page.goto('/')
+  await expect(page.locator('.dashboard-welcome')).toBeVisible()
+
+  // Open in-place AI workbench on dashboard
+  const createAiBtn = page.locator('.dashboard-ai-btn')
+  await expect(createAiBtn).toBeVisible()
+  await createAiBtn.click()
+
+  const workbench = page.locator('.dashboard-ai-workbench')
+  await expect(workbench).toBeVisible()
+  await expect(workbench.locator('.workbench-chips')).toBeVisible()
+
+  // Submit via example prompt chip
+  await workbench.locator('.workbench-chip').first().click()
+
+  // Verify proposed model card generated
+  const proposalCard = workbench.locator('.design-proposal-card')
+  await expect(proposalCard).toBeVisible({ timeout: 10_000 })
+  await expect(proposalCard.locator('.intent-pill')).toContainText('CREATE')
+  await expect(proposalCard.locator('.validation-pill.valid')).toBeVisible()
+  await expect(proposalCard.locator('.metric-item')).toHaveCount(6)
+
+  // Explicit approval: Apply & Open Editor
+  await proposalCard.locator('.btn-apply').click()
+
+  // Verify transition to Truss Editor with new analysis loaded
+  await expect(page.locator('.truss-editor-workspace')).toBeVisible({ timeout: 10_000 })
+  await expect(page.locator('.truss-members-group line.truss-member-line')).toHaveCount(3)
+
+  // 2. Editor Entry Point: Contextual Design Assistant
+  const designAiBtn = page.locator('.editor-topbar .btn-ai')
+  await expect(designAiBtn).toBeVisible()
+  await designAiBtn.click()
+
+  const editorAssistant = page.locator('.editor-design-assistant-card')
+  await expect(editorAssistant).toBeVisible()
+
+  // Enter out-of-scope prompt and verify guardrail notice
+  expectFailedRequest(page, '/api/ai/design')
+  expectHttpError(page, 400)
+  const textarea = editorAssistant.locator('.design-textarea')
+  await textarea.fill('Write a python script to scrape data')
+  await editorAssistant.locator('.btn-submit').click()
+  await expect(editorAssistant.locator('.error-banner')).toBeVisible({ timeout: 8_000 })
+  await expect(editorAssistant.locator('.error-banner')).toContainText('I can help create, modify or explain truss structures')
+
+  // Clear and submit valid modify instruction
+  await editorAssistant.locator('.error-dismiss').click()
+  await textarea.fill('Move joint J3 up by 1 m')
+  await editorAssistant.locator('.btn-submit').click()
+
+  // Verify proposed modification card and on-canvas overlay
+  const modifyCard = editorAssistant.locator('.design-proposal-card')
+  await expect(modifyCard).toBeVisible({ timeout: 10_000 })
+  await expect(modifyCard.locator('.intent-pill')).toContainText('MODIFY')
+  await expect(modifyCard.locator('.op-card')).toContainText('Move Joint J3')
+
+  // Verify on-canvas preview marker
+  const previewMarker = page.locator('.design-proposal-canvas-layer .design-preview-joint')
+  await expect(previewMarker).toBeVisible()
+
+  // Explicit approval: Apply Changes
+  await modifyCard.locator('.btn-apply').click()
+  await expect(editorAssistant.locator('.design-proposal-card')).toHaveCount(0)
+
+  // 3. Sidebar Entry Point: Natural Language Design Studio
+  const sidebarNav = page.locator('.primary-nav button:has-text("Natural Language Design")')
+  await expect(sidebarNav).toBeVisible()
+  await sidebarNav.click()
+
+  await expect(page.locator('.design-studio-page')).toBeVisible()
+  await expect(page.locator('.studio-header h1')).toHaveText('Natural Language Design Studio')
+  await expect(page.locator('.studio-left-pane')).toBeVisible()
+  await expect(page.locator('.studio-right-pane')).toBeVisible()
+
+  // Test Studio synthesis
+  const studioTextarea = page.locator('.studio-left-pane .design-textarea')
+  await studioTextarea.fill('Warren truss with 4 panels and 10 m span')
+  await page.locator('.studio-left-pane .btn-submit').click()
+
+  const studioProposal = page.locator('.studio-left-pane .design-proposal-card')
+  await expect(studioProposal).toBeVisible({ timeout: 10_000 })
+  await expect(studioProposal.locator('.intent-pill')).toContainText('CREATE')
+  await expect(page.locator('.studio-right-pane .cad-svg')).toBeVisible()
 })

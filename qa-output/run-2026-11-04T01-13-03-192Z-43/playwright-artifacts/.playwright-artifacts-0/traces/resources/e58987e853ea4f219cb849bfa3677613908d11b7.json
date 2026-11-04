@@ -1,0 +1,1 @@
+{"error_code":"VALIDATION_FAILED","message":"Correct the listed geometry issues before saving or reviewing this draft.","validation_issues":[{"code":"UNKNOWN_NODE_REFERENCE","message":"Member references unknown node 'missing'.","path":"/model/members/0/node_j"}]}

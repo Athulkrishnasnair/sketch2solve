@@ -1,0 +1,196 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/athulkrishna_s_nair/sketch2solve/frontend/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/e2e/playwright.config.js",
+      "-g",
+      "geometry review saves"
+    ],
+    "configFile": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/playwright.config.js",
+    "rootDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-40-18-313Z-40/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-40-18-313Z-40/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "snapshotDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.js",
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5174",
+          "browserName": "chromium",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "video": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-40-18-313Z-40/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "application.spec.js",
+      "file": "application.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "geometry review saves, validates, explicitly reviews, solves, and reloads persisted results",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1339,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('REVIEWED')\nExpected: visible\nError: strict mode violation: getByText('REVIEWED') resolved to 5 elements:\n    1) <span class=\"status-badge large-status status-complete\">…</span> aka getByText('Reviewed').first()\n    2) <span class=\"review-state\">…</span> aka getByText('Reviewed').nth(1)\n    3) <span class=\"draft-state reviewed\">REVIEWED</span> aka getByText('REVIEWED', { exact: true })\n    4) <button type=\"button\" class=\"button button-primary\">Submit reviewed geometry to solver</button> aka getByRole('button', { name: 'Submit reviewed geometry to' })\n    5) <span class=\"review-status-label\">…</span> aka getByText('Reviewed').nth(4)\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('REVIEWED') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByText('REVIEWED')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('REVIEWED')\nExpected: visible\nError: strict mode violation: getByText('REVIEWED') resolved to 5 elements:\n    1) <span class=\"status-badge large-status status-complete\">…</span> aka getByText('Reviewed').first()\n    2) <span class=\"review-state\">…</span> aka getByText('Reviewed').nth(1)\n    3) <span class=\"draft-state reviewed\">REVIEWED</span> aka getByText('REVIEWED', { exact: true })\n    4) <button type=\"button\" class=\"button button-primary\">Submit reviewed geometry to solver</button> aka getByRole('button', { name: 'Submit reviewed geometry to' })\n    5) <span class=\"review-status-label\">…</span> aka getByText('Reviewed').nth(4)\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('REVIEWED') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByText('REVIEWED')\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:350:44",
+                    "location": {
+                      "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                      "column": 44,
+                      "line": 350
+                    },
+                    "snippet": "  348 |\n  349 |   await page.getByRole('button', { name: 'Mark reviewed' }).click()\n> 350 |   await expect(page.getByText('REVIEWED')).toBeVisible()\n      |                                            ^\n  351 |   page.once('dialog', (dialog) => dialog.accept())\n  352 |   await page.getByRole('button', { name: 'Submit reviewed geometry to solver' }).click()\n  353 |   await expect(page.getByText('SUBMITTED')).toBeVisible()"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                        "column": 44,
+                        "line": 350
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('REVIEWED')\nExpected: visible\nError: strict mode violation: getByText('REVIEWED') resolved to 5 elements:\n    1) <span class=\"status-badge large-status status-complete\">…</span> aka getByText('Reviewed').first()\n    2) <span class=\"review-state\">…</span> aka getByText('Reviewed').nth(1)\n    3) <span class=\"draft-state reviewed\">REVIEWED</span> aka getByText('REVIEWED', { exact: true })\n    4) <button type=\"button\" class=\"button button-primary\">Submit reviewed geometry to solver</button> aka getByRole('button', { name: 'Submit reviewed geometry to' })\n    5) <span class=\"review-status-label\">…</span> aka getByText('Reviewed').nth(4)\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('REVIEWED') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for getByText('REVIEWED')\u001b[22m\n\n\n  348 |\n  349 |   await page.getByRole('button', { name: 'Mark reviewed' }).click()\n> 350 |   await expect(page.getByText('REVIEWED')).toBeVisible()\n      |                                            ^\n  351 |   page.once('dialog', (dialog) => dialog.accept())\n  352 |   await page.getByRole('button', { name: 'Submit reviewed geometry to solver' }).click()\n  353 |   await expect(page.getByText('SUBMITTED')).toBeVisible()\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js:350:44"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T15:40:22.870Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-40-22-840Z-137/playwright-artifacts/application-geometry-revie-d5ec2-d-reloads-persisted-results/test-failed-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-40-22-840Z-137/playwright-artifacts/application-geometry-revie-d5ec2-d-reloads-persisted-results/video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-40-22-840Z-137/playwright-artifacts/application-geometry-revie-d5ec2-d-reloads-persisted-results/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-03T15-40-22-840Z-137/playwright-artifacts/application-geometry-revie-d5ec2-d-reloads-persisted-results/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/application.spec.js",
+                    "column": 44,
+                    "line": 350
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-dd78af0c0f126990f226",
+          "file": "application.spec.js",
+          "line": 309,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-03T15:40:18.318Z",
+    "duration": 6182.477,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

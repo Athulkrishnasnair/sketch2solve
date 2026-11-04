@@ -1,0 +1,286 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/athulkrishna_s_nair/sketch2solve/frontend/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/e2e/playwright.config.js",
+      "tests/e2e/comprehensive-audit.spec.js"
+    ],
+    "configFile": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/playwright.config.js",
+    "rootDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T00-57-52-551Z-47/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T00-57-52-551Z-47/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "snapshotDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.js",
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5174",
+          "browserName": "chromium",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "video": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T00-57-52-551Z-47/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "comprehensive-audit.spec.js",
+      "file": "comprehensive-audit.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Comprehensive Application Audit",
+          "file": "comprehensive-audit.spec.js",
+          "line": 15,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Audit 1: Layout Overflow and Responsiveness across all viewports",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12782,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "--- OVERFLOW FINDINGS ---\n"
+                        },
+                        {
+                          "text": "[]\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T00:57:59.171Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6649999aa6270d63e117-aeb6e85493be083418c4",
+              "file": "comprehensive-audit.spec.js",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "Audit 2: Complete Interactive Element Inventory & State Checks",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 7360,
+                      "error": {
+                        "message": "TypeError: page.locator(...).toContainText is not a function",
+                        "stack": "TypeError: page.locator(...).toContainText is not a function\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/comprehensive-audit.spec.js:284:65",
+                        "location": {
+                          "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/comprehensive-audit.spec.js",
+                          "column": 65,
+                          "line": 284
+                        },
+                        "snippet": "  282 |     // Verify stale banner and pill\n  283 |     const isStale = await resultsPanel.locator('.banner-stale').isVisible()\n> 284 |     const statusStale = await page.locator('.editor-statusbar').toContainText('Results stale').then(() => true).catch(() => false)\n      |                                                                 ^\n  285 |     auditLog.push({\n  286 |       page: 'TrussEditor',\n  287 |       element: 'stale results detection',"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/comprehensive-audit.spec.js",
+                            "column": 65,
+                            "line": 284
+                          },
+                          "message": "TypeError: page.locator(...).toContainText is not a function\n\n  282 |     // Verify stale banner and pill\n  283 |     const isStale = await resultsPanel.locator('.banner-stale').isVisible()\n> 284 |     const statusStale = await page.locator('.editor-statusbar').toContainText('Results stale').then(() => true).catch(() => false)\n      |                                                                 ^\n  285 |     auditLog.push({\n  286 |       page: 'TrussEditor',\n  287 |       element: 'stale results detection',\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/comprehensive-audit.spec.js:284:65"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T00:58:12.161Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T00-57-59-129Z-144/playwright-artifacts/comprehensive-audit-Compre-e99f9-ment-Inventory-State-Checks/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T00-57-59-129Z-144/playwright-artifacts/comprehensive-audit-Compre-e99f9-ment-Inventory-State-Checks/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T00-57-59-129Z-144/playwright-artifacts/comprehensive-audit-Compre-e99f9-ment-Inventory-State-Checks/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T00-57-59-129Z-144/playwright-artifacts/comprehensive-audit-Compre-e99f9-ment-Inventory-State-Checks/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/comprehensive-audit.spec.js",
+                        "column": 65,
+                        "line": 284
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "6649999aa6270d63e117-fff74e017ea9b9bda11a",
+              "file": "comprehensive-audit.spec.js",
+              "line": 80,
+              "column": 3
+            },
+            {
+              "title": "Audit 3: Design Studio CREATE, MODIFY, EXPLAIN & Target Selection",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4302,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "--- DESIGN STUDIO AUDIT ---\n"
+                        },
+                        {
+                          "text": "{\n  \"targetSelector\": {\n    \"optionsCount\": 2\n  },\n  \"intentTab_Auto\": true,\n  \"intentTab_Create\": true,\n  \"intentTab_Modify\": true,\n  \"intentTab_Explain\": true,\n  \"createProposal\": {\n    \"intent\": \" CREATE\",\n    \"valid\": \" Valid \",\n    \"cadSvgRendered\": true\n  },\n  \"proposalDiscarded\": true,\n  \"explainProposal\": {\n    \"intent\": \" EXPLAIN\",\n    \"hasExplanation\": true\n  }\n}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T00:58:21.964Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6649999aa6270d63e117-f785552a6b46b699c9c1",
+              "file": "comprehensive-audit.spec.js",
+              "line": 301,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-04T00:57:52.560Z",
+    "duration": 34039.526,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

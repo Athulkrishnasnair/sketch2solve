@@ -1,0 +1,67 @@
+[
+  {
+    "filename": "test1.jpg",
+    "size_bytes": 109870,
+    "detected_format": "image/webp",
+    "upload_success": true,
+    "http_status": 201,
+    "analysis_record_saved": true,
+    "original_image_retrieved": true,
+    "opencv_candidate_lines": 153,
+    "provider": "gemini",
+    "provider_result": "mock proposal returned; not a live interpretation",
+    "review_status": "pending_review"
+  },
+  {
+    "filename": "test2.jpg",
+    "size_bytes": 86957,
+    "detected_format": "image/jpeg",
+    "upload_success": true,
+    "http_status": 201,
+    "analysis_record_saved": true,
+    "original_image_retrieved": true,
+    "opencv_candidate_lines": 300,
+    "provider": "gemini",
+    "provider_result": "mock proposal returned; not a live interpretation",
+    "review_status": "pending_review"
+  },
+  {
+    "filename": "test3.png",
+    "size_bytes": 75621,
+    "detected_format": "image/png",
+    "upload_success": true,
+    "http_status": 201,
+    "analysis_record_saved": true,
+    "original_image_retrieved": true,
+    "opencv_candidate_lines": 76,
+    "provider": "gemini",
+    "provider_result": "mock proposal returned; not a live interpretation",
+    "review_status": "pending_review"
+  },
+  {
+    "filename": "test4.jpg",
+    "size_bytes": 18606,
+    "detected_format": "image/jpeg",
+    "upload_success": true,
+    "http_status": 201,
+    "analysis_record_saved": true,
+    "original_image_retrieved": true,
+    "opencv_candidate_lines": 49,
+    "provider": "gemini",
+    "provider_result": "mock proposal returned; not a live interpretation",
+    "review_status": "pending_review"
+  },
+  {
+    "filename": "test5.png",
+    "size_bytes": 732759,
+    "detected_format": "image/png",
+    "upload_success": true,
+    "http_status": 201,
+    "analysis_record_saved": true,
+    "original_image_retrieved": true,
+    "opencv_candidate_lines": 300,
+    "provider": "gemini",
+    "provider_result": "mock proposal returned; not a live interpretation",
+    "review_status": "pending_review"
+  }
+]

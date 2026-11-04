@@ -264,6 +264,20 @@
 }
 
 /* --------------------------------------------------------------------------
+   Center Canvas & Results Viewport Column
+   -------------------------------------------------------------------------- */
+.editor-canvas-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+/* --------------------------------------------------------------------------
    Engineering Canvas
    -------------------------------------------------------------------------- */
 .canvas-container {
@@ -273,6 +287,7 @@
   overflow: hidden;
   cursor: crosshair;
   min-width: 0;
+  min-height: 160px;
 }
 .canvas-container.panning        { cursor: grab; }
 .canvas-container.panning:active { cursor: grabbing; }
@@ -822,6 +837,7 @@
   white-space: nowrap;
 }
 .status-pill.status-green    { background: var(--color-success-subtle); color: var(--color-success-text); }
+.status-pill.status-solved   { background: var(--color-success-subtle); color: var(--color-success-text); border: 1px solid #86efac; }
 .status-pill.status-yellow   { background: var(--color-warning-subtle); color: var(--color-warning-text); }
 .status-pill.status-red      { background: var(--color-danger-subtle);  color: var(--color-danger-text); }
 .status-pill.status-neutral  { background: var(--color-neutral);        color: var(--color-text-muted); }
@@ -1136,4 +1152,357 @@
 @media (max-width: 700px) {
   .editor-sidebar { display: none; }
   :root { --sidebar-width: 0px; }
+}
+
+/* --------------------------------------------------------------------------
+   On-Canvas Contextual Issue Highlighting & Repair
+   -------------------------------------------------------------------------- */
+.truss-member-line.is-muted,
+.truss-joint-node.is-muted,
+.support-symbol.is-muted,
+.support-hatch.is-muted,
+.load-vector-arrow.is-muted,
+.load-label.is-muted,
+.member-label.is-muted,
+.member-force-label.is-muted {
+  opacity: 0.22;
+  transition: opacity 0.2s ease;
+}
+
+/* Invalid geometry: confirmed error (Red) */
+.truss-member-line.issue-highlight-error {
+  stroke: #dc2626 !important;
+  stroke-width: 5px !important;
+  filter: drop-shadow(0 0 6px rgba(220, 38, 38, 0.65));
+  animation: issue-error-pulse 2s ease-in-out infinite;
+}
+
+/* Mechanism / under-constrained: warning (Amber) */
+.truss-member-line.issue-highlight-mechanism {
+  stroke: #d97706 !important;
+  stroke-width: 4.5px !important;
+  stroke-dasharray: 8, 4;
+  filter: drop-shadow(0 0 5px rgba(217, 119, 6, 0.6));
+  animation: issue-mech-pulse 2s ease-in-out infinite;
+}
+
+/* Warnings (Amber) */
+.truss-member-line.issue-highlight-warning {
+  stroke: #d97706 !important;
+  stroke-width: 4.5px !important;
+  filter: drop-shadow(0 0 4px rgba(217, 119, 6, 0.5));
+}
+
+/* AI proposed modification: distinct Blue/Cyan */
+.ai-proposed-member-line {
+  stroke: #0284c7;
+  stroke-width: 3.5px;
+  stroke-dasharray: 6, 4;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 5px rgba(2, 132, 199, 0.6));
+  animation: ai-pulse 2s ease-in-out infinite;
+}
+
+.ai-proposed-support-ring {
+  stroke: #0284c7;
+  stroke-width: 2.5px;
+  stroke-dasharray: 4, 3;
+  fill: rgba(2, 132, 199, 0.08);
+  animation: ai-pulse 2s ease-in-out infinite;
+}
+
+/* Affected joint pulsing ring */
+.joint-issue-pulse-ring {
+  pointer-events: none;
+  transform-origin: center;
+}
+.joint-issue-pulse-ring.ring-error {
+  stroke: #dc2626;
+  fill: rgba(220, 38, 38, 0.12);
+  animation: joint-ring-pulse-red 1.8s ease-in-out infinite;
+}
+.joint-issue-pulse-ring.ring-warning {
+  stroke: #d97706;
+  fill: rgba(217, 119, 6, 0.12);
+  animation: joint-ring-pulse-amber 1.8s ease-in-out infinite;
+}
+
+@keyframes issue-error-pulse {
+  0%, 100% { stroke-width: 5px; filter: drop-shadow(0 0 4px rgba(220, 38, 38, 0.5)); }
+  50% { stroke-width: 6.5px; filter: drop-shadow(0 0 9px rgba(220, 38, 38, 0.85)); }
+}
+
+@keyframes issue-mech-pulse {
+  0%, 100% { stroke-width: 4.5px; stroke-dashoffset: 0; }
+  50% { stroke-width: 5.5px; stroke-dashoffset: 6; }
+}
+
+@keyframes joint-ring-pulse-red {
+  0%, 100% { r: 13px; stroke-width: 2px; opacity: 0.9; }
+  50% { r: 17px; stroke-width: 3px; opacity: 0.5; }
+}
+
+@keyframes joint-ring-pulse-amber {
+  0%, 100% { r: 13px; stroke-width: 2px; opacity: 0.9; }
+  50% { r: 17px; stroke-width: 3px; opacity: 0.5; }
+}
+
+@keyframes ai-pulse {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.6; }
+}
+
+/* --------------------------------------------------------------------------
+   Analysis Results Experience: Reactions, Legend, and Inspector
+   -------------------------------------------------------------------------- */
+.reaction-vector-line {
+  stroke: #059669;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.reaction-arrowhead {
+  fill: #059669;
+  pointer-events: none;
+}
+
+.reaction-vector-label {
+  font-size: 11px;
+  font-weight: 700;
+  fill: #059669;
+  font-family: var(--font-mono, monospace);
+  paint-order: stroke;
+  stroke: #ffffff;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.reaction-vector-label.zero {
+  fill: #64748b;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+/* Canvas Force Color Legend */
+.canvas-forces-legend {
+  position: absolute;
+  top: var(--sp-3);
+  right: var(--sp-3);
+  background: rgba(255, 254, 248, 0.95);
+  border: 1px solid var(--color-border, #e9e5d7);
+  border-radius: var(--radius-md, 6px);
+  padding: 8px 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  z-index: 15;
+  backdrop-filter: blur(6px);
+  pointer-events: auto;
+  font-size: 11px;
+}
+
+.legend-header {
+  margin-bottom: 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.legend-title {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: #64748b;
+}
+
+.legend-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--color-text-primary, #252b2c);
+  font-weight: 500;
+}
+
+.legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.swatch-tension {
+  background: var(--color-member-tension, #1d4ed8);
+}
+
+.swatch-compression {
+  background: var(--color-member-compression, #dc2626);
+}
+
+.swatch-zero {
+  background: var(--color-member-zero, #64748b);
+}
+
+.swatch-reaction {
+  background: #059669;
+}
+
+/* Topbar Results Action Button */
+.action-btn.btn-results {
+  background: #e0f2fe;
+  color: #0369a1;
+  border-color: #bae6fd;
+}
+.action-btn.btn-results:hover {
+  background: #bae6fd;
+}
+.action-btn.btn-results.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+}
+.action-btn.btn-results.stale {
+  background: #fef3c7;
+  color: #b45309;
+  border-color: #fde68a;
+}
+
+/* Inspector Detailed Analysis Results */
+.member-analysis-group {
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border, #e9e5d7);
+}
+
+.member-stale-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.force-state-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  margin-left: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   Conversational Natural-Language Design Studio Assistant & Canvas Overlay
+   -------------------------------------------------------------------------- */
+.editor-design-assistant-card {
+  position: absolute;
+  bottom: 48px;
+  right: 20px;
+  width: 440px;
+  max-width: calc(100% - 40px);
+  max-height: calc(100% - 90px);
+  overflow-y: auto;
+  z-index: 25;
+  background: #faf8f4;
+  border: 1px solid #dcd5c4;
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(41, 42, 40, 0.12);
+  padding: 12px 14px;
+}
+
+.editor-design-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #eae5d7;
+}
+
+.editor-design-header .header-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: #292a28;
+}
+
+.editor-design-header .assistant-tag {
+  font: 700 9px var(--font-mono, monospace);
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.editor-design-header .assistant-close-btn {
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  color: #52564c;
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+.editor-design-header .assistant-close-btn:hover {
+  color: #292a28;
+}
+
+.action-btn.btn-ai.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+}
+
+/* Canvas Overlay Visualizations */
+.design-preview-member-added {
+  stroke: #0284c7;
+  stroke-width: 3px;
+  stroke-dasharray: 6 4;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.design-preview-member-deleted {
+  stroke: #ef4444;
+  stroke-width: 2.5px;
+  stroke-dasharray: 4 3;
+  opacity: 0.85;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.design-preview-joint {
+  fill: none;
+  stroke-width: 2px;
+  pointer-events: none;
+}
+
+.design-preview-joint.added {
+  stroke: #0284c7;
+  stroke-dasharray: 3 2;
+}
+
+.design-preview-joint.modified {
+  stroke: #f59e0b;
+  stroke-dasharray: 3 2;
+}
+
+.design-preview-label {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.design-preview-label.added {
+  fill: #0284c7;
 }

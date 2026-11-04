@@ -1,0 +1,309 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/athulkrishna_s_nair/sketch2solve/frontend/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/e2e/playwright.config.js",
+      "tests/e2e/phase1-polish.spec.js"
+    ],
+    "configFile": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/playwright.config.js",
+    "rootDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T01-16-41-168Z-43/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T01-16-41-168Z-43/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "snapshotDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.js",
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5174",
+          "browserName": "chromium",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "video": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T01-16-41-168Z-43/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "phase1-polish.spec.js",
+      "file": "phase1-polish.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Phase 1 Polish Verification",
+          "file": "phase1-polish.spec.js",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "1. Dashboard: semantic selectors and buttons retain existing behavior",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 1543,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.sketch-uploader, .dropzone, input[type=\"file\"]')\nExpected: visible\nError: strict mode violation: locator('.sketch-uploader, .dropzone, input[type=\"file\"]') resolved to 2 elements:\n    1) <input type=\"file\" class=\"visually-hidden\" accept=\"image/jpeg,image/png,image/webp\"/> aka getByRole('button', { name: 'Choose File' })\n    2) <div tabindex=\"0\" role=\"button\" class=\"dropzone\">…</div> aka getByRole('button', { name: 'Drop your sketch here or' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.sketch-uploader, .dropzone, input[type=\"file\"]') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('.sketch-uploader, .dropzone, input[type=\"file\"]')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.sketch-uploader, .dropzone, input[type=\"file\"]')\nExpected: visible\nError: strict mode violation: locator('.sketch-uploader, .dropzone, input[type=\"file\"]') resolved to 2 elements:\n    1) <input type=\"file\" class=\"visually-hidden\" accept=\"image/jpeg,image/png,image/webp\"/> aka getByRole('button', { name: 'Choose File' })\n    2) <div tabindex=\"0\" role=\"button\" class=\"dropzone\">…</div> aka getByRole('button', { name: 'Drop your sketch here or' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.sketch-uploader, .dropzone, input[type=\"file\"]') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('.sketch-uploader, .dropzone, input[type=\"file\"]')\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/phase1-polish.spec.js:32:83",
+                        "location": {
+                          "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/phase1-polish.spec.js",
+                          "column": 83,
+                          "line": 32
+                        },
+                        "snippet": "  30 |     // 3. Click New Analysis button to navigate to upload page\n  31 |     await headerNewBtn.click()\n> 32 |     await expect(page.locator('.sketch-uploader, .dropzone, input[type=\"file\"]')).toBeVisible()\n     |                                                                                   ^\n  33 |   })\n  34 |\n  35 |   test('2. Accessibility: canvas floating controls and header actions have explicit accessible names', async ({ page }) => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/phase1-polish.spec.js",
+                            "column": 83,
+                            "line": 32
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.sketch-uploader, .dropzone, input[type=\"file\"]')\nExpected: visible\nError: strict mode violation: locator('.sketch-uploader, .dropzone, input[type=\"file\"]') resolved to 2 elements:\n    1) <input type=\"file\" class=\"visually-hidden\" accept=\"image/jpeg,image/png,image/webp\"/> aka getByRole('button', { name: 'Choose File' })\n    2) <div tabindex=\"0\" role=\"button\" class=\"dropzone\">…</div> aka getByRole('button', { name: 'Drop your sketch here or' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.sketch-uploader, .dropzone, input[type=\"file\"]') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('.sketch-uploader, .dropzone, input[type=\"file\"]')\u001b[22m\n\n\n  30 |     // 3. Click New Analysis button to navigate to upload page\n  31 |     await headerNewBtn.click()\n> 32 |     await expect(page.locator('.sketch-uploader, .dropzone, input[type=\"file\"]')).toBeVisible()\n     |                                                                                   ^\n  33 |   })\n  34 |\n  35 |   test('2. Accessibility: canvas floating controls and header actions have explicit accessible names', async ({ page }) => {\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/phase1-polish.spec.js:32:83"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T01:16:47.565Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T01-16-47-537Z-140/playwright-artifacts/phase1-polish-Phase-1-Poli-6b44a-ns-retain-existing-behavior/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T01-16-47-537Z-140/playwright-artifacts/phase1-polish-Phase-1-Poli-6b44a-ns-retain-existing-behavior/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T01-16-47-537Z-140/playwright-artifacts/phase1-polish-Phase-1-Poli-6b44a-ns-retain-existing-behavior/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T01-16-47-537Z-140/playwright-artifacts/phase1-polish-Phase-1-Poli-6b44a-ns-retain-existing-behavior/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/phase1-polish.spec.js",
+                        "column": 83,
+                        "line": 32
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "8bd85001e8a284be5845-319949bffc9df95a53e2",
+              "file": "phase1-polish.spec.js",
+              "line": 9,
+              "column": 3
+            },
+            {
+              "title": "2. Accessibility: canvas floating controls and header actions have explicit accessible names",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3820,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T01:16:50.911Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8bd85001e8a284be5845-ade48d921c44503f3ef8",
+              "file": "phase1-polish.spec.js",
+              "line": 35,
+              "column": 3
+            },
+            {
+              "title": "3. P1 Fix: AnalysisResultsPanel viewport management, lower joints clickability, expand/minimize states, and pan/zoom",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 46240,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/phase1-polish.spec.js",
+                            "column": 23,
+                            "line": 135
+                          },
+                          "message": "Error: locator.click: Test timeout of 45000ms exceeded.\nBrowser logs:\n\n<launching> /home/athulkrishna_s_nair/.cache/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-linux64/chrome-headless-shell --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-FAvfnz --remote-debugging-pipe --no-startup-window\n<launched> pid=259\n[pid=259][err] [1104/011651.004823:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory\n[pid=259][err] [1104/011651.004921:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[pid=259][err] [1104/011651.038564:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory\n[pid=259][err] [1104/011651.038657:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory\n[pid=259][err] [1104/011651.046830:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[pid=259][err] [1104/011651.047005:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[pid=259][err] [1104/011651.047058:WARNING:device/bluetooth/dbus/bluez_dbus_manager.cc:209] Floss manager service not available, cannot set Floss enable/disable.\n[pid=259][err] [1104/011651.051562:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[pid=259][err] [1104/011651.092953:WARNING:media/gpu/vaapi/vaapi_wrapper.cc:1655] drmGetDevices2() has not found any devices\n[pid=259][err] [1104/011651.095615:WARNING:sandbox/policy/linux/sandbox_linux.cc:405] InitializeSandbox() called with multiple threads in process gpu-process.\n[pid=259][err] [1104/011651.227670:INFO:CONSOLE:946] \"[vite] connecting...\", source: http://127.0.0.1:5174/@vite/client (946)\n[pid=259][err] [1104/011651.303156:INFO:CONSOLE:1055] \"[vite] connected.\", source: http://127.0.0.1:5174/@vite/client (1055)\n[pid=259][err] [1104/011655.050098:INFO:CONSOLE:946] \"[vite] connecting...\", source: http://127.0.0.1:5174/@vite/client (946)\n[pid=259][err] [1104/011655.098288:INFO:CONSOLE:1055] \"[vite] connected.\", source: http://127.0.0.1:5174/@vite/client (1055)\n[pid=259] <gracefully close start>\nCall log:\n\u001b[2m  - waiting for locator('.truss-joints-group circle.truss-joint-node').nth(1)\u001b[22m\n\u001b[2m    - locator resolved to <circle r=\"7\" cy=\"278\" cx=\"554.5\" data-v-ae2570cd=\"\" class=\"truss-joint-node\"></circle>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <h4 data-v-c50f7cc4=\"\" class=\"card-title\">Equilibrium Matrix Diagnostics</h4> from <div role=\"region\" data-v-c50f7cc4=\"\" data-v-ae2570cd=\"\" aria-label=\"Analysis Results Panel\" class=\"analysis-results-panel is-expanded\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <h4 data-v-c50f7cc4=\"\" class=\"card-title\">Equilibrium Matrix Diagnostics</h4> from <div role=\"region\" data-v-c50f7cc4=\"\" data-v-ae2570cd=\"\" aria-label=\"Analysis Results Panel\" class=\"analysis-results-panel is-expanded\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    81 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <h4 data-v-c50f7cc4=\"\" class=\"card-title\">Equilibrium Matrix Diagnostics</h4> from <div role=\"region\" data-v-c50f7cc4=\"\" data-v-ae2570cd=\"\" aria-label=\"Analysis Results Panel\" class=\"analysis-results-panel is-expanded\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\n\n  133 |     const secondJoint = jointNodes.nth(1) // J2 at bottom right (Y=0)\n  134 |     await expect(secondJoint).toBeVisible()\n> 135 |     await secondJoint.click()\n      |                       ^\n  136 |     await expect(inspector.locator('.element-badge')).toBeVisible()\n  137 |\n  138 |     // 6. MINIMIZE PANEL: test minimized state\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/phase1-polish.spec.js:135:23"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T01:16:54.891Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T01-16-50-880Z-248/playwright-artifacts/phase1-polish-Phase-1-Poli-970ce-inimize-states-and-pan-zoom/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T01-16-50-880Z-248/playwright-artifacts/phase1-polish-Phase-1-Poli-970ce-inimize-states-and-pan-zoom/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T01-16-50-880Z-248/playwright-artifacts/phase1-polish-Phase-1-Poli-970ce-inimize-states-and-pan-zoom/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T01-16-50-880Z-248/playwright-artifacts/phase1-polish-Phase-1-Poli-970ce-inimize-states-and-pan-zoom/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "8bd85001e8a284be5845-f4788721a0edbc816a4d",
+              "file": "phase1-polish.spec.js",
+              "line": 70,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-04T01:16:41.178Z",
+    "duration": 62042.852,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

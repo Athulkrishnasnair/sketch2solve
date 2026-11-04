@@ -340,6 +340,14 @@ Repository history contains commit `1eede86` dated 2026-10-26, titled `chore: ad
 - Added deterministic tests for ROI bounds, ambiguous config points, and crop-to-original coordinate translation. Relevant evaluation tests passed 8; full backend suite passed 93; the crop experiment and standalone Phase A evaluation scripts completed; `git diff --check` passed. Overlays and details are in [`REPORT.md`](./evaluation/results/phase-a-2026-10-30/roi-crop-experiment/REPORT.md). No dependencies, AI calls, or edits to the Phase A baseline/annotations were made.
 - Next experiment: evaluate fixed overlapping tiles across test5's bays with a documented coordinate-map and deduplication rule, since the full reference crop remains capped and misses the rightmost bay. Keep detector thresholds and reference ambiguity rules unchanged.
 
+### 2026-11-02 — Playwright QA harness reliability fix
+
+- Files changed: `frontend/tests/e2e/playwright.config.js`, `overview_for_agents.md`.
+- Root cause: the repository’s Playwright harness configured `reuseExistingServer: false` for both the mock Flask backend and the Vite frontend; when the local app was already running on the expected port, the browser suite exited before any browser assertions could run. This broke the real-world QA workflow described in the repo instructions, which explicitly expects the app to be launched independently and then tested interactively.
+- Fix: set `reuseExistingServer: true` for both `webServer` entries so the suite reuses the already-started backend/frontend instead of failing with a port collision. This keeps the QA workflow compatible with local app startup and avoids destructive restarts or port conflicts.
+- Verification: `cd frontend && npm run test:unit -- --test-reporter=spec` passed 10/10 tests; `cd backend && . .venv/bin/activate && python -m unittest discover -s tests -q` passed 116/116 tests. Browser execution remains environment-blocked here because the sandbox is missing the required Playwright Chromium system libraries (`libnspr4.so` and related host libraries), so no actual browser assertions could complete in this container.
+- Remaining limitation: real browser assertions are still gated by the sandbox’s missing OS libraries; the code fix is in place and verified on unit/backend coverage, but full browser E2E execution requires a host environment with the required Playwright runtime dependencies installed.
+
 ### 2026-10-30 — Overlapping tile experiment on test5
 
 - Added an isolated evaluation runner and deterministic config for two layouts over the exact existing test5 ROI: three 600×420 tiles at 35% horizontal overlap, and four 480×420 tiles at 37.5% overlap. Origins, edge policy, image-to-source mapping, selection rationale, and tolerance sweep are recorded in `evaluation/results/phase-a-2026-10-30/overlapping-tile-experiment-2026-10-30/tile_config.json`. The layouts were selected from ROI geometry and annotated bay spacing before running the detector.
@@ -420,3 +428,197 @@ Repository history contains commit `1eede86` dated 2026-10-26, titled `chore: ad
   - Detail page integration: Added prominent "Edit geometry" and "Open Interactive Editor" buttons in `AnalysisDetailPage.vue` and `GeometryReview.vue`, routing to `?analysis=:id&view=editor` or `/analyses/:id/editor`.
   - Unit tests: Added 7 new frontend unit tests in `frontend/tests/unit/truss-editor.test.js` (total 10 tests passing).
   - Verification: 116 backend tests pass, 10 frontend unit tests pass, Vite production build passes with 1,735 modules.
+
+### 2026-11-02 — Contextual On-Canvas Issue Highlighting & AI Repair Assistant UX
+
+- On-Canvas Issue Highlighting:
+  - Enhanced `backend/app/services/truss_preview.py`: added graph connected-component analysis (`find_connected_components`) and enriched validation errors with precise element localization (`affected_elements`, `localization_precision`, `classification`, `uncertainty_explanation`).
+  - Differentiates stability failures (mechanisms, rank deficiency, underconstrained systems) vs. strength failures (strength failure requires material properties and cross-sectional capacity checks; high axial force alone is never marked as a strength failure).
+  - Canvas rendering in `frontend/src/pages/TrussEditorPage.vue` & `frontend/src/styles/truss-editor.css`:
+    - Affected members highlighted directly on canvas (red for confirmed geometry errors, amber for mechanisms/warnings, cyan `#0284c7` for AI-proposed modifications).
+    - Affected joints highlighted with visible markers and animated pulsing glow rings (`@keyframes joint-ring-pulse-red`, `@keyframes joint-ring-pulse-amber`).
+    - Unaffected geometry is muted with subtle opacity (`.is-muted`, opacity 0.22) to focus user attention on the issue.
+    - Status bar contains a toggle to clear or re-enable issue highlighting on demand.
+- Contextual Floating Action Card:
+  - Created `frontend/src/components/IssueResolutionAssistant.vue`: computes dynamic viewport coordinates centered near the affected geometry with boundary clamping and small-screen docking (`@media (max-width: 768px)`).
+  - Displays issue classification badge, concise engineering explanation, affected joint/member IDs, uncertainty callouts when mechanism location is undetermined, and prominent "Fix with AI" button with sparkle icon.
+  - Multi-issue navigation (`< 1 of N >`) with automatic canvas autofocus centering the viewport on the selected issue.
+- AI Repair Integration & Safety:
+  - Invokes `POST /api/ai/assistant` with model geometry, revision, selected issue, and diagnostics.
+  - AI proposes structured repairs, explains root cause and engineering rationale.
+  - Renders proposed changes on canvas as a distinct preview layer (`.ai-fix-preview-group`, `.ai-proposed-member-line`, `.ai-proposed-support-ring`).
+  - Requires explicit user approval via "Apply Suggested Fix"; preserves original geometry if canceled. Reruns deterministic preview validation after application.
+- Verification:
+  - Backend unit tests: **123/123 passed** (`unittest`).
+  - Frontend unit tests: **19/19 passed** (`issue-assistant.test.js`, `truss-editor.test.js`, `analyses.test.js`).
+  - Frontend production build: **Passed** with Vite 8.3.5 (1,740 modules transformed, 541ms).
+  - Playwright E2E browser tests: **Both passed** (`contextual on-canvas issue highlighting, floating action card, and AI repair workflow` in 1.3s; `issue resolution assistant independent scrolling, mouse-wheel isolation, and sticky footer` in 1.9s).
+  - `git diff --check` passed cleanly with 0 whitespace warnings.
+
+### 2026-11-02 — Issue Resolution Assistant Scrolling, Mouse-Wheel Isolation, and Sticky Footer
+
+- Bug Addressed:
+  - The floating `IssueResolutionAssistant` card previously exceeded the viewport height, pushing critical controls (including "Apply Suggested Fix") off-screen.
+  - When scrolling inside the card, mouse wheel events bubbled to `.canvas-container`, triggering canvas zoom instead of scrolling the card's content.
+- Fix Details:
+  - Viewport-Aware Maximum Height:
+    - Card container max-height dynamically computed as `min(480px, calc(100% - top - 16px))` on desktop, and `min(420px, calc(100% - 24px))` when docked on mobile (`@media (max-width: 768px)`).
+    - Anchor positioning in `TrussEditorPage.vue` clamps `top` and `left` against canvas dimensions so the card never falls below the canvas or into the bottom status bar.
+  - Independent Vertical Scrolling:
+    - Split card layout into fixed header (`.card-header`, `flex-shrink: 0`), dedicated vertical scroll container (`.card-content-scroll`, `overflow-y: auto`, `overscroll-behavior: contain`), and sticky action footer (`.card-footer`, `flex-shrink: 0`).
+    - Sticky footer keeps 'Apply Suggested Fix', 'Cancel', 'Retry', and 'Fix with AI' permanently visible and clickable without being clipped.
+  - Event Propagation & Interaction Isolation:
+    - Attached `@wheel.stop="handleCardWheel"`, `@pointerdown.stop`, `@pointermove.stop`, `@pointerup.stop`, `@mousedown.stop`, and `@click.stop` to the card and minimized pill.
+    - Added defensive guards in `TrussEditorPage.vue` (`handleWheel`, `handlePointerDown`, `handlePointerMove`) to ignore events originating from floating UI overlays.
+    - Preserved normal canvas zoom and pan interactions outside the card.
+  - User State Persistence:
+    - Added `userClearedHighlight` state so background recalculations do not forcefully re-select issues and reopen the card after explicit dismissal by the user.
+- Verification:
+  - Frontend unit tests: **19/19 passed**.
+  - Production build: **Passed** with Vite.
+  - Playwright E2E verification: **Passed** in 1.9s. Verified card scrollability (`scrollHeight > clientHeight`, `scrollTop > 0`), canvas scale invariance during card scroll, active canvas zoom outside card, cancellation, and fix application from sticky footer.
+
+### 2026-11-02 — Solver-Result Experience, Expanded Results Panel, and Canvas Overlays
+
+- Problem Addressed:
+  - Previously, clicking Solve in the geometry editor did not make the resulting numerical analysis sufficiently obvious or interactive; the editor merely showed `SOLVABLE` in the status pill without revealing member forces, reactions, or matrix diagnostics.
+- Changes Implemented:
+  - Transition & Results Panel (`frontend/src/components/AnalysisResultsPanel.vue`):
+    - Created dedicated expandable/dockable results panel with 4 organized tabs:
+      1. `Summary & Matrix`: Total joints ($N$), members ($M$), equations ($2N$), unknowns ($M+R$), system determinacy, matrix shape ($2N \times [M+R]$), numerical rank, condition number ($\kappa$), and max equilibrium residual compared with tolerance.
+      2. `Member Forces`: Complete table with Member ID, Start/End joints, length ($m$), axial force ($kN$), and Tension (blue badge) / Compression (red badge) / Zero-force classifications. Includes clickable 'Inspect on Canvas' action.
+      3. `Support Reactions`: Detailed table grouping reactions by Joint ID and Support type, showing horizontal force ($F_x$), vertical force ($F_y$), and total resultant vector magnitude ($R$).
+      4. `Limitations`: Engineering disclaimer clarifying that a numerical direct solution does not establish physical stability, buckling safety, yield capacity, or dynamic suitability.
+    - Added stale results detection: if geometry is modified after solving, the panel displays a warning banner with a 1-click 'Re-solve Now' action.
+    - Added zero-load state callout: when external loads are omitted, explains the structure is unloaded ($Ax = 0$), shows zero forces without treating it as a solver failure, and suggests applying loads.
+  - Interactive Canvas Visualization (`frontend/src/pages/TrussEditorPage.vue` & `frontend/src/styles/truss-editor.css`):
+    - Member Force Labels: Displays formatted axial forces directly along member midpoints on the truss with color-coded styling (Tension: `#1d4ed8` blue, Compression: `#dc2626` red, Zero: `#64748b` gray).
+    - Canvas Color Legend: Floating legend explaining blue/red/gray color codes on canvas.
+    - Support Reaction Vectors: Directional SVG arrows (`.reaction-arrowhead`) and magnitude labels (`.reaction-vector-label`) illustrating horizontal ($R_x$) and vertical ($R_y$) reaction forces at pin and roller supports.
+    - Toolbar Force Toggle: Quick-toggle button in the top canvas toolbar to show/hide force labels and reaction vectors.
+    - Interactive Member Inspection: Selecting any member on canvas or clicking 'Inspect' in the results table focuses the member and displays its length, axial force, and stress state in the inspector sidebar.
+  - Solve Workflow & Stale Results Protection:
+    - Solve button features an active loading spinner (`Solving…`) preventing duplicate submissions.
+    - Smoothly transitions and reveals the results panel upon solver completion.
+    - Modifying geometry, moving nodes, or editing supports immediately marks persisted results as `resultsStale = true`, suppressing canvas force overlays and reaction arrows until re-solved.
+  - Backend Integration (`backend/app/routes/analyses.py`):
+    - Included `member_states` in `POST /api/analyses/<id>/solve` response alongside `member_forces`, `support_reactions`, `diagnostics`, `max_equilibrium_residual`, and `residual_tolerance`.
+- Verification:
+  - Backend unit tests: **123/123 passed** (`unittest`).
+  - Frontend unit tests: **27/27 passed** (including 8 new tests in `analysis-results.test.js`).
+  - Frontend production build: **Passed** with Vite (1,745 modules transformed in 535ms).
+  - Playwright E2E browser tests: **3/3 passed** in 8.4s (`solver-result experience, expanded analysis panel, canvas force visualization, and zero-load handling`).
+  - Mathematical verification on triangular reference model ($A=(0,0), B=(4,0), C=(2,3)$, Pin at $A$, Roller at $B$, $F_y=-10\text{ kN}$ at $C$):
+    - $R_{Ay} = 5.0\text{ kN}$, $R_{By} = 5.0\text{ kN}$, $R_{Ax} \approx 0.0\text{ kN}$.
+    - Member $AB = +3.333333\text{ kN}$ (Tension).
+    - Members $AC = BC = -6.009252\text{ kN}$ (Compression).
+    - Equilibrium residual: $4.44 \times 10^{-16} \le 1.0 \times 10^{-9}$.
+  - `git diff --check` passed cleanly with 0 whitespace warnings.
+
+### 2026-11-03 — Conversational Natural-Language Truss Design (Phase 1 — Backend Only)
+
+- Work Scope:
+  - Exclusively backend implementation of conversational natural-language structural design engine and REST API contracts.
+  - Zero frontend files modified or created.
+- Architecture Assessment & Design Service (`backend/app/services/natural_language_design.py`):
+  - Created standalone conversational structural design service supporting three core intents:
+    1. **CREATE**: Synthesizes complete planar truss proposals matching Schema 1.0 from natural language without requiring sketches. Extracts span, height, bay/panel counts, boundary support constraints, applied point loads, and length/force units. Supports triangular roof, Warren, Pratt, and Howe topologies. Evaluates real-time equilibrium determinacy and solvability. When specifications are ambiguous or incomplete, generates structured clarification questions while providing a valid candidate proposal.
+    2. **MODIFY**: Accepts the active editor canvas model snapshot and user command. Generates discrete, restricted operations (`add_joint`, `update_joint`, `remove_joint`, `add_member`, `update_member`, `remove_member`, `add_support`, `update_support`, `remove_support`, `add_load`, `update_load`, `remove_load`). Ensures non-targeted geometry, supports, loads, and metadata remain strictly untouched. Independently validates operations against duplicate IDs, unknown nodes, coincident endpoints, and self-connected members. Handles ambiguous prompts (e.g. "make it stronger") with structured clarification questions.
+    3. **EXPLAIN**: Provides technically rigorous structural mechanics explanations grounded in actual joint coordinates, members, equilibrium equation balance ($2j$ vs $m+r$), degree of determinacy, connected components, and boundary conditions. When solved, classifies tension ($>0$), compression ($<0$), and zero-force members. When unsolved, explicitly disclaims that verified numerical force results are unavailable.
+  - Security, Input Sanitization & Guardrails:
+    - Rejects empty prompts (`EMPTY_MESSAGE`), messages exceeding 2000 characters (`MESSAGE_TOO_LONG`), and contexts exceeding 500 elements (`CONTEXT_TOO_LARGE`).
+    - Domain classifier detects and blocks out-of-scope non-structural requests (programming code generation, shell scripts, prompt injection, hacking, or secrets extraction) with HTTP 400 `{"error": "OUT_OF_SCOPE", "message": "I can help create, modify or explain truss structures. Describe the structural design you want."}`.
+    - Strict rejection of non-finite numbers (`NaN`, `Infinity`) and extreme coordinate bounds ($> 10^6$).
+    - Zero-paid-API testing: robust deterministic synthesis fallback ensures 100% of tests run hermetically without external network dependencies or API keys.
+- API Endpoints (`backend/app/routes/analyses.py`):
+  - `POST /api/ai/design`: Main natural language design endpoint supporting CREATE, MODIFY, EXPLAIN, and auto-detection.
+  - `POST /api/ai/design/apply`: Atomic proposal approval with revision gating. Verifies base revision against the persisted model's revision (returning HTTP 409 `REVISION_CONFLICT` on stale proposals), re-validates proposed geometry with `validate_truss_request` (returning HTTP 422 on invalid geometry), updates draft in database, increments revision, and commits atomically.
+  - `POST /api/ai/design/reject`: Cleanly acknowledges proposal rejection without mutating state.
+- Documentation:
+  - Authored comprehensive API reference in `backend/API.md`.
+  - Updated `qa-output/QA_REPORT.md` with new test metrics.
+- Verification:
+  - Backend unit & API tests: **162/162 passed** (`cd backend && ./.venv/bin/python -m unittest discover -s tests -v`), including 39 new tests in `backend/tests/test_natural_language_design.py`.
+  - `git diff --check` passed with 0 warnings.
+  - Frontend code confirmed 100% untouched.
+
+### 2026-11-03 — Conversational Design Studio (Phase 2 — Frontend Integration)
+
+- Work Scope:
+  - Frontend integration of the completed natural language structural design backend across Vue 3 application.
+  - Designed with CAD workbench aesthetics: warm off-white surfaces (`#fffef9`), fine charcoal typography (`#292a28`), subtle blue interactive controls (`#0284c7`), and restrained amber accents (`#f59e0b`).
+  - Strict avoidance of generic chat bubbles, purple gradients, robot avatars, or conversational fluff.
+  - The canvas remains the primary workspace at all times; no optimistic mutation without explicit user approval.
+- Three Entry Points Delivered:
+  1. **Dashboard (Create with AI)** (`frontend/src/pages/DashboardPage.vue`):
+     - Added prominent "Create with AI" action in the dashboard hero header and empty state.
+     - Expandable in-place natural language design workbench (`.dashboard-ai-workbench`) with contextual prompt chips (Triangular 6m span, Warren 4-panel 10m span, Pratt 6-panel 12m span).
+     - Renders proposed model card with 6-metric technical summary, determinacy status, and mini-SVG preview.
+     - 1-click 'Apply & Open Editor' creates a new analysis record atomically and navigates directly to the interactive geometry editor.
+  2. **Sidebar Navigation (Natural Language Design Studio)** (`frontend/src/pages/DesignStudioPage.vue` & `frontend/src/App.vue`):
+     - Added "Natural Language Design" primary navigation item with custom CAD vector icon.
+     - Dedicated studio workspace featuring a split-pane layout:
+       - Left pane: Target structure selector (to modify existing saved analyses or synthesize from scratch), prompt workbench, intent selector tabs (Auto, Create, Modify, Explain), and structured proposal cards with clarification chip navigation.
+       - Right pane: Live CAD vector preview with grid, coordinates, proposed member additions/deletions, support symbols, and load force vectors with magnitudes.
+  3. **Editor (Contextual Design Assistant)** (`frontend/src/pages/TrussEditorPage.vue` & `frontend/src/styles/truss-editor.css`):
+     - Added "Design with AI" action in the editor top toolbar with keyboard accessibility.
+     - Floating docked assistant card positioned non-obstructively above the bottom solver status bar.
+     - Passes rich context with each prompt: current active canvas snapshot (including unsaved manual edits), model revision, currently selected element (joint/member), live diagnostics, and solver results.
+     - Context tag indicators for revision, selected element ID, and unsaved canvas modifications.
+     - On-canvas proposal preview layers:
+       - Proposed added members: dashed cyan lines (`#0284c7`) with `+Mid` labels.
+       - Proposed deleted members: dashed red lines (`#ef4444`).
+       - Proposed moved/added joints: distinct cyan/amber markers with `ΔJid` / `+Jid` badges.
+     - Full event isolation (`@wheel.stop`, `@pointerdown.stop`) preventing unintentional canvas zooming, dragging, or deselecting.
+- Components & Shared API Client:
+  - `frontend/src/api/analyses.js`: Added `designTruss`, `applyDesignProposal`, and `rejectDesignProposal` clients.
+  - `frontend/src/components/DesignProposalCard.vue`: Authored structured engineering proposal card with intent pill (`CREATE`, `MODIFY`, `EXPLAIN`), proposal ID, revision transition badge, explanation quote, discrete operations breakdown list, 6-metric technical summary (joints, members, supports, loads, span, height), predicted solvability bar, clarification chips, and human-in-the-loop Apply/Discard actions.
+  - `frontend/src/components/DesignInstructionPanel.vue`: Authored prompt workbench with context chips, intent selector, textarea with Enter/Shift+Enter shortcuts, example chips, busy loading state, and dismissible error banner.
+- Workflow & Robustness:
+  - Human-in-the-loop: proposals never mutate geometry until user clicks Apply.
+  - Undo/Redo integration: applying a proposal pushes the previous canvas state onto the undo stack.
+  - Stale results protection: applying a proposal marks prior solver results as stale and prompts re-solving.
+  - Revision conflict handling: catches HTTP 409 responses and instructs user if canvas was modified concurrently.
+  - Input guardrails: handles HTTP 400 out-of-scope notices with polite CAD assistance hints.
+- Verification:
+  - Backend test suite: **162/162 passed** (`cd backend && ./.venv/bin/python -m unittest discover -s tests -v`).
+  - Frontend unit tests: **38/38 passed** (`npm --prefix frontend run test:unit`), including 11 tests in `tests/unit/natural-language-design.test.js`.
+  - Frontend production build: **Passed** with Vite (1,748 modules transformed in 551ms).
+  - Playwright E2E browser tests: **27/27 passed** (100% green across entire suite).
+  - `git diff --check`: **0 whitespace/formatting warnings**.
+
+### 2026-11-04 — Phase 1 UI/UX Polish Roadmap Implementation
+
+- Work Scope:
+  - Addressed targeted P1 and P2 findings identified in `audit-report.md`.
+  - Fixed P1 Canvas Pointer Interception: resolved lower-third geometry occlusion and event blocking caused by `AnalysisResultsPanel`.
+  - Fixed P2 Dashboard Selectors: replaced ambiguous `.dashboard-primary` class hooks with component-specific classes while preserving styles.
+  - Fixed P2 Accessibility & Contrast: added explicit accessible names (`aria-label`, `aria-pressed`, `role="toolbar"`) across floating toolbars and buttons; hardened secondary text colors to meet WCAG AA (>= 4.5:1).
+  - Deferred P3 Mobile Inspector Redesign per project instructions.
+- Architecture & Implementation Details:
+  - **P1 Canvas Viewport & Layout Management (`frontend/src/styles/truss-editor.css`, `frontend/src/pages/TrussEditorPage.vue`, `frontend/src/components/AnalysisResultsPanel.vue`)**:
+    - Root cause: `AnalysisResultsPanel` was historically rendered inside `.canvas-container` with absolute positioning (`position: absolute; bottom: 0; left: 0; right: 0; height: 290px` or `480px`). The SVG canvas occupied 100% of `.canvas-container` height underneath the opaque panel, rendering geometry in the lower third physically covered and blocking pointer events on lower joints (e.g. J1, J2 at Y=0).
+    - Introduced `.editor-canvas-column` flex container (`flex: 1; display: flex; flex-direction: column; min-width: 0; min-height: 0; position: relative; overflow: hidden;`) wrapping `.canvas-container` (`flex: 1`) and `AnalysisResultsPanel` (`flex-shrink: 0; position: relative;`).
+    - Standardized panel height transitions: default height `270px` (max `42vh`), expanded height `420px` (max `56vh`), and minimized height `42px` with overflow hidden.
+    - Added panel controls: Minimize/Restore toggle (`ChevronDown`/`ChevronUp`), Expand/Collapse toggle (`Maximize2`/`Minimize2`), and auto-restore on tab activation.
+    - Attached a `ResizeObserver` on `svgRef` via Vue `watch(svgRef)` in `TrussEditorPage.vue`. Whenever the visible canvas viewport changes (panel open, closed, expanded, or window resized), `fitView()` automatically recalibrates center and scale with responsive percentage-based padding (`paddingX`, `paddingY`), keeping all joints fully visible and selectable.
+    - Preserved existing canvas pan, zoom, drag, selection, and drawer transition end events (`@transitionend.self="emit('resize')"`).
+  - **P2 Semantic Dashboard Selectors (`frontend/src/pages/DashboardPage.vue`)**:
+    - Added `.btn-new-analysis` to the header's "New from Sketch" button.
+    - Added `.btn-empty-start` to the empty-state "Upload First Sketch" button.
+    - Retained `.dashboard-primary` for shared CSS styling without breaking existing selector logic.
+  - **P2 Accessibility & Contrast Adjustments**:
+    - Added `role="toolbar"` and `aria-label="Canvas view controls"` to `.canvas-floating-controls`.
+    - Added explicit `aria-label` attributes to Zoom In, Zoom Out, Fit Content, Toggle Grid, Snap to Grid, AI Proposal Layer, Issue Highlighting, Force Labels, Results Panel, Back to Analysis, Undo, Redo, and Results Panel action buttons (Minimize, Expand, Close).
+    - Darkened muted secondary text colors across dashboard and editor to exceed WCAG AA 4.5:1 ratio:
+      - `.dashboard-welcome p`: `#76756d` -> `#575a53` (5.7:1)
+      - `.btn-close-workbench`: `#888a7e` -> `#52564c` (>5.5:1)
+      - `.analysis-card-meta`: `#99998d` -> `#5a6058` (>5.2:1)
+      - `.dashboard-arrow`: `#a1a08e` -> `#61645a` (>4.6:1)
+      - `.editor-design-header .assistant-close-btn`: `#888b80` -> `#52564c` (>5.5:1)
+- Verification:
+  - Backend test suite: **162/162 passed** (`cd backend && ./.venv/bin/python -m unittest discover -s tests -v`, 30.18s).
+  - Frontend unit tests: **38/38 passed** (`npm --prefix frontend run test:unit`, 444ms).
+  - Frontend production build: **Passed cleanly** with Vite (1,748 modules transformed in 1.28s, 0 errors).
+  - Playwright E2E browser tests: **33/33 passed** (`npm --prefix frontend run test:e2e`, 1.4m), including 3 new dedicated Phase 1 polish regression tests in `tests/e2e/phase1-polish.spec.js`.
+  - `git diff --check`: **0 whitespace/formatting warnings**.

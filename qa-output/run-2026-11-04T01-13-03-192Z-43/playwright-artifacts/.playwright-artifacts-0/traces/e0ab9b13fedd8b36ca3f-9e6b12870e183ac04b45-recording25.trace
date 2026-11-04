@@ -1,0 +1,15 @@
+{"version":10,"type":"context-options","origin":"library","browserName":"","playwrightVersion":"1.64.1","options":{},"platform":"linux","wallTime":1793754809549,"monotonicTime":28004.174,"sdkLanguage":"javascript","title":"application.spec.js:266 › provider failure MISSING_GEMINI_API_KEY is saved and explained without secrets"}
+{"type":"before","callId":"gdzi@1577","startTime":28741.334,"class":"APIRequestContext","method":"fetch","params":{"url":"/api/analyses/b7376211dedc4f6d9b87a4979b9e0285","method":"GET"}}
+{"type":"log","callId":"gdzi@1577","time":28744.989,"message":"→ GET http://127.0.0.1:5174/api/analyses/b7376211dedc4f6d9b87a4979b9e0285"}
+{"type":"log","callId":"gdzi@1577","time":28745.01,"message":"  user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36"}
+{"type":"log","callId":"gdzi@1577","time":28745.015,"message":"  accept: */*"}
+{"type":"log","callId":"gdzi@1577","time":28745.018,"message":"  accept-encoding: gzip,deflate,br"}
+{"type":"log","callId":"gdzi@1577","time":28751.772,"message":"← 200 OK"}
+{"type":"log","callId":"gdzi@1577","time":28751.786,"message":"  vary: Origin"}
+{"type":"log","callId":"gdzi@1577","time":28751.791,"message":"  server: Werkzeug/3.1.9 Python/3.14.4"}
+{"type":"log","callId":"gdzi@1577","time":28751.795,"message":"  date: Wed, 04 Nov 2026 01:13:30 GMT"}
+{"type":"log","callId":"gdzi@1577","time":28751.8,"message":"  content-type: application/json"}
+{"type":"log","callId":"gdzi@1577","time":28751.806,"message":"  content-length: 18238"}
+{"type":"log","callId":"gdzi@1577","time":28751.811,"message":"  access-control-allow-origin: http://127.0.0.1:3000"}
+{"type":"log","callId":"gdzi@1577","time":28751.816,"message":"  connection: close"}
+{"type":"after","callId":"gdzi@1577","endTime":28752.074,"result":{"response":{"url":"http://127.0.0.1:5174/api/analyses/b7376211dedc4f6d9b87a4979b9e0285","status":200,"statusText":"OK","headers":[{"name":"vary","value":"Origin"},{"name":"server","value":"Werkzeug/3.1.9 Python/3.14.4"},{"name":"date","value":"Wed, 04 Nov 2026 01:13:30 GMT"},{"name":"content-type","value":"application/json"},{"name":"content-length","value":"18238"},{"name":"access-control-allow-origin","value":"http://127.0.0.1:3000"},{"name":"connection","value":"close"}],"serverAddr":{"ipAddress":"127.0.0.1","port":5174},"timing":{"startTime":1793754810289,"domainLookupStart":-1,"domainLookupEnd":-1,"connectStart":0,"secureConnectionStart":-1,"connectEnd":0.9430000000029395,"requestStart":0.9430000000029395,"responseStart":6.908000000003085},"responseEndTiming":7.096000000001368,"fetchUid":"c66a8d05b7c8245ef00b4e2b6d9a1cbc"}}}

@@ -14,6 +14,100 @@ from app.services.solver import (
 from app.services.validation import validate_truss_request
 
 
+def find_connected_components(nodes: list[Any], members: list[Any]) -> list[dict[str, list[str]]]:
+    """Partition nodes and members into connected graph components."""
+    node_ids = {n.id for n in nodes if hasattr(n, "id")}
+    adj: dict[str, set[str]] = {nid: set() for nid in node_ids}
+    member_map: dict[str, list[str]] = {nid: [] for nid in node_ids}
+
+    for m in members:
+        ni = getattr(m, "node_i", None)
+        nj = getattr(m, "node_j", None)
+        mid = getattr(m, "id", None)
+        if ni in adj and nj in adj:
+            adj[ni].add(nj)
+            adj[nj].add(ni)
+            if mid:
+                member_map[ni].append(mid)
+                member_map[nj].append(mid)
+
+    visited: set[str] = set()
+    components: list[dict[str, list[str]]] = []
+
+    for nid in sorted(node_ids):
+        if nid in visited:
+            continue
+        comp_nodes: list[str] = []
+        comp_members: set[str] = set()
+        queue = [nid]
+        visited.add(nid)
+
+        while queue:
+            curr = queue.pop(0)
+            comp_nodes.append(curr)
+            for mid in member_map.get(curr, []):
+                comp_members.add(mid)
+            for neighbor in adj.get(curr, set()):
+                if neighbor not in visited:
+                    visited.add(neighbor)
+                    queue.append(neighbor)
+
+        components.append({
+            "nodes": sorted(comp_nodes),
+            "members": sorted(comp_members),
+        })
+
+    return components
+
+
+def _enrich_validation_errors(errors: list[Any], raw_model: Any) -> list[dict[str, Any]]:
+    enriched = []
+    model_dict = raw_model.get("model", {}) if isinstance(raw_model, dict) else {}
+    nodes_list = model_dict.get("nodes", []) if isinstance(model_dict, dict) else []
+    members_list = model_dict.get("members", []) if isinstance(model_dict, dict) else []
+    supports_list = model_dict.get("supports", []) if isinstance(model_dict, dict) else []
+
+    for issue in errors:
+        d = asdict(issue)
+        d["classification"] = "invalid_geometry"
+        d["localization_precision"] = "exact"
+        path = d.get("path") or ""
+        element_id = ""
+        affected = {"nodes": [], "members": [], "supports": []}
+
+        parts = path.strip("/").split("/")
+        if len(parts) >= 3 and parts[0] == "model":
+            category = parts[1]
+            try:
+                idx = int(parts[2])
+            except ValueError:
+                idx = -1
+
+            if category == "members" and 0 <= idx < len(members_list):
+                m = members_list[idx]
+                if isinstance(m, dict):
+                    element_id = m.get("id", "")
+                    affected["members"] = [element_id] if element_id else []
+                    affected["nodes"] = [n for n in (m.get("node_i"), m.get("node_j")) if n]
+            elif category == "nodes" and 0 <= idx < len(nodes_list):
+                n = nodes_list[idx]
+                if isinstance(n, dict):
+                    element_id = n.get("id", "")
+                    affected["nodes"] = [element_id] if element_id else []
+            elif category == "supports" and 0 <= idx < len(supports_list):
+                s = supports_list[idx]
+                if isinstance(s, dict):
+                    element_id = s.get("id", "")
+                    affected["supports"] = [element_id] if element_id else []
+                    if s.get("node"):
+                        affected["nodes"] = [s.get("node")]
+
+        d["element_id"] = element_id
+        d["affected_elements"] = affected
+        enriched.append(d)
+    return enriched
+
+
 def evaluate_truss_preview(payload: Any) -> dict[str, Any]:
     """Evaluate a draft truss model without persisting or approving it.
 
@@ -32,7 +126,7 @@ def evaluate_truss_preview(payload: Any) -> dict[str, Any]:
             "validation": {
                 "status": "invalid",
                 "is_valid": False,
-                "errors": [asdict(issue) for issue in validation.errors],
+                "errors": _enrich_validation_errors(validation.errors, raw_model),
                 "warnings": [],
             },
             "solvability": {
@@ -74,8 +168,11 @@ def evaluate_truss_preview(payload: Any) -> dict[str, Any]:
         if node.id not in connected_nodes:
             warnings.append({
                 "code": "DISCONNECTED_JOINT",
+                "classification": "disconnected_geometry",
+                "localization_precision": "exact",
                 "message": f"Joint {node.id} has no connected members.",
                 "element_id": node.id,
+                "affected_elements": {"nodes": [node.id], "members": [], "supports": []},
                 "path": f"/model/nodes/{node.id}",
             })
 
@@ -86,8 +183,11 @@ def evaluate_truss_preview(payload: Any) -> dict[str, Any]:
         if pair in seen_pairs:
             warnings.append({
                 "code": "DUPLICATE_MEMBER_CONNECTION",
+                "classification": "invalid_geometry",
+                "localization_precision": "exact",
                 "message": f"Member {member.id} connects the same joints ({member.node_i} ↔ {member.node_j}) as member {seen_pairs[pair]}.",
                 "element_id": member.id,
+                "affected_elements": {"nodes": [member.node_i, member.node_j], "members": [member.id, seen_pairs[pair]], "supports": []},
                 "path": f"/model/members/{member.id}",
             })
         else:
@@ -125,10 +225,18 @@ def evaluate_truss_preview(payload: Any) -> dict[str, Any]:
         }
 
     if reaction_count < 3:
+        supp_nodes = [s.node for s in model.supports] if model.supports else [n.id for n in model.nodes]
         warnings.append({
             "code": "INSUFFICIENT_SUPPORTS",
+            "classification": "underconstrained_system",
+            "localization_precision": "exact" if model.supports else "component_level",
             "message": f"The structure has {reaction_count} support constraint{'s' if reaction_count != 1 else ''} (at least 3 non-parallel constraints are required for stable planar equilibrium).",
-            "element_id": model.supports[0].id if model.supports else "",
+            "element_id": model.supports[0].id if model.supports else (model.nodes[0].id if model.nodes else ""),
+            "affected_elements": {
+                "nodes": supp_nodes,
+                "members": [],
+                "supports": [s.id for s in model.supports],
+            },
             "path": "/model/supports",
         })
 
@@ -147,6 +255,7 @@ def evaluate_truss_preview(payload: Any) -> dict[str, Any]:
             "solvability": {
                 "status": "unsolvable",
                 "category": "ASSEMBLY_ERROR",
+                "classification": "invalid_geometry",
                 "code": err.code,
                 "message": err.message,
                 "equation_count": equation_count,
@@ -179,6 +288,23 @@ def evaluate_truss_preview(payload: Any) -> dict[str, Any]:
         else:
             msg = diagnostics.message or "Structure cannot be solved in static equilibrium."
 
+        components = find_connected_components(model.nodes, model.members)
+        primary_comp = components[0] if components else {"nodes": [n.id for n in model.nodes], "members": [m.id for m in model.members]}
+        classification = "mechanism" if diagnostics.category in ("UNDERDETERMINED", "SINGULAR_SQUARE") else ("statically_indeterminate" if diagnostics.category == "OVERDETERMINED" else "solver_diagnostic")
+
+        uncertainty_msg = None
+        if diagnostics.category in ("UNDERDETERMINED", "SINGULAR_SQUARE"):
+            uncertainty_msg = (
+                f"Numerical rank deficiency detected (rank {diagnostics.numerical_rank} vs {diagnostics.unknown_count} unknowns). "
+                "The kinematic mechanism is distributed across this connected component. Because the deficiency is a property of the global "
+                "equilibrium matrix, the exact affected member cannot be uniquely isolated without adding panel bracing."
+            )
+        elif diagnostics.category == "OVERDETERMINED":
+            uncertainty_msg = (
+                f"Statically indeterminate system: {diagnostics.equation_count} equations vs {diagnostics.unknown_count} unknowns. "
+                "Redundant members or constraints are distributed across this component."
+            )
+
         return {
             "is_valid": True,
             "validation": {
@@ -190,11 +316,19 @@ def evaluate_truss_preview(payload: Any) -> dict[str, Any]:
             "solvability": {
                 "status": "unsolvable",
                 "category": diagnostics.category,
+                "classification": classification,
                 "message": msg,
                 "equation_count": diagnostics.equation_count,
                 "unknown_count": diagnostics.unknown_count,
                 "rank": diagnostics.numerical_rank,
                 "condition_number": diagnostics.condition_number,
+                "affected_elements": {
+                    "nodes": primary_comp["nodes"],
+                    "members": primary_comp["members"],
+                    "supports": [s.id for s in model.supports],
+                },
+                "localization_precision": "component_level",
+                "uncertainty_explanation": uncertainty_msg,
             },
             "solver_results": None,
         }

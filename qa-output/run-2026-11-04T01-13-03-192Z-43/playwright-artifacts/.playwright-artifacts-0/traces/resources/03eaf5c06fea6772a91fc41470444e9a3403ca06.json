@@ -1,0 +1,1 @@
+{"geometry":{"schema_version":"1.0","metadata":{"name":"invalid","source":"human_review","units":{"length":"m","force":"N"}},"model":{"nodes":[{"id":"A","x":0,"y":0},{"id":"B","x":1,"y":0}],"members":[{"id":"M1","node_i":"A","node_j":"missing"}],"supports":[],"loads":[]}},"coordinates_confirmed":true}

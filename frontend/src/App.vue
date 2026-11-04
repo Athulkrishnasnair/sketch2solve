@@ -3,6 +3,7 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import AnalysisDetailPage from './pages/AnalysisDetailPage.vue'
 import AnalysisHistoryPage from './pages/AnalysisHistoryPage.vue'
 import DashboardPage from './pages/DashboardPage.vue'
+import DesignStudioPage from './pages/DesignStudioPage.vue'
 import NewAnalysisPage from './pages/NewAnalysisPage.vue'
 import TrussEditorPage from './pages/TrussEditorPage.vue'
 
@@ -15,6 +16,7 @@ const pageTitle = computed(() => ({
   history: 'Analysis history',
   detail: 'Analysis review',
   editor: 'Truss Editor',
+  design: 'Natural Language Design',
 })[view.value])
 
 function updateAddress(nextView, id = '') {
@@ -68,7 +70,7 @@ function handlePopState() {
     view.value = 'detail'
   } else {
     analysisId.value = ''
-    view.value = ['new', 'history'].includes(params.get('view')) ? params.get('view') : 'dashboard'
+    view.value = ['new', 'history', 'design'].includes(params.get('view')) ? params.get('view') : 'dashboard'
   }
 }
 
@@ -91,6 +93,7 @@ onBeforeUnmount(() => window.removeEventListener('popstate', handlePopState))
       <div class="local-banner"><span class="local-dot"></span> Local workspace</div>
       <nav class="primary-nav" aria-label="Main navigation">
         <button :class="['nav-item', { active: view === 'dashboard' } ]" type="button" @click="navigate('dashboard')"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="5.5" height="5.5" rx="1"/><rect x="11.5" y="3" width="5.5" height="5.5" rx="1"/><rect x="3" y="11.5" width="5.5" height="5.5" rx="1"/><rect x="11.5" y="11.5" width="5.5" height="5.5" rx="1"/></svg><span>Dashboard</span></button>
+        <button :class="['nav-item', { active: view === 'design' }]" type="button" @click="navigate('design')"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5 12 7l4.5 2-4.5 2-2 4.5-2-4.5-4.5-2 4.5-2 2-4.5Z" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="16" cy="4" r="1.2" fill="currentColor"/><circle cx="4" cy="16" r="1.2" fill="currentColor"/></svg><span>Natural Language Design</span></button>
         <button :class="['nav-item', { active: view === 'new' }]" type="button" @click="navigate('new')"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v14M3 10h14" /></svg><span>New analysis</span></button>
         <button :class="['nav-item', { active: view === 'history' || view === 'detail' }]" type="button" @click="navigate('history')"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h9" /><circle cx="2.5" cy="5.5" r=".7" fill="currentColor" /><circle cx="2.5" cy="10" r=".7" fill="currentColor" /><circle cx="2.5" cy="14.5" r=".7" fill="currentColor" /></svg><span>Analysis history</span><span class="nav-count">{{ historyCount }}</span></button>
       </nav>
@@ -102,7 +105,8 @@ onBeforeUnmount(() => window.removeEventListener('popstate', handlePopState))
 
     <main class="main-area" :class="{ 'in-editor': view === 'editor' }">
       <header v-if="view !== 'editor'" class="topbar"><div class="breadcrumb"><span>Workspace</span><span class="crumb-separator">/</span><strong>{{ pageTitle }}</strong></div><div class="topbar-right"><span class="local-pill"><span></span> LOCAL ONLY</span><span class="avatar" aria-hidden="true">S</span></div></header>
-      <DashboardPage v-if="view === 'dashboard'" @open="openAnalysis" @new="navigate('new')" @history="navigate('history')" @count="historyCount = $event" />
+      <DashboardPage v-if="view === 'dashboard'" @open="openAnalysis" @editor="openEditor" @new="navigate('new')" @history="navigate('history')" @design="navigate('design')" @count="historyCount = $event" />
+      <DesignStudioPage v-else-if="view === 'design'" :initial-analysis-id="analysisId" @open="openAnalysis" @editor="openEditor" @new="navigate('new')" @history="navigate('history')" />
       <NewAnalysisPage v-else-if="view === 'new'" @created="handleCreated" />
       <AnalysisHistoryPage v-else-if="view === 'history'" @open="openAnalysis" @new="navigate('new')" @count="historyCount = $event" />
       <TrussEditorPage v-else-if="view === 'editor'" :analysis-id="analysisId" @back="openAnalysis(analysisId)" @history="navigate('history')" />
