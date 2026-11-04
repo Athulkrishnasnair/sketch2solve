@@ -25,8 +25,9 @@ services:
         value: "0"
 
   # 2. Frontend Static Site (Vite + Vue 3)
-  - type: static
+  - type: web
     name: sketch2solve-frontend
+    runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
