@@ -1,0 +1,431 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/athulkrishna_s_nair/sketch2solve/frontend/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/e2e/playwright.config.js",
+      "tests/e2e/final-polish.spec.js"
+    ],
+    "configFile": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/playwright.config.js",
+    "rootDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-52-23-864Z-43/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-52-23-864Z-43/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "snapshotDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.js",
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5175",
+          "browserName": "chromium",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "video": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-52-23-864Z-43/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "final-polish.spec.js",
+      "file": "final-polish.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Sketch2Solve Final Polish and Verification",
+          "file": "final-polish.spec.js",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "1. Natural Language Design geometry preview accurately renders geometry, supports, loads, and CAD grid",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2487,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:52:27.500Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-6eea72fdce77531ea24d",
+              "file": "final-polish.spec.js",
+              "line": 4,
+              "column": 3
+            },
+            {
+              "title": "2. Analysis History pagination footer adheres to design standards",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2565,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:52:30.089Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-c4a50dc678453e1a5051",
+              "file": "final-polish.spec.js",
+              "line": 45,
+              "column": 3
+            },
+            {
+              "title": "3. New Analysis evidence-card copy provides accurate, neutral explanation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 372,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:52:32.670Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-83278aec37e154585a1e",
+              "file": "final-polish.spec.js",
+              "line": 76,
+              "column": 3
+            },
+            {
+              "title": "4. Issue Resolution Assistant is hidden by default and docks in bottom-right corner when opened",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2394,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:52:33.056Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-032c3da22f9cc0bcdd40",
+              "file": "final-polish.spec.js",
+              "line": 87,
+              "column": 3
+            },
+            {
+              "title": "5. Right sidebar tabbed workspace cleanly toggles between Tools and Design with AI",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2090,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:52:35.459Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-c62d63b2855458db5674",
+              "file": "final-polish.spec.js",
+              "line": 120,
+              "column": 3
+            },
+            {
+              "title": "6. Construction and Structural tools use 3-column grid with uniform 48px tile height",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1956,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:52:37.560Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-0b0ba67ebddc5ffbbc86",
+              "file": "final-polish.spec.js",
+              "line": 160,
+              "column": 3
+            },
+            {
+              "title": "7. Sequential AI proposal generation, application, and model mutation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3934,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:52:39.527Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-91d07c48901ff1feb47f",
+              "file": "final-polish.spec.js",
+              "line": 193,
+              "column": 3
+            },
+            {
+              "title": "8. Model mutation and Undo support restores previous geometry state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2536,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:52:43.472Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-145e718d41994ed20b7e",
+              "file": "final-polish.spec.js",
+              "line": 225,
+              "column": 3
+            },
+            {
+              "title": "9. Revision conflict handling rejects stale proposals gracefully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3543,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:52:46.018Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-0293a54ffa4efdda3f44",
+              "file": "final-polish.spec.js",
+              "line": 260,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-04T14:52:23.870Z",
+    "duration": 25812.443,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

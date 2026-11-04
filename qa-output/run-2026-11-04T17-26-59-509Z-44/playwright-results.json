@@ -1,0 +1,273 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/athulkrishna_s_nair/sketch2solve/frontend/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/e2e/playwright.config.js",
+      "-g",
+      "Minimal Save & Export MVP"
+    ],
+    "configFile": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/playwright.config.js",
+    "rootDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T17-26-59-509Z-44/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T17-26-59-509Z-44/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "snapshotDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.js",
+        "timeout": 90000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5175",
+          "browserName": "chromium",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "video": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T17-26-59-509Z-44/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "final-polish.spec.js",
+      "file": "final-polish.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Sketch2Solve Final Polish and Verification",
+          "file": "final-polish.spec.js",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "12. Minimal Save & Export MVP: Natural Language Design pathway (create -> correct -> save draft -> reopen from history -> solve -> download PNG, JSON, CSV -> stale guard)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7555,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T17:27:08.159Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-13356d445a412325ef8c",
+              "file": "final-polish.spec.js",
+              "line": 501,
+              "column": 3
+            },
+            {
+              "title": "13. Minimal Save & Export MVP: Direct export endpoints and JSON draft persistence",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3166,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T17:27:16.167Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-9badbb136fc1b6bdb387",
+              "file": "final-polish.spec.js",
+              "line": 618,
+              "column": 3
+            },
+            {
+              "title": "14. Minimal Save & Export MVP: Sketch upload pathway (upload -> edit geometry -> save draft -> reopen -> solve -> export PNG/JSON/CSV)",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 25330,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.analysis-results-panel')\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.analysis-results-panel') with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('.analysis-results-panel')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.analysis-results-panel')\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.analysis-results-panel') with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('.analysis-results-panel')\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js:705:32",
+                        "location": {
+                          "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                          "column": 32,
+                          "line": 705
+                        },
+                        "snippet": "  703 |     // 5. Results Panel appears with SOLVED status\n  704 |     const resultsPanel = page.locator('.analysis-results-panel')\n> 705 |     await expect(resultsPanel).toBeVisible({ timeout: 15_000 })\n      |                                ^\n  706 |     await expect(resultsPanel.locator('.badge-solved')).toBeVisible()\n  707 |\n  708 |     // 6. Test Export"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                            "column": 32,
+                            "line": 705
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.analysis-results-panel')\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.analysis-results-panel') with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('.analysis-results-panel')\u001b[22m\n\n\n  703 |     // 5. Results Panel appears with SOLVED status\n  704 |     const resultsPanel = page.locator('.analysis-results-panel')\n> 705 |     await expect(resultsPanel).toBeVisible({ timeout: 15_000 })\n      |                                ^\n  706 |     await expect(resultsPanel.locator('.badge-solved')).toBeVisible()\n  707 |\n  708 |     // 6. Test Export\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js:705:32"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T17:27:19.365Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T17-27-08-106Z-141/playwright-artifacts/final-polish-Sketch2Solve--b26a2-olve---export-PNG-JSON-CSV-/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T17-27-08-106Z-141/playwright-artifacts/final-polish-Sketch2Solve--b26a2-olve---export-PNG-JSON-CSV-/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T17-27-08-106Z-141/playwright-artifacts/final-polish-Sketch2Solve--b26a2-olve---export-PNG-JSON-CSV-/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T17-27-08-106Z-141/playwright-artifacts/final-polish-Sketch2Solve--b26a2-olve---export-PNG-JSON-CSV-/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                        "column": 32,
+                        "line": 705
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-53c9c1f30b761fb3db81",
+              "file": "final-polish.spec.js",
+              "line": 662,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-04T17:26:59.519Z",
+    "duration": 47056.379,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -6,7 +6,7 @@ import copy
 from dataclasses import asdict
 from pathlib import Path
 
-from flask import Blueprint, current_app, jsonify, request, send_file
+from flask import Blueprint, current_app, jsonify, request, Response, send_file
 from werkzeug.exceptions import BadRequest, RequestEntityTooLarge
 from werkzeug.utils import secure_filename
 
@@ -21,6 +21,7 @@ from app.services.analysis_persistence import (
     save_private_image,
 )
 from app.services.ai_assistant import resolve_geometry_issue
+from app.services.export_service import ExportError, export_truss_csv, export_truss_json, export_truss_png
 from app.services.natural_language_design import (
     process_design_request,
     validate_design_input,
@@ -297,7 +298,8 @@ def ai_apply_design_proposal():
             return _history_unavailable(analysis_id)
         if record is None:
             return jsonify({"error_code": "ANALYSIS_NOT_FOUND", "message": "Analysis was not found."}), 404
-        if record.review_status == "submitted":
+        allow_reopen = body.get("reopen") is True or body.get("force") is True
+        if record.review_status == "submitted" and not allow_reopen:
             return jsonify({
                 "error_code": "DRAFT_ALREADY_SUBMITTED",
                 "message": "This reviewed geometry was already submitted to the solver and cannot be modified.",
@@ -399,7 +401,8 @@ def save_analysis_draft(analysis_id: str):
     record, error = _review_record(analysis_id)
     if error:
         return error
-    if record.review_status == "submitted":
+    allow_reopen = request.args.get("reopen") in ("true", "1") or request.args.get("force") in ("true", "1")
+    if record.review_status == "submitted" and not allow_reopen:
         return jsonify({"error_code": "DRAFT_ALREADY_SUBMITTED", "message": "This reviewed geometry was already submitted to the solver."}), 409
     body, error = _json_body()
     if error:
@@ -438,7 +441,8 @@ def review_analysis_draft(analysis_id: str):
     record, error = _review_record(analysis_id)
     if error:
         return error
-    if record.review_status == "submitted":
+    allow_reopen = request.args.get("reopen") in ("true", "1") or request.args.get("force") in ("true", "1")
+    if record.review_status == "submitted" and not allow_reopen:
         return jsonify({"error_code": "DRAFT_ALREADY_SUBMITTED", "message": "This reviewed geometry was already submitted to the solver."}), 409
     if record.human_geometry_json is None:
         return jsonify({"error_code": "DRAFT_REQUIRED", "message": "Save a corrected draft before marking it reviewed."}), 409
@@ -558,6 +562,62 @@ def get_analysis_image(analysis_id: str):
     response.headers["Cache-Control"] = "private, no-store"
     response.headers["X-Content-Type-Options"] = "nosniff"
     return response
+
+
+@analyses_api.get("/api/analyses/<analysis_id>/export/<fmt>")
+@analyses_api.get("/api/analyses/<analysis_id>/export")
+def export_analysis_route(analysis_id: str, fmt: str | None = None):
+    try:
+        record = db.session.get(SketchAnalysis, analysis_id)
+    except Exception:
+        return _history_unavailable(analysis_id)
+    if record is None:
+        return _not_found()
+
+    target_format = (fmt or request.args.get("format") or "json").lower()
+
+    if target_format not in ("png", "json", "csv"):
+        return jsonify({
+            "error_code": "INVALID_EXPORT_FORMAT",
+            "message": f"Unsupported export format '{target_format}'. Supported formats are 'png', 'json', and 'csv'.",
+        }), 400
+
+    filename_base = secure_filename(record.original_filename or f"truss_{record.id[:8]}")
+    if not filename_base or filename_base.strip() == "":
+        filename_base = f"truss_{record.id[:8]}"
+
+    try:
+        if target_format == "json":
+            data = export_truss_json(record)
+            response = jsonify(data)
+            response.headers["Content-Disposition"] = f'attachment; filename="{filename_base}.json"'
+            return response, 200
+
+        elif target_format == "csv":
+            csv_content = export_truss_csv(record)
+            response = Response(csv_content, mimetype="text/csv")
+            response.headers["Content-Disposition"] = f'attachment; filename="{filename_base}_results.csv"'
+            return response, 200
+
+        elif target_format == "png":
+            png_buf = export_truss_png(record)
+            return send_file(
+                png_buf,
+                mimetype="image/png",
+                as_attachment=True,
+                download_name=f"{filename_base}.png",
+            )
+    except ExportError as exp_err:
+        return jsonify({
+            "error_code": exp_err.code,
+            "message": exp_err.message,
+        }), exp_err.status_code
+    except Exception as exc:
+        return jsonify({
+            "error_code": "EXPORT_FAILED",
+            "message": f"Export failed: {str(exc)}",
+        }), 500
+
 
 
 def _sniff_image_mime(content: bytes) -> str | None:

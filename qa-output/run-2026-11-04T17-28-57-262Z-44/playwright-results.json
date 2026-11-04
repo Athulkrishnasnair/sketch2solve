@@ -1,0 +1,228 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/athulkrishna_s_nair/sketch2solve/frontend/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/e2e/playwright.config.js",
+      "-g",
+      "Minimal Save & Export MVP"
+    ],
+    "configFile": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/playwright.config.js",
+    "rootDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T17-28-57-262Z-44/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T17-28-57-262Z-44/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "snapshotDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.js",
+        "timeout": 90000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5175",
+          "browserName": "chromium",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "video": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T17-28-57-262Z-44/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "final-polish.spec.js",
+      "file": "final-polish.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Sketch2Solve Final Polish and Verification",
+          "file": "final-polish.spec.js",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "12. Minimal Save & Export MVP: Natural Language Design pathway (create -> correct -> save draft -> reopen from history -> solve -> download PNG, JSON, CSV -> stale guard)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9069,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T17:29:04.744Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-13356d445a412325ef8c",
+              "file": "final-polish.spec.js",
+              "line": 501,
+              "column": 3
+            },
+            {
+              "title": "13. Minimal Save & Export MVP: Direct export endpoints and JSON draft persistence",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3202,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T17:29:14.336Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-9badbb136fc1b6bdb387",
+              "file": "final-polish.spec.js",
+              "line": 618,
+              "column": 3
+            },
+            {
+              "title": "14. Minimal Save & Export MVP: Sketch upload pathway (upload -> edit geometry -> save draft -> reopen -> solve -> export PNG/JSON/CSV)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11109,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T17:29:17.575Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-53c9c1f30b761fb3db81",
+              "file": "final-polish.spec.js",
+              "line": 662,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-04T17:28:57.274Z",
+    "duration": 31695.956999999995,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

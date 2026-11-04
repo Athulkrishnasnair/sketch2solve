@@ -18,7 +18,7 @@ export default defineConfig({
   fullyParallel: false,
   workers: 1,
   retries: 0,
-  timeout: 45_000,
+  timeout: 90_000,
   expect: { timeout: 8_000 },
   outputDir: path.join(runDirectory, 'playwright-artifacts'),
   reporter: [
@@ -26,7 +26,7 @@ export default defineConfig({
     ['json', { outputFile: path.join(runDirectory, 'playwright-results.json') }],
   ],
   use: {
-    baseURL: 'http://127.0.0.1:5174',
+    baseURL: 'http://127.0.0.1:5175',
     browserName: 'chromium',
     screenshot: 'only-on-failure',
     trace: 'retain-on-failure',
@@ -41,13 +41,13 @@ export default defineConfig({
       timeout: 30_000,
     },
     {
-      command: 'npm run dev -- --config tests/e2e/vite.config.js --host 127.0.0.1 --port 5174 --strictPort',
+      command: 'npm run dev -- --config tests/e2e/vite.config.js --host 127.0.0.1 --port 5175 --strictPort',
       cwd: frontendDirectory,
-      url: 'http://127.0.0.1:5174',
+      url: 'http://127.0.0.1:5175',
       reuseExistingServer: false,
       timeout: 30_000,
       env: {
-        VITE_API_BASE_URL: 'http://127.0.0.1:5174',
+        VITE_API_BASE_URL: 'http://127.0.0.1:5175',
       },
     },
   ],

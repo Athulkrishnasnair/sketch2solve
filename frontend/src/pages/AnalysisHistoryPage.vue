@@ -88,7 +88,22 @@ onMounted(refresh)
           <span class="row-arrow" aria-hidden="true">↗</span>
         </button>
       </div>
-      <div v-if="analyses.length < total" class="load-more-row"><span>Showing {{ analyses.length }} of {{ total }} saved runs</span><button class="button button-secondary" type="button" :disabled="loadingMore" @click="loadMore">{{ loadingMore ? 'Loading…' : 'Load more' }}</button></div>
+      <footer class="history-pagination-footer card-surface">
+        <span class="pagination-info">
+          Showing <strong>{{ analyses.length }}</strong> of <strong>{{ total }}</strong> saved runs
+        </span>
+        <button
+          v-if="analyses.length < total"
+          class="button button-secondary btn-load-more"
+          type="button"
+          :disabled="loadingMore"
+          @click="loadMore"
+        >
+          <span v-if="loadingMore" class="button-spinner"></span>
+          <span>{{ loadingMore ? 'Loading runs…' : 'Load more runs' }}</span>
+        </button>
+        <span v-else class="pagination-complete">All saved runs loaded</span>
+      </footer>
     </template>
   </section>
 </template>

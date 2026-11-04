@@ -1,0 +1,656 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/athulkrishna_s_nair/sketch2solve/frontend/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/e2e/playwright.config.js",
+      "tests/e2e/final-polish.spec.js"
+    ],
+    "configFile": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/playwright.config.js",
+    "rootDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-39-42-521Z-40/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-39-42-521Z-40/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "snapshotDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.js",
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5175",
+          "browserName": "chromium",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "video": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-39-42-521Z-40/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "final-polish.spec.js",
+      "file": "final-polish.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Sketch2Solve Final Polish and Verification",
+          "file": "final-polish.spec.js",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "1. Natural Language Design geometry preview accurately renders geometry, supports, loads, and CAD grid",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 11124,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.studio-canvas-stage .large-preview-svg')\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.studio-canvas-stage .large-preview-svg') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('.studio-canvas-stage .large-preview-svg')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.studio-canvas-stage .large-preview-svg')\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.studio-canvas-stage .large-preview-svg') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('.studio-canvas-stage .large-preview-svg')\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js:17:33",
+                        "location": {
+                          "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                          "column": 33,
+                          "line": 17
+                        },
+                        "snippet": "  15 |     // Inspect large geometry preview on the right\n  16 |     const previewCanvas = page.locator('.studio-canvas-stage .large-preview-svg')\n> 17 |     await expect(previewCanvas).toBeVisible()\n     |                                 ^\n  18 |\n  19 |     // 1. Check straight structural lines exist\n  20 |     const memberLines = previewCanvas.locator('.truss-member-line')"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                            "column": 33,
+                            "line": 17
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.studio-canvas-stage .large-preview-svg')\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.studio-canvas-stage .large-preview-svg') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('.studio-canvas-stage .large-preview-svg')\u001b[22m\n\n\n  15 |     // Inspect large geometry preview on the right\n  16 |     const previewCanvas = page.locator('.studio-canvas-stage .large-preview-svg')\n> 17 |     await expect(previewCanvas).toBeVisible()\n     |                                 ^\n  18 |\n  19 |     // 1. Check straight structural lines exist\n  20 |     const memberLines = previewCanvas.locator('.truss-member-line')\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js:17:33"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:39:47.210Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-39-47-180Z-137/playwright-artifacts/final-polish-Sketch2Solve--e8a30-supports-loads-and-CAD-grid/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-39-47-180Z-137/playwright-artifacts/final-polish-Sketch2Solve--e8a30-supports-loads-and-CAD-grid/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-39-47-180Z-137/playwright-artifacts/final-polish-Sketch2Solve--e8a30-supports-loads-and-CAD-grid/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-39-47-180Z-137/playwright-artifacts/final-polish-Sketch2Solve--e8a30-supports-loads-and-CAD-grid/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                        "column": 33,
+                        "line": 17
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-6eea72fdce77531ea24d",
+              "file": "final-polish.spec.js",
+              "line": 4,
+              "column": 3
+            },
+            {
+              "title": "2. Analysis History pagination footer adheres to design standards",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 10756,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.analysis-history-page')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.analysis-history-page') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('.analysis-history-page')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.analysis-history-page')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.analysis-history-page') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('.analysis-history-page')\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js:47:58",
+                        "location": {
+                          "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                          "column": 58,
+                          "line": 47
+                        },
+                        "snippet": "  45 |   test('2. Analysis History pagination footer adheres to design standards', async ({ page }) => {\n  46 |     await page.goto('/?view=history')\n> 47 |     await expect(page.locator('.analysis-history-page')).toBeVisible({ timeout: 10_000 })\n     |                                                          ^\n  48 |\n  49 |     // Check pagination footer exists with consistent design tokens\n  50 |     const footer = page.locator('.history-pagination-footer')"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                            "column": 58,
+                            "line": 47
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.analysis-history-page')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.analysis-history-page') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('.analysis-history-page')\u001b[22m\n\n\n  45 |   test('2. Analysis History pagination footer adheres to design standards', async ({ page }) => {\n  46 |     await page.goto('/?view=history')\n> 47 |     await expect(page.locator('.analysis-history-page')).toBeVisible({ timeout: 10_000 })\n     |                                                          ^\n  48 |\n  49 |     // Check pagination footer exists with consistent design tokens\n  50 |     const footer = page.locator('.history-pagination-footer')\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js:47:58"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:40:00.389Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-40-00-365Z-245/playwright-artifacts/final-polish-Sketch2Solve--e4c5c-adheres-to-design-standards/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-40-00-365Z-245/playwright-artifacts/final-polish-Sketch2Solve--e4c5c-adheres-to-design-standards/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-40-00-365Z-245/playwright-artifacts/final-polish-Sketch2Solve--e4c5c-adheres-to-design-standards/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-40-00-365Z-245/playwright-artifacts/final-polish-Sketch2Solve--e4c5c-adheres-to-design-standards/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                        "column": 58,
+                        "line": 47
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-c4a50dc678453e1a5051",
+              "file": "final-polish.spec.js",
+              "line": 45,
+              "column": 3
+            },
+            {
+              "title": "3. New Analysis evidence-card copy provides accurate, neutral explanation",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 10772,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.new-analysis-page')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.new-analysis-page') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('.new-analysis-page')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.new-analysis-page')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.new-analysis-page') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('.new-analysis-page')\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js:65:54",
+                        "location": {
+                          "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                          "column": 54,
+                          "line": 65
+                        },
+                        "snippet": "  63 |   test('3. New Analysis evidence-card copy provides accurate, neutral explanation', async ({ page }) => {\n  64 |     await page.goto('/?view=new')\n> 65 |     await expect(page.locator('.new-analysis-page')).toBeVisible({ timeout: 10_000 })\n     |                                                      ^\n  66 |\n  67 |     const step2 = page.locator('.workflow-step').nth(1)\n  68 |     await expect(step2).toBeVisible()"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                            "column": 54,
+                            "line": 65
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.new-analysis-page')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.new-analysis-page') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('.new-analysis-page')\u001b[22m\n\n\n  63 |   test('3. New Analysis evidence-card copy provides accurate, neutral explanation', async ({ page }) => {\n  64 |     await page.goto('/?view=new')\n> 65 |     await expect(page.locator('.new-analysis-page')).toBeVisible({ timeout: 10_000 })\n     |                                                      ^\n  66 |\n  67 |     const step2 = page.locator('.workflow-step').nth(1)\n  68 |     await expect(step2).toBeVisible()\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js:65:54"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:40:12.082Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-40-12-061Z-352/playwright-artifacts/final-polish-Sketch2Solve--be258-ccurate-neutral-explanation/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-40-12-061Z-352/playwright-artifacts/final-polish-Sketch2Solve--be258-ccurate-neutral-explanation/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-40-12-061Z-352/playwright-artifacts/final-polish-Sketch2Solve--be258-ccurate-neutral-explanation/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-40-12-061Z-352/playwright-artifacts/final-polish-Sketch2Solve--be258-ccurate-neutral-explanation/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                        "column": 54,
+                        "line": 65
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-83278aec37e154585a1e",
+              "file": "final-polish.spec.js",
+              "line": 63,
+              "column": 3
+            },
+            {
+              "title": "4. Issue Resolution Assistant is hidden by default and docks in bottom-right corner when opened",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2037,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:40:23.795Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-032c3da22f9cc0bcdd40",
+              "file": "final-polish.spec.js",
+              "line": 74,
+              "column": 3
+            },
+            {
+              "title": "5. Right sidebar tabbed workspace cleanly toggles between Tools and Design with AI",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2579,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:40:25.928Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-c62d63b2855458db5674",
+              "file": "final-polish.spec.js",
+              "line": 107,
+              "column": 3
+            },
+            {
+              "title": "6. Construction and Structural tools use 3-column grid with uniform 48px tile height",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1963,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:40:28.521Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-0b0ba67ebddc5ffbbc86",
+              "file": "final-polish.spec.js",
+              "line": 147,
+              "column": 3
+            },
+            {
+              "title": "7. Sequential AI proposal generation, application, and model mutation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4349,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:40:30.494Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-91d07c48901ff1feb47f",
+              "file": "final-polish.spec.js",
+              "line": 180,
+              "column": 3
+            },
+            {
+              "title": "8. Model mutation and Undo support restores previous geometry state",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 2173,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m4\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m4\u001b[39m\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js:234:29",
+                        "location": {
+                          "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                          "column": 29,
+                          "line": 234
+                        },
+                        "snippet": "  232 |\n  233 |     const afterJointCount = await page.locator('.truss-joint-node').count()\n> 234 |     expect(afterJointCount).toBe(initialJointCount + 1)\n      |                             ^\n  235 |\n  236 |     // Click Undo\n  237 |     const undoBtn = page.locator('.editor-topbar button[aria-label=\"Undo\"]')"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                            "column": 29,
+                            "line": 234
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m4\u001b[39m\n\n  232 |\n  233 |     const afterJointCount = await page.locator('.truss-joint-node').count()\n> 234 |     expect(afterJointCount).toBe(initialJointCount + 1)\n      |                             ^\n  235 |\n  236 |     // Click Undo\n  237 |     const undoBtn = page.locator('.editor-topbar button[aria-label=\"Undo\"]')\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js:234:29"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:40:34.856Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-40-23-772Z-456/playwright-artifacts/final-polish-Sketch2Solve--95089-res-previous-geometry-state/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-40-23-772Z-456/playwright-artifacts/final-polish-Sketch2Solve--95089-res-previous-geometry-state/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-40-23-772Z-456/playwright-artifacts/final-polish-Sketch2Solve--95089-res-previous-geometry-state/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-40-23-772Z-456/playwright-artifacts/final-polish-Sketch2Solve--95089-res-previous-geometry-state/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                        "column": 29,
+                        "line": 234
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-145e718d41994ed20b7e",
+              "file": "final-polish.spec.js",
+              "line": 212,
+              "column": 3
+            },
+            {
+              "title": "9. Revision conflict handling rejects stale proposals gracefully",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 12501,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.sidebar-design-pane').locator('.design-error-notice')\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.sidebar-design-pane').locator('.design-error-notice') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('.sidebar-design-pane').locator('.design-error-notice')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.sidebar-design-pane').locator('.design-error-notice')\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.sidebar-design-pane').locator('.design-error-notice') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('.sidebar-design-pane').locator('.design-error-notice')\u001b[22m\n\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js:279:31",
+                        "location": {
+                          "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                          "column": 31,
+                          "line": 279
+                        },
+                        "snippet": "  277 |     // Verify conflict error message is displayed\n  278 |     const errorNotice = sidebarDesignPane.locator('.design-error-notice')\n> 279 |     await expect(errorNotice).toBeVisible()\n      |                               ^\n  280 |     await expect(errorNotice).toContainText(/Revision conflict|stale|modified/i)\n  281 |   })\n  282 | })"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                            "column": 31,
+                            "line": 279
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.sidebar-design-pane').locator('.design-error-notice')\nExpected: visible\nTimeout: 8000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.sidebar-design-pane').locator('.design-error-notice') with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('.sidebar-design-pane').locator('.design-error-notice')\u001b[22m\n\n\n  277 |     // Verify conflict error message is displayed\n  278 |     const errorNotice = sidebarDesignPane.locator('.design-error-notice')\n> 279 |     await expect(errorNotice).toBeVisible()\n      |                               ^\n  280 |     await expect(errorNotice).toContainText(/Revision conflict|stale|modified/i)\n  281 |   })\n  282 | })\n    at /home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js:279:31"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:40:38.001Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-40-37-980Z-713/playwright-artifacts/final-polish-Sketch2Solve--4ae0d--stale-proposals-gracefully/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-40-37-980Z-713/playwright-artifacts/final-polish-Sketch2Solve--4ae0d--stale-proposals-gracefully/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-40-37-980Z-713/playwright-artifacts/final-polish-Sketch2Solve--4ae0d--stale-proposals-gracefully/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-40-37-980Z-713/playwright-artifacts/final-polish-Sketch2Solve--4ae0d--stale-proposals-gracefully/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/final-polish.spec.js",
+                        "column": 31,
+                        "line": 279
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-0293a54ffa4efdda3f44",
+              "file": "final-polish.spec.js",
+              "line": 244,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-04T14:39:42.529Z",
+    "duration": 68464.339,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 5,
+    "flaky": 0
+  }
+}

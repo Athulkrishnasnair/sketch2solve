@@ -34,6 +34,7 @@ import {
   Link2,
   BarChart3,
   Tag,
+  Sliders,
 } from 'lucide-vue-next'
 import {
   getAnalysis,
@@ -123,11 +124,21 @@ let previewSeq = 0
 let previewDebounceTimer = null
 
 // AI Assistant & Conversational Natural-Language Design Studio
+const activeSidebarTab = ref('tools') // 'tools' | 'design'
+const showIssueAssistant = ref(true)
 const showDesignAssistant = ref(false)
 const designModelRevision = ref(1)
 const designProposal = ref(null)
 const designBusy = ref(false)
 const designError = ref('')
+
+function switchSidebarTab(tab) {
+  activeSidebarTab.value = tab
+  showDesignAssistant.value = tab === 'design'
+  nextTick(() => {
+    fitView()
+  })
+}
 
 const memberMap = computed(() => {
   const map = {}
@@ -381,11 +392,13 @@ watch(
     if (!issues.length) {
       selectedIssueId.value = null
       userClearedHighlight.value = false
+      showIssueAssistant.value = false
       return
     }
     // If user explicitly cleared highlighting, preserve their choice during background recalculation
     if (userClearedHighlight.value) return
 
+    showIssueAssistant.value = true
     if (!selectedIssueId.value || !issues.some((i) => i.id === selectedIssueId.value)) {
       selectedIssueId.value = issues[0].id
       focusOnIssue(issues[0])
@@ -399,18 +412,20 @@ const selectedIssue = computed(() => {
   return activeIssues.value.find((i) => i.id === selectedIssueId.value) || null
 })
 
-const isHighlightActive = computed(() => Boolean(selectedIssue.value))
+const isHighlightActive = computed(() => Boolean(selectedIssue.value && showIssueAssistant.value))
 const affectedNodeIds = computed(() => new Set(selectedIssue.value?.affected_elements?.nodes || []))
 const affectedMemberIds = computed(() => new Set(selectedIssue.value?.affected_elements?.members || []))
 
 function toggleHighlightMode() {
-  if (isHighlightActive.value) {
+  if (showIssueAssistant.value) {
     userClearedHighlight.value = true
     selectedIssueId.value = null
     aiPreviewFix.value = null
+    showIssueAssistant.value = false
   } else if (activeIssues.value.length) {
     userClearedHighlight.value = false
     selectedIssueId.value = activeIssues.value[0].id
+    showIssueAssistant.value = true
     focusOnIssue(activeIssues.value[0])
   }
 }
@@ -419,6 +434,7 @@ function handleSelectIssue(issue) {
   if (!issue) return
   userClearedHighlight.value = false
   selectedIssueId.value = issue.id
+  showIssueAssistant.value = true
   focusOnIssue(issue)
 }
 
@@ -426,6 +442,7 @@ function handleClearHighlight() {
   userClearedHighlight.value = true
   selectedIssueId.value = null
   aiPreviewFix.value = null
+  showIssueAssistant.value = false
 }
 
 function focusOnIssue(issue) {
@@ -592,6 +609,7 @@ const gridLines = computed(() => {
 
 // --- History / Undo / Redo ---
 function pushHistory() {
+  const skipRevisionBump = Boolean(arguments[0])
   if (isHistoryNavigating.value) return
   const snapshot = JSON.stringify(geometry.value)
   if (historyIndex.value >= 0 && historyStack.value[historyIndex.value] === snapshot) return
@@ -599,6 +617,9 @@ function pushHistory() {
   historyStack.value.push(snapshot)
   historyIndex.value = historyStack.value.length - 1
   isDirty.value = true
+  if (!skipRevisionBump) {
+    designModelRevision.value += 1
+  }
   if (persistedSolverData.value) {
     resultsStale.value = true
   }
@@ -790,14 +811,59 @@ function importAllProposal() {
     .filter((m) => validNodeIds.has(m.joint_i) && validNodeIds.has(m.joint_j) && m.joint_i !== m.joint_j)
     .map((m) => ({ id: m.id, node_i: m.joint_i, node_j: m.joint_j }))
 
-  geometry.value.model.supports = (proposal.value.supports || [])
-    .filter((s) => s.node && validNodeIds.has(s.node))
-    .map((s) => ({
+  geometry.value.model.supports = (proposal.value.supports || []).map((s) => {
+    let nodeId = s.node || s.joint
+    if (!nodeId && s.x != null && s.y != null) {
+      let closest = null
+      let minDist = Infinity
+      for (const j of pj) {
+        const d = Math.hypot(j.x - s.x, j.y - s.y)
+        if (d < minDist) {
+          minDist = d
+          closest = j.id
+        }
+      }
+      nodeId = closest
+    }
+    const supType = ['pin', 'roller'].includes(String(s.possible_type || s.type).toLowerCase())
+      ? String(s.possible_type || s.type).toLowerCase()
+      : 'pin'
+    return {
       id: s.id,
-      node: s.node,
-      type: ['pin', 'roller'].includes(s.possible_type?.toLowerCase()) ? s.possible_type.toLowerCase() : 'pin',
-      ...(s.possible_type?.toLowerCase() === 'roller' ? { direction: 'vertical' } : {}),
-    }))
+      node: nodeId,
+      type: supType,
+      ...(supType === 'roller' ? { direction: 'vertical' } : {}),
+    }
+  }).filter((s) => s.node && validNodeIds.has(s.node))
+
+  geometry.value.model.loads = (proposal.value.loads || []).map((l) => {
+    let nodeId = l.node || l.joint
+    if (!nodeId && l.x != null && l.y != null) {
+      let closest = null
+      let minDist = Infinity
+      for (const j of pj) {
+        const d = Math.hypot(j.x - l.x, j.y - l.y)
+        if (d < minDist) {
+          minDist = d
+          closest = j.id
+        }
+      }
+      nodeId = closest
+    }
+    const mag = Number(l.magnitude) || 10
+    const dir = String(l.direction || '').toLowerCase()
+    let fx = 0
+    let fy = -mag
+    if (dir.includes('up')) fy = mag
+    else if (dir.includes('left')) { fx = -mag; fy = 0 }
+    else if (dir.includes('right')) { fx = mag; fy = 0 }
+    return {
+      id: l.id,
+      node: nodeId,
+      fx,
+      fy,
+    }
+  }).filter((l) => l.node && validNodeIds.has(l.node))
 
   pushHistory()
   fitView()
@@ -1134,7 +1200,12 @@ async function saveDraft() {
   statusMessage.value = ''
   try {
     const payload = JSON.parse(JSON.stringify(geometry.value))
-    await saveAnalysisDraft(props.analysisId, payload, true)
+    const needReopen = reviewStatus.value === 'submitted' || Boolean(persistedSolverData.value)
+    if (needReopen) {
+      await saveAnalysisDraft(props.analysisId, payload, true, true)
+    } else {
+      await saveAnalysisDraft(props.analysisId, payload, true)
+    }
     isDirty.value = false
     reviewStatus.value = 'draft'
     statusMessage.value = 'Draft saved.'
@@ -1318,6 +1389,12 @@ async function handleApplyDesignProposal(proposal) {
   designBusy.value = true
   designError.value = ''
 
+  if (proposal.base_revision != null && proposal.base_revision !== designModelRevision.value) {
+    designError.value = 'Revision conflict: Canvas model was modified after this proposal was generated. Please formulate a fresh request.'
+    designBusy.value = false
+    return
+  }
+
   try {
     const res = await applyDesignProposal({
       proposal_id: proposal.proposal_id,
@@ -1391,76 +1468,110 @@ function handleClearPreview() {
   aiPreviewFix.value = null
 }
 
-function applyAiFix(fix) {
+async function applyAiFix(fix) {
   if (!fix || !fix.modifications) return
 
+  // Stale check
+  if (fix.base_revision != null && fix.base_revision !== designModelRevision.value) {
+    showToast('Cannot apply fix: model has changed since this recommendation was created. Please generate a fresh fix.', 'error')
+    aiPreviewFix.value = null
+    return
+  }
+
   const mods = fix.modifications
-  const model = geometry.value.model
+  const newModel = JSON.parse(JSON.stringify(geometry.value.model))
 
   // 1. Removals
   if (mods.nodes_to_remove?.length) {
     const toRemove = new Set(mods.nodes_to_remove)
-    model.nodes = model.nodes.filter((n) => !toRemove.has(n.id))
-    model.members = model.members.filter((m) => !toRemove.has(m.node_i) && !toRemove.has(m.node_j))
-    model.supports = model.supports.filter((s) => !toRemove.has(s.node))
-    model.loads = model.loads.filter((l) => !toRemove.has(l.node))
+    newModel.nodes = newModel.nodes.filter((n) => !toRemove.has(n.id))
+    newModel.members = newModel.members.filter((m) => !toRemove.has(m.node_i) && !toRemove.has(m.node_j))
+    newModel.supports = newModel.supports.filter((s) => !toRemove.has(s.node))
+    newModel.loads = newModel.loads.filter((l) => !toRemove.has(l.node))
   }
 
   if (mods.members_to_remove?.length) {
     const toRemove = new Set(mods.members_to_remove)
-    model.members = model.members.filter((m) => !toRemove.has(m.id))
+    newModel.members = newModel.members.filter((m) => !toRemove.has(m.id))
   }
 
   if (mods.supports_to_remove?.length) {
     const toRemove = new Set(mods.supports_to_remove)
-    model.supports = model.supports.filter((s) => !toRemove.has(s.id))
+    newModel.supports = newModel.supports.filter((s) => !toRemove.has(s.id))
   }
 
   if (mods.loads_to_remove?.length) {
     const toRemove = new Set(mods.loads_to_remove)
-    model.loads = model.loads.filter((l) => !toRemove.has(l.id))
+    newModel.loads = newModel.loads.filter((l) => !toRemove.has(l.id))
   }
 
   // 2. Additions
   if (mods.nodes_to_add?.length) {
     for (const n of mods.nodes_to_add) {
-      if (!model.nodes.some((existing) => existing.id === n.id)) {
-        model.nodes.push({ id: n.id, x: Number(n.x), y: Number(n.y) })
+      if (!newModel.nodes.some((ex) => ex.id === n.id)) {
+        newModel.nodes.push({ id: n.id, x: Number(n.x), y: Number(n.y) })
       }
     }
   }
 
   if (mods.members_to_add?.length) {
     for (const m of mods.members_to_add) {
-      if (!model.members.some((existing) => existing.id === m.id)) {
-        model.members.push({ id: m.id, node_i: m.node_i, node_j: m.node_j })
+      // Skip if member between these two nodes already exists
+      const alreadyConnected = newModel.members.some(
+        (ex) => (ex.node_i === m.node_i && ex.node_j === m.node_j) || (ex.node_i === m.node_j && ex.node_j === m.node_i)
+      )
+      if (alreadyConnected) continue
+
+      let memId = m.id
+      if (!memId || newModel.members.some((ex) => ex.id === memId)) {
+        memId = nextId('M', newModel.members)
       }
+      newModel.members.push({ id: memId, node_i: m.node_i, node_j: m.node_j })
     }
   }
 
   if (mods.supports_to_add?.length) {
     for (const s of mods.supports_to_add) {
-      if (!model.supports.some((existing) => existing.id === s.id)) {
-        const supRecord = { id: s.id, node: s.node, type: s.type }
-        if (s.type === 'roller') {
-          supRecord.direction = s.direction === 'horizontal' ? 'horizontal' : 'vertical'
-        }
-        model.supports.push(supRecord)
+      // Replace existing support at the same node
+      newModel.supports = newModel.supports.filter((ex) => ex.node !== s.node)
+
+      let supId = s.id
+      if (!supId || newModel.supports.some((ex) => ex.id === supId)) {
+        supId = nextId('S', newModel.supports)
       }
+      const supRecord = { id: supId, node: s.node, type: s.type }
+      if (s.type === 'roller') {
+        supRecord.direction = s.direction === 'horizontal' ? 'horizontal' : 'vertical'
+      }
+      newModel.supports.push(supRecord)
     }
   }
 
   if (mods.loads_to_add?.length) {
     for (const l of mods.loads_to_add) {
-      if (!model.loads.some((existing) => existing.id === l.id)) {
-        model.loads.push({ id: l.id, node: l.node, fx: Number(l.fx), fy: Number(l.fy) })
+      let loadId = l.id
+      if (!loadId || newModel.loads.some((ex) => ex.id === loadId)) {
+        loadId = nextId('L', newModel.loads)
       }
+      newModel.loads.push({ id: loadId, node: l.node, fx: Number(l.fx || 0), fy: Number(l.fy || 0) })
     }
   }
 
+  // Reactive state update
+  geometry.value = {
+    ...geometry.value,
+    model: newModel,
+  }
+
   aiPreviewFix.value = null
+  selectedElement.value = null
+  designModelRevision.value += 1
+  persistedSolverData.value = null
+  resultsStale.value = true
+
   pushHistory()
   showToast(`Applied fix: ${fix.title}`, 'success')
+  await runPreview()
 }
 
 // --- Lifecycle & Init ---
@@ -1494,9 +1605,10 @@ async function loadData() {
         warning: 'A numerical solution does not establish physical stability or engineering suitability.',
       }
       resultsStale.value = false
+      showResultsPanel.value = true
     }
 
-    pushHistory()
+    pushHistory(true)
     isDirty.value = false
     await runPreview()
     setTimeout(fitView, 100)
@@ -1671,10 +1783,10 @@ onBeforeUnmount(() => {
         <div class="toolbar-separator" />
         <button
           class="action-btn btn-ai"
-          :class="{ active: showDesignAssistant }"
+          :class="{ active: activeSidebarTab === 'design' }"
           type="button"
           title="Natural Language Design Assistant"
-          @click="showDesignAssistant = !showDesignAssistant"
+          @click="switchSidebarTab(activeSidebarTab === 'design' ? 'tools' : 'design')"
         >
           <Sparkles :size="14" />
           <span>Design with AI</span>
@@ -2117,50 +2229,12 @@ onBeforeUnmount(() => {
           </g>
         </svg>
 
-        <!-- ─── Natural Language Conversational Design Assistant (docked floating card) ─── -->
-        <div
-          v-if="showDesignAssistant"
-          class="editor-design-assistant-card"
-          @wheel.stop
-          @pointerdown.stop
-        >
-          <div class="editor-design-header">
-            <div class="header-title">
-              <Sparkles :size="14" class="sparkle-icon" />
-              <strong>Design with AI</strong>
-              <span class="assistant-tag">Context Aware</span>
-            </div>
-            <button
-              type="button"
-              class="assistant-close-btn"
-              aria-label="Close Assistant"
-              @click="showDesignAssistant = false"
-            >
-              ✕
-            </button>
-          </div>
-
-          <DesignInstructionPanel
-            :analysis-id="analysisId"
-            :model-revision="designModelRevision"
-            :selected-element="selectedElement"
-            :is-dirty="isDirty"
-            :proposal="designProposal"
-            :busy="designBusy"
-            :error="designError"
-            :compact="true"
-            @submit="handleDesignSubmit"
-            @apply="handleApplyDesignProposal"
-            @reject="handleRejectDesignProposal"
-            @clear-error="designError = ''"
-          />
-        </div>
-
-        <!-- ─── Floating Contextual Action Card (near affected geometry) ─── -->
+        <!-- ─── Floating Contextual Action Card (docked in bottom-right corner) ─── -->
         <IssueResolutionAssistant
-          v-if="activeIssues.length && isHighlightActive"
+          v-if="showIssueAssistant && activeIssues.length && selectedIssue"
           :issues="activeIssues"
           :selected-issue-id="selectedIssueId"
+          :model-revision="designModelRevision"
           :anchor-position="contextualCardPosition"
           :geometry="geometry"
           :diagnostics="solvability"
@@ -2176,6 +2250,7 @@ onBeforeUnmount(() => {
       <!-- ─── Analysis Results Panel (docked in canvas column) ─── -->
       <AnalysisResultsPanel
         v-if="showResultsPanel && hasSolvedResults"
+        :analysis-id="analysisId"
         :solver-data="persistedSolverData"
         :is-stale="resultsStale"
         :geometry="geometry"
@@ -2194,76 +2269,104 @@ onBeforeUnmount(() => {
       />
     </div>
 
-      <!-- ─── Right Sidebar: Toolbox + Inspector ─── -->
+      <!-- ─── Right Sidebar: Tabs for Tools vs Design with AI ─── -->
       <aside class="editor-sidebar">
-
-        <!-- Toolbox: grouped -->
-        <section class="toolbox-section">
-          <!-- Navigation group -->
-          <div class="toolbox-group">
-            <div class="section-label">Navigate</div>
-            <div class="tools-grid" style="grid-template-columns: repeat(2, 1fr);">
-              <button class="tool-tile" :class="{ active: activeTool === 'select' }" type="button" title="Select / Move (V)" @click="activeTool = 'select'">
-                <MousePointer :size="15" /> Select
-              </button>
-              <button class="tool-tile" :class="{ active: activeTool === 'pan' }" type="button" title="Pan Canvas (H)" @click="activeTool = 'pan'">
-                <Hand :size="15" /> Pan
-              </button>
-            </div>
-          </div>
-
-          <!-- Construction group -->
-          <div class="toolbox-group">
-            <div class="section-label">Construction</div>
-            <div class="tools-grid">
-              <button class="tool-tile" :class="{ active: activeTool === 'joint' }" type="button" title="Add Joint — click canvas" @click="activeTool = 'joint'">
-                <PlusCircle :size="15" /> Joint
-              </button>
-              <button class="tool-tile" :class="{ active: activeTool === 'member' }" type="button" title="Add Member — click two joints" @click="activeTool = 'member'">
-                <Spline :size="15" /> Member
-              </button>
-              <button class="tool-tile" :class="{ active: activeTool === 'measure' }" type="button" title="Measure Distance" @click="activeTool = 'measure'">
-                <Ruler :size="15" /> Measure
-              </button>
-            </div>
-          </div>
-
-          <!-- Structural group -->
-          <div class="toolbox-group">
-            <div class="section-label">Structural</div>
-            <div class="tools-grid">
-              <button class="tool-tile" :class="{ active: activeTool === 'pin' }" type="button" title="Pin Support — click joint" @click="activeTool = 'pin'">
-                <Anchor :size="15" /> Pin
-              </button>
-              <button class="tool-tile" :class="{ active: activeTool === 'roller' }" type="button" title="Roller Support — click joint" @click="activeTool = 'roller'">
-                <CircleDot :size="15" /> Roller
-              </button>
-              <button class="tool-tile" :class="{ active: activeTool === 'load' }" type="button" title="Add Load — click joint then edit in inspector" @click="activeTool = 'load'">
-                <ArrowDown :size="15" /> Load
-              </button>
-            </div>
-          </div>
-
-          <!-- Editing group -->
-          <div class="toolbox-group">
-            <div class="section-label">Edit</div>
-            <div class="tools-grid" style="grid-template-columns: repeat(2, 1fr);">
-              <button class="tool-tile tool-delete" :class="{ active: activeTool === 'delete' }" type="button" title="Delete — click element (or select + Delete key)" @click="activeTool = 'delete'">
-                <Trash2 :size="15" /> Delete
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <!-- Import AI Proposal strip (only when no model nodes yet) -->
-        <div v-if="proposalJoints.length && !nodes.length" class="import-proposal-strip">
-          <button class="action-btn btn-review" type="button" @click="importAllProposal">
-            <Sparkles :size="13" /> Import AI Proposal
+        <!-- Sidebar Navigation Tabs -->
+        <nav class="sidebar-tabs-nav" role="tablist" aria-label="Sidebar navigation">
+          <button
+            type="button"
+            role="tab"
+            class="sidebar-tab-btn"
+            :class="{ active: activeSidebarTab === 'tools' }"
+            :aria-selected="activeSidebarTab === 'tools'"
+            @click="switchSidebarTab('tools')"
+          >
+            <Sliders :size="13" />
+            <span>Tools</span>
           </button>
-        </div>
+          <button
+            type="button"
+            role="tab"
+            class="sidebar-tab-btn"
+            :class="{ active: activeSidebarTab === 'design' }"
+            :aria-selected="activeSidebarTab === 'design'"
+            @click="switchSidebarTab('design')"
+          >
+            <Sparkles :size="13" />
+            <span>Design with AI</span>
+            <span v-if="designProposal" class="tab-indicator-badge">1</span>
+          </button>
+        </nav>
 
-        <!-- Properties Inspector -->
-        <section class="inspector-section">
+        <!-- Tab 1: Tools & Properties Inspector -->
+        <div v-show="activeSidebarTab === 'tools'" class="sidebar-tools-pane">
+          <!-- Toolbox: grouped -->
+          <section class="toolbox-section">
+            <!-- Navigation group -->
+            <div class="toolbox-group">
+              <div class="section-label">Navigate</div>
+              <div class="tools-grid tools-grid-2">
+                <button class="tool-tile" :class="{ active: activeTool === 'select' }" type="button" title="Select / Move (V)" @click="activeTool = 'select'">
+                  <MousePointer :size="15" /> Select
+                </button>
+                <button class="tool-tile" :class="{ active: activeTool === 'pan' }" type="button" title="Pan Canvas (H)" @click="activeTool = 'pan'">
+                  <Hand :size="15" /> Pan
+                </button>
+              </div>
+            </div>
+
+            <!-- Construction group -->
+            <div class="toolbox-group">
+              <div class="section-label">Construction</div>
+              <div class="tools-grid tools-grid-3">
+                <button class="tool-tile" :class="{ active: activeTool === 'joint' }" type="button" title="Add Joint — click canvas" @click="activeTool = 'joint'">
+                  <PlusCircle :size="15" /> Joint
+                </button>
+                <button class="tool-tile" :class="{ active: activeTool === 'member' }" type="button" title="Add Member — click two joints" @click="activeTool = 'member'">
+                  <Spline :size="15" /> Member
+                </button>
+                <button class="tool-tile" :class="{ active: activeTool === 'measure' }" type="button" title="Measure Distance" @click="activeTool = 'measure'">
+                  <Ruler :size="15" /> Measure
+                </button>
+              </div>
+            </div>
+
+            <!-- Structural group -->
+            <div class="toolbox-group">
+              <div class="section-label">Structural</div>
+              <div class="tools-grid tools-grid-3">
+                <button class="tool-tile" :class="{ active: activeTool === 'pin' }" type="button" title="Pin Support — click joint" @click="activeTool = 'pin'">
+                  <Anchor :size="15" /> Pin
+                </button>
+                <button class="tool-tile" :class="{ active: activeTool === 'roller' }" type="button" title="Roller Support — click joint" @click="activeTool = 'roller'">
+                  <CircleDot :size="15" /> Roller
+                </button>
+                <button class="tool-tile" :class="{ active: activeTool === 'load' }" type="button" title="Add Load — click joint then edit in inspector" @click="activeTool = 'load'">
+                  <ArrowDown :size="15" /> Load
+                </button>
+              </div>
+            </div>
+
+            <!-- Editing group -->
+            <div class="toolbox-group">
+              <div class="section-label">Edit</div>
+              <div class="tools-grid tools-grid-1">
+                <button class="tool-tile tool-delete" :class="{ active: activeTool === 'delete' }" type="button" title="Delete — click element (or select + Delete key)" @click="activeTool = 'delete'">
+                  <Trash2 :size="15" /> Delete
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Import AI Proposal strip (only when no model nodes yet) -->
+          <div v-if="proposalJoints.length && !nodes.length" class="import-proposal-strip">
+            <button class="action-btn btn-review" type="button" @click="importAllProposal">
+              <Sparkles :size="13" /> Import AI Proposal
+            </button>
+          </div>
+
+          <!-- Properties Inspector -->
+          <section class="inspector-section">
 
           <!-- ─── Joint Inspector ─── -->
           <div v-if="selectedElement?.type === 'node' && nodeMap[selectedElement.id]">
@@ -2422,6 +2525,30 @@ onBeforeUnmount(() => {
           </div>
 
         </section>
+        </div><!-- /sidebar-tools-pane -->
+
+        <!-- Tab 2: Natural Language Design Studio -->
+        <div
+          v-show="activeSidebarTab === 'design'"
+          class="sidebar-design-pane editor-design-assistant-card"
+          @wheel.stop
+          @pointerdown.stop
+        >
+          <DesignInstructionPanel
+            :analysis-id="analysisId"
+            :model-revision="designModelRevision"
+            :selected-element="selectedElement"
+            :is-dirty="isDirty"
+            :proposal="designProposal"
+            :busy="designBusy"
+            :error="designError"
+            :compact="true"
+            @submit="handleDesignSubmit"
+            @apply="handleApplyDesignProposal"
+            @reject="handleRejectDesignProposal"
+            @clear-error="designError = ''"
+          />
+        </div>
       </aside>
 
       <!-- ─── AI Assistant Drawer (secondary, on-demand) ─── -->

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import {
   CheckCircle2,
   AlertTriangle,
@@ -14,9 +14,18 @@ import {
   ArrowUpRight,
   ShieldAlert,
   Sliders,
+  Download,
+  FileCode,
+  Table,
+  Image,
 } from 'lucide-vue-next'
+import { downloadAnalysisExport } from '../api/analyses'
 
 const props = defineProps({
+  analysisId: {
+    type: String,
+    default: '',
+  },
   solverData: {
     type: Object,
     default: null,
@@ -213,6 +222,50 @@ const reactionRows = computed(() => {
 function handleRowClick(memberId) {
   emit('select-member', memberId)
 }
+
+// Export Workflow State
+const showExportMenu = ref(false)
+const exportingFormat = ref('')
+const exportError = ref('')
+
+const hasResults = computed(() => {
+  return Boolean(results.value && Object.keys(results.value?.member_forces || {}).length > 0)
+})
+
+async function handleExport(format) {
+  if (!props.analysisId) {
+    exportError.value = 'No analysis ID available for export.'
+    return
+  }
+  if (format === 'csv' && (props.isStale || !hasResults.value)) {
+    return
+  }
+
+  exportingFormat.value = format
+  exportError.value = ''
+  try {
+    await downloadAnalysisExport(props.analysisId, format)
+    showExportMenu.value = false
+  } catch (err) {
+    exportError.value = err.message || `Export failed for ${format.toUpperCase()}`
+  } finally {
+    exportingFormat.value = ''
+  }
+}
+
+function handleClickOutside(event) {
+  if (showExportMenu.value && !event.target.closest('.export-dropdown-container')) {
+    showExportMenu.value = false
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('click', handleClickOutside)
+})
 </script>
 
 <template>
@@ -278,6 +331,100 @@ function handleRowClick(memberId) {
       </div>
 
       <div class="header-right">
+        <!-- Export Dropdown -->
+        <div class="export-dropdown-container">
+          <button
+            class="header-action-btn btn-export"
+            :class="{ active: showExportMenu }"
+            type="button"
+            title="Export truss model or results"
+            aria-label="Export analysis data"
+            :aria-expanded="showExportMenu"
+            @click.stop="showExportMenu = !showExportMenu"
+          >
+            <Download :size="13" />
+            <span>Export</span>
+            <ChevronDown :size="11" />
+          </button>
+
+          <div v-if="showExportMenu" class="export-menu" role="menu" @click.stop>
+            <div class="export-menu-header">
+              <span>Export Analysis</span>
+            </div>
+
+            <!-- PNG Option -->
+            <button
+              class="export-menu-item"
+              type="button"
+              role="menuitem"
+              :disabled="exportingFormat === 'png'"
+              @click="handleExport('png')"
+            >
+              <div class="export-item-icon">
+                <Image :size="14" />
+              </div>
+              <div class="export-item-info">
+                <div class="export-item-title-row">
+                  <span class="export-item-name">PNG Diagram</span>
+                  <span class="export-item-ext">200 DPI</span>
+                </div>
+                <span class="export-item-desc">Matplotlib high-res vector plot</span>
+              </div>
+            </button>
+
+            <!-- JSON Option -->
+            <button
+              class="export-menu-item"
+              type="button"
+              role="menuitem"
+              :disabled="exportingFormat === 'json'"
+              @click="handleExport('json')"
+            >
+              <div class="export-item-icon">
+                <FileCode :size="14" />
+              </div>
+              <div class="export-item-info">
+                <div class="export-item-title-row">
+                  <span class="export-item-name">JSON Model</span>
+                  <span class="export-item-ext">Schema 1.0</span>
+                </div>
+                <span class="export-item-desc">Geometry, loads, units</span>
+              </div>
+            </button>
+
+            <!-- CSV Option -->
+            <button
+              class="export-menu-item"
+              :class="{ 'is-disabled': isStale || !hasResults }"
+              type="button"
+              role="menuitem"
+              :disabled="exportingFormat === 'csv' || isStale || !hasResults"
+              :title="isStale ? 'Requires fresh solve (results are stale)' : (!hasResults ? 'Solve model before exporting CSV' : 'Export member forces & reactions CSV')"
+              @click="handleExport('csv')"
+            >
+              <div class="export-item-icon">
+                <Table :size="14" />
+              </div>
+              <div class="export-item-info">
+                <div class="export-item-title-row">
+                  <span class="export-item-name">CSV Results</span>
+                  <span v-if="isStale" class="export-badge-tag tag-stale">Stale</span>
+                  <span v-else-if="!hasResults" class="export-badge-tag tag-unsolved">Unsolved</span>
+                  <span v-else class="export-item-ext">Forces & Rx</span>
+                </div>
+                <span class="export-item-desc">
+                  {{ isStale ? 'Requires fresh solve (geometry modified)' : (!hasResults ? 'Requires fresh successful solve' : 'Axial forces and reactions') }}
+                </span>
+              </div>
+            </button>
+
+            <div v-if="exportError" class="export-menu-error">
+              <AlertTriangle :size="12" />
+              <span>{{ exportError }}</span>
+            </div>
+          </div>
+        </div>
+
         <!-- Force labels toggle button -->
         <button
           class="header-action-btn btn-force-labels"
@@ -720,6 +867,153 @@ function handleRowClick(memberId) {
   background: #fee2e2;
   color: #b91c1c;
   border-color: #fca5a5;
+}
+
+/* Export Dropdown */
+.export-dropdown-container {
+  position: relative;
+  display: inline-flex;
+}
+
+.export-menu {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  width: 260px;
+  background: #ffffff;
+  border: 1px solid var(--color-border, #e9e5d7);
+  border-radius: 8px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+  padding: 6px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.export-menu-header {
+  padding: 6px 8px 4px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  border-bottom: 1px solid #f1f5f9;
+  margin-bottom: 2px;
+}
+
+.export-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease;
+  font-family: inherit;
+}
+
+.export-menu-item:hover:not(:disabled) {
+  background: #f8fafc;
+}
+
+.export-menu-item.is-disabled,
+.export-menu-item:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: #fafafa;
+}
+
+.export-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #334155;
+  flex-shrink: 0;
+}
+
+.export-menu-item:hover:not(:disabled) .export-item-icon {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.export-item-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.export-item-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.export-item-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-primary, #252b2c);
+}
+
+.export-item-ext {
+  font-size: 10px;
+  font-weight: 600;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.export-badge-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.export-badge-tag.tag-stale {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+.export-badge-tag.tag-unsolved {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.export-item-desc {
+  font-size: 11px;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+
+.export-menu-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  margin-top: 4px;
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  border-radius: 4px;
+  font-size: 11px;
+  color: #991b1b;
 }
 
 /* Warning & Explanatory Banners */

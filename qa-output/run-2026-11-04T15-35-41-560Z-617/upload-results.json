@@ -1,0 +1,67 @@
+[
+  {
+    "filename": "GEMINI_AUTHENTICATION_FAILED.png",
+    "size_bytes": 75621,
+    "detected_format": "image/png",
+    "upload_success": false,
+    "http_status": 502,
+    "analysis_record_saved": true,
+    "original_image_retrieved": true,
+    "opencv_candidate_lines": 76,
+    "provider": "gemini",
+    "provider_result": "documented mocked error GEMINI_AUTHENTICATION_FAILED",
+    "review_status": "pending_review"
+  },
+  {
+    "filename": "GEMINI_RATE_LIMITED.png",
+    "size_bytes": 75621,
+    "detected_format": "image/png",
+    "upload_success": false,
+    "http_status": 429,
+    "analysis_record_saved": true,
+    "original_image_retrieved": true,
+    "opencv_candidate_lines": 76,
+    "provider": "gemini",
+    "provider_result": "documented mocked error GEMINI_RATE_LIMITED",
+    "review_status": "pending_review"
+  },
+  {
+    "filename": "GEMINI_TIMEOUT.png",
+    "size_bytes": 75621,
+    "detected_format": "image/png",
+    "upload_success": false,
+    "http_status": 504,
+    "analysis_record_saved": true,
+    "original_image_retrieved": true,
+    "opencv_candidate_lines": 76,
+    "provider": "gemini",
+    "provider_result": "documented mocked error GEMINI_TIMEOUT",
+    "review_status": "pending_review"
+  },
+  {
+    "filename": "GEMINI_NETWORK_ERROR.png",
+    "size_bytes": 75621,
+    "detected_format": "image/png",
+    "upload_success": false,
+    "http_status": 503,
+    "analysis_record_saved": true,
+    "original_image_retrieved": true,
+    "opencv_candidate_lines": 76,
+    "provider": "gemini",
+    "provider_result": "documented mocked error GEMINI_NETWORK_ERROR",
+    "review_status": "pending_review"
+  },
+  {
+    "filename": "INVALID_GEMINI_RESPONSE.png",
+    "size_bytes": 75621,
+    "detected_format": "image/png",
+    "upload_success": false,
+    "http_status": 502,
+    "analysis_record_saved": true,
+    "original_image_retrieved": true,
+    "opencv_candidate_lines": 76,
+    "provider": "gemini",
+    "provider_result": "documented mocked error INVALID_GEMINI_RESPONSE",
+    "review_status": "pending_review"
+  }
+]

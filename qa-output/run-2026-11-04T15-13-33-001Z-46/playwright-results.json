@@ -1,0 +1,165 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/athulkrishna_s_nair/sketch2solve/frontend/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/e2e/playwright.config.js",
+      "tests/e2e/final-polish.spec.js",
+      "-g",
+      "Natural Language Design geometry preview"
+    ],
+    "configFile": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/playwright.config.js",
+    "rootDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T15-13-33-001Z-46/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T15-13-33-001Z-46/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "snapshotDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.js",
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5175",
+          "browserName": "chromium",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "video": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T15-13-33-001Z-46/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "final-polish.spec.js",
+      "file": "final-polish.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Sketch2Solve Final Polish and Verification",
+          "file": "final-polish.spec.js",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "1. Natural Language Design geometry preview accurately renders geometry, supports, loads, and CAD grid",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2721,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "=== SVG HTML START ===\n<svg data-v-0ea7f51c=\"\" class=\"cad-svg\" viewBox=\"-0.96 -4.2 7.92 5.28\" preserveAspectRatio=\"xMidYMid meet\"><!-- Background CAD Grid --><defs data-v-0ea7f51c=\"\"><pattern data-v-0ea7f51c=\"\" id=\"cad-grid-pattern\" width=\"1\" height=\"1\" patternUnits=\"userSpaceOnUse\"><path data-v-0ea7f51c=\"\" d=\"M 1 0 L 0 0 0 1\" fill=\"none\" stroke=\"#eae5d7\" stroke-width=\"0.033600000000000005\"></path></pattern></defs><rect data-v-0ea7f51c=\"\" x=\"-0.96\" y=\"-4.2\" width=\"7.92\" height=\"5.28\" fill=\"url(#cad-grid-pattern)\"></rect><!-- Straight Structural Members --><g data-v-0ea7f51c=\"\" class=\"cad-members-group\"><line data-v-0ea7f51c=\"\" x1=\"0\" y1=\"0\" x2=\"6\" y2=\"0\" class=\"cad-member\" stroke-width=\"0.084\"></line><line data-v-0ea7f51c=\"\" x1=\"6\" y1=\"0\" x2=\"3\" y2=\"-3\" class=\"cad-member\" stroke-width=\"0.084\"></line><line data-v-0ea7f51c=\"\" x1=\"3\" y1=\"-3\" x2=\"0\" y2=\"0\" class=\"cad-member\" stroke-width=\"0.084\"></line></g><!-- Support Constraints (Pin & Roller) --><g data-v-0ea7f51c=\"\" class=\"cad-supports-group\"><g data-v-0ea7f51c=\"\" transform=\"translate(0, 0)\"><!-- Pin Support: clean triangle + ground line --><polygon data-v-0ea7f51c=\"\" points=\"-0.21600000000000003,0.3168000000000001 0.21600000000000003,0.3168000000000001 0,0\" class=\"cad-support pin\"></polygon><line data-v-0ea7f51c=\"\" x1=\"-0.28800000000000003\" y1=\"0.3168000000000001\" x2=\"0.28800000000000003\" y2=\"0.3168000000000001\" class=\"cad-support-ground\" stroke-width=\"0.0588\"></line></g><g data-v-0ea7f51c=\"\" transform=\"translate(6, 0)\"><!-- Pin Support: clean triangle + ground line --><!-- Roller Support: triangle + roller circles + ground line --><polygon data-v-0ea7f51c=\"\" points=\"-0.21600000000000003,0.23040000000000005 0.21600000000000003,0.23040000000000005 0,0\" class=\"cad-support roller\"></polygon><circle data-v-0ea7f51c=\"\" cx=\"-0.1008\" cy=\"0.28224000000000005\" r=\"0.051840000000000004\" class=\"cad-support-roller\" stroke-width=\"0.0504\"></circle><circle data-v-0ea7f51c=\"\" cx=\"0.1008\" cy=\"0.28224000000000005\" r=\"0.051840000000000004\" class=\"cad-support-roller\" stroke-width=\"0.0504\"></circle><line data-v-0ea7f51c=\"\" x1=\"-0.28800000000000003\" y1=\"0.3456\" x2=\"0.28800000000000003\" y2=\"0.3456\" class=\"cad-support-ground\" stroke-width=\"0.0588\"></line></g></g><!-- Loads (Force Vectors with Direction & Magnitudes) --><g data-v-0ea7f51c=\"\" class=\"cad-loads-group\"><g data-v-0ea7f51c=\"\" transform=\"translate(3, -3)\"><!-- Downward load (fy < 0): arrow points down to node (0,0) from (0, -len) --><line data-v-0ea7f51c=\"\" x1=\"0\" y1=\"-0.8400000000000001\" x2=\"0\" y2=\"0\" class=\"cad-load-arrow\" stroke=\"#dc2626\" stroke-width=\"0.1008\"></line><polygon data-v-0ea7f51c=\"\" points=\"-0.12960000000000002,-0.23040000000000005 0.12960000000000002,-0.23040000000000005 0,0\" class=\"cad-load-arrow\" fill=\"#dc2626\"></polygon><text data-v-0ea7f51c=\"\" x=\"0.2016\" y=\"-0.37800000000000006\" font-size=\"0.24\" class=\"cad-load-label\" fill=\"#dc2626\" font-weight=\"700\" font-family=\"monospace\">10 kN </text><!-- Horizontal load (fx != 0) --><!--v-if--></g></g><!-- Joint Markers & Labels --><g data-v-0ea7f51c=\"\" class=\"cad-joints-group\"><g data-v-0ea7f51c=\"\" transform=\"translate(0, 0)\"><circle data-v-0ea7f51c=\"\" cx=\"0\" cy=\"0\" r=\"0.14400000000000002\" class=\"cad-joint\" stroke-width=\"0.042\"></circle><text data-v-0ea7f51c=\"\" x=\"0.18720000000000003\" y=\"-0.1728\" font-size=\"0.24\" class=\"joint-label\">J1</text></g><g data-v-0ea7f51c=\"\" transform=\"translate(6, 0)\"><circle data-v-0ea7f51c=\"\" cx=\"0\" cy=\"0\" r=\"0.14400000000000002\" class=\"cad-joint\" stroke-width=\"0.042\"></circle><text data-v-0ea7f51c=\"\" x=\"0.18720000000000003\" y=\"-0.1728\" font-size=\"0.24\" class=\"joint-label\">J2</text></g><g data-v-0ea7f51c=\"\" transform=\"translate(3, -3)\"><circle data-v-0ea7f51c=\"\" cx=\"0\" cy=\"0\" r=\"0.14400000000000002\" class=\"cad-joint\" stroke-width=\"0.042\"></circle><text data-v-0ea7f51c=\"\" x=\"0.18720000000000003\" y=\"-0.1728\" font-size=\"0.24\" class=\"joint-label\">J3</text></g></g></svg>\n=== SVG HTML END ===\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T15:13:37.741Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-6eea72fdce77531ea24d",
+              "file": "final-polish.spec.js",
+              "line": 4,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-04T15:13:33.007Z",
+    "duration": 7640.187,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

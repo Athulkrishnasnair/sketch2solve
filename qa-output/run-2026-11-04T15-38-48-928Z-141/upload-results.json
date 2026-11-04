@@ -1,0 +1,15 @@
+[
+  {
+    "filename": "MISSING_GEMINI_API_KEY.png",
+    "size_bytes": 75621,
+    "detected_format": "image/png",
+    "upload_success": false,
+    "http_status": 503,
+    "analysis_record_saved": true,
+    "original_image_retrieved": true,
+    "opencv_candidate_lines": 76,
+    "provider": "gemini",
+    "provider_result": "documented mocked error MISSING_GEMINI_API_KEY",
+    "review_status": "pending_review"
+  }
+]

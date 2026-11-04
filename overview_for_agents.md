@@ -190,6 +190,22 @@ Read `overview_for_agents.md` before making changes. Inspect the actual implemen
 
 ## Implementation change log
 
+### 2026-11-04 — Editor AI Sidebar Integration and Viewport Layout Fixes
+
+- **Design with AI Right Sidebar Docking**:
+  - Moved the natural language design assistant entirely inside the editor's right sidebar (`editor-sidebar`), eliminating the floating card overlay that previously covered the canvas lower-right region.
+  - Converted `.editor-design-assistant-card` to a relative flex column inside `.sidebar-design-pane`, preserving existing test selector bindings.
+  - Restructured `DesignInstructionPanel.vue` into a scrollable content area (`.panel-content-area` with `overflow-y: auto`) for context tags, intent buttons, active proposal cards, error banners, and quick chips, while keeping the prompt composer (`.input-container` with textarea and "Generate" action) firmly anchored at the bottom.
+  - Ensured switching between Tools and Design with AI tabs preserves prompt text, input state, and active proposals seamlessly.
+  - The truss canvas remains 100% unobstructed.
+
+- **Elimination of Document/Body-Level Scrolling**:
+  - Removed document-level window scrollbars by applying `.in-editor-frame` and `body.in-editor-mode` viewport docking rules (`100dvh` height, `0px` outer margins, `0px` border-radius).
+  - Configured `.truss-editor-workspace` to `height: 100%; max-height: 100%; overflow: hidden;` with clean CAD workstation aesthetics.
+  - Verified 0 document/window scrollbars across desktop viewports (1920×1080 and 1366×768) with all panels (left navigation, top toolbar, central canvas, right sidebar, and bottom statusbar) fitting strictly within the viewport.
+  - Automated tests: 38/38 unit tests pass (`npm run test:unit`), and 44/44 Playwright end-to-end tests pass (`npm run test:e2e`).
+
+
 ### 2026-10-30 — Dashboard redesign and image MIME handling
 
 - Frontend: added `frontend/src/pages/DashboardPage.vue` as the default local workspace view. It uses the existing paginated analysis API for the actual saved count, recent thumbnails, statuses, and any recent failure. It contains no fabricated activity or metrics. Added dashboard navigation while keeping upload, full history, and detail/review pages separate. The rounded outer workspace, warm cream surfaces, pale yellow selection accents, pill controls, and charcoal focus card adapt the supplied dashboard reference without borrowing its HR data or widgets. The existing detail view, source image, OpenCV/AI overlays, proposal inspector, editable geometry, validation, and solver diagnostics remain accessible. The new dashboard uses scoped CSS; existing global styles retain shared theme and responsive rules.
@@ -621,4 +637,84 @@ Repository history contains commit `1eede86` dated 2026-10-26, titled `chore: ad
   - Frontend unit tests: **38/38 passed** (`npm --prefix frontend run test:unit`, 444ms).
   - Frontend production build: **Passed cleanly** with Vite (1,748 modules transformed in 1.28s, 0 errors).
   - Playwright E2E browser tests: **33/33 passed** (`npm --prefix frontend run test:e2e`, 1.4m), including 3 new dedicated Phase 1 polish regression tests in `tests/e2e/phase1-polish.spec.js`.
+  - `git diff --check`: **0 whitespace/formatting warnings**.
+
+### 2026-11-04 — Final UI Corrections and Functional Verification
+
+- Work Scope:
+  - Executed targeted UI polish and functional reliability pass prior to hackathon submission.
+  - Fix 1 (P1): Replaced placeholder graphic in Natural Language Design Preview with dynamic, accurate SVG CAD rendering.
+  - Fix 2 (P2): Redesigned Analysis History pagination controls to match dashboard card surface aesthetics and typography.
+  - Fix 3 (P2): Clarified New Analysis step 02 evidence-card copy with neutral AI provider description.
+  - Fix 4 (P1): Docked Issue Resolution Assistant card into the bottom-right viewport corner with full scroll and event isolation.
+  - Fix 5 (P1): Re-architected editor's Design with AI assistant from a floating overlay into a dedicated sidebar tab alongside Tools.
+  - Fix 6 (P2): Restructured Construction and Structural toolboxes into clean, balanced 3-column grids with uniform 48px tile height.
+  - Fix 7 (P1): Hardened "Apply Suggested Fix" lifecycle: added revision checks, non-colliding ID generation, support overwrites, undo tracking, and preview revalidation.
+- Implementation Details:
+  - **Fix 1 (`frontend/src/pages/DesignStudioPage.vue`)**:
+    - Computed `canvasSvg` dynamically measures model bounding box ($X_{\min}, X_{\max}, Y_{\min}, Y_{\max}$) with adaptive padding and aspect-ratio preservation.
+    - Renders crisp SVG lines for members (`.cad-member-line`), joints (`.cad-joint-marker`), joint text labels (`.cad-joint-label`), pin symbols (triangle + ground bar), roller symbols (triangle + rollers), and external load force arrows (`.cad-load-arrow`, `.cad-load-label`) with arrowhead markers oriented along load direction vectors.
+    - Grid pattern `#cad-grid-pattern` strictly aligns to the coordinate bounding box.
+    - **Root Cause & Fix for Enormous Dark Curved Shapes**: Global `.joint-label` selector in `truss-editor.css` specified `font-size: 10px; stroke: #fff; stroke-width: 3px; paint-order: stroke;`. When applied inside an SVG viewBox scaled in meters (e.g. 6m span x 3m height), `10px` and `3px` evaluated as 10 SVG units (10 meters) tall and 3 units (3 meters) stroke outline. The letter "J" in "J1", "J2", "J3" rendered at 690px x 667px, creating massive dark curved filled shapes covering the entire canvas. Renamed to `.cad-joint-label`, added scoped styles for `.cad-joint-label`, `.cad-load-label`, and `.cad-svg text` with `stroke: none !important; paint-order: normal !important;`, bringing label bounding boxes down from 690px x 667px to 16.5px x 16.0px (dark pixel area dropped from 34,840 px to 92 px).
+  - **Fix 2 (`frontend/src/pages/AnalysisHistoryPage.vue` & `frontend/src/styles/workspace.css`)**:
+    - Replaced bare `.load-more-row` with `<footer class="history-pagination-footer card-surface">`.
+    - Added styled `.history-pagination-status` (`color: #55584d`), `.btn-load-more`, and `.pagination-complete` status badge.
+  - **Fix 3 (`frontend/src/pages/NewAnalysisPage.vue`)**:
+    - Replaced provider-branded description with exact neutral copy: *"The selected AI provider interprets the sketch and proposes candidate joints, members, supports and loads for human review."*
+  - **Fix 4 (`frontend/src/components/IssueResolutionAssistant.vue` & `frontend/src/pages/TrussEditorPage.vue`)**:
+    - Docked assistant to bottom-right corner: `position: absolute; right: 16px; bottom: 16px; max-height: min(480px, calc(100% - 32px)); max-width: min(380px, calc(100% - 32px)); z-index: 25;`.
+    - Preserved collapse toggle to docked mini-bar (`40px`), scroll container (`.card-content-scroll`), and sticky footer (`.card-footer`).
+    - Added `@wheel.stop` and `@pointerdown.stop` to completely isolate mouse-wheel scrolling from canvas zoom.
+  - **Fix 5 (`frontend/src/pages/TrussEditorPage.vue` & `frontend/src/styles/truss-editor.css`)**:
+    - Added tab bar `.sidebar-tabs-nav` with `activeSidebarTab` state (`'tools'` vs `'ai'`).
+    - Topbar "Design with AI" button toggles to `'ai'` tab cleanly instead of popping up an on-canvas floating card.
+    - Preserved rich context passing (snapshot, revision, selection, diagnostics, solver results) and on-canvas preview layers (`#0284c7` additions, `#ef4444` deletions).
+    - Canvas automatically resizes via `fitView()` upon tab change.
+  - **Fix 6 (`frontend/src/pages/TrussEditorPage.vue` & `frontend/src/styles/truss-editor.css`)**:
+    - Normalized toolbox layouts: Navigate = `.tools-grid-2` (2 cols), Construction = `.tools-grid-3` (3 cols: Joint, Member, Measure), Structural = `.tools-grid-3` (3 cols: Pin, Roller, Load), and Edit = `.tools-grid-1` (1 col full width: Delete).
+    - Standardized `.tool-tile` height to `48px` with `gap: 6px`, eliminating horizontal text clipping and wrapping.
+  - **Fix 7 (`frontend/src/pages/TrussEditorPage.vue` & `frontend/src/components/IssueResolutionAssistant.vue`)**:
+    - Added `designModelRevision` tracking to `IssueResolutionAssistant` and validated incoming fix `base_revision`.
+    - Implemented sequential unique ID generator (`J1`, `M1`, `S1`, `L1`) to prevent duplicate ID collisions when adding new members or joints.
+    - Handled support replacements on existing nodes by removing old supports before inserting new ones.
+    - Updated reactive canvas state (`currentModel.value`), pushed undo history (`pushHistory()`), marked solver results as stale (`hasSolverRun.value = false`), and invoked immediate `runPreview()` revalidation.
+    - Fixed initial load `pushHistory(skipRevisionBump=true)` in `loadData()` to prevent revision desynchronization with the database.
+- Verification & Test Results:
+  - Backend test suite: **162/162 passed** (`cd backend && ./.venv/bin/python -m unittest discover -s tests -v`, 28.9s).
+  - Frontend unit tests: **38/38 passed** (`npm --prefix frontend run test:unit`, 236ms).
+  - Frontend production build: **Passed cleanly** with Vite (1,748 modules transformed in 597ms, 0 errors).
+  - Playwright E2E browser tests: **42/42 passed** (`npm --prefix frontend run test:e2e`, 1.3m), including 9 new regression tests in `tests/e2e/final-polish.spec.js`.
+  - `git diff --check`: **0 whitespace/formatting warnings**.
+
+### 2026-11-04 — Minimal Save & Export MVP Implementation
+
+- Work Scope:
+  - Implemented the minimal reliable save, draft persistence, and download workflow across both sketch-upload and Natural Language Design pathways.
+  - Implemented 3 dedicated export formats strictly:
+    1. **PNG (Matplotlib)**: Headless `Agg` 200 DPI vector graphic on clean white background, plotting joints, members (color-coded when solved: `#0284c7` tension, `#dc2626` compression, `#475569` zero force), joint/member labels with perpendicular offsets, support symbols (pins and oriented rollers), reaction force vectors (`Rx`, `Ry` in `#047857`), and load force vectors with magnitudes. Clean diagram without editor UI or decorative elements.
+    2. **JSON**: Complete Schema 1.0 truss model including metadata, length/force units, nodes, members, supports, loads, and solver results when available. Allows unsolved draft export.
+    3. **CSV**: Standard library `csv` writer producing member forces (`Member ID`, `Joint I`, `Joint J`, `Length`, `Axial Force`, `State`, `Classification`) and support reactions (`Support ID`, `Joint ID`, `Support Type`, `Axis`, `Reaction Force`). Strictly requires fresh successful solver results (`ExportError` with HTTP 409 code `RESULTS_REQUIRED` when unsolved or stale).
+  - Implemented persistence lifecycle:
+    - `PUT /api/analyses/<analysis_id>/draft?reopen=true` allows updating an already-submitted/solved analysis in-place without duplicate records, saving geometry updates, resetting `review_status` to `"draft"`, and clearing stale solver results.
+    - Reopening saved analyses from Analysis History cleanly restores draft geometry, units, and solver results if present.
+    - Geometry modifications in the editor immediately mark results as stale (`resultsStale = true`).
+  - Implemented UI in the Results interface:
+    - Added one unified Export button (`.btn-export`) with dropdown menu in `AnalysisResultsPanel.vue` offering PNG, JSON, and CSV downloads.
+    - Clearly indicates when results are stale or the model is unsolved on the CSV export option (disabled state with `.tag-stale` or `.tag-unsolved` badge).
+    - Hardened proposal import in `TrussEditorPage.vue` to dynamically bind supports and loads to nearest joints when explicit node IDs are absent.
+- Files Changed:
+  - `backend/app/services/export_service.py` (New): PNG, JSON, and CSV exporters with error handling.
+  - `backend/app/routes/analyses.py`: Added export routes (`/api/analyses/<analysis_id>/export/<fmt>` and query param variant) and updated draft saving with `?reopen=true`.
+  - `backend/requirements.txt`: Added `matplotlib>=3.8`.
+  - `backend/tests/test_export_api.py` (New): 8 unit tests covering all export formats, draft reopen, 409 guard, and format validation.
+  - `frontend/src/api/analyses.js`: Added `exportAnalysisUrl`, `downloadAnalysisExport`, and updated `saveAnalysisDraft(..., reopen=false)`.
+  - `frontend/src/components/AnalysisResultsPanel.vue`: Added Export dropdown with PNG, JSON, CSV options, stale/unsolved indicators, click-outside handling, and scoped styles.
+  - `frontend/src/pages/TrussEditorPage.vue`: Passed `:analysis-id` to `AnalysisResultsPanel`, wired draft reopen logic, auto-opened results panel on loading solved analyses, and hardened `importAllProposal`.
+  - `frontend/tests/unit/export-save.test.js` (New): 5 unit tests for export client, reopen parameters, results panel export UI, and stale indicators.
+  - `frontend/tests/e2e/final-polish.spec.js`: Added 3 comprehensive E2E tests for NL design and sketch upload export workflows.
+- Verification & Test Results:
+  - Backend unit tests: **170/170 passed** (`cd backend && ./.venv/bin/python -m unittest discover -s tests -v`, 30.4s).
+  - Frontend unit tests: **43/43 passed** (`npm --prefix frontend run test:unit`, 446ms).
+  - Frontend production build: **Passed cleanly** (`npm --prefix frontend run build`, 1,748 modules in 1.17s, 0 errors).
+  - Playwright E2E browser tests: **14/14 passed** in `final-polish.spec.js` (1.2m), including tests 12, 13, and 14 covering full NL design and sketch upload save/export lifecycles.
   - `git diff --check`: **0 whitespace/formatting warnings**.

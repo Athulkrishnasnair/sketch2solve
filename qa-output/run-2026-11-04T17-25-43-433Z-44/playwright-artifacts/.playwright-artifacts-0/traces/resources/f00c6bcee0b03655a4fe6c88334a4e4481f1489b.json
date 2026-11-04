@@ -1,0 +1,1 @@
+{"message":"Create a triangular truss with 6 m span and 3 m height with a pin at left, roller at right, and 10 kN downward load at top","intent":"auto","context":{"model_revision":1,"units":{"length":"m","force":"kN"}},"provider":null}

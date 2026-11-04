@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import AnalysisDetailPage from './pages/AnalysisDetailPage.vue'
 import AnalysisHistoryPage from './pages/AnalysisHistoryPage.vue'
 import DashboardPage from './pages/DashboardPage.vue'
@@ -79,11 +79,22 @@ onMounted(() => {
   handlePopState()
 })
 
-onBeforeUnmount(() => window.removeEventListener('popstate', handlePopState))
+watch(view, (nextView) => {
+  if (typeof document !== 'undefined') {
+    document.body.classList.toggle('in-editor-mode', nextView === 'editor')
+  }
+}, { immediate: true })
+
+onBeforeUnmount(() => {
+  window.removeEventListener('popstate', handlePopState)
+  if (typeof document !== 'undefined') {
+    document.body.classList.remove('in-editor-mode')
+  }
+})
 </script>
 
 <template>
-  <div class="app-frame">
+  <div class="app-frame" :class="{ 'in-editor-frame': view === 'editor' }">
     <aside class="sidebar">
       <a class="brand" href="/" @click.prevent="navigate('dashboard')">
         <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 36 36" fill="none"><path d="M5 28.5 18 7l13 21.5H5Z" stroke="currentColor" stroke-width="2" /><path d="m11.4 18 13.1 0M9 22.1h18M18 7v21.5" stroke="currentColor" stroke-width="1.5" /><circle cx="18" cy="7" r="2" fill="currentColor" /><circle cx="5" cy="28.5" r="2" fill="currentColor" /><circle cx="31" cy="28.5" r="2" fill="currentColor" /></svg></span>

@@ -232,7 +232,7 @@ const displayModel = computed(() => {
 // Proposed Changes for Canvas Highlighting
 const proposedAdditions = computed(() => {
   if (!activeProposal.value?.operations) return []
-  return activeProposal.value.operations.filter((op) => op.op === 'add_member')
+  return activeProposal.value.operations.filter((op) => op.op === 'add_member').map((op) => op.id)
 })
 
 const proposedRemovals = computed(() => {
@@ -247,6 +247,8 @@ const canvasSvg = computed(() => {
   if (!displayModel.value || !displayModel.value.nodes || displayModel.value.nodes.length === 0) return null
   const nodes = displayModel.value.nodes
   const members = displayModel.value.members || []
+  const supports = displayModel.value.supports || []
+  const loads = displayModel.value.loads || []
 
   let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
   nodes.forEach((n) => {
@@ -256,14 +258,30 @@ const canvasSvg = computed(() => {
     if (n.y > maxY) maxY = n.y
   })
 
-  const spanX = Math.max(2, maxX - minX)
-  const spanY = Math.max(2, maxY - minY)
-  const pad = Math.max(spanX, spanY) * 0.2
+  const spanX = Math.max(maxX - minX, 1)
+  const spanY = Math.max(maxY - minY, 1)
+  const maxDim = Math.max(spanX, spanY)
 
-  const vx = minX - pad
-  const vy = -(maxY + pad)
-  const vw = spanX + pad * 2
-  const vh = spanY + pad * 2
+  // Determine dynamic padding ensuring supports below and load arrows above fit comfortably
+  const padX = Math.max(spanX * 0.16, maxDim * 0.14, 0.8)
+  const padYTop = Math.max(spanY * 0.22, maxDim * 0.18, 1.2)
+  const padYBottom = Math.max(spanY * 0.22, maxDim * 0.18, 1.0)
+
+  // In SVG coordinates (positive y points down):
+  // Cartesian y = maxY is SVG y = -maxY
+  // Cartesian y = minY is SVG y = -minY
+  const vx = minX - padX
+  const vy = -(maxY + padYTop)
+  const vw = spanX + padX * 2
+  const vh = spanY + padYTop + padYBottom
+
+  // Dynamic visual dimensions scaling proportionally to model dimensions
+  const memberStroke = Math.max(0.04, Math.min(0.14, maxDim * 0.014))
+  const jointRadius = Math.max(0.1, Math.min(0.24, maxDim * 0.024))
+  const supportSize = Math.max(0.22, Math.min(0.48, maxDim * 0.048))
+  const loadArrowLen = Math.max(0.6, Math.min(1.4, maxDim * 0.14))
+  const fontSize = Math.max(0.22, Math.min(0.44, maxDim * 0.04))
+  const gridStep = maxDim <= 10 ? 1 : maxDim <= 30 ? 2 : 5
 
   const nodeMap = {}
   nodes.forEach((n) => { nodeMap[n.id] = n })
@@ -272,11 +290,21 @@ const canvasSvg = computed(() => {
     viewBox: `${vx} ${vy} ${vw} ${vh}`,
     nodes,
     members,
-    supports: displayModel.value.supports || [],
-    loads: displayModel.value.loads || [],
+    supports,
+    loads,
     nodeMap,
     span: (maxX - minX).toFixed(2),
     height: (maxY - minY).toFixed(2),
+    memberStroke,
+    jointRadius,
+    supportSize,
+    loadArrowLen,
+    fontSize,
+    gridStep,
+    vx,
+    vy,
+    vw,
+    vh,
   }
 })
 </script>
@@ -397,15 +425,31 @@ const canvasSvg = computed(() => {
             :viewBox="canvasSvg.viewBox"
             preserveAspectRatio="xMidYMid meet"
           >
-            <!-- Background Grid (Visual CAD Feel) -->
+            <!-- Background CAD Grid -->
             <defs>
-              <pattern id="cad-grid" width="1" height="1" patternUnits="userSpaceOnUse">
-                <path d="M 1 0 L 0 0 0 1" fill="none" stroke="#ede9df" stroke-width="0.04" />
+              <pattern
+                id="cad-grid-pattern"
+                :width="canvasSvg.gridStep"
+                :height="canvasSvg.gridStep"
+                patternUnits="userSpaceOnUse"
+              >
+                <path
+                  :d="`M ${canvasSvg.gridStep} 0 L 0 0 0 ${canvasSvg.gridStep}`"
+                  fill="none"
+                  stroke="#eae5d7"
+                  :stroke-width="canvasSvg.memberStroke * 0.4"
+                />
               </pattern>
             </defs>
-            <rect :x="-50" :y="-50" width="100" height="100" fill="url(#cad-grid)" />
+            <rect
+              :x="canvasSvg.vx"
+              :y="canvasSvg.vy"
+              :width="canvasSvg.vw"
+              :height="canvasSvg.vh"
+              fill="url(#cad-grid-pattern)"
+            />
 
-            <!-- Existing Members -->
+            <!-- Straight Structural Members -->
             <g class="cad-members-group">
               <line
                 v-for="m in canvasSvg.members"
@@ -414,58 +458,190 @@ const canvasSvg = computed(() => {
                 :y1="-(canvasSvg.nodeMap[m.node_i]?.y ?? 0)"
                 :x2="canvasSvg.nodeMap[m.node_j]?.x ?? 0"
                 :y2="-(canvasSvg.nodeMap[m.node_j]?.y ?? 0)"
-                :class="['cad-member', { 'proposed-removal': proposedRemovals.includes(m.id) }]"
+                :class="[
+                  'cad-member',
+                  {
+                    'proposed-addition': proposedAdditions.includes(m.id),
+                    'proposed-removal': proposedRemovals.includes(m.id),
+                  }
+                ]"
+                :stroke-width="canvasSvg.memberStroke"
               />
             </g>
 
-            <!-- Proposed Added Members (Dashed Cyan) -->
-            <g class="cad-proposed-additions">
-              <line
-                v-for="(op, idx) in proposedAdditions"
-                :key="`prop-add-${idx}`"
-                :x1="canvasSvg.nodeMap[op.node_i]?.x ?? 0"
-                :y1="-(canvasSvg.nodeMap[op.node_i]?.y ?? 0)"
-                :x2="canvasSvg.nodeMap[op.node_j]?.x ?? 0"
-                :y2="-(canvasSvg.nodeMap[op.node_j]?.y ?? 0)"
-                class="cad-member proposed-addition"
-              />
-            </g>
-
-            <!-- Supports -->
+            <!-- Support Constraints (Pin & Roller) -->
             <g class="cad-supports-group">
-              <polygon
+              <g
                 v-for="s in canvasSvg.supports"
                 :key="s.id"
-                :points="`${(canvasSvg.nodeMap[s.node]?.x ?? 0) - 0.28},${-(canvasSvg.nodeMap[s.node]?.y ?? 0) + 0.4} ${(canvasSvg.nodeMap[s.node]?.x ?? 0) + 0.28},${-(canvasSvg.nodeMap[s.node]?.y ?? 0) + 0.4} ${(canvasSvg.nodeMap[s.node]?.x ?? 0)},${-(canvasSvg.nodeMap[s.node]?.y ?? 0)}`"
-                class="cad-support"
-                :class="s.type"
-              />
+                :transform="`translate(${canvasSvg.nodeMap[s.node]?.x ?? 0}, ${-(canvasSvg.nodeMap[s.node]?.y ?? 0)})`"
+              >
+                <!-- Pin Support: clean triangle + ground line -->
+                <template v-if="s.type === 'pin'">
+                  <polygon
+                    :points="`${-canvasSvg.supportSize * 0.75},${canvasSvg.supportSize * 1.1} ${canvasSvg.supportSize * 0.75},${canvasSvg.supportSize * 1.1} 0,0`"
+                    class="cad-support pin"
+                  />
+                  <line
+                    :x1="-canvasSvg.supportSize * 1.0"
+                    :y1="canvasSvg.supportSize * 1.1"
+                    :x2="canvasSvg.supportSize * 1.0"
+                    :y2="canvasSvg.supportSize * 1.1"
+                    class="cad-support-ground"
+                    :stroke-width="canvasSvg.memberStroke * 0.7"
+                  />
+                </template>
+
+                <!-- Roller Support: triangle + roller circles + ground line -->
+                <template v-else>
+                  <polygon
+                    :points="`${-canvasSvg.supportSize * 0.75},${canvasSvg.supportSize * 0.8} ${canvasSvg.supportSize * 0.75},${canvasSvg.supportSize * 0.8} 0,0`"
+                    class="cad-support roller"
+                  />
+                  <circle
+                    :cx="-canvasSvg.supportSize * 0.35"
+                    :cy="canvasSvg.supportSize * 0.98"
+                    :r="canvasSvg.supportSize * 0.18"
+                    class="cad-support-roller"
+                    :stroke-width="canvasSvg.memberStroke * 0.6"
+                  />
+                  <circle
+                    :cx="canvasSvg.supportSize * 0.35"
+                    :cy="canvasSvg.supportSize * 0.98"
+                    :r="canvasSvg.supportSize * 0.18"
+                    class="cad-support-roller"
+                    :stroke-width="canvasSvg.memberStroke * 0.6"
+                  />
+                  <line
+                    :x1="-canvasSvg.supportSize * 1.0"
+                    :y1="canvasSvg.supportSize * 1.2"
+                    :x2="canvasSvg.supportSize * 1.0"
+                    :y2="canvasSvg.supportSize * 1.2"
+                    class="cad-support-ground"
+                    :stroke-width="canvasSvg.memberStroke * 0.7"
+                  />
+                </template>
+              </g>
             </g>
 
-            <!-- Loads (Downward Arrows) -->
+            <!-- Loads (Force Vectors with Direction & Magnitudes) -->
             <g class="cad-loads-group">
               <g
                 v-for="l in canvasSvg.loads"
                 :key="l.id"
                 :transform="`translate(${canvasSvg.nodeMap[l.node]?.x ?? 0}, ${-(canvasSvg.nodeMap[l.node]?.y ?? 0)})`"
               >
-                <line x1="0" y1="-0.9" x2="0" y2="0" stroke="#ef4444" stroke-width="0.1" />
-                <polygon points="-0.15,-0.25 0.15,-0.25 0,0" fill="#ef4444" />
-                <text x="0.25" y="-0.5" font-size="0.32" fill="#ef4444" font-family="monospace">
-                  {{ l.fy }} kN
-                </text>
+                <!-- Downward load (fy < 0): arrow points down to node (0,0) from (0, -len) -->
+                <template v-if="(l.fy ?? 0) < 0">
+                  <line
+                    x1="0"
+                    :y1="-canvasSvg.loadArrowLen"
+                    x2="0"
+                    y2="0"
+                    class="cad-load-arrow"
+                    stroke="#dc2626"
+                    :stroke-width="canvasSvg.memberStroke * 1.2"
+                  />
+                  <polygon
+                    :points="`${-canvasSvg.jointRadius * 0.9},${-canvasSvg.jointRadius * 1.6} ${canvasSvg.jointRadius * 0.9},${-canvasSvg.jointRadius * 1.6} 0,0`"
+                    class="cad-load-arrow"
+                    fill="#dc2626"
+                  />
+                  <text
+                    :x="canvasSvg.jointRadius * 1.4"
+                    :y="-canvasSvg.loadArrowLen * 0.45"
+                    :font-size="canvasSvg.fontSize"
+                    class="cad-load-label"
+                    fill="#dc2626"
+                    font-weight="700"
+                    font-family="monospace"
+                  >
+                    {{ Math.abs(l.fy) }} kN
+                  </text>
+                </template>
+
+                <!-- Upward load (fy > 0): arrow points up to node (0,0) from (0, len) -->
+                <template v-else-if="(l.fy ?? 0) > 0">
+                  <line
+                    x1="0"
+                    :y1="canvasSvg.loadArrowLen"
+                    x2="0"
+                    y2="0"
+                    class="cad-load-arrow"
+                    stroke="#dc2626"
+                    :stroke-width="canvasSvg.memberStroke * 1.2"
+                  />
+                  <polygon
+                    :points="`${-canvasSvg.jointRadius * 0.9},${canvasSvg.jointRadius * 1.6} ${canvasSvg.jointRadius * 0.9},${canvasSvg.jointRadius * 1.6} 0,0`"
+                    class="cad-load-arrow"
+                    fill="#dc2626"
+                  />
+                  <text
+                    :x="canvasSvg.jointRadius * 1.4"
+                    :y="canvasSvg.loadArrowLen * 0.6"
+                    :font-size="canvasSvg.fontSize"
+                    class="cad-load-label"
+                    fill="#dc2626"
+                    font-weight="700"
+                    font-family="monospace"
+                  >
+                    {{ l.fy }} kN
+                  </text>
+                </template>
+
+                <!-- Horizontal load (fx != 0) -->
+                <template v-if="(l.fx ?? 0) !== 0">
+                  <line
+                    :x1="(l.fx > 0 ? -canvasSvg.loadArrowLen : canvasSvg.loadArrowLen)"
+                    y1="0"
+                    x2="0"
+                    y2="0"
+                    class="cad-load-arrow"
+                    stroke="#dc2626"
+                    :stroke-width="canvasSvg.memberStroke * 1.2"
+                  />
+                  <polygon
+                    :points="l.fx > 0
+                      ? `${-canvasSvg.jointRadius * 1.6},${-canvasSvg.jointRadius * 0.9} ${-canvasSvg.jointRadius * 1.6},${canvasSvg.jointRadius * 0.9} 0,0`
+                      : `${canvasSvg.jointRadius * 1.6},${-canvasSvg.jointRadius * 0.9} ${canvasSvg.jointRadius * 1.6},${canvasSvg.jointRadius * 0.9} 0,0`"
+                    class="cad-load-arrow"
+                    fill="#dc2626"
+                  />
+                  <text
+                    :x="l.fx > 0 ? -canvasSvg.loadArrowLen * 0.8 : canvasSvg.jointRadius * 1.5"
+                    :y="-canvasSvg.jointRadius * 1.2"
+                    :font-size="canvasSvg.fontSize"
+                    class="cad-load-label"
+                    fill="#dc2626"
+                    font-weight="700"
+                    font-family="monospace"
+                  >
+                    {{ Math.abs(l.fx) }} kN
+                  </text>
+                </template>
               </g>
             </g>
 
-            <!-- Joints -->
+            <!-- Joint Markers & Labels -->
             <g class="cad-joints-group">
               <g
                 v-for="n in canvasSvg.nodes"
                 :key="n.id"
                 :transform="`translate(${n.x}, ${-n.y})`"
               >
-                <circle cx="0" cy="0" r="0.18" class="cad-joint" />
-                <text x="0.25" y="-0.22" font-size="0.3" class="joint-label">
+                <circle
+                  cx="0"
+                  cy="0"
+                  :r="canvasSvg.jointRadius"
+                  class="cad-joint"
+                  :stroke-width="canvasSvg.memberStroke * 0.5"
+                />
+                <text
+                  :x="canvasSvg.jointRadius * 1.3"
+                  :y="-canvasSvg.jointRadius * 1.2"
+                  :font-size="canvasSvg.fontSize"
+                  class="cad-joint-label"
+                >
                   {{ n.id }}
                 </text>
               </g>
@@ -714,19 +890,16 @@ const canvasSvg = computed(() => {
 
 .cad-member {
   stroke: #292a28;
-  stroke-width: 0.12;
   stroke-linecap: round;
 }
 
 .cad-member.proposed-addition {
   stroke: #0284c7;
-  stroke-width: 0.14;
   stroke-dasharray: 0.35, 0.15;
 }
 
 .cad-member.proposed-removal {
   stroke: #ef4444;
-  stroke-width: 0.12;
   stroke-dasharray: 0.2, 0.15;
   opacity: 0.75;
 }
@@ -734,17 +907,47 @@ const canvasSvg = computed(() => {
 .cad-joint {
   fill: #f4dc68;
   stroke: #292a28;
-  stroke-width: 0.06;
 }
 
-.joint-label {
+.cad-joint-label {
   font-family: var(--mono, monospace);
   font-weight: 700;
   fill: #3e4139;
+  stroke: none !important;
+  paint-order: normal !important;
+  pointer-events: none;
+}
+
+.cad-load-label {
+  font-family: var(--mono, monospace);
+  font-weight: 700;
+  stroke: none !important;
+  paint-order: normal !important;
+}
+
+.cad-svg text {
+  stroke: none !important;
+  paint-order: normal !important;
 }
 
 .cad-support {
   fill: #606859;
+  stroke: #292a28;
+  stroke-linejoin: round;
+}
+
+.cad-support.roller {
+  fill: #78826f;
+}
+
+.cad-support-ground {
+  stroke: #292a28;
+  stroke-linecap: round;
+}
+
+.cad-support-roller {
+  fill: #fff;
+  stroke: #292a28;
 }
 
 .canvas-legend {

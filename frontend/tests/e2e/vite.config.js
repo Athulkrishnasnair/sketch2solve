@@ -4,7 +4,7 @@ import viteConfig from '../../vite.config.js'
 export default mergeConfig(viteConfig, {
   server: {
     host: '127.0.0.1',
-    port: 5174,
+    port: 5175,
     strictPort: true,
     proxy: {
       '/api': {

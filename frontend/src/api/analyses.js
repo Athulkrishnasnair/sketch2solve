@@ -53,12 +53,47 @@ export async function getAnalysisImage(imageUrl) {
   }
 }
 
-export function saveAnalysisDraft(analysisId, draft, coordinatesConfirmed) {
-  return request(`/api/analyses/${encodeURIComponent(analysisId)}/draft`, {
+export function saveAnalysisDraft(analysisId, draft, coordinatesConfirmed, reopen = false) {
+  const query = reopen ? '?reopen=true' : ''
+  return request(`/api/analyses/${encodeURIComponent(analysisId)}/draft${query}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ geometry: draft, coordinates_confirmed: coordinatesConfirmed }),
   })
+}
+
+export function exportAnalysisUrl(analysisId, format = 'json') {
+  return apiUrl(`/api/analyses/${encodeURIComponent(analysisId)}/export/${encodeURIComponent(format)}`)
+}
+
+export async function downloadAnalysisExport(analysisId, format = 'json') {
+  const url = exportAnalysisUrl(analysisId, format)
+  const response = await fetch(url)
+  if (!response.ok) {
+    let message = `Export failed with HTTP ${response.status}.`
+    try {
+      const errJson = await response.json()
+      if (errJson?.message) message = errJson.message
+    } catch (_) {}
+    const err = new Error(message)
+    err.status = response.status
+    throw err
+  }
+  const blob = await response.blob()
+  const disposition = response.headers.get('content-disposition') || ''
+  let filename = `truss_${analysisId.slice(0, 8)}.${format}`
+  const match = disposition.match(/filename="?([^";]+)"?/)
+  if (match && match[1]) {
+    filename = match[1]
+  }
+  const blobUrl = window.URL.createObjectURL(blob)
+  const anchor = document.createElement('a')
+  anchor.href = blobUrl
+  anchor.download = filename
+  document.body.appendChild(anchor)
+  anchor.click()
+  document.body.removeChild(anchor)
+  window.URL.revokeObjectURL(blobUrl)
 }
 
 export function markAnalysisReviewed(analysisId) {

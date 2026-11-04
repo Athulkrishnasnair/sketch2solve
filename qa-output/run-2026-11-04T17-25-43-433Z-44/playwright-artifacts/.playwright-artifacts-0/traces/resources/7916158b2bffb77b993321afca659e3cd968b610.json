@@ -1,0 +1,1 @@
+{"message":"Create a triangular truss with 4 m span and 2 m height","intent":"auto","context":{"model_revision":1,"units":{"length":"m","force":"kN"}},"provider":null}

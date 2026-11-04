@@ -146,58 +146,97 @@ function handleClear() {
 
 <template>
   <div class="design-instruction-panel" :class="{ compact }">
-    <!-- Context Bar -->
-    <div class="panel-context-bar">
-      <div class="context-left">
-        <span class="context-tag" :title="`Model revision ${modelRevision}`">
-          <Layers :size="12" /> Rev {{ modelRevision }}
-        </span>
-        <span v-if="selectedElement" class="context-tag selected-tag">
-          Selected: <strong>{{ selectedElement.id }}</strong> ({{ selectedElement.type }})
-        </span>
-        <span v-if="isDirty" class="context-tag dirty-tag" title="Canvas has unsaved changes that will be used as base context">
-          Unsaved canvas edits included
-        </span>
+    <!-- Scrollable content area: Context bar, Active proposal, Error banner, Suggestions -->
+    <div class="panel-content-area">
+      <!-- Context Bar -->
+      <div class="panel-context-bar">
+        <div class="context-left">
+          <span class="context-tag" :title="`Model revision ${modelRevision}`">
+            <Layers :size="12" /> Rev {{ modelRevision }}
+          </span>
+          <span v-if="selectedElement" class="context-tag selected-tag">
+            Selected: <strong>{{ selectedElement.id }}</strong> ({{ selectedElement.type }})
+          </span>
+          <span v-if="isDirty" class="context-tag dirty-tag" title="Canvas has unsaved changes that will be used as base context">
+            Unsaved canvas edits included
+          </span>
+        </div>
+
+        <!-- Intent Mode Pills -->
+        <div class="intent-selector" role="radiogroup" aria-label="Design Intent">
+          <button
+            type="button"
+            class="intent-btn"
+            :class="{ active: selectedIntent === 'auto' }"
+            @click="selectedIntent = 'auto'"
+          >
+            Auto
+          </button>
+          <button
+            type="button"
+            class="intent-btn"
+            :class="{ active: selectedIntent === 'create' }"
+            @click="selectedIntent = 'create'"
+          >
+            Create
+          </button>
+          <button
+            type="button"
+            class="intent-btn"
+            :class="{ active: selectedIntent === 'modify' }"
+            @click="selectedIntent = 'modify'"
+          >
+            Modify
+          </button>
+          <button
+            type="button"
+            class="intent-btn"
+            :class="{ active: selectedIntent === 'explain' }"
+            @click="selectedIntent = 'explain'"
+          >
+            Explain
+          </button>
+        </div>
       </div>
 
-      <!-- Intent Mode Pills -->
-      <div class="intent-selector" role="radiogroup" aria-label="Design Intent">
+      <!-- Error Banner -->
+      <div v-if="error" class="error-banner" role="alert">
+        <AlertCircle :size="14" class="error-icon" />
+        <div class="error-body">
+          <strong>Design Service Notice</strong>
+          <p>{{ error }}</p>
+        </div>
+        <button type="button" class="error-dismiss" aria-label="Dismiss error" @click="handleClear">✕</button>
+      </div>
+
+      <!-- Active Proposal Display -->
+      <div v-if="proposal" class="proposal-container">
+        <DesignProposalCard
+          :proposal="proposal"
+          :compact="compact"
+          :is-busy="busy"
+          @apply="emit('apply', $event)"
+          @reject="emit('reject', $event)"
+          @select-clarification="handleClarification"
+        />
+      </div>
+
+      <!-- Suggested Quick Chips -->
+      <div v-if="!proposal && quickChips.length > 0" class="chips-row">
         <button
+          v-for="(chip, idx) in quickChips"
+          :key="idx"
           type="button"
-          class="intent-btn"
-          :class="{ active: selectedIntent === 'auto' }"
-          @click="selectedIntent = 'auto'"
+          class="prompt-chip"
+          :disabled="busy"
+          @click="selectChip(chip)"
         >
-          Auto
-        </button>
-        <button
-          type="button"
-          class="intent-btn"
-          :class="{ active: selectedIntent === 'create' }"
-          @click="selectedIntent = 'create'"
-        >
-          Create
-        </button>
-        <button
-          type="button"
-          class="intent-btn"
-          :class="{ active: selectedIntent === 'modify' }"
-          @click="selectedIntent = 'modify'"
-        >
-          Modify
-        </button>
-        <button
-          type="button"
-          class="intent-btn"
-          :class="{ active: selectedIntent === 'explain' }"
-          @click="selectedIntent = 'explain'"
-        >
-          Explain
+          {{ chip }}
         </button>
       </div>
     </div>
 
-    <!-- Input Area -->
+    <!-- Input Area (anchored at bottom) -->
     <div class="input-container">
       <textarea
         ref="textareaRef"
@@ -223,42 +262,6 @@ function handleClear() {
         </button>
       </div>
     </div>
-
-    <!-- Suggested Quick Chips -->
-    <div v-if="!proposal && quickChips.length > 0" class="chips-row">
-      <button
-        v-for="(chip, idx) in quickChips"
-        :key="idx"
-        type="button"
-        class="prompt-chip"
-        :disabled="busy"
-        @click="selectChip(chip)"
-      >
-        {{ chip }}
-      </button>
-    </div>
-
-    <!-- Error Banner -->
-    <div v-if="error" class="error-banner" role="alert">
-      <AlertCircle :size="14" class="error-icon" />
-      <div class="error-body">
-        <strong>Design Service Notice</strong>
-        <p>{{ error }}</p>
-      </div>
-      <button type="button" class="error-dismiss" aria-label="Dismiss error" @click="handleClear">✕</button>
-    </div>
-
-    <!-- Active Proposal Display -->
-    <div v-if="proposal" class="proposal-container">
-      <DesignProposalCard
-        :proposal="proposal"
-        :compact="compact"
-        :is-busy="busy"
-        @apply="emit('apply', $event)"
-        @reject="emit('reject', $event)"
-        @select-clarification="handleClarification"
-      />
-    </div>
   </div>
 </template>
 
@@ -272,11 +275,44 @@ function handleClear() {
   border-radius: 12px;
   padding: 12px 14px;
   box-shadow: 0 3px 12px rgba(41, 42, 40, 0.03);
+  box-sizing: border-box;
 }
 
 .design-instruction-panel.compact {
-  padding: 8px 10px;
+  height: 100%;
+  max-height: 100%;
+  padding: 10px;
   gap: 8px;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  overflow: hidden;
+}
+
+.panel-content-area {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 2px;
+}
+
+.panel-content-area::-webkit-scrollbar {
+  width: 5px;
+}
+.panel-content-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+.panel-content-area::-webkit-scrollbar-thumb {
+  background: #dcd7c9;
+  border-radius: 4px;
+}
+.panel-content-area::-webkit-scrollbar-thumb:hover {
+  background: #c5bfae;
 }
 
 /* Context Bar */

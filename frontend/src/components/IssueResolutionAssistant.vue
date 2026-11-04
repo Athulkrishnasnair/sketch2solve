@@ -42,6 +42,10 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  modelRevision: {
+    type: Number,
+    default: 1,
+  },
   busy: {
     type: Boolean,
     default: false,
@@ -141,6 +145,11 @@ async function handleResolveWithAi() {
       issuePayload,
       props.diagnostics
     )
+    result.base_revision = props.modelRevision
+    for (const f of result.proposed_fixes || []) {
+      f.base_revision = props.modelRevision
+      f.proposal_id = result.resolution_id || `fix-${Date.now()}`
+    }
     resolution.value = result
     if (result.proposed_fixes && result.proposed_fixes.length > 0) {
       selectedFixIndex.value = 0
@@ -163,6 +172,10 @@ function selectFix(index) {
 function handleApplyFix() {
   const fix = resolution.value?.proposed_fixes?.[selectedFixIndex.value]
   if (!fix) return
+  if (fix.base_revision != null && props.modelRevision !== fix.base_revision) {
+    resolveError.value = 'Proposal is stale: The canvas model was modified after this fix was proposed. Please request a fresh fix.'
+    return
+  }
   emit('apply-fix', fix)
   resolution.value = null
   emit('clear-preview')
@@ -198,21 +211,14 @@ function handleCardWheel(e) {
   e.stopPropagation()
 }
 
-// Compute dynamic card placement styles
+// Compute dynamic card placement styles in bottom-right region of canvas (non-obstructing)
 const cardPositionStyle = computed(() => {
-  if (!props.anchorPosition) {
-    return {
-      bottom: '16px',
-      right: '24px',
-      maxHeight: 'min(480px, calc(100% - 32px))',
-    }
-  }
-  const top = Math.round(props.anchorPosition.y)
-  const left = Math.round(props.anchorPosition.x)
   return {
-    left: `${left}px`,
-    top: `${top}px`,
-    maxHeight: `min(480px, calc(100% - ${top + 16}px))`,
+    position: 'absolute',
+    right: '16px',
+    bottom: '16px',
+    maxHeight: 'min(480px, calc(100% - 32px))',
+    maxWidth: 'min(380px, calc(100% - 32px))',
   }
 })
 </script>
@@ -464,8 +470,8 @@ const cardPositionStyle = computed(() => {
 .assistant-minimized-pill {
   pointer-events: auto;
   position: absolute;
-  bottom: calc(var(--statusbar-height) + 14px);
-  right: 24px;
+  bottom: 16px;
+  right: 16px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -503,7 +509,9 @@ const cardPositionStyle = computed(() => {
 .contextual-action-card {
   pointer-events: auto;
   position: absolute;
-  max-width: 350px;
+  right: 16px;
+  bottom: 16px;
+  max-width: 360px;
   width: calc(100% - 32px);
   background: #fffef8; /* Warm off-white */
   border: 1px solid #e9e5d7;
@@ -511,11 +519,10 @@ const cardPositionStyle = computed(() => {
   box-shadow: 0 10px 28px rgba(41, 43, 41, 0.14), 0 2px 6px rgba(41, 43, 41, 0.04);
   color: #252b2c;
   overflow: hidden;
-  max-height: min(480px, calc(100% - 24px));
+  max-height: min(480px, calc(100% - 32px));
   display: flex;
   flex-direction: column;
   overscroll-behavior: contain;
-  transition: left 0.15s ease-out, top 0.15s ease-out;
   box-sizing: border-box;
 }
 

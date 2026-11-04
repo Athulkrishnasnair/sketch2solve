@@ -1,0 +1,18 @@
+# Sketch2Solve Structural Analysis Export
+# Analysis ID,87c21e10d73447db99e3951bfd6c8cee
+# Model Name,Triangular Truss
+# Status,SOLVED
+# Force Unit,kN
+# Length Unit,m
+
+[MEMBER AXIAL FORCES]
+Member ID,Joint I,Joint J,Length (m),Axial Force (kN),State,Classification
+M1,J1,J2,6.0000,5.0000,tension,Tension
+M2,J2,J3,4.2426,-7.0711,compression,Compression
+M3,J3,J1,4.2426,-7.0711,compression,Compression
+
+[SUPPORT REACTIONS]
+Support ID,Joint ID,Support Type,Axis,Reaction Force (kN)
+S1,J1,pin,X,0.0000
+S1,J1,pin,Y,5.0000
+S2,J2,roller,Y,5.0000

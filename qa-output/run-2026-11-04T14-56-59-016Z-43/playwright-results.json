@@ -1,0 +1,1627 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/athulkrishna_s_nair/sketch2solve/frontend/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/e2e/playwright.config.js"
+    ],
+    "configFile": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e/playwright.config.js",
+    "rootDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-56-59-016Z-43/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-56-59-016Z-43/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "snapshotDir": "/home/athulkrishna_s_nair/sketch2solve/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.spec.js",
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5175",
+          "browserName": "chromium",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "video": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/athulkrishna_s_nair/sketch2solve/qa-output/run-2026-11-04T14-56-59-016Z-43/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "application.spec.js",
+      "file": "application.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "health endpoint, dashboard, and primary navigation load",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 578,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:03.699Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-3448a4c9af6d3b4963ae",
+          "file": "application.spec.js",
+          "line": 74,
+          "column": 1
+        },
+        {
+          "title": "uploads evaluation sketch test1.jpg through the UI",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 762,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:04.390Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-1c7e02f70b41947f2e14",
+          "file": "application.spec.js",
+          "line": 91,
+          "column": 3
+        },
+        {
+          "title": "uploads evaluation sketch test2.jpg through the UI",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 783,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:05.164Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-0cb4d838d79afdc6ca2d",
+          "file": "application.spec.js",
+          "line": 91,
+          "column": 3
+        },
+        {
+          "title": "uploads evaluation sketch test3.png through the UI",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 610,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:05.959Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-342f9663b08e078de8dc",
+          "file": "application.spec.js",
+          "line": 91,
+          "column": 3
+        },
+        {
+          "title": "uploads evaluation sketch test4.jpg through the UI",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 549,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:06.581Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-e33cfd46c0fd894a478b",
+          "file": "application.spec.js",
+          "line": 91,
+          "column": 3
+        },
+        {
+          "title": "uploads evaluation sketch test5.png through the UI",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1304,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:07.145Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-4a12c39d6b556b945a67",
+          "file": "application.spec.js",
+          "line": 91,
+          "column": 3
+        },
+        {
+          "title": "existing analysis details expose image, detection/proposal toggles, zoom, and review controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 688,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:08.459Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-8b0cdc1768418aaa5749",
+          "file": "application.spec.js",
+          "line": 137,
+          "column": 1
+        },
+        {
+          "title": "history refreshes without breaking saved records",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 433,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:09.159Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-ddf631baf0d32570dff3",
+          "file": "application.spec.js",
+          "line": 159,
+          "column": 1
+        },
+        {
+          "title": "history displays an understandable backend error",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 364,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:09.604Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-e09ed851971fbb39f617",
+          "file": "application.spec.js",
+          "line": 167,
+          "column": 1
+        },
+        {
+          "title": "valid WebP uploads and misleading extension is resolved from image bytes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 744,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:09.982Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-35e11c62980441b65a99",
+          "file": "application.spec.js",
+          "line": 179,
+          "column": 1
+        },
+        {
+          "title": "corrupt and unsupported uploads show clear messages and persist failed attempts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 737,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:10.741Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-d16e5792a36dd0c2b584",
+          "file": "application.spec.js",
+          "line": 206,
+          "column": 1
+        },
+        {
+          "title": "oversized UI upload is blocked and backend limit returns a recorded 413",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1945,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:11.489Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-bf75a5ca6d53ee0a6bd9",
+          "file": "application.spec.js",
+          "line": 234,
+          "column": 1
+        },
+        {
+          "title": "provider failure MISSING_GEMINI_API_KEY is saved and explained without secrets",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 538,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:13.446Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-9e6b12870e183ac04b45",
+          "file": "application.spec.js",
+          "line": 266,
+          "column": 3
+        },
+        {
+          "title": "provider failure GEMINI_AUTHENTICATION_FAILED is saved and explained without secrets",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 516,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:13.996Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-dcee67c601e6d90f8ba0",
+          "file": "application.spec.js",
+          "line": 266,
+          "column": 3
+        },
+        {
+          "title": "provider failure GEMINI_RATE_LIMITED is saved and explained without secrets",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 521,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:14.522Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-a4d230f4cdba783d3c5e",
+          "file": "application.spec.js",
+          "line": 266,
+          "column": 3
+        },
+        {
+          "title": "provider failure GEMINI_TIMEOUT is saved and explained without secrets",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 537,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:15.055Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-7356a62098670e735c52",
+          "file": "application.spec.js",
+          "line": 266,
+          "column": 3
+        },
+        {
+          "title": "provider failure GEMINI_NETWORK_ERROR is saved and explained without secrets",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 467,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:15.603Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-480a21e30f331bd2f18f",
+          "file": "application.spec.js",
+          "line": 266,
+          "column": 3
+        },
+        {
+          "title": "provider failure INVALID_GEMINI_RESPONSE is saved and explained without secrets",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 525,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:16.081Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-dbe3a8c973f2e0b1625f",
+          "file": "application.spec.js",
+          "line": 266,
+          "column": 3
+        },
+        {
+          "title": "empty proposal stays unapproved and visible as having no candidate elements",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 516,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:16.617Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-9d1d8b1a073fc78e080b",
+          "file": "application.spec.js",
+          "line": 296,
+          "column": 1
+        },
+        {
+          "title": "geometry review saves, validates, explicitly reviews, solves, and reloads persisted results",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1299,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:17.145Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-dd78af0c0f126990f226",
+          "file": "application.spec.js",
+          "line": 309,
+          "column": 1
+        },
+        {
+          "title": "invalid geometry, missing units, and solver failures preserve the unapproved or reviewed draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 183,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:18.455Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-67602a598ad535e92b6a",
+          "file": "application.spec.js",
+          "line": 367,
+          "column": 1
+        },
+        {
+          "title": "a missing stored image is explained while geometry remains available",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 433,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:18.651Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-549ec620bedc1610ac8c",
+          "file": "application.spec.js",
+          "line": 444,
+          "column": 1
+        },
+        {
+          "title": "network failure displays the local backend connection message",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 355,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:19.094Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-916d3755b810e008fbb4",
+          "file": "application.spec.js",
+          "line": 461,
+          "column": 1
+        },
+        {
+          "title": "contextual on-canvas issue highlighting, floating action card, and AI repair workflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 996,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:19.461Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-e740d33c2caf670c1d0d",
+          "file": "application.spec.js",
+          "line": 469,
+          "column": 1
+        },
+        {
+          "title": "issue resolution assistant independent scrolling, mouse-wheel isolation, and sticky footer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1859,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:20.468Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-91f896dacce724012a9c",
+          "file": "application.spec.js",
+          "line": 520,
+          "column": 1
+        },
+        {
+          "title": "solver-result experience: triangular reference model verification, results panel, on-canvas forces, reactions, legend, and stale protection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2673,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:22.339Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-90e7df6681b439f8df04",
+          "file": "application.spec.js",
+          "line": 596,
+          "column": 1
+        },
+        {
+          "title": "Conversational natural-language truss design workflows across dashboard, sidebar studio, and editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5536,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:57:25.023Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ab9b13fedd8b36ca3f-be02a5fc51f43f00e3ff",
+          "file": "application.spec.js",
+          "line": 784,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "comprehensive-audit.spec.js",
+      "file": "comprehensive-audit.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Comprehensive Application Audit",
+          "file": "comprehensive-audit.spec.js",
+          "line": 15,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Audit 1: Layout Overflow and Responsiveness across all viewports",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 10330,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "--- OVERFLOW FINDINGS ---\n"
+                        },
+                        {
+                          "text": "[]\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:57:30.584Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6649999aa6270d63e117-aeb6e85493be083418c4",
+              "file": "comprehensive-audit.spec.js",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "Audit 2: Complete Interactive Element Inventory & State Checks",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3509,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "--- INTERACTIVE ELEMENT AUDIT LOG ---\n"
+                        },
+                        {
+                          "text": "[\n  {\n    \"page\": \"Dashboard\",\n    \"element\": \"button.dashboard-primary\",\n    \"label\": \"＋ New analysis\",\n    \"hasHandler\": true,\n    \"enabled\": true\n  },\n  {\n    \"page\": \"Dashboard\",\n    \"element\": \"button.dashboard-ai-btn\",\n    \"label\": \"Create with AI\",\n    \"hasHandler\": true,\n    \"togglesWorkbench\": true\n  },\n  {\n    \"page\": \"Dashboard\",\n    \"element\": \"button.btn-close-workbench\",\n    \"label\": \"✕\",\n    \"hasHandler\": true,\n    \"closesWorkbench\": true\n  },\n  {\n    \"page\": \"Dashboard\",\n    \"element\": \"button.dashboard-link\",\n    \"label\": \"Browse all history ↗\",\n    \"hasHandler\": true,\n    \"enabled\": true\n  },\n  {\n    \"page\": \"Dashboard\",\n    \"element\": \".workbench-chip\",\n    \"count\": 4,\n    \"label\": \"Example Prompt Chips\",\n    \"hasHandler\": true\n  },\n  {\n    \"page\": \"Dashboard\",\n    \"element\": \".design-proposal-card\",\n    \"label\": \"Generated Proposal Card\",\n    \"rendered\": true,\n    \"hasApply\": true,\n    \"hasDiscard\": true\n  },\n  {\n    \"page\": \"TrussEditor\",\n    \"element\": \"topbar buttons\",\n    \"back\": {\n      \"visible\": true,\n      \"enabled\": true\n    },\n    \"undo\": {\n      \"visible\": true,\n      \"enabled\": false\n    },\n    \"redo\": {\n      \"visible\": true,\n      \"enabled\": false\n    },\n    \"save\": {\n      \"visible\": true,\n      \"enabled\": true\n    },\n    \"review\": {\n      \"visible\": true,\n      \"enabled\": true\n    },\n    \"solve\": {\n      \"visible\": true,\n      \"enabled\": false\n    },\n    \"designAi\": {\n      \"visible\": true,\n      \"enabled\": true\n    }\n  },\n  {\n    \"page\": \"TrussEditor\",\n    \"element\": \"tool palette\",\n    \"tools\": {\n      \"select\": {\n        \"exists\": true,\n        \"activates\": true\n      },\n      \"pan\": {\n        \"exists\": true,\n        \"activates\": true\n      },\n      \"joint\": {\n        \"exists\": true,\n        \"activates\": true\n      },\n      \"member\": {\n        \"exists\": true,\n        \"activates\": true\n      },\n      \"measure\": {\n        \"exists\": true,\n        \"activates\": true\n      },\n      \"pin\": {\n        \"exists\": true,\n        \"activates\": true\n      },\n      \"roller\": {\n        \"exists\": true,\n        \"activates\": true\n      },\n      \"load\": {\n        \"exists\": true,\n        \"activates\": true\n      },\n      \"delete\": {\n        \"exists\": true,\n        \"activates\": true\n      }\n    }\n  },\n  {\n    \"page\": \"TrussEditor\",\n    \"element\": \"floating canvas toolbar\",\n    \"zoomIn\": true,\n    \"zoomOut\": true,\n    \"fitView\": true,\n    \"gridToggle\": true,\n    \"snapToggle\": true,\n    \"aiLayerToggle\": true\n  },\n  {\n    \"page\": \"ResultsPanel\",\n    \"element\": \"tabs\",\n    \"tabs\": {\n      \"Summary & Matrix\": {\n        \"clickable\": true\n      },\n      \"Member Forces\": {\n        \"clickable\": true\n      },\n      \"Support Reactions\": {\n        \"clickable\": true\n      },\n      \"Limitations\": {\n        \"clickable\": true\n      }\n    }\n  },\n  {\n    \"page\": \"TrussEditor\",\n    \"element\": \"stale results detection\",\n    \"staleBannerVisible\": true,\n    \"statusBarShowsStale\": true\n  }\n]\n"
+                        },
+                        {
+                          "text": "--- CONSOLE MESSAGES ---\n"
+                        },
+                        {
+                          "text": "[\n  {\n    \"type\": \"debug\",\n    \"text\": \"[vite] connecting...\"\n  },\n  {\n    \"type\": \"debug\",\n    \"text\": \"[vite] connected.\"\n  }\n]\n"
+                        },
+                        {
+                          "text": "--- FAILED REQUESTS ---\n"
+                        },
+                        {
+                          "text": "[]\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:57:40.923Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6649999aa6270d63e117-fff74e017ea9b9bda11a",
+              "file": "comprehensive-audit.spec.js",
+              "line": 80,
+              "column": 3
+            },
+            {
+              "title": "Audit 3: Design Studio CREATE, MODIFY, EXPLAIN & Target Selection",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4304,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "--- DESIGN STUDIO AUDIT ---\n"
+                        },
+                        {
+                          "text": "{\n  \"targetSelector\": {\n    \"optionsCount\": 21\n  },\n  \"intentTab_Auto\": true,\n  \"intentTab_Create\": true,\n  \"intentTab_Modify\": true,\n  \"intentTab_Explain\": true,\n  \"createProposal\": {\n    \"intent\": \" CREATE\",\n    \"valid\": \" Valid \",\n    \"cadSvgRendered\": true\n  },\n  \"proposalDiscarded\": false,\n  \"explainProposal\": {\n    \"intent\": \" EXPLAIN\",\n    \"hasExplanation\": true\n  }\n}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:57:44.444Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6649999aa6270d63e117-f785552a6b46b699c9c1",
+              "file": "comprehensive-audit.spec.js",
+              "line": 302,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "final-polish.spec.js",
+      "file": "final-polish.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Sketch2Solve Final Polish and Verification",
+          "file": "final-polish.spec.js",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "1. Natural Language Design geometry preview accurately renders geometry, supports, loads, and CAD grid",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1891,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:57:48.786Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-6eea72fdce77531ea24d",
+              "file": "final-polish.spec.js",
+              "line": 4,
+              "column": 3
+            },
+            {
+              "title": "2. Analysis History pagination footer adheres to design standards",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2059,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:57:50.694Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-c4a50dc678453e1a5051",
+              "file": "final-polish.spec.js",
+              "line": 45,
+              "column": 3
+            },
+            {
+              "title": "3. New Analysis evidence-card copy provides accurate, neutral explanation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 392,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:57:52.763Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-83278aec37e154585a1e",
+              "file": "final-polish.spec.js",
+              "line": 76,
+              "column": 3
+            },
+            {
+              "title": "4. Issue Resolution Assistant docks in bottom-right corner and closes when highlighting is cleared",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2421,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:57:53.167Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-9a38a0f00c470d096f68",
+              "file": "final-polish.spec.js",
+              "line": 87,
+              "column": 3
+            },
+            {
+              "title": "5. Right sidebar tabbed workspace cleanly toggles between Tools and Design with AI",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2059,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:57:55.598Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-c62d63b2855458db5674",
+              "file": "final-polish.spec.js",
+              "line": 120,
+              "column": 3
+            },
+            {
+              "title": "6. Construction and Structural tools use 3-column grid with uniform 48px tile height",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2536,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:57:57.670Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-0b0ba67ebddc5ffbbc86",
+              "file": "final-polish.spec.js",
+              "line": 160,
+              "column": 3
+            },
+            {
+              "title": "7. Sequential AI proposal generation, application, and model mutation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3926,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:58:00.217Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-91d07c48901ff1feb47f",
+              "file": "final-polish.spec.js",
+              "line": 193,
+              "column": 3
+            },
+            {
+              "title": "8. Model mutation and Undo support restores previous geometry state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2602,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:58:04.155Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-145e718d41994ed20b7e",
+              "file": "final-polish.spec.js",
+              "line": 225,
+              "column": 3
+            },
+            {
+              "title": "9. Revision conflict handling rejects stale proposals gracefully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3628,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:58:06.771Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "072ebf0c3ef2dcb6ab87-0293a54ffa4efdda3f44",
+              "file": "final-polish.spec.js",
+              "line": 260,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "phase1-polish.spec.js",
+      "file": "phase1-polish.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Phase 1 Polish Verification",
+          "file": "phase1-polish.spec.js",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "1. Dashboard: semantic selectors and buttons retain existing behavior",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 556,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:58:10.422Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8bd85001e8a284be5845-319949bffc9df95a53e2",
+              "file": "phase1-polish.spec.js",
+              "line": 9,
+              "column": 3
+            },
+            {
+              "title": "2. Accessibility: canvas floating controls and header actions have explicit accessible names",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1963,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:58:10.988Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8bd85001e8a284be5845-ade48d921c44503f3ef8",
+              "file": "phase1-polish.spec.js",
+              "line": 35,
+              "column": 3
+            },
+            {
+              "title": "3. P1 Fix: AnalysisResultsPanel viewport management, lower joints clickability, expand/minimize states, and pan/zoom",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3925,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-04T14:58:12.960Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8bd85001e8a284be5845-f4788721a0edbc816a4d",
+              "file": "phase1-polish.spec.js",
+              "line": 70,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-04T14:56:59.022Z",
+    "duration": 78073.121,
+    "expected": 42,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

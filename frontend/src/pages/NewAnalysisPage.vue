@@ -120,7 +120,7 @@ onBeforeUnmount(() => { if (previewUrl.value) URL.revokeObjectURL(previewUrl.val
       <section class="workflow-card card-surface">
         <div class="card-heading"><div><div class="eyebrow">A CONTROLLED WORKFLOW</div><h2>Evidence stays distinct</h2></div><span class="workflow-icon">⌁</span></div>
         <div class="workflow-step"><span class="step-number">01</span><div><strong>Visual evidence</strong><p>OpenCV reports candidate lines and endpoint clusters. These are not verified truss members.</p></div><span class="step-tag tag-vision">VISION</span></div>
-        <div class="workflow-step"><span class="step-number">02</span><div><strong>AI interpretation</strong><p>{{ provider === 'gemini' ? 'Gemini' : 'Muse Spark' }} proposes possible joints, members, supports and loads from the sketch.</p></div><span class="step-tag tag-ai">{{ provider === 'gemini' ? 'GEMINI' : 'META' }}</span></div>
+        <div class="workflow-step"><span class="step-number">02</span><div><strong>AI interpretation</strong><p>The selected AI provider interprets the sketch and proposes candidate joints, members, supports and loads for human review.</p></div><span class="step-tag tag-ai">{{ provider === 'gemini' ? 'GEMINI' : 'META' }}</span></div>
         <div class="workflow-step"><span class="step-number">03</span><div><strong>Human review</strong><p>Correct a separate draft, check its units, then explicitly mark it reviewed before solver submission.</p></div><span class="step-tag tag-review">REVIEW</span></div>
         <div class="workflow-note"><span>i</span><p>Nothing is solved automatically from the AI proposal. Solver output describes only the geometry you explicitly reviewed and submitted.</p></div>
       </section>
