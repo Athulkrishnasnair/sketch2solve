@@ -18,7 +18,7 @@ MAX_IMAGE_BYTES = 10 * 1024 * 1024
 MAX_IMAGE_DIMENSION = 6000
 MAX_IMAGE_PIXELS = 24_000_000
 MAX_RAW_HOUGH_SEGMENTS = 5_000
-MAX_CANDIDATE_LINES = 300
+MAX_CANDIDATE_LINES = 500
 
 
 class PerceptionInputError(ValueError):
@@ -130,6 +130,7 @@ class PerceptionConfig:
     duplicate_angle_degrees: float = 4.0
     duplicate_distance: float = 4.0
     duplicate_overlap_ratio: float = 0.65
+    max_candidate_lines: int = 500
 
 
 @dataclass(frozen=True)
@@ -231,10 +232,11 @@ def detect_candidate_geometry(
         for index, (x1, y1, x2, y2) in enumerate(candidates, start=1)
     )
     joints = _cluster_endpoints(lines, config.endpoint_tolerance)
+    max_cap = getattr(config, "max_candidate_lines", MAX_CANDIDATE_LINES)
     warning_list = []
     if not lines:
         warning_list.append("No candidate line segments were detected.")
-    if raw_detection_count > MAX_RAW_HOUGH_SEGMENTS or len(candidates) == MAX_CANDIDATE_LINES:
+    if raw_detection_count > MAX_RAW_HOUGH_SEGMENTS or len(candidates) >= max_cap:
         warning_list.append("Candidate line output was capped to keep processing bounded.")
     return PerceptionResult(
         image_width=width,
@@ -281,11 +283,14 @@ def _validate_config(config: PerceptionConfig) -> None:
         raise ValueError("Endpoint tolerance and minimum line length must be non-negative.")
     if config.hough_rho <= 0 or config.hough_theta_degrees <= 0:
         raise ValueError("Hough rho and theta increments must be positive.")
+    if getattr(config, "max_candidate_lines", MAX_CANDIDATE_LINES) <= 0:
+        raise ValueError("max_candidate_lines must be positive.")
 
 
 def _canonical_segments(raw_segments, config: PerceptionConfig) -> list[tuple[int, int, int, int]]:
     if raw_segments is None:
         return []
+    max_cap = getattr(config, "max_candidate_lines", MAX_CANDIDATE_LINES)
     segments = []
     for raw in raw_segments.reshape(-1, 4):
         x1, y1, x2, y2 = (int(value) for value in raw)
@@ -299,8 +304,12 @@ def _canonical_segments(raw_segments, config: PerceptionConfig) -> list[tuple[in
     for candidate in segments:
         if not any(_is_duplicate(candidate, existing, config) for existing in kept):
             kept.append(candidate)
-            if len(kept) >= MAX_CANDIDATE_LINES:
-                break
+    # If candidate output exceeds the safety cap, rank by structural length/relevance
+    # so long continuous truss members are prioritized over localized noise
+    if len(kept) > max_cap:
+        kept.sort(key=lambda s: math.hypot(s[2] - s[0], s[3] - s[1]), reverse=True)
+        kept = kept[:max_cap]
+        kept.sort()
     return kept
 
 

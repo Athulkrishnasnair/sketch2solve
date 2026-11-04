@@ -15,7 +15,7 @@ from app import create_app
 from app.extensions import db
 from app.models.analysis import SketchAnalysis
 from app.services.analysis_persistence import AnalysisPersistenceError, begin_analysis
-from app.services.gemini_interpretation import GeminiAPIError
+from app.services.muse_interpretation import MuseAPIError
 
 
 def image_bytes(width=96, height=64, image_format=".png"):
@@ -60,7 +60,7 @@ class AnalysisApiTests(unittest.TestCase):
             db.session.remove()
         self.tempdir.cleanup()
 
-    def upload(self, content=None, filename="drawing.png", mime="image/png", provider="gemini"):
+    def upload(self, content=None, filename="drawing.png", mime="image/png", provider="meta"):
         return self.client.post(
             "/api/analyses",
             data={
@@ -106,14 +106,14 @@ class AnalysisApiTests(unittest.TestCase):
         analysis_id = data["analysis_id"]
         self.assertEqual(data["status"], "pending_review")
         self.assertEqual(data["review_status"], "pending_review")
-        self.assertEqual(data["provider"], "gemini")
-        self.assertEqual(data["model_id"], "gemini-3.1-flash-lite")
+        self.assertEqual(data["provider"], "meta")
+        self.assertEqual(data["model_id"], "muse-spark-1.3")
         self.assertTrue(data["interpretation_proposal"]["proposal_only"])
         self.assertEqual(data["human_review"]["geometry"], None)
         self.assertEqual(data["validation"]["status"], "not_performed")
         self.assertNotIn("image_storage_name", data)
         self.assertNotIn("uploads", json.dumps(data))
-        self.assertNotIn("GEMINI_API_KEY", json.dumps(data))
+        self.assertNotIn("MODEL_API_KEY", json.dumps(data))
         interpret.assert_called_once()
 
         detail = self.client.get(f"/api/analyses/{analysis_id}")
@@ -136,16 +136,16 @@ class AnalysisApiTests(unittest.TestCase):
     def test_provider_failure_is_saved_without_provider_details(self):
         with patch(
             "app.routes.analyses.interpretation_provider.interpret_truss_sketch",
-            side_effect=GeminiAPIError(),
+            side_effect=MuseAPIError(),
         ):
             response = self.upload()
         self.assertEqual(response.status_code, 502)
         body = response.get_json()
-        self.assertEqual(body["error_code"], "GEMINI_API_ERROR")
+        self.assertEqual(body["error_code"], "MUSE_API_ERROR")
         self.assertNotIn("API_KEY", json.dumps(body))
         detail = self.client.get(f"/api/analyses/{body['analysis_id']}").get_json()
         self.assertEqual(detail["status"], "failed")
-        self.assertEqual(detail["error_code"], "GEMINI_API_ERROR")
+        self.assertEqual(detail["error_code"], "MUSE_API_ERROR")
         self.assertIsNotNone(detail["perception"])
         original = self.client.get(f"/api/analyses/{body['analysis_id']}/image")
         self.assertEqual(original.mimetype, "image/png")
@@ -227,7 +227,7 @@ class AnalysisApiTests(unittest.TestCase):
         private_marker = "test-api-key-must-not-appear"
         with patch(
             "app.routes.analyses.interpretation_provider.interpret_truss_sketch",
-            side_effect=RuntimeError(f"GEMINI_API_KEY={private_marker}"),
+            side_effect=RuntimeError(f"MODEL_API_KEY={private_marker}"),
         ):
             response = self.upload()
         self.assertEqual(response.status_code, 500)

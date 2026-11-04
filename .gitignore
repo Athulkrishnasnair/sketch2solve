@@ -23,3 +23,8 @@ dist/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Test artifacts
+qa-output/
+test-results/
+playwright-report/

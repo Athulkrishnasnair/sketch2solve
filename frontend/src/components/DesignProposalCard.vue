@@ -209,7 +209,7 @@ function formatOpText(op) {
           :key="idx"
           class="clarification-item"
         >
-          <div class="cq-prompt">{{ cq.prompt }}</div>
+          <div class="cq-prompt">{{ cq.question || cq.prompt || 'Specification Details Needed:' }}</div>
           <div v-if="cq.options?.length" class="cq-options">
             <button
               v-for="(opt, optIdx) in cq.options"

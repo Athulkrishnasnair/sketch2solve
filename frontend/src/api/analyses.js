@@ -115,7 +115,7 @@ export function previewAnalysisGeometry(geometry, analysisId = '') {
   })
 }
 
-export function createAnalysis(file, provider) {
+export function createAnalysis(file, provider = 'meta') {
   const body = new FormData()
   body.append('image', file)
   body.append('provider', provider)

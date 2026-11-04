@@ -21,8 +21,8 @@ from app.services.validation import validate_truss_request
 
 
 BACKEND_ENV_PATH = Path(__file__).resolve().parents[2] / ".env"
-DEFAULT_ASSISTANT_MODEL = "gemini-3.1-flash-lite"
-DEFAULT_TIMEOUT_SECONDS = 30.0
+DEFAULT_ASSISTANT_MODEL = "muse-spark-1.3"
+DEFAULT_TIMEOUT_SECONDS = 75.0
 
 ASSISTANT_SYSTEM_PROMPT = (
     "You are an expert structural engineer specializing in 2D pin-jointed truss analysis. "
@@ -161,8 +161,7 @@ def resolve_geometry_issue(
         raise ValueError("Invalid geometry payload: missing 'model' container.")
 
     load_dotenv(dotenv_path=BACKEND_ENV_PATH, override=False)
-    raw_provider = (provider or os.environ.get("INTERPRETATION_PROVIDER", "gemini")).strip().lower()
-    api_key = os.environ.get("GEMINI_API_KEY", "").strip() if raw_provider == "gemini" else os.environ.get("MODEL_API_KEY", "").strip()
+    api_key = os.environ.get("MODEL_API_KEY", "").strip()
 
     ai_response = None
     if client is not None or api_key:
@@ -171,7 +170,7 @@ def resolve_geometry_issue(
                 geometry=geometry,
                 issue=issue,
                 diagnostics=diagnostics or {},
-                provider=raw_provider,
+                provider="meta",
                 client=client,
                 api_key=api_key,
                 timeout_seconds=timeout_seconds,
@@ -182,6 +181,12 @@ def resolve_geometry_issue(
 
     if ai_response is None:
         ai_response = _generate_heuristic_resolution(geometry, issue, diagnostics or {})
+    elif not ai_response.get("proposed_fixes"):
+        # Augment with deterministic structural repair if the model provided explanations without explicit edits
+        heuristic = _generate_heuristic_resolution(geometry, issue, diagnostics or {})
+        ai_response["proposed_fixes"] = heuristic.get("proposed_fixes", [])
+        if not ai_response.get("root_cause_explanation"):
+            ai_response["root_cause_explanation"] = heuristic.get("root_cause_explanation")
 
     # Safety Validation Gate: verify every proposed fix against schema
     validated_fixes = []
@@ -214,6 +219,92 @@ def resolve_geometry_issue(
     return ai_response
 
 
+def _normalize_assistant_response(data: Any) -> dict[str, Any] | None:
+    if not isinstance(data, dict):
+        return None
+
+    root_cause = data.get("root_cause_explanation")
+    if not root_cause:
+        rc_raw = data.get("root_cause")
+        if isinstance(rc_raw, dict):
+            root_cause = rc_raw.get("description") or rc_raw.get("stability") or rc_raw.get("effect")
+        elif isinstance(rc_raw, str):
+            root_cause = rc_raw
+        elif data.get("analysis"):
+            root_cause = str(data.get("analysis"))
+
+    rationale = data.get("engineering_rationale")
+    if not rationale and isinstance(data.get("root_cause"), dict):
+        rationale = data["root_cause"].get("stability") or data["root_cause"].get("effect")
+
+    proposed_fixes = data.get("proposed_fixes")
+    if not proposed_fixes and "corrections_minimal" in data and isinstance(data["corrections_minimal"], list):
+        proposed_fixes = []
+        for idx, corr in enumerate(data["corrections_minimal"], start=1):
+            title = corr.get("option") or f"Fix option {idx}"
+            desc = corr.get("result") or corr.get("note") or corr.get("constraints_used") or title
+            mods = {
+                "nodes_to_add": [],
+                "nodes_to_remove": [],
+                "members_to_add": [],
+                "members_to_remove": [],
+                "supports_to_add": [],
+                "supports_to_remove": [],
+                "loads_to_add": [],
+                "loads_to_remove": [],
+            }
+            affected = {"nodes": [], "members": [], "supports": [], "loads": []}
+            for op in corr.get("operations", []):
+                action = op.get("op", "")
+                if action in ("delete_node", "remove_node"):
+                    node_id = op.get("node") or op.get("id")
+                    if node_id:
+                        mods["nodes_to_remove"].append(node_id)
+                        affected["nodes"].append(node_id)
+                elif action in ("add_member", "connect"):
+                    count = len(mods["members_to_add"]) + 1
+                    m_id = op.get("id") or f"M_add_{count}"
+                    ni = op.get("node_i") or op.get("start")
+                    nj = op.get("node_j") or op.get("end")
+                    if ni and nj:
+                        mods["members_to_add"].append({"id": m_id, "node_i": ni, "node_j": nj})
+                        affected["members"].append(m_id)
+                        affected["nodes"].extend([ni, nj])
+                elif action in ("delete_member", "remove_member"):
+                    m_id = op.get("member") or op.get("id")
+                    if m_id:
+                        mods["members_to_remove"].append(m_id)
+                        affected["members"].append(m_id)
+                elif action in ("add_support",):
+                    count = len(mods["supports_to_add"]) + 1
+                    s_id = op.get("id") or f"S_add_{count}"
+                    s_node = op.get("node")
+                    s_type = op.get("type", "pin")
+                    if s_node:
+                        mods["supports_to_add"].append({"id": s_id, "node": s_node, "type": s_type})
+                        affected["supports"].append(s_id)
+                        affected["nodes"].append(s_node)
+                elif action in ("delete_support", "remove_support"):
+                    s_id = op.get("support") or op.get("id")
+                    if s_id:
+                        mods["supports_to_remove"].append(s_id)
+                        affected["supports"].append(s_id)
+
+            proposed_fixes.append({
+                "id": f"fix_{idx}",
+                "title": title,
+                "description": desc,
+                "affected_elements": {k: list(dict.fromkeys(v)) for k, v in affected.items()},
+                "modifications": mods,
+            })
+
+    return {
+        "root_cause_explanation": root_cause or "Structural issue identified.",
+        "engineering_rationale": rationale or "",
+        "proposed_fixes": proposed_fixes or [],
+    }
+
+
 def _call_ai_provider(
     geometry: dict[str, Any],
     issue: dict[str, Any],
@@ -223,7 +314,7 @@ def _call_ai_provider(
     api_key: str,
     timeout_seconds: float,
 ) -> dict[str, Any] | None:
-    """Call external AI provider with structured JSON output schema."""
+    """Call Meta Model API with structured JSON output schema."""
     user_prompt = (
         f"Truss Geometry:\n{json.dumps(geometry, indent=2)}\n\n"
         f"Detected Issue:\n{json.dumps(issue, indent=2)}\n\n"
@@ -231,34 +322,64 @@ def _call_ai_provider(
         "Explain the engineering root cause and propose minimal, structured corrections."
     )
 
-    if provider == "gemini":
-        use_sdk = client is None
-        if use_sdk:
-            try:
-                from google import genai
-                from google.genai import types
-                client = genai.Client(
-                    api_key=api_key,
-                    http_options=types.HttpOptions(timeout=max(1, int(timeout_seconds * 1000))),
-                )
-            except ImportError:
-                return None
+    base_url = os.environ.get("MODEL_BASE_URL", "https://api.meta.ai/v1").strip() or "https://api.meta.ai/v1"
+    model_name = os.environ.get("MODEL_NAME", DEFAULT_ASSISTANT_MODEL).strip() or DEFAULT_ASSISTANT_MODEL
 
-        model_name = os.environ.get("GEMINI_MODEL", DEFAULT_ASSISTANT_MODEL).strip() or DEFAULT_ASSISTANT_MODEL
-        response = client.models.generate_content(
-            model=model_name,
-            contents=[user_prompt],
-            config={
-                "system_instruction": ASSISTANT_SYSTEM_PROMPT,
-                "response_mime_type": "application/json",
-                "response_json_schema": ASSISTANT_RESPONSE_SCHEMA,
-                "temperature": 0.1,
-            },
-        )
-        output_text = getattr(response, "text", None)
-        if not output_text:
+    use_sdk = client is None
+    if use_sdk:
+        try:
+            from openai import OpenAI
+            client = OpenAI(
+                api_key=api_key,
+                base_url=base_url,
+                timeout=timeout_seconds,
+                max_retries=0,
+            )
+        except ImportError:
             return None
-        return json.loads(output_text)
+
+    try:
+        if hasattr(client, "chat") and hasattr(client.chat, "completions"):
+            response = client.chat.completions.create(
+                model=model_name,
+                messages=[
+                    {"role": "system", "content": ASSISTANT_SYSTEM_PROMPT},
+                    {"role": "user", "content": user_prompt},
+                ],
+                response_format={"type": "json_object"},
+                temperature=0.1,
+                timeout=timeout_seconds,
+            )
+            content = response.choices[0].message.content if getattr(response, "choices", None) else None
+            if not content:
+                return None
+            return _normalize_assistant_response(json.loads(content))
+        elif hasattr(client, "responses") and hasattr(client.responses, "create"):
+            response = client.responses.create(
+                model=model_name,
+                instructions=ASSISTANT_SYSTEM_PROMPT,
+                input=[{
+                    "type": "message",
+                    "role": "user",
+                    "content": [{"type": "input_text", "text": user_prompt}],
+                }],
+                text={
+                    "format": {
+                        "type": "json_schema",
+                        "name": "issue_resolution",
+                        "strict": True,
+                        "schema": ASSISTANT_RESPONSE_SCHEMA,
+                    },
+                },
+                timeout=timeout_seconds,
+                store=False,
+            )
+            output_text = getattr(response, "output_text", None)
+            if not output_text:
+                return None
+            return _normalize_assistant_response(json.loads(output_text))
+    except Exception:
+        return None
 
     return None
 

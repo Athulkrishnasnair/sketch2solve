@@ -8,29 +8,30 @@ from typing import Any
 
 from dotenv import load_dotenv
 
-from app.services import gemini_interpretation, muse_interpretation
+from app.services import muse_interpretation
 
 
 BACKEND_ENV_PATH = Path(__file__).resolve().parents[2] / ".env"
-SUPPORTED_PROVIDERS = frozenset({"meta", "gemini"})
+SUPPORTED_PROVIDERS = frozenset({"meta"})
 
 
 def resolve_provider(provider: str | None = None) -> str:
-    """Return a supported provider after loading local, non-secret settings."""
+    """Return the active provider after loading local, non-secret settings.
+
+    Meta is the only active provider. Gemini has been removed from active dispatch.
+    """
     load_dotenv(dotenv_path=BACKEND_ENV_PATH, override=False)
     selected = (provider or os.environ.get("INTERPRETATION_PROVIDER", "meta")).strip().lower()
-    if selected not in SUPPORTED_PROVIDERS:
-        raise ValueError("INTERPRETATION_PROVIDER must be 'meta' or 'gemini'.")
-    return selected
+    if selected != "meta":
+        raise ValueError("INTERPRETATION_PROVIDER must be 'meta'. Gemini is not supported in active dispatch.")
+    return "meta"
 
 
-def model_id_for(provider: str) -> str:
+def model_id_for(provider: str = "meta") -> str:
     """Return the configured model identifier without exposing credentials."""
-    if provider == "gemini":
-        return os.environ.get("GEMINI_MODEL", gemini_interpretation.DEFAULT_GEMINI_MODEL).strip() or gemini_interpretation.DEFAULT_GEMINI_MODEL
     if provider == "meta":
-        return muse_interpretation.MUSE_MODEL
-    raise ValueError("INTERPRETATION_PROVIDER must be 'meta' or 'gemini'.")
+        return os.environ.get("MODEL_NAME", muse_interpretation.MUSE_MODEL).strip() or muse_interpretation.MUSE_MODEL
+    raise ValueError("INTERPRETATION_PROVIDER must be 'meta'.")
 
 
 def interpret_truss_sketch(
@@ -41,15 +42,13 @@ def interpret_truss_sketch(
     timeout_seconds: float | None = None,
     client: Any | None = None,
 ):
-    """Dispatch to the configured provider while preserving proposal semantics.
+    """Dispatch exclusively to the Meta provider while preserving proposal semantics.
 
-    `INTERPRETATION_PROVIDER` may be `meta` (default) or `gemini`. Values from
-    the process environment take precedence over entries in backend/.env.
+    Meta Model API (Muse Spark) is the only active interpretation provider.
     """
-    selected = resolve_provider(provider)
+    resolve_provider(provider)
 
-    adapter = gemini_interpretation if selected == "gemini" else muse_interpretation
     kwargs = {"mime_type": mime_type, "client": client}
     if timeout_seconds is not None:
         kwargs["timeout_seconds"] = timeout_seconds
-    return adapter.interpret_truss_sketch(image_bytes, **kwargs)
+    return muse_interpretation.interpret_truss_sketch(image_bytes, **kwargs)

@@ -31,8 +31,8 @@ from app.services.validation import validate_truss_request
 
 
 BACKEND_ENV_PATH = Path(__file__).resolve().parents[2] / ".env"
-DEFAULT_DESIGN_MODEL = "gemini-3.1-flash-lite"
-DEFAULT_TIMEOUT_SECONDS = 30.0
+DEFAULT_DESIGN_MODEL = "muse-spark-1.3"
+DEFAULT_TIMEOUT_SECONDS = 75.0
 
 MAX_MESSAGE_LENGTH = 2000
 MAX_ELEMENTS_COUNT = 500
@@ -507,20 +507,48 @@ def apply_operations_to_model(
     }
     errors: list[str] = []
 
-    for op_idx, op in enumerate(operations):
-        if not isinstance(op, dict):
+    def _resolve_n(rid: Any) -> str:
+        s = str(rid)
+        known = {str(n.get("id")) for n in nodes if "id" in n}
+        if s in known:
+            return s
+        for p in ("J", "N", "node_"):
+            if f"{p}{s}" in known:
+                return f"{p}{s}"
+            if s.startswith(p) and s[len(p):] in known:
+                return s[len(p):]
+        return s
+
+    def _resolve_m(rid: Any) -> str:
+        s = str(rid)
+        known = {str(m.get("id")) for m in members if "id" in m}
+        if s in known:
+            return s
+        for p in ("M", "m", "member_"):
+            if f"{p}{s}" in known:
+                return f"{p}{s}"
+            if s.startswith(p) and s[len(p):] in known:
+                return s[len(p):]
+        return s
+
+    for op_idx, raw_op in enumerate(operations):
+        if not isinstance(raw_op, dict):
             errors.append(f"Operation at index {op_idx} must be an object.")
             continue
+        op = dict(raw_op)
         op_type = op.get("op")
         if op_type not in ALLOWED_OPERATIONS:
             errors.append(f"Disallowed or unknown operation '{op_type}' at index {op_idx}.")
             continue
 
-        target_id = op.get("id")
+        raw_target_id = op.get("id")
+        target_id = str(raw_target_id) if raw_target_id is not None else None
 
         if op_type == "add_joint":
             if not target_id:
                 target_id = f"J{len(nodes) + 1}"
+            elif not any(target_id.startswith(p) for p in ("J", "N", "node_")) and all(str(n.get("id", "")).startswith("J") for n in nodes):
+                target_id = f"J{target_id}"
             if any(n.get("id") == target_id for n in nodes):
                 errors.append(f"Cannot add joint: ID '{target_id}' already exists.")
                 continue
@@ -533,6 +561,7 @@ def apply_operations_to_model(
             affected["nodes"].add(target_id)
 
         elif op_type == "update_joint":
+            target_id = _resolve_n(target_id)
             node = next((n for n in nodes if n.get("id") == target_id), None)
             if not node:
                 errors.append(f"Cannot update joint: ID '{target_id}' not found.")
@@ -554,6 +583,7 @@ def apply_operations_to_model(
             affected["nodes"].add(target_id)
 
         elif op_type == "remove_joint":
+            target_id = _resolve_n(target_id)
             node_idx = next((i for i, n in enumerate(nodes) if n.get("id") == target_id), None)
             if node_idx is None:
                 errors.append(f"Cannot remove joint: ID '{target_id}' not found.")
@@ -584,8 +614,8 @@ def apply_operations_to_model(
                     affected["loads"].add(lid)
 
         elif op_type == "add_member":
-            ni = op.get("node_i")
-            nj = op.get("node_j")
+            ni = _resolve_n(op.get("node_i"))
+            nj = _resolve_n(op.get("node_j"))
             if not ni or not nj:
                 errors.append("add_member operation requires 'node_i' and 'node_j'.")
                 continue
@@ -601,6 +631,8 @@ def apply_operations_to_model(
                 continue
             if not target_id:
                 target_id = f"M{len(members) + 1}"
+            elif not any(target_id.startswith(p) for p in ("M", "m", "member_")) and all(str(m.get("id", "")).startswith("M") for m in members):
+                target_id = f"M{target_id}"
             if any(m.get("id") == target_id for m in members):
                 errors.append(f"Cannot add member: ID '{target_id}' already exists.")
                 continue
@@ -610,6 +642,7 @@ def apply_operations_to_model(
             affected["nodes"].add(nj)
 
         elif op_type == "update_member":
+            target_id = _resolve_m(target_id)
             member = next((m for m in members if m.get("id") == target_id), None)
             if not member:
                 errors.append(f"Cannot update member: ID '{target_id}' not found.")
@@ -628,6 +661,7 @@ def apply_operations_to_model(
             affected["members"].add(target_id)
 
         elif op_type == "remove_member":
+            target_id = _resolve_m(target_id)
             member_idx = next((i for i, m in enumerate(members) if m.get("id") == target_id), None)
             if member_idx is None:
                 errors.append(f"Cannot remove member: ID '{target_id}' not found.")
@@ -640,7 +674,7 @@ def apply_operations_to_model(
                 affected["nodes"].add(m["node_j"])
 
         elif op_type == "add_support":
-            node_ref = op.get("node")
+            node_ref = _resolve_n(op.get("node"))
             known_node_ids = {n.get("id") for n in nodes}
             if node_ref not in known_node_ids:
                 errors.append(f"add_support references unknown node '{node_ref}'.")
@@ -1070,6 +1104,98 @@ def synthesize_truss_explanation(
     return " ".join(lines)
 
 
+def _normalize_design_response(data: Any, requested_intent: str = "create") -> dict[str, Any] | None:
+    if not isinstance(data, dict):
+        return None
+
+    # Already standard schema
+    if "proposed_model" in data or ("operations" in data and "intent" in data):
+        return data
+
+    # Top-level direct model payload (e.g. Meta Model API returned nodes, members, supports directly)
+    if "nodes" in data and "members" in data:
+        nodes = []
+        for n in data["nodes"]:
+            nodes.append({"id": str(n.get("id")), "x": float(n.get("x", 0)), "y": float(n.get("y", 0))})
+
+        members = []
+        for m in data["members"]:
+            m_id = str(m.get("id"))
+            ni = str(m.get("node_i") or m.get("start") or "")
+            nj = str(m.get("node_j") or m.get("end") or "")
+            members.append({"id": m_id, "node_i": ni, "node_j": nj})
+
+        supports = []
+        for idx, s in enumerate(data.get("supports", []), start=1):
+            s_id = str(s.get("id") or f"S{idx}")
+            s_node = str(s.get("node") or "")
+            stype = str(s.get("type") or "pin").lower()
+            if "roller" in stype:
+                supports.append({"id": s_id, "node": s_node, "type": "roller", "direction": "vertical"})
+            else:
+                supports.append({"id": s_id, "node": s_node, "type": "pin"})
+
+        loads = []
+        for idx, l in enumerate(data.get("loads", []), start=1):
+            l_id = str(l.get("id") or f"L{idx}")
+            l_node = str(l.get("node") or "")
+            fx = float(l.get("fx", 0))
+            fy = float(l.get("fy", 0))
+            loads.append({"id": l_id, "node": l_node, "fx": fx, "fy": fy})
+
+        units = data.get("units") or {"length": "m", "force": "kN"}
+        model_payload = {
+            "schema_version": "1.0",
+            "metadata": {
+                "name": "AI Designed Truss",
+                "units": units,
+            },
+            "model": {
+                "nodes": nodes,
+                "members": members,
+                "supports": supports,
+                "loads": loads,
+            }
+        }
+
+        return {
+            "intent": "create",
+            "status": "proposed",
+            "explanation": data.get("explanation") or f"Proposed symmetrical 2D truss with {len(nodes)} joints and {len(members)} members.",
+            "proposed_model": model_payload,
+            "operations": [],
+            "clarification_questions": [],
+        }
+
+    # Direct operations array (e.g. Meta Model API returned {"operations": [...]})
+    if "operations" in data and isinstance(data["operations"], list):
+        ops = []
+        for op in data["operations"]:
+            action = op.get("op", "")
+            if action in ALLOWED_OPERATIONS:
+                ops.append(op)
+        return {
+            "intent": data.get("intent", "modify"),
+            "status": data.get("status", "proposed"),
+            "explanation": data.get("explanation") or "Proposed structural modifications based on instructions.",
+            "operations": ops,
+            "clarification_questions": data.get("clarification_questions", []),
+        }
+
+    # Direct explanation or answer
+    if "explanation" in data or "answer" in data:
+        exp = data.get("explanation") or data.get("answer") or ""
+        return {
+            "intent": data.get("intent", requested_intent),
+            "status": data.get("status", "explained"),
+            "explanation": exp,
+            "operations": data.get("operations", []),
+            "clarification_questions": data.get("clarification_questions", []),
+        }
+
+    return data
+
+
 def _call_design_provider(
     message: str,
     context: dict[str, Any],
@@ -1078,71 +1204,71 @@ def _call_design_provider(
     api_key: str,
     timeout_seconds: float,
 ) -> dict[str, Any] | None:
-    """Call external AI provider with JSON schema for natural language design."""
+    """Call Meta Model API with structured JSON output for natural language design."""
     user_prompt = (
         f"User Instruction:\n{message}\n\n"
         f"Truss Context:\n{json.dumps(context, indent=2)}\n\n"
         "Return structured output strictly matching the provided schema."
     )
 
-    if provider == "gemini":
-        use_sdk = client is None
-        if use_sdk:
-            try:
-                from google import genai
-                from google.genai import types
-                client = genai.Client(
-                    api_key=api_key,
-                    http_options=types.HttpOptions(timeout=max(1, int(timeout_seconds * 1000))),
-                )
-            except ImportError:
-                return None
+    base_url = os.environ.get("MODEL_BASE_URL", "https://api.meta.ai/v1").strip() or "https://api.meta.ai/v1"
+    model_name = os.environ.get("MODEL_NAME", DEFAULT_DESIGN_MODEL).strip() or DEFAULT_DESIGN_MODEL
 
-        model_name = os.environ.get("GEMINI_MODEL", DEFAULT_DESIGN_MODEL).strip() or DEFAULT_DESIGN_MODEL
+    use_sdk = client is None
+    if use_sdk:
         try:
-            response = client.models.generate_content(
-                model=model_name,
-                contents=[user_prompt],
-                config={
-                    "system_instruction": DESIGN_SYSTEM_PROMPT,
-                    "response_mime_type": "application/json",
-                    "response_json_schema": DESIGN_RESPONSE_SCHEMA,
-                    "temperature": 0.1,
-                },
+            from openai import OpenAI
+            client = OpenAI(
+                api_key=api_key,
+                base_url=base_url,
+                timeout=timeout_seconds,
+                max_retries=0,
             )
-            output_text = getattr(response, "text", None)
-            if not output_text:
-                return None
-            return json.loads(output_text)
-        except Exception:
+        except ImportError:
             return None
 
-    elif provider == "meta":
-        use_sdk = client is None
-        if use_sdk:
-            try:
-                from openai import OpenAI
-                client = OpenAI(
-                    api_key=api_key,
-                    base_url="https://api.meta.ai/v1",
-                    timeout=timeout_seconds,
-                )
-            except ImportError:
-                return None
-        try:
+    try:
+        if hasattr(client, "chat") and hasattr(client.chat, "completions"):
             response = client.chat.completions.create(
-                model="muse-spark-1.3",
+                model=model_name,
                 messages=[
                     {"role": "system", "content": DESIGN_SYSTEM_PROMPT},
                     {"role": "user", "content": user_prompt},
                 ],
                 response_format={"type": "json_object"},
                 temperature=0.1,
+                timeout=timeout_seconds,
             )
-            content = response.choices[0].message.content
-            return json.loads(content) if content else None
-        except Exception:
-            return None
+            content = response.choices[0].message.content if getattr(response, "choices", None) else None
+            if not content:
+                return None
+            return _normalize_design_response(json.loads(content), requested_intent=context.get("intent", "create"))
+        elif hasattr(client, "responses") and hasattr(client.responses, "create"):
+            response = client.responses.create(
+                model=model_name,
+                instructions=DESIGN_SYSTEM_PROMPT,
+                input=[{
+                    "type": "message",
+                    "role": "user",
+                    "content": [{"type": "input_text", "text": user_prompt}],
+                }],
+                text={
+                    "format": {
+                        "type": "json_schema",
+                        "name": "truss_design_proposal",
+                        "strict": True,
+                        "schema": DESIGN_RESPONSE_SCHEMA,
+                    },
+                },
+                timeout=timeout_seconds,
+                store=False,
+            )
+            output_text = getattr(response, "output_text", None)
+            if not output_text:
+                return None
+            return _normalize_design_response(json.loads(output_text), requested_intent=context.get("intent", "create"))
+    except Exception:
+        return None
 
     return None
 
@@ -1165,17 +1291,16 @@ def process_design_request(
     resolved_intent = detect_intent(intent, message, has_model)
     proposal_id = uuid4().hex
 
-    # Check external provider configuration
+    # Check external provider configuration (Meta Model API exclusively)
     load_dotenv(dotenv_path=BACKEND_ENV_PATH, override=False)
-    raw_provider = (provider or os.environ.get("INTERPRETATION_PROVIDER", "gemini")).strip().lower()
-    api_key = os.environ.get("GEMINI_API_KEY", "").strip() if raw_provider == "gemini" else os.environ.get("MODEL_API_KEY", "").strip()
+    api_key = os.environ.get("MODEL_API_KEY", "").strip()
 
     ai_output: dict[str, Any] | None = None
     if client is not None or api_key:
         ai_output = _call_design_provider(
             message=message,
             context=ctx,
-            provider=raw_provider,
+            provider="meta",
             client=client,
             api_key=api_key,
             timeout_seconds=timeout_seconds,

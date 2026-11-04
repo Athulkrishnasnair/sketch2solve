@@ -261,7 +261,7 @@ onMounted(loadDashboard)
           <span class="analysis-card-details">
             <span class="analysis-card-topline"><span class="dashboard-status" :class="statusClass(item.status)"><i></i>{{ statusLabel(item.status) }}</span><span class="dashboard-arrow">↗</span></span>
             <strong>{{ item.original_filename || (item.analysis_type === 'solver' ? 'Solver run' : 'Untitled sketch') }}</strong>
-            <span class="analysis-card-meta"><span>{{ item.provider || 'Deterministic solver' }}</span><span>{{ formatDate(item.created_at) }}</span></span>
+            <span class="analysis-card-meta"><span>{{ item.provider === 'solver' || item.analysis_type === 'solver' ? 'Deterministic solver' : 'AI interpretation' }}</span><span>{{ formatDate(item.created_at) }}</span></span>
             <span v-if="item.error_message" class="analysis-failure-message">{{ item.error_message }}</span>
           </span>
         </button>

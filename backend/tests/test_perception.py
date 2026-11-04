@@ -123,6 +123,26 @@ class PerceptionTests(unittest.TestCase):
         self.assertLessEqual(len(result.lines), 2)
         self.assertGreaterEqual(len(result.lines), 1)
 
+    def test_candidate_line_cap_is_configurable_and_prioritizes_longer_structural_lines(self):
+        # Create many short segments and a few long segments
+        many_lines = [((10, y), (35, y)) for y in range(20, 160, 4)]  # 35 short lines
+        long_line = ((10, 170), (220, 170))  # 1 long line (210px)
+        content = sketch(many_lines + [long_line], width=240, height=200)
+
+        # Cap at 5 lines
+        capped_config = PerceptionConfig(
+            hough_threshold=10,
+            min_line_length=15,
+            max_line_gap=5,
+            max_candidate_lines=5,
+        )
+        result = detect_candidate_geometry(content, capped_config)
+        self.assertEqual(len(result.lines), 5)
+        self.assertIn("Candidate line output was capped to keep processing bounded.", result.warnings)
+        # Verify the long line is retained despite being placed last in input
+        max_detected_len = max(line.length_px for line in result.lines)
+        self.assertGreater(max_detected_len, 150.0)
+
 
 if __name__ == "__main__":
     unittest.main()

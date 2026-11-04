@@ -66,6 +66,7 @@ const resolving = ref(false)
 const resolution = ref(null)
 const selectedFixIndex = ref(0)
 const resolveError = ref('')
+let requestSeq = 0
 
 const hasIssues = computed(() => props.issues && props.issues.length > 0)
 const totalIssues = computed(() => props.issues.length)
@@ -81,10 +82,12 @@ const activeIssue = computed(() => {
   return props.issues[currentIndex.value] || props.issues[0]
 })
 
-// Reset resolution state when active issue changes
+// Reset resolution state and invalidate in-flight request when active issue changes
 watch(
   () => activeIssue.value?.id,
   () => {
+    ++requestSeq
+    resolving.value = false
     resolution.value = null
     resolveError.value = ''
     selectedFixIndex.value = 0
@@ -107,9 +110,12 @@ function nextIssue() {
 }
 
 function clearHighlight() {
+  ++requestSeq
+  resolving.value = false
   emit('clear-highlight')
   emit('clear-preview')
   resolution.value = null
+  resolveError.value = ''
 }
 
 function toggleDismiss() {
@@ -123,6 +129,7 @@ function toggleDismiss() {
 
 async function handleResolveWithAi() {
   if (!activeIssue.value || resolving.value) return
+  const seq = ++requestSeq
   resolving.value = true
   resolveError.value = ''
   resolution.value = null
@@ -145,6 +152,8 @@ async function handleResolveWithAi() {
       issuePayload,
       props.diagnostics
     )
+    if (seq !== requestSeq) return // Stale request, ignore
+
     result.base_revision = props.modelRevision
     for (const f of result.proposed_fixes || []) {
       f.base_revision = props.modelRevision
@@ -156,9 +165,13 @@ async function handleResolveWithAi() {
       emit('preview-fix', result.proposed_fixes[0])
     }
   } catch (err) {
-    resolveError.value = err.message || 'AI resolution could not be completed.'
+    if (seq === requestSeq) {
+      resolveError.value = err.message || 'AI resolution could not be completed.'
+    }
   } finally {
-    resolving.value = false
+    if (seq === requestSeq) {
+      resolving.value = false
+    }
   }
 }
 
@@ -174,6 +187,8 @@ function handleApplyFix() {
   if (!fix) return
   if (fix.base_revision != null && props.modelRevision !== fix.base_revision) {
     resolveError.value = 'Proposal is stale: The canvas model was modified after this fix was proposed. Please request a fresh fix.'
+    resolution.value = null
+    emit('clear-preview')
     return
   }
   emit('apply-fix', fix)
@@ -182,6 +197,8 @@ function handleApplyFix() {
 }
 
 function handleCancelFix() {
+  ++requestSeq
+  resolving.value = false
   resolution.value = null
   resolveError.value = ''
   emit('clear-preview')
@@ -216,9 +233,9 @@ const cardPositionStyle = computed(() => {
   return {
     position: 'absolute',
     right: '16px',
-    bottom: '16px',
-    maxHeight: 'min(480px, calc(100% - 32px))',
-    maxWidth: 'min(380px, calc(100% - 32px))',
+    bottom: '90px',
+    maxHeight: 'min(480px, calc(100% - 110px))',
+    maxWidth: 'min(360px, calc(100% - 32px))',
   }
 })
 </script>
@@ -412,8 +429,8 @@ const cardPositionStyle = computed(() => {
 
       <!-- Sticky Action Footer: Always Visible and Reachable -->
       <footer class="card-footer" @wheel.stop="handleCardWheel">
-        <!-- Action Approval Buttons when resolution exists -->
-        <div v-if="resolution" class="action-approval-row">
+        <!-- Action Approval Buttons when resolution exists and has fixes -->
+        <div v-if="resolution && resolution.proposed_fixes && resolution.proposed_fixes.length > 0" class="action-approval-row">
           <button
             class="btn-apply-fix"
             type="button"
@@ -433,11 +450,23 @@ const cardPositionStyle = computed(() => {
           </button>
         </div>
 
+        <!-- Feedback when resolution exists but has NO proposed fixes -->
+        <div v-else-if="resolution" class="no-fixes-feedback" style="display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%;">
+          <span style="font-size: 11px; color: #55625d;">No automated modifications proposed.</span>
+          <div style="display: flex; gap: 6px;">
+            <button class="btn-retry-resolve" type="button" @click.stop="handleResolveWithAi">Retry</button>
+            <button class="btn-cancel-fix" type="button" @click.stop="handleCancelFix">Dismiss</button>
+          </div>
+        </div>
+
         <!-- Provider Error Feedback -->
         <div v-else-if="resolveError" class="resolve-error-banner">
           <AlertTriangle :size="12" />
           <span>{{ resolveError }}</span>
-          <button class="btn-retry-resolve" type="button" @click.stop="handleResolveWithAi">Retry</button>
+          <div style="display: flex; gap: 6px; margin-left: auto;">
+            <button class="btn-retry-resolve" type="button" @click.stop="handleResolveWithAi">Retry</button>
+            <button class="btn-cancel-fix" type="button" style="padding: 3px 8px; font-size: 10px;" @click.stop="handleCancelFix">Cancel</button>
+          </div>
         </div>
 
         <!-- Primary Call to Action: Fix with AI -->
@@ -445,7 +474,7 @@ const cardPositionStyle = computed(() => {
           <button
             class="btn-fix-ai"
             type="button"
-            :disabled="resolving || busy"
+            :disabled="resolving"
             @click.stop="handleResolveWithAi"
           >
             <Loader2 v-if="resolving" :size="13" class="spin-icon" />
@@ -470,7 +499,7 @@ const cardPositionStyle = computed(() => {
 .assistant-minimized-pill {
   pointer-events: auto;
   position: absolute;
-  bottom: 16px;
+  bottom: 90px;
   right: 16px;
   display: inline-flex;
   align-items: center;
@@ -510,16 +539,16 @@ const cardPositionStyle = computed(() => {
   pointer-events: auto;
   position: absolute;
   right: 16px;
-  bottom: 16px;
+  bottom: 90px; /* was 16px */
   max-width: 360px;
   width: calc(100% - 32px);
-  background: #fffef8; /* Warm off-white */
+  background: #fffef8;
   border: 1px solid #e9e5d7;
   border-radius: 12px;
   box-shadow: 0 10px 28px rgba(41, 43, 41, 0.14), 0 2px 6px rgba(41, 43, 41, 0.04);
   color: #252b2c;
   overflow: hidden;
-  max-height: min(480px, calc(100% - 32px));
+  max-height: min(480px, calc(100% - 110px));
   display: flex;
   flex-direction: column;
   overscroll-behavior: contain;

@@ -6,7 +6,7 @@ const emit = defineEmits(['created'])
 const fileInput = ref(null)
 const selectedFile = ref(null)
 const previewUrl = ref('')
-const provider = ref('gemini')
+const provider = ref('meta')
 const dragging = ref(false)
 const submitting = ref(false)
 const errorMessage = ref('')
@@ -46,27 +46,25 @@ function handleDrop(event) {
 
 function humanizeError(error) {
   const messages = {
-    MISSING_GEMINI_API_KEY: 'Gemini is selected, but its server-side credential is not configured.',
-    MISSING_MODEL_API_KEY: 'Meta is selected, but its server-side credential is not configured.',
+    MISSING_GEMINI_API_KEY: 'The interpretation service is not configured with an API key.',
+    MISSING_MODEL_API_KEY: 'The interpretation service is not configured with an API key.',
     INVALID_IMAGE: 'The uploaded file could not be read as a supported sketch image.',
     IMAGE_TOO_LARGE: 'The image exceeds the 10 MiB upload limit.',
     UNSUPPORTED_IMAGE_TYPE: 'Choose a JPEG, PNG, or WebP image.',
-    GEMINI_API_ERROR: 'Gemini could not complete the interpretation request.',
-    MUSE_API_ERROR: 'Meta Muse Spark could not complete the interpretation request.',
-    GEMINI_AUTHENTICATION_FAILED: 'Gemini rejected the backend credential or account access.',
-    MUSE_AUTHENTICATION_FAILED: 'Meta rejected the backend credential or account access.',
-    GEMINI_INVALID_MODEL: 'Gemini did not recognize the configured model. Check GEMINI_MODEL.',
-    MUSE_INVALID_MODEL: 'Meta did not recognize the configured model.',
-    GEMINI_RATE_LIMITED: 'Gemini rate limit or quota was reached. Try again later.',
-    MUSE_RATE_LIMITED: 'Meta rate limit or quota was reached. Try again later.',
-    GEMINI_NETWORK_ERROR: 'The backend could not reach Gemini. Check the backend network connection.',
-    MUSE_NETWORK_ERROR: 'The backend could not reach Meta. Check the backend network connection.',
-    GEMINI_TIMEOUT: 'The Gemini request timed out. Try again with a smaller image.',
-    MUSE_TIMEOUT: 'The Meta request timed out. Try again with a smaller image.',
-    INVALID_GEMINI_RESPONSE: 'Gemini returned a response that did not match the expected interpretation format.',
-    INVALID_MUSE_RESPONSE: 'Meta returned a response that did not match the expected interpretation format.',
-    INVALID_IMAGE: 'The file is corrupted or its image dimensions are not supported.',
-    UNSUPPORTED_IMAGE_TYPE: 'Use a JPEG, PNG, or WebP image.',
+    GEMINI_API_ERROR: 'The AI model could not complete the interpretation request.',
+    MUSE_API_ERROR: 'The AI model could not complete the interpretation request.',
+    GEMINI_AUTHENTICATION_FAILED: 'The AI service rejected the backend credential or account access.',
+    MUSE_AUTHENTICATION_FAILED: 'The AI service rejected the backend credential or account access.',
+    GEMINI_INVALID_MODEL: 'The AI service did not recognize the configured model.',
+    MUSE_INVALID_MODEL: 'The AI service did not recognize the configured model.',
+    GEMINI_RATE_LIMITED: 'The AI service rate limit or quota was reached. Try again later.',
+    MUSE_RATE_LIMITED: 'The AI service rate limit or quota was reached. Try again later.',
+    GEMINI_NETWORK_ERROR: 'The backend could not reach the AI service. Check the backend network connection.',
+    MUSE_NETWORK_ERROR: 'The backend could not reach the AI service. Check the backend network connection.',
+    GEMINI_TIMEOUT: 'The AI interpretation request timed out. Try again with a smaller image.',
+    MUSE_TIMEOUT: 'The AI interpretation request timed out. Try again with a smaller image.',
+    INVALID_GEMINI_RESPONSE: 'The AI model returned a response that did not match the expected interpretation format.',
+    INVALID_MUSE_RESPONSE: 'The AI model returned a response that did not match the expected interpretation format.',
     IMAGE_STORAGE_FAILED: 'The backend could not save the uploaded image.',
     ANALYSIS_HISTORY_UNAVAILABLE: 'The backend could not save or retrieve analysis history.',
   }
@@ -78,7 +76,7 @@ async function submit() {
   submitting.value = true
   errorMessage.value = ''
   try {
-    const result = await createAnalysis(selectedFile.value, provider.value)
+    const result = await createAnalysis(selectedFile.value, 'meta')
     selectedFile.value = null
     emit('created', result.analysis_id)
   } catch (error) {
@@ -112,15 +110,14 @@ onBeforeUnmount(() => { if (previewUrl.value) URL.revokeObjectURL(previewUrl.val
           <small>JPEG, PNG or WebP</small>
         </div>
         <div v-if="previewUrl" class="upload-preview"><img :src="previewUrl" alt="Preview of selected truss sketch" /><span>Local preview · not uploaded yet</span><button type="button" @click="selectedFile = null">Remove</button></div>
-        <div class="upload-options"><label for="provider">Interpretation provider</label><select id="provider" v-model="provider" :disabled="submitting"><option value="gemini">Gemini · Flash-Lite</option><option value="meta">Meta · Muse Spark</option></select></div>
-        <button class="button button-primary upload-submit" type="button" :disabled="!selectedFile || submitting" @click="submit"><span v-if="submitting" class="button-spinner"></span>{{ submitting ? 'Analysing sketch…' : 'Start analysis' }}<svg v-if="!submitting" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+        <button style="margin-top: 12px;" class="button button-primary upload-submit" type="button" :disabled="!selectedFile || submitting" @click="submit"><span v-if="submitting" class="button-spinner"></span>{{ submitting ? 'Analysing sketch…' : 'Start analysis' }}<svg v-if="!submitting" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
         <p class="credential-note"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="currentColor"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor"/></svg> Provider credentials stay on the backend.</p>
       </section>
 
       <section class="workflow-card card-surface">
         <div class="card-heading"><div><div class="eyebrow">A CONTROLLED WORKFLOW</div><h2>Evidence stays distinct</h2></div><span class="workflow-icon">⌁</span></div>
         <div class="workflow-step"><span class="step-number">01</span><div><strong>Visual evidence</strong><p>OpenCV reports candidate lines and endpoint clusters. These are not verified truss members.</p></div><span class="step-tag tag-vision">VISION</span></div>
-        <div class="workflow-step"><span class="step-number">02</span><div><strong>AI interpretation</strong><p>The selected AI provider interprets the sketch and proposes candidate joints, members, supports and loads for human review.</p></div><span class="step-tag tag-ai">{{ provider === 'gemini' ? 'GEMINI' : 'META' }}</span></div>
+        <div class="workflow-step"><span class="step-number">02</span><div><strong>AI interpretation</strong><p>The AI model interprets the sketch and proposes candidate joints, members, supports and loads for human review.</p></div><span class="step-tag tag-ai">AI</span></div>
         <div class="workflow-step"><span class="step-number">03</span><div><strong>Human review</strong><p>Correct a separate draft, check its units, then explicitly mark it reviewed before solver submission.</p></div><span class="step-tag tag-review">REVIEW</span></div>
         <div class="workflow-note"><span>i</span><p>Nothing is solved automatically from the AI proposal. Solver output describes only the geometry you explicitly reviewed and submitted.</p></div>
       </section>

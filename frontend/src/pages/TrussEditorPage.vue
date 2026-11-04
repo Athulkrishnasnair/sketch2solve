@@ -679,9 +679,7 @@ async function runPreview() {
       }
     }
   } finally {
-    if (seq === previewSeq) {
-      calculating.value = false
-    }
+    calculating.value = false
   }
 }
 
@@ -1863,6 +1861,42 @@ onBeforeUnmount(() => {
             </button>
           </div>
 
+          <!-- Mobile Floating Construction Toolbar (Visible on <= 768px) -->
+          <div class="mobile-construction-bar" role="toolbar" aria-label="Mobile construction tools">
+            <button class="m-tool-btn" :class="{ active: activeTool === 'select' }" type="button" title="Select / Move" aria-label="Select tool" @click="activeTool = 'select'">
+              <MousePointer :size="15" />
+              <span>Select</span>
+            </button>
+            <button class="m-tool-btn" :class="{ active: activeTool === 'pan' }" type="button" title="Pan Canvas" aria-label="Pan canvas" @click="activeTool = 'pan'">
+              <Hand :size="15" />
+              <span>Pan</span>
+            </button>
+            <button class="m-tool-btn" :class="{ active: activeTool === 'joint' }" type="button" title="Add Joint" aria-label="Add joint tool" @click="activeTool = 'joint'">
+              <PlusCircle :size="15" />
+              <span>Joint</span>
+            </button>
+            <button class="m-tool-btn" :class="{ active: activeTool === 'member' }" type="button" title="Add Member" aria-label="Add member tool" @click="activeTool = 'member'">
+              <Spline :size="15" />
+              <span>Member</span>
+            </button>
+            <button class="m-tool-btn" :class="{ active: activeTool === 'pin' }" type="button" title="Pin Support" aria-label="Pin support tool" @click="activeTool = 'pin'">
+              <Anchor :size="15" />
+              <span>Pin</span>
+            </button>
+            <button class="m-tool-btn" :class="{ active: activeTool === 'roller' }" type="button" title="Roller Support" aria-label="Roller support tool" @click="activeTool = 'roller'">
+              <CircleDot :size="15" />
+              <span>Roller</span>
+            </button>
+            <button class="m-tool-btn" :class="{ active: activeTool === 'load' }" type="button" title="Add Load" aria-label="Add load tool" @click="activeTool = 'load'">
+              <ArrowDown :size="15" />
+              <span>Load</span>
+            </button>
+            <button class="m-tool-btn tool-delete" :class="{ active: activeTool === 'delete' }" type="button" title="Delete" aria-label="Delete tool" @click="activeTool = 'delete'">
+              <Trash2 :size="15" />
+              <span>Delete</span>
+            </button>
+          </div>
+
         <!-- Floating Forces Color Legend -->
         <div v-if="hasSolvedResults && !resultsStale" class="canvas-forces-legend" aria-label="Analysis Legend">
           <div class="legend-header">
@@ -2238,7 +2272,7 @@ onBeforeUnmount(() => {
           :anchor-position="contextualCardPosition"
           :geometry="geometry"
           :diagnostics="solvability"
-          :busy="calculating || saving"
+          :busy="saving"
           @select-issue="handleSelectIssue"
           @clear-highlight="handleClearHighlight"
           @apply-fix="applyAiFix"
@@ -2270,7 +2304,7 @@ onBeforeUnmount(() => {
     </div>
 
       <!-- ─── Right Sidebar: Tabs for Tools vs Design with AI ─── -->
-      <aside class="editor-sidebar">
+      <aside class="editor-sidebar" :class="{ 'mobile-open': activeSidebarTab === 'design' }">
         <!-- Sidebar Navigation Tabs -->
         <nav class="sidebar-tabs-nav" role="tablist" aria-label="Sidebar navigation">
           <button
@@ -2295,6 +2329,15 @@ onBeforeUnmount(() => {
             <Sparkles :size="13" />
             <span>Design with AI</span>
             <span v-if="designProposal" class="tab-indicator-badge">1</span>
+          </button>
+          <button
+            type="button"
+            class="sidebar-tab-btn btn-close-mobile-tab"
+            aria-label="Close panel"
+            title="Close panel"
+            @click="switchSidebarTab('tools')"
+          >
+            ✕
           </button>
         </nav>
 

@@ -88,13 +88,14 @@ def create_sketch_analysis():
     }
 
     try:
-        provider = interpretation_provider.resolve_provider(request.form.get("provider"))
+        req_provider = request.form.get("provider")
+        provider = interpretation_provider.resolve_provider(req_provider or "meta")
         model_id = interpretation_provider.model_id_for(provider)
         record.provider = provider
         record.model_id = _safe_model_id(model_id, provider)
         save_private_image(record, content, mime_type)
     except ValueError:
-        return _fail(record, "INVALID_PROVIDER", "Configured interpretation provider must be 'meta' or 'gemini'.", 400)
+        return _fail(record, "INVALID_PROVIDER", "Configured interpretation provider must be 'meta'.", 400)
     except (OSError, AnalysisPersistenceError):
         return _fail(record, "IMAGE_STORAGE_FAILED", "Uploaded image could not be stored safely.", 503)
 
@@ -703,10 +704,10 @@ def _provider_http_status(code: str) -> int:
 
 def _safe_model_id(value: str, provider: str) -> str:
     # Avoid reflecting arbitrary configuration content through history APIs.
-    expected_prefix = "gemini-" if provider == "gemini" else "muse-"
+    valid_prefixes = ("muse-", "meta-")
     if (
         len(value) > 128
-        or not value.startswith(expected_prefix)
+        or not any(value.startswith(p) for p in valid_prefixes)
         or any(ch not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._:-" for ch in value)
     ):
         return "configured-model"

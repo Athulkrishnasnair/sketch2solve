@@ -2,6 +2,7 @@
 
 import copy
 import json
+from types import SimpleNamespace
 import unittest
 from unittest.mock import MagicMock, patch
 
@@ -498,27 +499,27 @@ class TestNaturalLanguageDesign(unittest.TestCase):
             self.assertTrue(data["validation"]["is_valid"])
 
     def test_security_provider_timeout_falls_back_gracefully(self):
-        """Mock client raising timeout falls back gracefully to deterministic logic."""
+        """Mock Meta client raising timeout falls back gracefully to deterministic logic."""
         mock_client = MagicMock()
-        mock_client.models.generate_content.side_effect = TimeoutError("Simulated timeout")
+        mock_client.chat.completions.create.side_effect = TimeoutError("Simulated timeout")
         result = process_design_request(
             message="Create a triangular truss with 6 m span",
             client=mock_client,
-            provider="gemini",
+            provider="meta",
         )
         self.assertEqual(result["status"], "proposed")
         self.assertTrue(result["validation"]["is_valid"])
 
     def test_security_malformed_ai_output_falls_back_gracefully(self):
-        """Mock client returning non-JSON text falls back cleanly."""
+        """Mock Meta client returning non-JSON text falls back cleanly."""
         mock_client = MagicMock()
-        mock_response = MagicMock()
-        mock_response.text = "This is not JSON at all!"
-        mock_client.models.generate_content.return_value = mock_response
+        mock_choice = MagicMock()
+        mock_choice.message.content = "This is not JSON at all!"
+        mock_client.chat.completions.create.return_value = SimpleNamespace(choices=[mock_choice])
         result = process_design_request(
             message="Create a triangular truss with 6 m span",
             client=mock_client,
-            provider="gemini",
+            provider="meta",
         )
         self.assertEqual(result["status"], "proposed")
         self.assertTrue(result["validation"]["is_valid"])

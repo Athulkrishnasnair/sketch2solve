@@ -740,24 +740,22 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 16px;
-  background: var(--color-surface, #fffef8);
-  border-bottom: 1px solid var(--color-border, #e9e5d7);
-  gap: 12px;
+  padding: 6px 12px;
+  gap: 8px;
+  flex-wrap: nowrap;
 }
 
 .header-left {
   display: flex;
   align-items: center;
-  gap: 10px;
-  min-width: 200px;
+  gap: 8px;
+  min-width: 0;
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .panel-title {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--color-text-primary, #252b2c);
+  font-size: 13px;
 }
 
 .status-badge {
@@ -1312,6 +1310,116 @@ onUnmounted(() => {
 @keyframes spin {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .analysis-results-panel {
+    height: 320px;
+    max-height: 55vh;
+  }
+
+  .analysis-results-panel.is-expanded {
+    height: 80vh;
+    max-height: 85vh;
+  }
+
+  .analysis-results-panel.is-minimized {
+    height: 44px;
+  }
+
+  .panel-header {
+    flex-wrap: wrap;
+    padding: 6px 10px;
+    gap: 6px;
+  }
+
+  .header-left {
+    min-width: 0;
+    flex: 1 1 auto;
+    gap: 6px;
+  }
+
+  .panel-title {
+    font-size: 13px;
+  }
+
+  .header-center {
+    order: 3;
+    width: 100%;
+    padding: 2px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+  }
+
+  .panel-tabs {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tab-btn {
+    white-space: nowrap;
+    font-size: 11px;
+    padding: 4px 8px;
+    flex: 1 0 auto;
+    text-align: center;
+  }
+
+  .header-right {
+    margin-left: auto;
+    gap: 4px;
+  }
+
+  .header-action-btn span {
+    display: none;
+  }
+
+  .header-action-btn {
+    padding: 5px 6px;
+  }
+
+  .panel-body {
+    padding: 10px 12px;
+  }
+
+  .data-table-wrapper,
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Keep results actions accessible on mobile */
+.header-left {
+  flex: 1 1 100%;
+  width: 100%;
+}
+
+.header-right {
+  order: 2;
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.header-action-btn {
+  flex: 0 0 auto;
+  min-height: 34px;
+}
+
+.export-dropdown-container {
+  flex: 0 0 auto;
+}
+
+.export-menu {
+  left: 0;
+  right: auto;
+  width: min(260px, calc(100vw - 24px));
+}
 }
 </style>
 

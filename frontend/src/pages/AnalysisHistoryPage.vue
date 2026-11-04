@@ -153,10 +153,10 @@ onMounted(refresh)
             </span>
 
             <span class="provider-cell">
-              <b :class="item.provider === 'gemini' ? 'provider-gemini' : item.provider === 'meta' ? 'provider-meta' : ''">
-                {{ item.provider || 'Deterministic solver' }}
+              <b class="provider-ai">
+                {{ item.provider === 'solver' || item.analysis_type === 'solver' ? 'Deterministic solver' : 'AI interpretation' }}
               </b>
-              <small>{{ item.model_id || (item.analysis_type === 'solver' ? 'Truss model' : 'Model unavailable') }}</small>
+              <small>{{ item.analysis_type === 'solver' ? 'Truss model' : 'Computer vision + AI' }}</small>
             </span>
 
             <span class="date-cell">{{ formatDate(item.created_at) }}</span>

@@ -57,10 +57,16 @@ const textareaRef = ref(null)
 
 const placeholderText = computed(() => {
   if (props.selectedElement?.type === 'node') {
-    return `Instruct modification for joint ${props.selectedElement.id} (e.g. "Move J${props.selectedElement.id} upwards by 0.5m", "Add pin support")...`
+    const id = props.selectedElement.id || ''
+    return id
+      ? `Instruct modification for joint ${id} (e.g. "Move ${id} upwards by 0.5m", "Add pin support")...`
+      : 'Instruct modification for selected joint...'
   }
   if (props.selectedElement?.type === 'member') {
-    return `Instruct modification for member ${props.selectedElement.id} (e.g. "Remove member ${props.selectedElement.id}", "Explain member force")...`
+    const id = props.selectedElement.id || ''
+    return id
+      ? `Instruct modification for member ${id} (e.g. "Remove member ${id}", "Explain member force")...`
+      : 'Instruct modification for selected member...'
   }
   if (selectedIntent.value === 'create') {
     return 'Describe the truss to create (e.g. "Create a triangular truss with 6 m span and 3 m height", "Warren truss with 4 panels")...'
@@ -125,13 +131,20 @@ function selectChip(text) {
 }
 
 function handleClarification({ question, answer }) {
-  message.value = `${question.prompt}: ${answer}`
+  // Never interpolate question.prompt when undefined; use the clean answer directly
+  const text = answer || question?.question || question?.prompt || ''
+  message.value = text.replace(/^undefined:\s*/i, '').trim()
   handleSubmit()
 }
 
 function handleSubmit() {
-  const text = message.value.trim()
+  let text = message.value.trim()
   if (!text || props.busy) return
+  // Safety guard: strip any accidental "undefined:" prefix
+  if (text.toLowerCase().startsWith('undefined:')) {
+    text = text.replace(/^undefined:\s*/i, '').trim()
+    message.value = text
+  }
   emit('submit', {
     message: text,
     intent: selectedIntent.value,
@@ -406,17 +419,20 @@ function handleClear() {
   border: none;
   outline: none;
   resize: vertical;
-  min-height: 48px;
-  padding: 8px 10px;
+  min-height: 52px;
+  max-height: 200px;
+  padding: 10px 12px;
   font-family: inherit;
-  font-size: 12px;
+  font-size: 13px;
   color: #292a28;
-  line-height: 1.45;
+  line-height: 1.5;
   background: transparent;
+  box-sizing: border-box;
 }
 
 .design-textarea::placeholder {
-  color: #9ea094;
+  color: #8c9085;
+  opacity: 1;
 }
 
 .input-actions {

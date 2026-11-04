@@ -11,14 +11,18 @@ import base64
 import json
 import math
 import os
+from pathlib import Path
 from typing import Any
 
 import cv2
+from dotenv import load_dotenv
 import numpy as np
 from openai import APIConnectionError, APIStatusError, APITimeoutError, OpenAI, OpenAIError
 from app.services.perception import PerceptionInputError, inspect_image_header
 
 
+BACKEND_ENV_PATH = Path(__file__).resolve().parents[2] / ".env"
+load_dotenv(dotenv_path=BACKEND_ENV_PATH, override=False)
 META_BASE_URL = "https://api.meta.ai/v1"
 MUSE_MODEL = "muse-spark-1.3"
 DEFAULT_TIMEOUT_SECONDS = 60.0
@@ -251,12 +255,15 @@ def interpret_truss_sketch(
         raise InvalidSketchImageError("Image data must be non-empty encoded bytes.")
     image_bytes = bytes(image_bytes)
     width, height, detected_mime = _inspect_image(image_bytes, mime_type)
+    api_key = os.environ.get("MODEL_API_KEY", "").strip()
+    base_url = os.environ.get("MODEL_BASE_URL", META_BASE_URL).strip() or META_BASE_URL
+    model_name = os.environ.get("MODEL_NAME", MUSE_MODEL).strip() or MUSE_MODEL
+
     if client is None:
-        api_key = os.environ.get("MODEL_API_KEY", "").strip()
         if not api_key:
             raise MissingModelAPIKeyError()
         client = OpenAI(
-            base_url=META_BASE_URL,
+            base_url=base_url,
             api_key=api_key,
             timeout=timeout_seconds,
             max_retries=0,
@@ -272,21 +279,41 @@ def interpret_truss_sketch(
         ],
     }]
     try:
-        response = client.responses.create(
-            model=MUSE_MODEL,
-            instructions=_SYSTEM_INSTRUCTIONS,
-            input=request_input,
-            text={
-                "format": {
-                    "type": "json_schema",
-                    "name": "truss_visual_interpretation",
-                    "strict": True,
-                    "schema": _INTERPRETATION_SCHEMA,
+        if hasattr(client, "responses") and hasattr(client.responses, "create"):
+            response = client.responses.create(
+                model=model_name,
+                instructions=_SYSTEM_INSTRUCTIONS,
+                input=request_input,
+                text={
+                    "format": {
+                        "type": "json_schema",
+                        "name": "truss_visual_interpretation",
+                        "strict": True,
+                        "schema": _INTERPRETATION_SCHEMA,
+                    },
                 },
-            },
-            timeout=timeout_seconds,
-            store=False,
-        )
+                timeout=timeout_seconds,
+                store=False,
+            )
+            output_text = getattr(response, "output_text", None)
+        else:
+            response = client.chat.completions.create(
+                model=model_name,
+                messages=[
+                    {"role": "system", "content": _SYSTEM_INSTRUCTIONS},
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "text", "text": _USER_PROMPT},
+                            {"type": "image_url", "image_url": {"url": data_url}},
+                        ],
+                    },
+                ],
+                response_format={"type": "json_object"},
+                temperature=0,
+                timeout=timeout_seconds,
+            )
+            output_text = response.choices[0].message.content if getattr(response, "choices", None) else None
     except APITimeoutError as error:
         raise MuseTimeoutError() from error
     except APIConnectionError as error:
@@ -295,8 +322,6 @@ def interpret_truss_sketch(
         raise MuseAPIError(error.status_code) from error
     except OpenAIError as error:
         raise MuseAPIError() from error
-
-    output_text = getattr(response, "output_text", None)
     if not isinstance(output_text, str) or not output_text.strip():
         raise InvalidMuseResponseError("Muse Model API returned no structured text.")
     try:

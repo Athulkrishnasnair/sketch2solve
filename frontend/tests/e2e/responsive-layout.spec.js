@@ -196,4 +196,119 @@ test.describe('Sketch2Solve Responsive Layout & Visual Polish Verification', () 
     // Capture mobile design studio screenshot
     await page.screenshot({ path: path.join(outputDir, '06-mobile-design-390px.png') })
   })
+
+  test('7. Natural Language Design: Clean textarea rendering, placeholder, and no undefined text', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await page.goto('/?view=design')
+    await expect(page.locator('.design-studio-page')).toBeVisible({ timeout: 10_000 })
+
+    const textarea = page.locator('.studio-left-pane .design-textarea')
+    await expect(textarea).toBeVisible()
+
+    // 1. Initial state: textarea must be empty, no literal 'undefined'
+    const initialVal = await textarea.inputValue()
+    expect(initialVal).not.toContain('undefined')
+
+    const placeholder = await textarea.getAttribute('placeholder')
+    expect(placeholder).toBeTruthy()
+    expect(placeholder).not.toContain('undefined')
+
+    // 2. Submit ambiguous prompt to trigger clarification chips
+    await textarea.fill('truss')
+    await page.locator('.studio-left-pane .btn-submit').click()
+
+    const proposalCard = page.locator('.studio-left-pane .design-proposal-card')
+    await expect(proposalCard).toBeVisible({ timeout: 25_000 })
+
+    // If clarification questions appear, verify no 'undefined' in question text or options
+    const clarificationSection = proposalCard.locator('.clarification-section')
+    if (await clarificationSection.isVisible()) {
+      const promptText = await clarificationSection.locator('.cq-prompt').first().textContent()
+      expect(promptText).not.toContain('undefined')
+
+      // Click the first clarification chip
+      const firstChip = clarificationSection.locator('.cq-chip').first()
+      const chipLabel = (await firstChip.textContent() || '').trim()
+      await firstChip.click()
+
+      // Textarea must be populated with the clean answer, never "undefined:"
+      const populatedVal = await textarea.inputValue()
+      expect(populatedVal).not.toContain('undefined')
+      expect(populatedVal).toContain(chipLabel)
+    }
+
+    // Capture screenshot of clean textarea
+    await page.screenshot({ path: path.join(outputDir, '07-nl-design-textarea-clean.png') })
+  })
+
+  test('8. Mobile Truss Editor 390px: Full viewport width canvas, floating tool dock, and responsive results', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+    await page.goto('/?view=design')
+    await expect(page.locator('.design-studio-page')).toBeVisible({ timeout: 10_000 })
+
+    // Select existing analysis to open in editor
+    const select = page.locator('#analysis-select')
+    await expect(select).toBeVisible({ timeout: 10_000 })
+    await expect(async () => {
+      const count = await select.locator('option').count()
+      expect(count).toBeGreaterThan(1)
+    }).toPass({ timeout: 10_000 })
+    await select.selectOption({ index: 1 })
+
+    // Open analysis in editor
+    const openEditorBtn = page.locator('.btn-open-editor')
+    await expect(openEditorBtn).toBeVisible({ timeout: 10_000 })
+    await openEditorBtn.click()
+
+    // Editor workspace must be visible
+    const editor = page.locator('.truss-editor-workspace')
+    await expect(editor).toBeVisible({ timeout: 20_000 })
+
+    // 1. App-frame and canvas must use full 390px available viewport
+    const appFrameBox = await page.locator('.app-frame.in-editor-frame').boundingBox()
+    expect(appFrameBox.width).toBe(390)
+
+    const canvasBox = await page.locator('.canvas-container').boundingBox()
+    expect(canvasBox.width).toBe(390)
+    expect(canvasBox.height).toBeGreaterThan(250)
+
+    // 2. Mobile floating construction toolbar must be visible
+    const mobileToolBar = page.locator('.mobile-construction-bar')
+    await expect(mobileToolBar).toBeVisible()
+
+    // Verify tools: Select, Joint, Member, etc.
+    const jointBtn = mobileToolBar.locator('button:has-text("Joint")')
+    await expect(jointBtn).toBeVisible()
+    await jointBtn.click()
+    await expect(jointBtn).toHaveClass(/active/)
+
+    // Capture mobile full-canvas screenshot
+    await page.screenshot({ path: path.join(outputDir, '08-mobile-truss-editor-full-canvas.png') })
+
+    // 3. Mark reviewed and Solve to test Analysis Results panel
+    const reviewBtn = page.locator('.editor-topbar .btn-review')
+    if (await reviewBtn.isEnabled()) {
+      await reviewBtn.click()
+      await page.waitForTimeout(500)
+    }
+
+    const solveBtn = page.locator('.editor-topbar .btn-solve')
+    if (await solveBtn.isEnabled()) {
+      await solveBtn.click()
+      // Confirm solver modal
+      const confirmSubmitBtn = page.locator('.cdialog-confirm')
+      await expect(confirmSubmitBtn).toBeVisible({ timeout: 5_000 })
+      await confirmSubmitBtn.click()
+
+      const resultsPanel = page.locator('.analysis-results-panel')
+      await expect(resultsPanel).toBeVisible({ timeout: 15_000 })
+
+      // Panel must occupy full 390px width without horizontal viewport overflow
+      const resultsBox = await resultsPanel.boundingBox()
+      expect(resultsBox.width).toBe(390)
+
+      // Capture mobile results panel screenshot
+      await page.screenshot({ path: path.join(outputDir, '09-mobile-truss-editor-results.png') })
+    }
+  })
 })

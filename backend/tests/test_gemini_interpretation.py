@@ -127,14 +127,16 @@ class GeminiInterpretationTests(unittest.TestCase):
                 self.assertEqual(actual_mime, expected_mime)
                 self.assertEqual(actual_data, content)
 
-    def test_dispatcher_selects_gemini_or_meta_from_configuration(self):
+    def test_dispatcher_rejects_gemini_and_dispatches_only_to_meta(self):
         expected = object()
+        # Gemini is rejected from active dispatch
         with patch.dict(os.environ, {"INTERPRETATION_PROVIDER": "gemini"}, clear=True), patch.object(
             interpretation_provider, "load_dotenv", return_value=False
-        ), patch.object(gemini, "interpret_truss_sketch", return_value=expected) as gemini_call:
-            self.assertIs(interpretation_provider.interpret_truss_sketch(image_bytes()), expected)
-        gemini_call.assert_called_once()
+        ):
+            with self.assertRaises(ValueError):
+                interpretation_provider.interpret_truss_sketch(image_bytes())
 
+        # Meta is the only active provider
         with patch.dict(os.environ, {"INTERPRETATION_PROVIDER": "meta"}, clear=True), patch.object(
             interpretation_provider, "load_dotenv", return_value=False
         ), patch.object(muse_interpretation, "interpret_truss_sketch", return_value=expected) as meta_call:

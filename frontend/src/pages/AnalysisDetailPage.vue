@@ -57,25 +57,25 @@ function statusClass(status) {
 
 function humanizeError(code, message) {
   const messages = {
-    MISSING_GEMINI_API_KEY: 'Gemini is selected, but its server-side credential is not configured.',
-    MISSING_MODEL_API_KEY: 'Meta is selected, but its server-side credential is not configured.',
+    MISSING_GEMINI_API_KEY: 'The interpretation service is not configured with an API key.',
+    MISSING_MODEL_API_KEY: 'The interpretation service is not configured with an API key.',
     INVALID_IMAGE: 'The uploaded file could not be read as a supported sketch image.',
     IMAGE_TOO_LARGE: 'The image exceeds the 10 MiB upload limit.',
     UNSUPPORTED_IMAGE_TYPE: 'The saved image is not a supported format.',
-    GEMINI_API_ERROR: 'Gemini could not complete the interpretation request.',
-    MUSE_API_ERROR: 'Meta Muse Spark could not complete the interpretation request.',
-    GEMINI_AUTHENTICATION_FAILED: 'Gemini rejected the backend credential or account access.',
-    MUSE_AUTHENTICATION_FAILED: 'Meta rejected the backend credential or account access.',
-    GEMINI_INVALID_MODEL: 'Gemini did not recognize the configured model. Check GEMINI_MODEL.',
-    MUSE_INVALID_MODEL: 'Meta did not recognize the configured model.',
-    GEMINI_RATE_LIMITED: 'Gemini rate limit or quota was reached. Try again later.',
-    MUSE_RATE_LIMITED: 'Meta rate limit or quota was reached. Try again later.',
-    GEMINI_NETWORK_ERROR: 'The backend could not reach Gemini. Check the backend network connection.',
-    MUSE_NETWORK_ERROR: 'The backend could not reach Meta. Check the backend network connection.',
-    GEMINI_TIMEOUT: 'The Gemini request timed out. Try again with a smaller image.',
-    MUSE_TIMEOUT: 'The Meta request timed out. Try again with a smaller image.',
-    INVALID_GEMINI_RESPONSE: 'Gemini returned an unexpected interpretation format.',
-    INVALID_MUSE_RESPONSE: 'Meta returned an unexpected interpretation format.',
+    GEMINI_API_ERROR: 'The AI model could not complete the interpretation request.',
+    MUSE_API_ERROR: 'The AI model could not complete the interpretation request.',
+    GEMINI_AUTHENTICATION_FAILED: 'The AI service rejected the backend credential or account access.',
+    MUSE_AUTHENTICATION_FAILED: 'The AI service rejected the backend credential or account access.',
+    GEMINI_INVALID_MODEL: 'The AI service did not recognize the configured model.',
+    MUSE_INVALID_MODEL: 'The AI service did not recognize the configured model.',
+    GEMINI_RATE_LIMITED: 'The AI service rate limit or quota was reached. Try again later.',
+    MUSE_RATE_LIMITED: 'The AI service rate limit or quota was reached. Try again later.',
+    GEMINI_NETWORK_ERROR: 'The backend could not reach the AI service. Check the network connection.',
+    MUSE_NETWORK_ERROR: 'The backend could not reach the AI service. Check the network connection.',
+    GEMINI_TIMEOUT: 'The AI interpretation request timed out. Try again with a smaller image.',
+    MUSE_TIMEOUT: 'The AI interpretation request timed out. Try again with a smaller image.',
+    INVALID_GEMINI_RESPONSE: 'The AI model returned an unexpected interpretation format.',
+    INVALID_MUSE_RESPONSE: 'The AI model returned an unexpected interpretation format.',
     ANALYSIS_HISTORY_UNAVAILABLE: 'The backend could not save or retrieve this analysis.',
   }
   return messages[code] || message || 'The analysis could not be completed.'
@@ -104,7 +104,7 @@ async function retryAnalysis() {
     const blob = await getAnalysisImage(analysis.value.sketch.image_url)
     const filename = analysis.value.sketch.original_filename || 'sketch.png'
     const file = new File([blob], filename, { type: blob.type || analysis.value.sketch.mime_type })
-    const result = await createAnalysis(file, analysis.value.provider === 'meta' ? 'meta' : 'gemini')
+    const result = await createAnalysis(file, 'meta')
     emit('created', result.analysis_id)
   } catch (cause) {
     error.value = humanizeError(cause.body?.error_code, cause.message)
@@ -142,7 +142,7 @@ function selectElement(id) { selectedElementId.value = id || '' }
           <div class="detail-meta">
             <span>{{ formatDate(analysis.created_at) }}</span><i></i>
             <span>{{ imageWidth && imageHeight ? `${imageWidth} × ${imageHeight} px` : 'No source image' }}</span><i></i>
-            <span>{{ analysis.provider ? `${analysis.provider} · ${analysis.model_id || ''}` : 'Deterministic solver' }}</span>
+            <span>{{ analysis.provider === 'solver' ? 'Deterministic solver' : 'AI interpretation' }}</span>
           </div>
         </div>
         <div style="display: flex; align-items: center; gap: 12px;">

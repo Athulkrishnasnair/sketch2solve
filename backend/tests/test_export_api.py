@@ -104,7 +104,7 @@ class ExportApiTests(unittest.TestCase):
             res = self.client.post(
                 "/api/analyses",
                 data={
-                    "provider": "gemini",
+                    "provider": "meta",
                     "image": (BytesIO(image_bytes()), "drawing.png", "image/png"),
                 },
                 content_type="multipart/form-data",

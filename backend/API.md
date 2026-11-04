@@ -66,7 +66,7 @@ Processes natural language requests to create new trusses, modify existing canva
     "selected_element": { "type": "member", "id": "M2" },
     "diagnostics": { /* System diagnostics */ },
     "solver_results": { /* Active solver results */ },
-    "provider": "gemini" | "meta"
+    "provider": "meta"
   }
 }
 ```
@@ -267,7 +267,7 @@ Evaluates geometry in real time without persisting state or approving drafts.
 
 ## 4. Visual Sketch Perception & Analysis Pipeline
 
-- `POST /api/analyses`: Multipart file upload (`image`), executes OpenCV line detection and selected provider interpretation (`meta` or `gemini`).
+- `POST /api/analyses`: Multipart file upload (`image`), executes OpenCV line detection and Meta Model API interpretation.
 - `GET /api/analyses?page=1&per_page=20`: Paginated history of analyses.
 - `GET /api/analyses/<analysis_id>`: Returns full analysis detail, sketch metadata, perception candidates, proposal, human draft, and solver results.
 - `GET /api/analyses/<analysis_id>/image`: Securely streams the private original sketch image.

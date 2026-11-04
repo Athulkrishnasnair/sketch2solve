@@ -1,6 +1,7 @@
 """Unit and integration tests for AI-powered Issue Resolution Assistant."""
 
 import copy
+from types import SimpleNamespace
 import unittest
 from unittest.mock import MagicMock
 
@@ -139,24 +140,24 @@ class TestAIIssueResolutionAssistant(unittest.TestCase):
 
         # 1. Successful provider response
         mock_client = MagicMock()
-        mock_response = MagicMock()
-        mock_response.text = (
+        mock_choice = MagicMock()
+        mock_choice.message.content = (
             '{"root_cause_explanation": "AI says missing constraint.", '
             '"engineering_rationale": "Planar equilibrium requires 3 reactions.", '
             '"proposed_fixes": [{"id": "fix_ai", "title": "Add roller at N2", "description": "Fixes it.", '
             '"affected_elements": {"nodes": ["N2"], "members": [], "supports": ["S_ai"], "loads": []}, '
             '"modifications": {"supports_to_add": [{"id": "S_ai", "node": "N2", "type": "roller", "direction": "vertical"}]}}]}'
         )
-        mock_client.models.generate_content.return_value = mock_response
+        mock_client.chat.completions.create.return_value = SimpleNamespace(choices=[mock_choice])
 
-        res = resolve_geometry_issue(geom, issue, provider="gemini", client=mock_client)
+        res = resolve_geometry_issue(geom, issue, provider="meta", client=mock_client)
         self.assertEqual(res["root_cause_explanation"], "AI says missing constraint.")
         self.assertEqual(len(res["proposed_fixes"]), 1)
         self.assertTrue(res["proposed_fixes"][0]["is_valid"])
 
         # 2. Timeout / Error fallback
-        mock_client.models.generate_content.side_effect = TimeoutError("Request timed out")
-        fallback_res = resolve_geometry_issue(geom, issue, provider="gemini", client=mock_client)
+        mock_client.chat.completions.create.side_effect = TimeoutError("Request timed out")
+        fallback_res = resolve_geometry_issue(geom, issue, provider="meta", client=mock_client)
         self.assertEqual(fallback_res["status"], "success")
         self.assertIn("support", fallback_res["root_cause_explanation"].lower())
         self.assertGreater(len(fallback_res["proposed_fixes"]), 0)
